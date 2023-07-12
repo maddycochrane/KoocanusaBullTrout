@@ -297,6 +297,8 @@ head(grave.juv.bull.dat)
 grave.sr<-left_join(grave.juv.bull.dat, grave.bt.redd.tot, by="Year")
 head(grave.sr)
 
+
+# plotting stock-recruit function 
 grave.sr<-ggplot(data=grave.sr,aes(x=lagRedds, y=log(PopEst/lagRedds )))+
   geom_point()+
   labs(x="Redd Count (2 yr lag)", y="log(Juvenile Population Est. / Redd Count)",
@@ -313,11 +315,17 @@ mod<- lm(log(PopEst/lagRedds) ~ lagRedds, data = grave.sr)
 summary(mod)
 # beta = -0.009735 , p < 0.001, F stat = 55.33
 
+
+
+# view log(R/S) over time 
 ggplot(data=grave.sr,aes(x=Year, y=log(PopEst/lagRedds )))+
          geom_point()+
   labs(y="log(Juvenile Population Est. / Redd Count)")
 # save image
 ggsave("Results/sr.time.png",width = 4, height =4)
+
+
+
 
 
 
