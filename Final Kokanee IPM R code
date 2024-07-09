@@ -1,0 +1,1361 @@
+
+
+### kokanee integrated population model ###
+
+# 7.8.24
+# madaline cochrane
+
+library(R2jags)
+library(dplyr)
+library(ggplot2)
+library(mcmcplots)
+library(tidyr)
+library(patchwork) # To display 2 charts together
+library(hrbrthemes)
+
+setwd("C:\\Users\\maddy\\OneDrive - Montana State University\\Koocanusa") # personal computer
+#setwd("C:\\Users\\v73v137\\OneDrive - Montana State University\\Koocanusa") # when remoting in
+
+
+#### bring in kokanee redd data
+kokanee.redds<-read.csv("Data/KoocanusaKokaneeCounts.csv",
+                        header=TRUE) 
+
+ggplot(data=kokanee.redds, aes(x=Year,y=Redds))+geom_point()+geom_line()+
+  facet_wrap(~Waterbody)+
+  theme_bw()+labs(y="Kokanee Escapement")
+#ggsave("Results/summary/kok.escapement.png",width = 6, height = 4)
+
+kokanee.redds<-kokanee.redds%>%
+  add_row(Year = 1976, Waterbody = "BullRiver")%>% # need to add zeros for years btw 1980 - 1995 when no surveys occured
+  add_row(Year = 1977, Waterbody = "BullRiver")%>%
+  add_row(Year = 1978, Waterbody = "BullRiver")%>%
+  add_row(Year = 1979, Waterbody = "BullRiver")%>%
+  add_row(Year = 1980, Waterbody = "BullRiver")%>%
+  add_row(Year = 1981, Waterbody = "BullRiver")%>%
+  add_row(Year = 1982, Waterbody = "BullRiver")%>%
+  add_row(Year = 1983, Waterbody = "BullRiver")%>%
+  add_row(Year = 1984, Waterbody = "BullRiver")%>%
+  add_row(Year = 1985, Waterbody = "BullRiver")%>%
+  add_row(Year = 1986, Waterbody = "BullRiver")%>%
+  add_row(Year = 1987, Waterbody = "BullRiver")%>%
+  add_row(Year = 1988, Waterbody = "BullRiver")%>%
+  add_row(Year = 1989, Waterbody = "BullRiver")%>%
+  add_row(Year = 1990, Waterbody = "BullRiver")%>%
+  add_row(Year = 1991, Waterbody = "BullRiver")%>%
+  add_row(Year = 1992, Waterbody = "BullRiver")%>%
+  add_row(Year = 1993, Waterbody = "BullRiver")%>%
+  add_row(Year = 1994, Waterbody = "BullRiver")%>%
+  add_row(Year = 1995, Waterbody = "BullRiver")%>%
+  arrange(Year,Waterbody)
+
+kokanee.redds.wide<-tidyr::spread(data=kokanee.redds, key=Year, value=Redds) # from long to wider
+#head(kokanee.redds.wide)
+
+redd.totals<-kokanee.redds %>% group_by(Year)%>%summarise(sum(Redds))
+
+# view distribution of data by stream
+ggplot(data=kokanee.redds, aes(x=Redds))+geom_histogram()+facet_wrap(~Waterbody)
+mean(kokanee.redds$Redds,na.rm=T)/sd(kokanee.redds$Redds,na.rm=T)
+# sd is greater compared to the mean but not nearly as zero dispersed as cpue data
+
+
+#### read in kokanee catch per unit effort data
+kok.raw.net.dat<-read.csv("Data/KokaneeCatchRawData.csv",header=TRUE) 
+
+kok.raw.net.dat$Date <- # change date from character to posixct
+  as.POSIXct(kok.raw.net.dat$Date, tz = "", format="%m/%d/%Y") 
+
+kok.raw.net.dat <- kok.raw.net.dat %>%
+  filter(NetType == 1)%>% # only use type 1 nets for kokanee
+  filter(Season=="Fall")%>% # only use fall net data
+  filter(YYYY>1977)%>%
+  mutate(month = lubridate::month(Date))
+
+# view distribution by year
+ggplot(data=kok.raw.net.dat, aes(x= Length_mm,group=YYYY))+geom_histogram()+facet_wrap(~YYYY)
+
+
+# length-weight relationship
+ggplot(data=kok.raw.net.dat, aes(x= Length_mm,y=Weight_g))+geom_point()+
+  stat_smooth(method = 'nls', formula = 'y~a*x^b', method.args = list(start= c(a = 6e-06,b=3)),se=FALSE)+
+  scale_y_continuous(expand=c(0,0))+
+  labs(x="Length (mm)", y="Weight (g)")+theme_bw()+
+  annotate(geom="text", x=200, y=1000, label = "y == 5.3e-06*x^{3.10}", parse =TRUE)
+#ggsave("Results/summary/kok.length-weight.png",width = 6, height = 4)
+
+# fit length-weight model
+nls_fit <- nls(formula = Weight_g ~ a*Length_mm^b, 
+               start = c(a=6e-06, b=3), data = kok.raw.net.dat)
+coef(nls_fit)
+# a = 5.3E-06
+# b= 3.10
+
+
+#### need to characterize the size of adults as time varying ####
+kok.meanL<-kok.raw.net.dat%>%group_by(YYYY)%>%summarise(meanL=mean(Length_mm,na.rm=T))
+kok.meanL <- kok.meanL %>% mutate(minLength = meanL-25) # minimum size cut-off per year is 25 mm less than mean
+head(kok.meanL)
+
+
+
+#### read in kokanee bioacoustic data
+kok.hydro.acoustic<-read.csv("Data/Koocanusakokaneehydro-acoustics.csv",
+                             header=TRUE) 
+
+kok.hydro.acoustic$Age2.Kokanee<-as.integer(kok.hydro.acoustic$Age2.Kokanee) 
+kok.hydro.acoustic$Age3.Kokanee<-as.integer(kok.hydro.acoustic$Age3.Kokanee)
+kok.hydro.acoustic <- kok.hydro.acoustic %>%
+  mutate(adult_kok = round(0.5*ImmMatOverlapKokanee+ MatureNoOverlapKokanee,digits=0))%>% # age 3 is ~ same as adult_kok
+  rename(YYYY = Year)
+
+#ggplot(data=kok.hydro.acoustic, aes(x=YYYY,y=Age3.Kokanee))+geom_line()+
+ # geom_line(data=kok.hydro.acoustic,aes(x=YYYY,y=adult_kok),color="blue")
+
+#head(kok.hydro.acoustic)
+#tail(kok.hydro.acoustic)
+
+# join adult hydro-acoustic estimate and length from gill net to get adult biomass estimtes
+kok.hydro.acoustic<-left_join(kok.hydro.acoustic, kok.meanL,by=c("YYYY"))
+kok.hydro.acoustic <- kok.hydro.acoustic %>%
+  mutate(adult_biomass = Age3.Kokanee*meanL) # using Age3.Kokanee as adult estimate
+
+# plot raw acoustic data over time
+ggplot(data=kok.hydro.acoustic, aes(x=YYYY,y=Age3.Kokanee))+
+  geom_point()+geom_line()+
+  scale_x_continuous(limits=c(2010,2023))+
+  labs(y="Adult Kokanee (n)")+theme_bw()
+
+# look at distribution of acoustic data
+ggplot(data=kok.hydro.acoustic, aes(x=adult_kok))+geom_histogram()
+mean(kok.hydro.acoustic$Age3.Kokanee,na.rm=T)/sd(kok.hydro.acoustic$Age3.Kokanee,na.rm=T)
+# mean is larger than the sd, but not the worst skew
+
+
+kok.hydro.acoustic <- kok.hydro.acoustic %>% # adding rows when no surveys occured to match overall timeline
+  add_row(YYYY=1978)%>%
+  add_row(YYYY=1979)%>%
+  add_row(YYYY=1980)%>%
+  add_row(YYYY=1981)%>%
+  add_row(YYYY=1982)%>%
+  add_row(YYYY=1983)%>%
+  add_row(YYYY=1984)%>%
+  add_row(YYYY=1985)%>%
+  add_row(YYYY=1986)%>%
+  add_row(YYYY=1987)%>%
+  add_row(YYYY=1988)%>%
+  add_row(YYYY=1989)%>%
+  add_row(YYYY=1990)%>%
+  #add_row(YYYY=1991)%>%
+  add_row(YYYY=1992)%>%
+  add_row(YYYY=1993)%>%
+  add_row(YYYY=1994)%>%
+  add_row(YYYY=1995)%>%
+  add_row(YYYY=1996)%>%
+  add_row(YYYY=1997)%>%
+  add_row(YYYY=1998)%>%
+  add_row(YYYY=1999)%>%
+  add_row(YYYY=2000)%>%
+  add_row(YYYY=2001)%>%
+  add_row(YYYY=2002)%>%
+  add_row(YYYY=2003)%>%
+  add_row(YYYY=2004)%>%
+  add_row(YYYY=2005)%>%
+  add_row(YYYY=2006)%>%
+  add_row(YYYY=2007)%>%
+  add_row(YYYY=2008)%>%
+  add_row(YYYY=2009)%>%
+  add_row(YYYY=2010)%>%
+  add_row(YYYY=2011)%>%
+  add_row(YYYY=2012)%>%
+  arrange(YYYY)
+
+
+
+
+## read in spawner size data from norbury creek
+spawner.bc<-read.csv("Data/SpawnerBodySize_BC.csv",header=T)
+#head(spawner.bc)
+
+# comparing different data sources on size of adult kokanee over time
+ggplot()+
+  #geom_boxplot(data=kok.raw.net.dat, aes(x=YYYY,y=Length_mm,group=YYYY))+
+  geom_point(data=kok.meanL,aes(x=YYYY,y=meanL),color="black",size=2)+
+  geom_line(data=kok.meanL,aes(x=YYYY,y=meanL),color="black",size=1)+
+  annotate("text", x = 1985, y = 450, label = "Mean Gill Net",color="black")+
+  
+  geom_point(data=kok.meanL,aes(x=YYYY,y=meanL-25),color="grey",size=2)+
+  geom_line(data=kok.meanL,aes(x=YYYY,y=meanL-25),color="grey",size=1)+
+  annotate("text", x = 1990, y = 220, label = "Gill Net Cut-Off",color="grey")+
+  
+  geom_point(data=spawner.bc,aes(x=Year,y=MeanLength_mm),color="red",size=2)+
+  geom_line(data=spawner.bc,aes(x=Year,y=MeanLength_mm),color="red",size=1)+
+  annotate("text", x = 2000, y = 350, label = "Mean Spawner",color="red")+
+  #geom_point(data=spawner.bc,aes(x=Year,y=MeanLength_mm-25),color="orange",size=2)+
+  #geom_line(data=spawner.bc,aes(x=Year,y=MeanLength_mm-25),color="orange",size=1)+
+  #geom_point(data=spawner.bc,aes(x=Year,y=MeanLength_mm-SDLength_mm*2),color="yellow",size=2)
+  
+  geom_point(data=kok.hydro.acoustic,aes(x=YYYY,y=MinAdultLength),color="purple",size=2)+
+  geom_line(data=kok.hydro.acoustic,aes(x=YYYY,y=MinAdultLength),color="purple",size=1)+
+  annotate("text", x = 2019, y = 180, label = "Minimum Hydro-Acoustic",color="purple")+
+  theme_bw()+labs(x="Year",y="Kokanee Length (mm)")
+#ggsave("Results/summary/kok.adult.size.png",width = 10, height = 6)
+
+
+
+# removing sub-adult kokanee from cpue data that are below size threshold for adults that year
+kok.raw.net.dat<-kok.raw.net.dat %>% 
+  mutate(Adult = case_when(YYYY==1979 & Length_mm > c(kok.meanL$minLength[1]) ~ 1,
+                           YYYY==1980 & Length_mm > c(kok.meanL$minLength[2]) ~ 1,
+                           YYYY==1981 & Length_mm > c(kok.meanL$minLength[3]) ~ 1,
+                           YYYY==1982 & Length_mm > c(kok.meanL$minLength[4]) ~ 1,
+                           YYYY==1983 & Length_mm > c(kok.meanL$minLength[5]) ~ 1,
+                           YYYY==1984 & Length_mm > c(kok.meanL$minLength[6]) ~ 1,
+                           YYYY==1985 & Length_mm > c(kok.meanL$minLength[7]) ~ 1,
+                           YYYY==1986 & Length_mm > c(kok.meanL$minLength[8]) ~ 1,
+                           YYYY==1987 & Length_mm > c(kok.meanL$minLength[9]) ~ 1,
+                           YYYY==1988 & Length_mm > c(kok.meanL$minLength[10]) ~ 1,
+                           YYYY==1989 & Length_mm > c(kok.meanL$minLength[11]) ~ 1,
+                           YYYY==1990 & Length_mm > c(kok.meanL$minLength[12]) ~ 1,
+                           YYYY==1991 & Length_mm > c(kok.meanL$minLength[13]) ~ 1,
+                           YYYY==1992 & Length_mm > c(kok.meanL$minLength[14]) ~ 1,
+                           YYYY==1993 & Length_mm > c(kok.meanL$minLength[15]) ~ 1,
+                           YYYY==1994 & Length_mm > c(kok.meanL$minLength[16]) ~ 1,
+                           YYYY==1995 & Length_mm > c(kok.meanL$minLength[17]) ~ 1,
+                           YYYY==1996 & Length_mm > c(kok.meanL$minLength[18]) ~ 1,
+                           YYYY==1997 & Length_mm > c(kok.meanL$minLength[19]) ~ 1,
+                           YYYY==1998 & Length_mm > c(kok.meanL$minLength[20]) ~ 1,
+                           YYYY==1999 & Length_mm > c(kok.meanL$minLength[21]) ~ 1,
+                           YYYY==2000 & Length_mm > c(kok.meanL$minLength[22]) ~ 1,
+                           YYYY==2001 & Length_mm > c(kok.meanL$minLength[23]) ~ 1,
+                           YYYY==2002 & Length_mm > c(kok.meanL$minLength[24]) ~ 1,
+                           YYYY==2003 & Length_mm > c(kok.meanL$minLength[25]) ~ 1,
+                           YYYY==2004 & Length_mm > c(kok.meanL$minLength[26]) ~ 1,
+                           YYYY==2005 & Length_mm > c(kok.meanL$minLength[27]) ~ 1,
+                           YYYY==2006 & Length_mm > c(kok.meanL$minLength[28]) ~ 1,
+                           YYYY==2007 & Length_mm > c(kok.meanL$minLength[29]) ~ 1,
+                           YYYY==2008 & Length_mm > c(kok.meanL$minLength[30]) ~ 1,
+                           YYYY==2009 & Length_mm > c(kok.meanL$minLength[31]) ~ 1,
+                           YYYY==2010 & Length_mm > c(kok.meanL$minLength[32]) ~ 1,
+                           YYYY==2011 & Length_mm > c(kok.meanL$minLength[33]) ~ 1,
+                           YYYY==2012 & Length_mm > c(kok.meanL$minLength[34]) ~ 1,
+                           YYYY==2013 & Length_mm > c(kok.meanL$minLength[35]) ~ 1,
+                           YYYY==2014 & Length_mm > c(kok.meanL$minLength[36]) ~ 1,
+                           YYYY==2015 & Length_mm > c(kok.meanL$minLength[37]) ~ 1,
+                           YYYY==2016 & Length_mm > c(kok.meanL$minLength[38]) ~ 1,
+                           YYYY==2017 & Length_mm > c(kok.meanL$minLength[39]) ~ 1,
+                           YYYY==2018 & Length_mm > c(kok.meanL$minLength[40]) ~ 1,
+                           YYYY==2019 & Length_mm > c(kok.meanL$minLength[41]) ~ 1,
+                           YYYY==2020 & Length_mm > c(kok.meanL$minLength[42]) ~ 1,
+                           YYYY==2021 & Length_mm > c(kok.meanL$minLength[43]) ~ 1,
+                           YYYY==2022 & Length_mm > c(kok.meanL$minLength[44]) ~ 1,
+                           YYYY==2023 & Length_mm > c(kok.meanL$minLength[45]) ~ 1,
+                           is.na(Length_mm) ~ 2)) # some lengths not recorded = assuming adult
+kok.adult.net.dat<-kok.raw.net.dat %>% tidyr::drop_na(Adult)# NA = sub-adult 
+
+kok.raw.net.dat$Adult[is.na(kok.raw.net.dat$Adult)] <- 0 # turning na to 0
+#kok.sub.net.dat <- kok.raw.net.dat %>% filter(Adult == 0) # only sub-adult kokanee
+#ggplot(data=kok.sub.net.dat, aes(x=Length_mm))+geom_histogram()+facet_wrap(~YYYY) # plot sub-adult cpue over time
+
+# redo mean length after sub-adults are removed
+kok.meanL.new<-kok.adult.net.dat%>%group_by(YYYY)%>%summarise(meanL=mean(Length_mm,na.rm=T), 
+                                                              sdL = sd(Length_mm,na.rm=T))
+
+ggplot(data=kok.meanL.new, aes(x=YYYY, y=meanL))+geom_point()+geom_line()+
+  geom_ribbon(aes(ymin=meanL-sdL, ymax=meanL+sdL),alpha=0.1)+
+  geom_point(data=kok.meanL,aes(x=YYYY,y=meanL),color="purple")+ # includes sub-adults
+  geom_line(data=kok.meanL,aes(x=YYYY,y=meanL),color="purple")
+
+kok.meanL.new <- kok.meanL.new %>%
+  mutate(meanL_scale = scale(meanL))%>% # scaling mean length of adult kokanee
+  mutate(lagSize = meanL - lag(meanL, n=2))%>% # lagging by 2 years
+  mutate(lagSize_scale = scale(lagSize))
+head(kok.meanL.new)
+
+kok.meanL.new$lagSize_scale[2] <- 0 # assuming na are average length years
+
+
+### estimate kokanee spawner abundance based on fork length (using 1996-2003 relationship)
+redd.totals <- redd.totals %>% 
+  rename(YYYY = Year) %>% 
+  drop_na(`sum(Redds)`)
+redd.totals<-left_join(redd.totals, kok.meanL.new,by=c("YYYY"))
+
+redd.totals %>% filter(YYYY<2004)%>%
+  ggplot( aes(x=log(meanL), y=log(`sum(Redds)`)))+geom_point()+
+  stat_smooth(method="lm")
+redd.totals.subset <- redd.totals %>% filter(YYYY<2004)
+
+power.law<-lm(log(`sum(Redds)`) ~ log(meanL),data=redd.totals.subset)
+summary(power.law)
+
+estimated.spawners<-exp(power.law$coefficients[1] + power.law$coefficients[2]*log(kok.meanL.new$meanL[7:17] ))
+yrs <- seq(1985, 1995,1)
+new.spawners<-tibble(yrs,estimated.spawners,meanL=kok.meanL.new$meanL[7:17])
+
+ggplot(data=redd.totals.subset, aes(x=meanL, y=`sum(Redds)`))+geom_point()+
+  geom_point(data=new.spawners, aes(x=meanL, y=estimated.spawners),color="red")
+
+
+
+
+# want to summarize individuals by net (and then by proxy year)
+kok.net.sum<-kok.adult.net.dat%>%
+  mutate(month = lubridate::month(Date))%>%
+  filter(month == 9 | month ==10)%>% # only using September and October data
+  group_by(Section, YYYY, NetNumb) %>%
+  summarise(n = n())
+mean(kok.net.sum$n)
+sd(kok.net.sum$n)
+
+# distribution of raw kokanee cpue data
+kok.net.sum %>% filter(YYYY < 1995)%>%
+  ggplot(aes(x=n,group=Section,color=Section))+geom_histogram()+facet_wrap(~YYYY)
+
+ggplot(data=kok.net.sum, aes(x=YYYY,y=n,group=YYYY))+geom_boxplot() # before updating with net count and soak times
+
+# read in net soak times
+set.times.fall<-read.csv("Data/updated.set.net.times.fall.nets.csv",
+                         header=TRUE) 
+#str(set.times.fall)
+set.times.fall$Date <- # change date from character to posixct
+  as.POSIXct(set.times.fall$Date, tz = "", format="%m/%d/%Y") 
+#head(set.times.fall)
+print(set.times.fall %>% group_by(YYYY) %>% count(),n=100)
+
+set.times.fall <- set.times.fall %>% 
+  filter(YYYY>1977)%>%
+  mutate(month = lubridate::month(Date))%>%
+  filter(month == 9 | month == 10)%>% # only using september, oct nets
+  dplyr::select(YYYY,Date,Section,TimeSet,TimePulled, NetNumb,HoursSet,NetCount)
+#head(set.times.fall)
+tail(set.times.fall)
+
+print(set.times.fall %>% group_by(YYYY) %>% count(),n=50)
+
+# joining soak times with catch data
+kok.net.sums<-left_join(set.times.fall,kok.net.sum,by=c("Section","YYYY","NetNumb"))
+
+# Replace NAs with 0s
+kok.net.sums$n[is.na(kok.net.sums$n)] <- 0
+
+kok.net.sums <- kok.net.sums %>% 
+  #add_row(YYYY=1981)%>% # need these years added if only using september data
+  #add_row(YYYY=1985)%>%
+  #add_row(YYYY=1991)%>%
+  #add_row(YYYY=1993)%>%
+  #add_row(YYYY=1995)%>%
+  #filter(Section == "Canada" | Section == "Rexford")%>%
+  mutate(cpue = round(n/HoursSet*16,0)) # standardizing set time to 16 hours
+
+# calculating total soak time each year
+#total.soaktime.year<-set.times.fall %>% group_by(YYYY) %>% summarise(sum=sum(HoursSet))
+#total.soaktime.year <- total.soaktime.year %>% arrange(YYYY)
+
+#set.times.fall2 <- set.times.fall %>% 
+  #add_row(YYYY=2018)%>%
+  #add_row(YYYY=2019)%>%
+  #dplyr::select(YYYY,HoursSet,NetNumb)%>%
+  #ungroup()%>%arrange(YYYY,NetNumb)
+
+# add sample number for each year
+#set.times.fall2$sample <- data.table::rowid(set.times.fall2$YYYY)
+#head(set.times.fall2)
+
+#set.times.fall2 <- set.times.fall2 %>% dplyr::select(-NetNumb)
+#set.times.final<-tidyr::spread(set.times.fall2,key=YYYY, value=HoursSet) # from long to wide 
+
+# final plot for standaridzed kokanee cpue over time
+kok.net.sums %>% 
+  ggplot(aes(x=YYYY,y=cpue,group=YYYY))+geom_boxplot()+
+  scale_y_continuous(limits=c(0,60))+
+  labs(x="Year",y="Catch Per Net")+theme_bw()
+#ggsave("Results/summary/kokanee_cpue.png",width = 8, height =6)
+
+kok.net.sums %>% 
+  ggplot(aes(x=YYYY,y=n,group=YYYY))+geom_boxplot()+
+  scale_y_continuous(limits=c(0,60))+
+  labs(x="Year",y="Catch Per Net")+theme_bw()
+#ggsave("Results/summary/kokanee_n.png",width = 8, height =6)
+
+
+kok.net.sums2 <- kok.net.sums %>% 
+  dplyr::select(YYYY,cpue,NetNumb)%>%
+  ungroup()%>%arrange(YYYY,NetNumb)
+
+# add sample number 
+kok.net.sums2$sample <- data.table::rowid(kok.net.sums2$YYYY)
+head(kok.net.sums2)
+
+kok.net.sums2 <- kok.net.sums2 %>% dplyr::select(-NetNumb)
+kok.net.final2<-tidyr::spread(kok.net.sums2,key=YYYY, value=cpue) # from long to wide for input into jags
+head(kok.net.final2)
+
+## do the same thing but for total n and not for cpue
+kok.net.sums3 <- kok.net.sums %>% 
+  #tibble::add_row(YYYY = 1983)%>%
+  dplyr::select(YYYY,n,NetNumb)%>%
+  ungroup()%>%arrange(YYYY,NetNumb)
+
+# add sample number
+kok.net.sums3$sample <- data.table::rowid(kok.net.sums3$YYYY)
+head(kok.net.sums3)
+
+# count over time (not cpue)
+ggplot(data=kok.net.sums3, aes(x=YYYY,y=n,group=YYYY))+geom_boxplot()
+
+kok.net.sums3 <- kok.net.sums3 %>% dplyr::select(-NetNumb)
+kok.net.final3<-tidyr::spread(kok.net.sums3,key=YYYY, value=n)
+#head(kok.net.final3)
+
+# nets per year sums
+print(kok.net.sums %>% group_by(YYYY)%>%summarise(n=n()),n=100)
+
+# distribution of cpue by year
+ggplot(data=kok.net.sums, aes(x=cpue))+geom_histogram()+facet_wrap(~YYYY,scales = "free_y")
+
+
+
+
+## getting weight by year
+kok.weight<-kok.raw.net.dat %>% 
+  group_by(YYYY)%>% # filter(Length_mm>=250)%>% # sub-adults have already been removed
+  summarise(avg_weight_g=mean(Weight_g,na.rm=T),
+            sd_weight_g = sd(Weight_g,na.rm=T))%>%
+  add_row(YYYY=1978)%>%
+  arrange(YYYY)
+print(kok.weight,n=50)
+
+kok.weight <- kok.weight %>%
+  mutate(avg_weight_lbs = avg_weight_g*0.00220462) # converting grams to lbs
+
+# plotting adult kokanee weight over time
+ggplot(data=kok.weight, aes(x=YYYY,y=avg_weight_g))+
+  geom_point()+geom_line()+
+  geom_ribbon(aes(ymin=avg_weight_g-2*sd_weight_g, ymax=avg_weight_g+2*sd_weight_g),alpha=0.1)+
+  theme_classic()+labs(y="Average Kokanee Weight (g)",x="Year")
+
+
+
+
+
+
+
+###########################################################
+#### kokanee integrated adult only population model #### 
+
+# group all data sets together into a list to pass to jags
+jags.data<-list( length = c(kok.meanL.new$meanL_scale[2:45]), # 1980 - 2023, scaled length data
+                 length.real = c(kok.meanL.new$meanL[2:45]), # 1980 - 2023, real length data
+                 adult.kok.bioacoustic = c(kok.hydro.acoustic$Age3.Kokanee[3:46]), # 1980-2023, adult kok hydro-acoustic data
+                 kok.redd = kokanee.redds.wide[,6:49], # 1980 - 2023, escapement
+                 nYears = ncol(kokanee.redds.wide[,6:49]), 
+                 nSitesKok = nrow(kokanee.redds.wide[,6:49]),
+                 y.kok= kok.net.final3[,4:47],# 1980 - 2023, cpue data
+                 nRepsKok=nrow(kok.net.final2[,4:47])) 
+
+
+cat(file="jags/ipm.kok.density.txt", "
+# likelihood
+model{ 
+  for(t in 1:nYears){ 
+# Process Likelihoods
+    log(Na[t]) <- alpha + beta.length2*length[t] # as adult size increases, the population size decreases (linear when abundance is log transformed)  
+    Nadults[t] ~ dnorm(Na[t],tau.N)
+  }
+  
+  for(t in 1:(nYears-1)){
+# Derived parameter
+    lambda[t] <- Nadults[t+1]/Nadults[t] 
+  }
+   
+# Observation Likelihood
+for (t in 17:26){ # 1996 - 2005 when redd counts were done
+      for(j in 1:nSitesKok){
+  # Redd enumeration
+        kok.redd[j,t] ~ dpois(Nspawners[t]*qkok[j])
+  }
+    Nspawners[t] <- Nadults[t]*mean.expansion
+  }
+
+for (t in 33:44){ # 2012 - 2023 when redd counts were done
+      for(j in 1:nSitesKok){
+    # Redd enumeration
+        kok.redd[j,t] ~ dpois(Nspawners[t]*qkok[j])
+  }
+    Nspawners[t] <- Nadults[t]*mean.expansion
+  }
+
+for (t in 34:44){ # 2013 - 2023 when hydro-acoustic surveys occurred 
+  # Bioacoustic data
+      adult.kok.bioacoustic[t] ~ dpois(Nadults[t]) 
+}
+
+for (t in 1:44){ 
+      for(i in 1:nRepsKok){
+  # CPUE
+      y.kok[i,t] ~ dnegbin( p.k[t] , r.k ) # includes observation error
+      }
+      p.k[t] <- r.k/(r.k+Ncpue[t])
+      Ncpue[t] <- Nadults[t]*q.lake.kok[t]
+      q.lake.kok[t] <- meanq*exp(length[t]*beta.length ) # beta.length is stochastic, small fish are harder to catch
+    }
+
+
+# PRIORS
+  # relattionship between N and length
+  alpha ~ dnorm(14,1/5^2) # abundance on log scale 
+  beta.length2 ~ dnorm(-0.1,1/0.5^2)T(,0) # as abundance goes up, size gets smaller
+  tau.N <- pow(sd.N, -2)
+  sd.N ~ dnorm(500000,1/300000^2)
+
+
+  # catchability coefficients
+    qkok ~ ddirch(c(0.08,0.04,0.2,0.02,0.44,0.12,0.10))
+    mean.expansion ~ dnorm(0.06,1/0.1^2)T(0,)
+    meanq ~ dnorm(1e-07,1/2e-02^2)T(0,)
+    beta.length ~ dnorm(0.5,1)T(0,) #  positive = easier to catch big fish 
+    
+  # over-disperstion parameter for neg binomial
+    r.k ~ dgamma(1,1)
+} 
+")
+
+params <- c("Nadults","lambda", "alpha","sd.N", "qkok","mean.expansion", 
+            "r.k.redd","meanq","r.k","beta.length2","beta.length") 
+
+inits <- function(){
+  list(
+    beta.length = runif(1,0.15,0.20),
+    beta.length2 = runif(1,-0.3,-0.1),
+    alpha = runif(1,13.5,14.5),
+    mean.expansion = runif(1,0.06,0.10),
+    meanq = runif(1, 2.96E-07, 2.97E-07),
+    r.k = runif(1,1,2.5),
+    q.kok = c(0.07,0.03,0.19,0.03,0.48,0.11,0.09),
+    sd.N = runif(1,500000,1500000)
+  )
+}
+
+
+# run model - this is going to take awhile 
+kok.ipm.mod.dd <- 
+  jags.parallel(
+    data = jags.data,
+    model.file = "jags/ipm.kok.density.txt",
+    parameters.to.save = params,
+    inits=inits,
+    n.chains = 3, 
+    n.iter = 20000, 
+    n.burnin = 18000,
+    n.thin=5) # will only return 400 outputs per chain
+
+options(max.print=1000000)
+kok.ipm.mod.dd
+mcmcplot(kok.ipm.mod.dd)
+
+#saveRDS(kok.ipm.mod.dd, file="R/kok.ipm.mod.dd") 
+# read in datafile
+kok.ipm.mod.dd <-readRDS(file="R/kok.ipm.mod.dd")
+
+
+
+### view results
+Na<-kok.ipm.mod.dd$BUGSoutput$mean$Nadults
+yrs<-seq(1980,2023)
+sum<-tibble(yrs,Na)
+ggplot(data=sum, aes(x=yrs,y=Na))+geom_point()+geom_line()
+
+
+qkok<-c(kok.ipm.mod.dd$BUGSoutput$mean$meanq)
+beta.length <- c(kok.ipm.mod.dd$BUGSoutput$mean$beta.length)
+length = c(kok.meanL.new$meanL_scale[2:45]) 
+
+qkok.series <- qkok*exp(beta.length*length   ) 
+plot(length,qkok.series)
+# catchability coefficient increases with length
+
+
+
+Nadult.low<-kok.ipm.mod.dd$BUGSoutput$summary[1:44,3] # 2.5% 
+Nadult.high<-kok.ipm.mod.dd$BUGSoutput$summary[1:44,7] # 97.5%
+kok.wt = c(kok.weight$avg_weight_lbs[3:46]) # 15 or 3
+
+out.result.kok<-tibble(yrs,Na,Nadult.low,Nadult.high,kok.wt)
+out.result.kok <- out.result.kok %>% 
+  mutate(N_3run = zoo::rollapply(Na, 3,mean,align='right',fill=NA))%>%
+  mutate(N_3run_low = zoo::rollapply(Nadult.low, 3,mean,align='right',fill=NA))%>%
+  mutate(N_3run_high = zoo::rollapply(Nadult.high, 3,mean,align='right',fill=NA))%>%
+  mutate(biomass = Na*kok.wt)%>% # weight is in lbs
+  mutate(biomass.low =Nadult.low*kok.wt)%>%
+  mutate(biomass.high=Nadult.high*kok.wt)%>%
+  mutate(biomass_3run = zoo::rollapply(biomass, 3, mean,align='right',fill=NA))%>%
+  mutate(biomass_3run_low = zoo::rollapply(biomass.low, 3, mean,align='right',fill=NA))%>%
+  mutate(biomass_3run_high = zoo::rollapply(biomass.high, 3, mean,align='right',fill=NA))
+
+# adult population
+kokn<-out.result.kok %>% filter(yrs>1979)%>%
+  ggplot(aes(x=yrs, y=Na))+
+  geom_line(size=1,linetype="solid")+geom_point(size=1.5)+
+  geom_ribbon(aes(ymin=Nadult.low, ymax=Nadult.high),alpha=0.1,)+
+  scale_x_continuous(expand=c(0,0),breaks=c(1980,1985,1990,1995,2000,2005,2010,2015,2020))+
+  scale_y_continuous(expand=c(0.01,0),label=scales::comma)+
+  labs(x="Year",y="Adult Kokanee Abundance (n)")+theme_bw()
+kokn
+#ggsave("Results/summary/kok-pop-size.png",width = 6, height = 4)
+
+# running average
+ggplot(data=out.result.kok,aes(x=yrs,y=N_3run)) + geom_point()+geom_line()+
+  geom_ribbon(aes(ymin=N_3run_low, ymax=N_3run_high),alpha=0.1)+
+  #scale_x_continuous(expand=c(0,0),breaks=c(1995,2000,2005,2010,2015,2020),limits=c(1992,2023))+
+  #scale_y_continuous(expand=c(0.01,0),label=scales::comma)+
+  labs(x="Year",y="Adult Kokanee 3-yr Average (n)")+theme_bw()
+#ggsave("Results/summary/kok-3-yr-avg-pop-size.png",width = 6, height = 4)
+
+ggplot(data=out.result.kok,aes(x=yrs,y=biomass_3run)) + geom_point()+geom_line()+
+  geom_ribbon(aes(ymin=biomass_3run_low, ymax=biomass_3run_high),alpha=0.1)+
+  #scale_x_continuous(expand=c(0,0),breaks=c(1995,2000,2005,2010,2015,2020),limits=c(1992,2023))+
+  scale_y_continuous(expand=c(0.01,0),label=scales::comma)+
+  labs(x="Year",y="Adult Kokanee 3-yr Average Biomass (lbs)")+theme_bw()
+#ggsave("Results/summary/kok-3-yr-avg-biomass.png",width = 6, height = 4)
+
+# biomass over time
+ggplot(data=out.result.kok,aes(x=yrs,y=biomass)) + geom_point()+geom_line()+
+  geom_ribbon(aes(ymin=biomass.low, ymax=biomass.high),alpha=0.1)+
+  #scale_x_continuous(expand=c(0,0),breaks=c(1995,2000,2005,2010,2015,2020),limits=c(1992,2023))+
+  labs(x="Year",y="Adult Kokanee Biomass (lbs)")+theme_bw()
+#ggsave("Results/summary/kok-biomass.png",width = 6, height = 4)
+
+
+
+
+
+######################################
+### relationship btw abundance and length
+# log(Na[t]) <- alpha + beta.length2*length.real[t]
+size.N.sim.dat <- as.matrix(data.frame(constant = 1,
+                                       length = seq(from = min(length), to = max(length), 
+                                                    length.out=20)))
+
+# posterior draws
+posterior.draws<-as.matrix(as.mcmc(kok.ipm.mod.dd))
+posterior.draws<-as_tibble(posterior.draws)
+#head(posterior.draws)
+posterior.draws<-posterior.draws %>%
+  dplyr::select(alpha,beta.length2) # make sure this is in the same order as sim.dat # 
+#head(posterior.draws)
+posterior.draws<-as.matrix(posterior.draws)
+
+
+Xb <- t(size.N.sim.dat %*% t(posterior.draws)) # multiplying all posterior draws by each dd row
+#head(Xb)
+Xc<-exp(Xb)# transform
+#head(Xc)
+pp <- as.data.frame(Xc)
+
+names(pp) <- size.N.sim.dat[, "length"]
+#head(pp)
+## these are draws for alpha - beta 
+
+pp.long <- tidyr::gather(pp, key = "length")
+#head(pp.long)
+pp.sum <- summarize(group_by(pp.long, length), 
+                    median_pp = median(value), 
+                    mean_pp = mean(value),
+                    lower_pp = quantile(value, probs = c(0.025)), 
+                    upper_pp = quantile(value, probs = c(0.975)),
+                    low10_pp = quantile(value, probs = c(0.1)),
+                    high90_pp = quantile(value, probs = c(0.90)),
+                    low25_pp = quantile(value, probs = c(0.25)),
+                    high75_pp = quantile(value, probs = c(0.75)))
+
+#head(pp.sum)
+
+pp.sum$length <- as.numeric(pp.sum$length)
+
+# converting from scaled length to true length
+m<-mean(kok.meanL.new$meanL,na.rm=T)
+s<-sd(kok.meanL.new$meanL,na.rm=T)
+
+#head(pp.sum)
+pp.sum <- pp.sum %>%
+  mutate(step1 = length*s)%>%
+  mutate(step2 = step1+m)%>%
+  rename(Length_real = step2)%>%
+  dplyr::select(-step1)
+#head(pp.sum) 
+
+length.r = c(kok.meanL.new$meanL[2:45]) # 2 or 14
+
+understanding.lam<-tibble(length.r,Na,
+                          yrs=seq(1980,2023,1))
+
+ggplot(data = pp.sum, aes(x = Length_real, y = mean_pp)) +
+  geom_ribbon(aes(ymin=lower_pp,ymax=upper_pp),alpha=0.1)+
+  geom_line(size=1.5) + 
+  scale_x_continuous(expand=c(0.01,0.01))+
+  scale_y_continuous(expand=c(0.01,0),limit=c(0,5.2e06))+
+  geom_point(data=understanding.lam, aes(x=length.r, y=Na))+ # real data
+  theme_bw()+
+  labs(x="Length (mm)", y="Adult Kokanee Abundance")
+#ggsave("Results/summary/kokaneN~length.png",width = 4, height = 4)
+
+
+
+
+###################################################################################
+### gape limitation calculations ####
+head(kok.raw.net.dat) # only includes adults (sub-adults already removed)
+
+bull.raw.net.dat<-read.csv("Data/BullTroutCatchRawData.csv",header=TRUE) 
+
+bull.raw.net.dat$Date <- # change date from character to posixct
+  as.POSIXct(bull.raw.net.dat$Date, tz = "", format="%m/%d/%Y") 
+
+bull.raw.net.dat <- bull.raw.net.dat %>%
+  filter(NetType == 2)%>% # only use type 2 data for bull trout
+  filter(Season == "Spring") # only using spring nets
+
+# get mean length and sd of bull trout
+#head(bull.raw.net.dat)
+bt.length<-bull.raw.net.dat %>% 
+  mutate(Stage = if_else(Length_mm >= 500,"A","SA"))%>% 
+  filter(Stage == "A")%>%
+  group_by(YYYY)%>%
+  summarise(BT_Avg_Length_mm=mean(Length_mm,na.rm=T),
+            BT_SD_Length_mm=sd(Length_mm,na.rm=T))%>%
+  add_row(YYYY=1983)%>%
+  add_row(YYYY=1984)%>%
+  add_row(YYYY=1985)%>%
+  arrange(YYYY)
+print(bt.length, n=50)
+
+print(bull.raw.net.dat %>% 
+        mutate(Stage = if_else(Length_mm >= 500,"A","SA"))%>% 
+        filter(Stage == "A")%>%
+        group_by(YYYY)%>%
+        count(),n=50)
+
+# increase SD when sample size is small
+mean(bt.length$BT_SD_Length_mm,na.rm=T) # 70
+bt.length$BT_SD_Length_mm[3]<-c(70) # in 1980 only 2 fish were caught
+bt.length$BT_SD_Length_mm[4]<-c(70) # in 1981 only 6 fish were caught
+bt.length$BT_SD_Length_mm[5]<-c(70) # in 1982 only 6 fish were caught
+bt.length$BT_SD_Length_mm[6]<-c(70) # 1983 no fish were caught
+bt.length$BT_SD_Length_mm[7]<-c(70) # 1984 no fish were caught
+bt.length$BT_SD_Length_mm[8]<-c(70) # 1985 no fish were caught
+bt.length$BT_SD_Length_mm[9]<-c(70) # 1986
+bt.length$BT_SD_Length_mm[10]<-c(70) # 1987
+bt.length$BT_SD_Length_mm[11]<-c(70) # 1988
+bt.length$BT_SD_Length_mm[12]<-c(70) # 1989
+bt.length$BT_SD_Length_mm[13]<-c(70) # 1990
+bt.length$BT_SD_Length_mm[14]<-c(70) # 1991
+bt.length$BT_SD_Length_mm[16]<-c(70) # 1993
+bt.length$BT_SD_Length_mm[18]<-c(70) # in 1995 only 4 fish were caught
+
+bt.length$BT_Avg_Length_mm[6]<-c(564.1665) # 3 yr gap given average btw last knowns
+bt.length$BT_Avg_Length_mm[7]<-c(564.1665)
+bt.length$BT_Avg_Length_mm[8]<-c(564.1665)
+
+ggplot(data=bt.length,aes(x=YYYY,y=BT_Avg_Length_mm))+ 
+  geom_errorbar(aes(ymin=BT_Avg_Length_mm-70,
+                    ymax=BT_Avg_Length_mm+70))+
+  stat_smooth()
+
+ggplot(data=bt.length,aes(x=YYYY,y=BT_Avg_Length_mm))+ 
+  geom_errorbar(aes(ymin=BT_Avg_Length_mm-BT_SD_Length_mm,
+                    ymax=BT_Avg_Length_mm+BT_SD_Length_mm))+
+  stat_smooth()
+
+
+
+# mean and sd of kokanee length
+kok.length<-kok.raw.net.dat %>% 
+  group_by(YYYY)%>%
+  summarise(Kok_Avg_Length_mm=mean(Length_mm,na.rm=T),
+            Kok_SD_Length_mm = sd(Length_mm,na.rm=T))
+print(kok.length,n=50)
+
+print(kok.raw.net.dat %>% 
+        group_by(YYYY)%>% # how many kokanee adults caught per year
+        count(),n=50)
+
+ggplot(data=kok.length,aes(x=YYYY,y=Kok_Avg_Length_mm))+ 
+  geom_errorbar(aes(ymin=Kok_Avg_Length_mm-Kok_SD_Length_mm, # ~2 year cycles
+                    ymax=Kok_Avg_Length_mm+Kok_SD_Length_mm))+
+  stat_smooth()
+
+mean(kok.length$Kok_SD_Length_mm,na.rm=T) # 22
+
+ggplot(data=kok.length,aes(x=YYYY,y=Kok_Avg_Length_mm))+ 
+  geom_errorbar(aes(ymin=Kok_Avg_Length_mm-19,
+                    ymax=Kok_Avg_Length_mm+19))+
+  stat_smooth()
+
+
+# combine kokanee and bull trout data
+fish.length<-dplyr::full_join(bt.length,kok.length)
+fish.length<-fish.length%>%arrange(YYYY)%>%  filter(YYYY>1979)
+
+
+
+# create a data frame with random lengths for each yr based on mean and sd
+# bull trout
+set.seed(2)
+times=nrow(fish.length)
+b=matrix(nrow=100, ncol=times)
+for (t in 1:nrow(fish.length)){
+  b[,t] <- cbind(rnorm(100, 
+                       mean=fish.length$BT_Avg_Length_mm[t],
+                       sd=fish.length$BT_SD_Length_mm[t]))
+}
+
+b<-data.frame(b)
+
+# kokanee
+set.seed(2)
+k=matrix(nrow=100, ncol=times)
+for (t in 1:nrow(fish.length)){
+  k[,t] <- cbind(rnorm(100, 
+                       mean=fish.length$Kok_Avg_Length_mm[t],
+                       sd=fish.length$Kok_SD_Length_mm[t]))
+}
+k<-data.frame(k)
+
+
+# calculate proportion of kokanee that bull trout can eat based on gape length (50% of length)
+prop <- c()
+for(i in 1:nrow(fish.length)){
+  m<-cbind(k[,i],b[,i])
+  m<-as_tibble(m)
+  m<- m %>% mutate(eat = if_else(V2/2 >= V1,1,0))
+  m<-m%>%filter(eat==1)%>%count()
+  prop[i]<-m
+}
+c<-tibble(prop)
+
+c$yr <- seq(1980,2023,1)
+prop<-unlist(c$prop)
+
+ggplot(data=fish.length, aes(x=YYYY,y=Kok_Avg_Length_mm))+geom_point()+
+  geom_line()+
+  geom_errorbar(aes(ymin=Kok_Avg_Length_mm-Kok_SD_Length_mm,
+                    ymax=Kok_Avg_Length_mm+Kok_SD_Length_mm),alpha=0.3)+
+  
+  geom_point(aes(x=YYYY,y=BT_Avg_Length_mm/2),color="blue")+
+  geom_line(aes(x=YYYY,y=BT_Avg_Length_mm/2),color="blue",linetype="dashed")+
+  geom_errorbar(aes(ymin=(BT_Avg_Length_mm-BT_SD_Length_mm)/2,
+                    ymax=(BT_Avg_Length_mm+BT_SD_Length_mm)/2),color="blue",alpha=0.3,linetype="dashed")+
+  #stat_smooth(color="black",alpha=0.2)+
+  #stat_smooth(colour="blue",aes(x=YYYY,y=(BT_Avg_Length_mm/2)),alpha=0.2)+
+  scale_x_continuous(expand=c(0,0))+
+  labs(x="Year",y="Length (mm)")+theme_bw()+  theme(legend.position = "none")+
+  annotate("text", x = 2010, y = 400, label = "Bull Trout gape",color="blue")+
+  annotate("text", x = 1988, y = 450, label = "Kokanee",color="black")
+#ggsave("Results/summary/bt.kok.gape.png",width = 6, height = 6)
+
+
+
+ggplot(data=fish.length, aes(x=YYYY,y=Kok_Avg_Length_mm))+geom_point()+
+  geom_line()+
+  geom_errorbar(aes(ymin=Kok_Avg_Length_mm-Kok_SD_Length_mm,
+                    ymax=Kok_Avg_Length_mm+Kok_SD_Length_mm),alpha=0.5)+
+  scale_x_continuous(expand=c(0,0))+
+  labs(x="Year",y="Length (mm)")+theme_bw()+  theme(legend.position = "none")+
+  annotate("text", x = 1988, y = 450, label = "Kokanee",color="black")
+
+
+#saveRDS(prop, file="R/gape") 
+# read in datafile
+prop <-readRDS(file="R/gape")
+
+##############################################################################################
+
+
+
+
+
+
+
+### calculating total number of adult kokanee available to bull trout 
+head(out.result.kok)
+# read in datafile
+prop <-readRDS(file="R/gape")
+out.result.kok$prop <- prop # from BTgape
+
+out.result.kok <- out.result.kok%>%
+  mutate(Avail_adult_kok = Na*prop/100)%>%
+  mutate(Avail_adult_kok_low = Nadult.low*prop/100)%>%
+  mutate(Avail_adult_kok_high = Nadult.high*prop/100)%>%
+  mutate(scale_avail_kok = scale(Avail_adult_kok))%>%
+  mutate(scale_prop = scale(prop/100))%>% # proportion of adult kokanee available to adult bull trout
+  ungroup()%>%
+  arrange(yrs)%>%distinct()
+
+#write.csv(out.result.kok, "Data/kok.estimated.abundances.csv")
+
+kok_avail<-ggplot(data=out.result.kok, aes(x=yrs,y=Avail_adult_kok))+geom_point(size=1.5)+geom_line(size=1.2)+
+  geom_ribbon(aes(ymin=Avail_adult_kok_low,ymax=Avail_adult_kok_high),alpha=0.1)+
+  scale_y_continuous(expand=c(0,0))+
+  scale_x_continuous(expand=c(0,0),limits=c(1980,2023))+ # breaks = c(1980,1985,1990,1995,2000,2005,2010,2015,2020)
+  labs(x="Year",y="Available Adult Kokanee (n)")+theme_bw()
+kok_avail
+
+
+# from wide to long
+out.result.for.plotting2<-out.result.kok%>%dplyr::select(yrs,Nadult.low,Avail_adult_kok_low)%>%
+  gather(Group,Nestimate.low, Nadult.low:Avail_adult_kok_low)%>%
+  mutate(Group = case_when(Group == "Nadult.low" ~ "Na",
+                           Group == "Avail_adult_kok_low" ~ "Avail_adult_kok"))
+
+out.result.for.plotting<-out.result.kok%>%dplyr::select(yrs,Na,Avail_adult_kok)%>%
+  gather(Group,Nestimate,Na:Avail_adult_kok)
+
+out.result.for.plotting3<-out.result.kok%>%dplyr::select(yrs,Nadult.high,Avail_adult_kok_high)%>%
+  gather(Group,Nestimate.high, Nadult.high:Avail_adult_kok_high)%>%
+  mutate(Group = case_when(Group == "Nadult.high" ~ "Na",
+                           Group == "Avail_adult_kok_high" ~ "Avail_adult_kok"))
+
+#head(out.result.for.plotting)
+#head(out.result.for.plotting2)
+
+out.result.for.plotting<-left_join(out.result.for.plotting,out.result.for.plotting2,by=c("yrs","Group"))
+out.result.for.plotting<-left_join(out.result.for.plotting,out.result.for.plotting3,by=c("yrs","Group"))
+out.result.for.plotting <- out.result.for.plotting%>%filter(yrs>1979)%>%
+  mutate(Group = case_when(Group == "Na" ~ "Total",
+                           Group == "Avail_adult_kok" ~ "Available"))%>%arrange(yrs,Group)
+
+ggplot(out.result.for.plotting, aes(x=yrs,y=Nestimate,color=Group,group=Group))+
+  geom_point()+geom_line()+
+  geom_ribbon(aes(x=yrs,ymin=Nestimate.low,ymax=Nestimate.high),alpha=0.1)+theme_bw()+ # ,color=NA
+  scale_color_grey()+
+  scale_x_continuous(expand=c(0,0))+
+  scale_y_continuous(expand=c(0,0))+
+  theme(legend.position = c(0.8,0.8),
+        legend.title = element_blank())+
+  labs(x="Year",y="Adult Kokanee (n)")
+
+
+
+
+###################################################################################
+### second model ###
+### fit ricker stock-recruitment curve with Na estimates
+# 2013 - 2023
+
+jags.data<-list(subadult.kok.bioacoustic = c(kok.hydro.acoustic$Age2.Kokanee[36:46]), # 2013 - 2023
+                kok.wt = c(kok.weight$avg_weight_lbs[33:43]), # 2010 - 2020
+                Nadults = Na[31:41], # 2010 - 2020 BUILDING IN THE 3 YR LAG HERE
+                nYears = 11)
+
+
+cat(file="jags/ipm.kok.txt", "
+# likelihood
+model{ 
+   for (t in 1:nYears){ # 2013 - 2023 is stochastic SR function (lag accounted for in data)
+# Process Likelihood
+  # Ricker model for recruitment
+    log_predR[t] <- log(biomass[t]) + lg_alpha - beta_sr*biomass[t] 
+    biomass[t]<-kok.wt[t]*Nadults[t]*0.5 
+    logR_Obs[t] ~ dnorm(log_predR[t], tauR_process) # includes process variation
+    Nsubadults[t] <- exp(logR_Obs[t]) #  log transformation
+  }
+
+# Observation Likelihood
+for (t in 1:nYears){ # 2013 - 2023 when hydro-acoustic surveys occurred 
+    # kokanee bioacoustic data
+      subadult.kok.bioacoustic[t] ~ dpois(Nsubadults[t])
+}
+
+  # PRIORS
+  # intrinsic productivity 
+    alpha_sr ~ dunif(5,50)
+    lg_alpha <- log(alpha_sr) # transform to account for lognormal error distribution
+  
+  # strength of dens depend
+    beta_sr ~ dunif(0,2e-05)
+    #b <- beta_sr
+  
+  # unk process variance for recruits model 
+  sigmaR_process ~ dnorm(0.2, 1)T(0,) # sd = 1
+  tauR_process <- pow(sigmaR_process, -2)
+} 
+")
+
+# parameters monitored 
+params <- c("Nsubadults","lg_alpha","beta_sr","sigmaR_process")
+
+inits <- function(){
+  list(
+    beta_sr = runif(1,3e-06,3.5e-06),
+    alpha_sr = runif(1,20,21),
+    sigmaR_process = runif(1,0.2,0.5)
+  )
+}
+
+# jags parallel for faster runs
+kok.ipm.mod <- 
+  jags.parallel(
+    data = jags.data,
+    model.file = "jags/ipm.kok.txt",
+    parameters.to.save = params,
+    inits = inits,
+    n.chains = 3, 
+    n.iter = 20000, 
+    n.burnin = 18000,
+    n.thin=5)
+
+options(max.print=1000000)
+kok.ipm.mod
+mcmcplot(kok.ipm.mod)
+
+#saveRDS(kok.ipm.mod, file="R/kok.ipm.mod") 
+# read in datafile
+kok.ipm.mod <-readRDS(file="R/kok.ipm.mod")
+
+## view results
+quantile(kok.ipm.mod$BUGSoutput$sims.list$beta_sr,0.025)
+quantile(kok.ipm.mod$BUGSoutput$sims.list$beta_sr,0.975)
+mean(kok.ipm.mod$BUGSoutput$sims.list$beta_sr)
+
+
+Nsa<-kok.ipm.mod$BUGSoutput$mean$Nsubadults
+Na2 <- Na[31:41] # from other model
+yrs<-seq(2013,2023)
+
+sum<-tibble(yrs,Na2,Nsa)
+
+ggplot(data=sum,aes(x=yrs,y=Nsa))+
+  geom_point(color="maroon",size=3)+geom_line(color="maroon")+
+  geom_point(data=kok.hydro.acoustic, aes(x=YYYY,y=Age2.Kokanee))+
+  geom_line(data=kok.hydro.acoustic, aes(x=YYYY,y=Age2.Kokanee))+
+  labs(x="Year",y="Sub-Adults")
+
+
+a<-c(exp(kok.ipm.mod$BUGSoutput$mean$lg_alpha))
+a.low<-c(kok.ipm.mod$BUGSoutput$summary[14,3])
+a.high<-c(exp(kok.ipm.mod$BUGSoutput$summary[14,7]))
+b.low<-c(kok.ipm.mod$BUGSoutput$summary[12,3])
+b.high<-c(kok.ipm.mod$BUGSoutput$summary[12,7])
+b<-c(kok.ipm.mod$BUGSoutput$mean$beta_sr)
+wt<-c(kok.weight$avg_weight_lbs[33:43])
+
+
+
+res<-tibble(Na2,Nsa,wt,yrs=seq(2013,2023))
+res <- res %>% # only want last two digits of years
+  mutate(id=substr(yrs,nchar(yrs)-1,nchar(yrs)))
+
+res <- res %>%
+  mutate(biomass=wt*Na2*0.5)%>%
+  mutate(model_recruitment = exp(log(biomass) + log(a) - b*biomass))%>% # Ricker
+  mutate(model_recruitment_low = exp(log(biomass) + log(a.low) - b.high*biomass))%>% # Ricker - betas need to be flipped around
+  mutate(model_recruitment_high = exp(log(biomass) + log(a.high) - b.low*biomass))%>% # Ricker - betas need to be flipped around
+  mutate(residual = Nsa - model_recruitment)
+
+min<-min(res$biomass)
+max<-max(res$biomass)
+seqbiomass <- seq(1,max ,10000)
+
+seqNones <- exp(log(seqbiomass) + log(a) - b*seqbiomass) # ricker
+res2 <- tibble(seqbiomass,seqNones)
+
+ggplot(data=res, aes(x=yrs, y=residual)) + geom_point() + stat_smooth(method="lm")
+
+#ggplot(data=res )+
+ # geom_line(data=res2, aes(x=seqbiomass, y=seqNones),color="orange",size=1.2)+
+  #geom_ribbon(data=res,aes(x=biomass,ymin=model_recruitment_low, ymax=model_recruitment_high),alpha=0.2)+
+  #geom_text(aes(x=biomass, y=Nsa,label=id))+ # converting from grams to lbs
+  #labs(x="Spawning Biomass (lbs)", y="Sub-Adult Recruits",title="Kokanee")+
+  #theme_classic()
+
+
+
+Na_old<-Na[1:30] 
+weights<-kok.weight$avg_weight_lbs[3:32]
+
+prediction<-tibble(Na_old,weights,yrs=seq(1983,2012)) # years are recruitment years
+
+prediction <- prediction %>%
+  mutate(biomass=weights*Na_old*0.5)%>%
+  #mutate(model_recruitment = exp(log(biomass) + log(a) -log(1+ b*biomass)))%>% # BH
+  mutate(model_recruitment_low = exp(log(biomass) + log(a.low) - b.high*biomass))%>% # Ricker - replace b.low with b.high (less decrease at high biomasses)
+  mutate(model_recruitment = exp(log(biomass) + log(a) - b*biomass))%>% # Ricker
+  mutate(model_recruitment_high = exp(log(biomass) + log(a.high) - b.low*biomass))%>% # Ricker - flip high/low for beta
+  mutate(id=substr(yrs,nchar(yrs)-1,nchar(yrs)))# only want last two digits of years
+
+
+ggplot(data=prediction )+
+  geom_point( data=prediction ,aes(x=biomass, y=model_recruitment))+ # predicted from SR function
+  geom_point(data=res,aes(x=biomass, y=Nsa),color="orange")+ # estimated with model
+  geom_ribbon(data=prediction, aes(x=biomass, ymin=model_recruitment_low, ymax=model_recruitment_high),alpha=0.1)+
+  labs(x="Spawning Biomass (lbs)", y="Sub-Adult Recruits",title="Kokanee")+
+  theme_classic()
+
+head(prediction)
+head(res)
+
+
+######################################
+### stock-recruitment curve final plots
+# log_predR[t+3] <- log(biomass[t]) + lg_alpha - beta_sr*biomass[t] 
+sr.sim.dat <- as.matrix(data.frame(constant = 1,
+                                   biomass = seq(from = 0.001, to = 12e05, # max
+                                                 length.out=20)))
+#head(sr.sim.dat)
+
+# posterior draws
+posterior.draws<-as.matrix(as.mcmc(kok.ipm.mod))
+posterior.draws<-as_tibble(posterior.draws)
+#head(posterior.draws)
+posterior.draws3<-posterior.draws %>%
+  dplyr::select(lg_alpha,beta_sr)%>% # make sure this is in the same order as sim.dat # 
+  mutate(beta = -beta_sr)%>%
+  dplyr::select(lg_alpha,beta)
+#head(posterior.draws3)
+posterior.draws3<-as.matrix(posterior.draws3)
+
+
+Xb <- t(sr.sim.dat %*% t(posterior.draws3)) # multiplying all posterior draws by each dd row
+#head(Xb)
+sr.pp <- as.data.frame(Xb)
+
+names(sr.pp) <- sr.sim.dat[, "biomass"]
+#head(sr.pp)
+## these are draws for alpha and beta (still need to add log(biomass))
+
+sr.pp.long <- tidyr::gather(sr.pp, key = "biomass")
+#head(sr.pp.long)
+sr.pp.long$biomass<-as.numeric(sr.pp.long$biomass)
+sr.pp.long <- sr.pp.long %>% 
+  mutate(value = value + log(biomass))
+
+sr.pp.sum <- summarize(group_by(sr.pp.long, biomass), 
+                       median_pp = median(value), 
+                       mean_pp = mean(value),
+                       lower_pp = quantile(value, probs = c(0.025)), 
+                       upper_pp = quantile(value, probs = c(0.975)),
+                       low10_pp = quantile(value, probs = c(0.1)),
+                       high90_pp = quantile(value, probs = c(0.90)),
+                       low25_pp = quantile(value, probs = c(0.25)),
+                       high75_pp = quantile(value, probs = c(0.75)))
+
+#head(sr.pp.sum)
+
+sr.pp.sum$biomass <- as.numeric(sr.pp.sum$biomass)
+
+#head(res)
+#head(prediction)
+res2 <- res %>% dplyr::select(yrs,biomass,Nsa) %>% rename(model_recruitment = Nsa) %>% mutate(type = "Data")
+prediction2 <- prediction %>% dplyr::select(yrs, biomass, model_recruitment) %>% mutate(type="Prediction")
+
+res2<-full_join(res2,prediction2,by=c("yrs","biomass","type","model_recruitment"))  
+
+
+ggplot(data = sr.pp.sum, aes(x = biomass, y = exp(mean_pp))) +
+  geom_ribbon(aes(ymin=exp(lower_pp),ymax=exp(upper_pp)),alpha=0.1)+
+  geom_line(size=1,color="darkgrey") + 
+  scale_x_continuous(expand=c(0,10000))+scale_y_continuous(expand=c(0,50))+
+  geom_point(data=res2, aes(x=biomass, y=model_recruitment, shape=type))+
+  theme_bw()+
+  theme(legend.title=element_blank(),
+        legend.position = c(0.85,0.85),
+        plot.margin = margin(1,1,1,1, "cm"))+
+  labs(x="Spawning Biomass (lbs)", y="Sub-Adult Recruits")
+#ggsave("Results/summary/kok-s-r-curve.png",width = 6, height = 4)
+
+
+
+
+
+
+
+# don't know sub-adult population for the first 3 years, so setting the same as 1983
+Nsubs<-c(rep(prediction$model_recruitment[1],3), prediction$model_recruitment, kok.ipm.mod$BUGSoutput$mean$Nsubadults)
+Nsubs.low<-c(rep(prediction$model_recruitment_low[1],3), prediction$model_recruitment_low, kok.ipm.mod$BUGSoutput$summary[1:11,3])
+Nsubs.high<-c(rep(prediction$model_recruitment_high[1],3), prediction$model_recruitment_high, kok.ipm.mod$BUGSoutput$summary[1:11,7])
+
+Na<-kok.ipm.mod.dd$BUGSoutput$mean$Nadults
+Nadult.low<-kok.ipm.mod.dd$BUGSoutput$summary[1:44,3] # 2.5% 32 or 44
+Nadult.high<-kok.ipm.mod.dd$BUGSoutput$summary[1:44,7] # 97.5%
+
+
+years <- seq(1980,2023,1)
+wt<-c(kok.weight$avg_weight_lbs[3:46])
+prop <-readRDS(file="R/gape")
+mean.adult.length<-c(kok.meanL.new$meanL[2:45])
+
+
+predict<-tibble(years,Nsubs.low,Nsubs,Nsubs.high,Nadult.low,Na,Nadult.high,wt,prop,mean.adult.length)
+predict <- predict %>%
+  mutate(adult_biomass = Na*wt)%>%
+  mutate(adult_biomass_low = Nadult.low*wt)%>%
+  mutate(adult_biomass_high = Nadult.high*wt)%>%
+  
+  mutate(adult_biomass_accessible = Na*wt*(prop/100))%>%
+  mutate(adult_biomass_accessible_low = Nadult.low*wt*(prop/100))%>%
+  mutate(adult_biomass_accessible_high = Nadult.high*wt*(prop/100))%>%
+  
+  mutate(sub_adult_weight_g = 5.286471e-06*(mean.adult.length-51)^3.101260)%>% # setting growth increment at 51 mm
+  mutate(sub_adult_weight_lbs = 0.00220462*sub_adult_weight_g)%>%
+  mutate(sub_adult_biomass = sub_adult_weight_lbs*Nsubs)%>%
+  mutate(sub_adult_biomass_low = sub_adult_weight_lbs*Nsubs.low)%>%
+  mutate(sub_adult_biomass_high = sub_adult_weight_lbs*Nsubs.high)%>%
+  
+  mutate(total_biomass = adult_biomass + sub_adult_biomass)%>%
+  mutate(total_biomass_low = adult_biomass_low + sub_adult_biomass_low)%>%
+  mutate(total_biomass_high = adult_biomass_high + sub_adult_biomass_high)%>%
+  
+  mutate(total_accessible_biomass = adult_biomass_accessible + sub_adult_biomass)%>%
+  mutate(total_accessible_biomass_low = adult_biomass_accessible_low + sub_adult_biomass_low)%>%
+  mutate(total_accessible_biomass_high = adult_biomass_accessible_high + sub_adult_biomass_high)%>%
+  
+  mutate(running_biomass_total=zoo::rollapply(total_biomass,3,mean,align='right',fill=NA))%>%
+  mutate(running_biomass_total_low=zoo::rollapply(total_biomass_low,3,mean,align='right',fill=NA))%>%
+  mutate(running_biomass_total_high=zoo::rollapply(total_biomass_high,3,mean,align='right',fill=NA))%>%
+  
+  mutate(running_accessible_biomass=zoo::rollapply(total_accessible_biomass,3,mean,align='right',fill=NA))%>%
+  mutate(running_accessible_biomass_low=zoo::rollapply(total_accessible_biomass_low,3,mean,align='right',fill=NA))%>%
+  mutate(running_accessible_biomass_high=zoo::rollapply(total_accessible_biomass_high,3,mean,align='right',fill=NA))
+
+
+
+ggplot()+
+  geom_line(data=predict, aes(x=years, y=total_biomass),color="blue")+
+  geom_ribbon(data=predict, aes(x=years, ymin=total_biomass_low,ymax=total_biomass_high),alpha=0.1,fill="blue")+
+  theme_bw()+labs(x="Year",y="Biomass (lbs)")
+
+ggplot()+
+  geom_line(data=predict, aes(x=years, y=running_accessible_biomass),color="black")+ # available
+  geom_ribbon(data=predict, aes(x=years, ymin=running_accessible_biomass_low,ymax=running_accessible_biomass_high),alpha=0.1,fill="black")+
+  
+  geom_line(data=predict, aes(x=years, y=running_biomass_total),color="blue")+
+  geom_ribbon(data=predict, aes(x=years, ymin=running_biomass_total_low,ymax=running_biomass_total_high),alpha=0.1,fill="blue")
+
+predict$running_accessible_biomass[1]<-predict$running_accessible_biomass[3] # giving first and second values the same as third
+predict$running_accessible_biomass[2]<-predict$running_accessible_biomass[3]
+
+predict$running_accessible_biomass_low[1]<-predict$running_accessible_biomass_low[3] # giving first and second values the same as third
+predict$running_accessible_biomass_low[2]<-predict$running_accessible_biomass_low[3]
+
+predict$running_accessible_biomass_high[1]<-predict$running_accessible_biomass_high[3] # giving first and second values the same as third
+predict$running_accessible_biomass_high[2]<-predict$running_accessible_biomass_high[3]
+
+predict$running_biomass_total[1]<-predict$running_biomass_total[3] # giving first and second values the same as third
+predict$running_biomass_total[2]<-predict$running_biomass_total[3]
+
+predict$running_biomass_total_low[1]<-predict$running_biomass_total_low[3] # giving first and second values the same as third
+predict$running_biomass_total_low[2]<-predict$running_biomass_total_low[3]
+
+predict$running_biomass_total_high[1]<-predict$running_biomass_total_high[3] # giving first and second values the same as third
+predict$running_biomass_total_high[2]<-predict$running_biomass_total_high[3]
+
+
+#saveRDS(predict, file="R/kokanee_biomass") 
+# read in datafile
+#predict <-readRDS(file="R/kokanee_biomass")
+# the predict file is the one to use in the bull trout model 
+
+
+
+# from wide to long
+#head(predict) 
+out.result.for.plotting<-predict%>%dplyr::select(years,total_biomass,total_accessible_biomass)%>%
+  rename("Total Biomass" = total_biomass)%>%
+  rename("Available Biomass" = total_accessible_biomass)%>%
+  gather(Group,BiomassEstimate,"Total Biomass":"Available Biomass")
+
+low<-predict%>%dplyr::select(years,total_accessible_biomass_low,total_biomass_low)%>%
+  rename("Available Biomass" = total_accessible_biomass_low)%>%
+  rename("Total Biomass" = total_biomass_low)%>%
+  gather(Group,LowEstimate,"Available Biomass":"Total Biomass")
+#head(low)
+high<-predict%>%dplyr::select(years,total_accessible_biomass_high,total_biomass_high)%>%
+  rename("Available Biomass" = total_accessible_biomass_high)%>%
+  rename("Total Biomass" = total_biomass_high)%>%
+  gather(Group,HighEstimate,"Available Biomass":"Total Biomass")
+#head(high)
+
+out.result.for.plotting<-left_join(out.result.for.plotting,low)
+out.result.for.plotting<-left_join(out.result.for.plotting,high)
+out.result.for.plotting<-data.frame(out.result.for.plotting)
+
+
+out.result.for.plotting %>% #filter(Group=="Available Biomass")%>%
+  ggplot(aes(x=years,y=BiomassEstimate,color=Group,group=Group))+
+  geom_point()+geom_line()+
+  geom_ribbon(aes(x=years,ymin=LowEstimate,ymax=HighEstimate,color=Group,group=Group,linetype=Group),alpha=0.1)+
+  theme_bw()+ # ,color=NA
+  scale_color_grey()+
+  #scale_fill_grey()+
+  scale_x_continuous(expand=c(0,0))+
+  scale_y_continuous(expand=c(0,50000))+
+  theme(legend.position = c(0.8,0.8),
+        legend.title = element_blank())+
+  labs(x="Year",y="Kokanee Biomass (lbs)")
+#ggsave("Results/summary/kok-biomass-available.png",width = 6, height = 4)
+
+
+## running averages
+#head(predict) # running averages not annual averages
+out.result.for.plotting<-predict%>%dplyr::select(years,running_biomass_total,running_accessible_biomass)%>%
+  rename("Total Biomass" = running_biomass_total)%>%
+  rename("Available Biomass" = running_accessible_biomass)%>%
+  gather(Group,BiomassEstimate,"Total Biomass":"Available Biomass")
+
+low<-predict%>%dplyr::select(years,running_accessible_biomass_low,running_biomass_total_low)%>%
+  rename("Available Biomass" = running_accessible_biomass_low)%>%
+  rename("Total Biomass" = running_biomass_total_low)%>%
+  gather(Group,LowEstimate,"Available Biomass":"Total Biomass")
+#head(low)
+high<-predict%>%dplyr::select(years,running_accessible_biomass_high,running_biomass_total_high)%>%
+  rename("Available Biomass" = running_accessible_biomass_high)%>%
+  rename("Total Biomass" = running_biomass_total_high)%>%
+  gather(Group,HighEstimate,"Available Biomass":"Total Biomass")
+#head(high)
+
+out.result.for.plotting<-left_join(out.result.for.plotting,low)
+out.result.for.plotting<-left_join(out.result.for.plotting,high)
+out.result.for.plotting<-data.frame(out.result.for.plotting)
+#head(out.result.for.plotting)
+
+kok<-out.result.for.plotting %>% #filter(Group=="Available Biomass")%>%
+  ggplot(aes(x=years,y=BiomassEstimate,color=Group,group=Group))+
+  geom_point()+geom_line()+
+  geom_ribbon(aes(x=years,ymin=LowEstimate,ymax=HighEstimate,color=Group,group=Group,linetype=Group),alpha=0.1)+
+  theme_bw()+ # ,color=NA
+  scale_color_grey()+
+  #scale_fill_grey()+
+  scale_x_continuous(expand=c(0,0))+
+  scale_y_continuous(expand=c(0,50000))+
+  theme(legend.position = c(0.8,0.8),
+        legend.title = element_blank())+
+  labs(x="Year",y="Average Kokanee Biomass (lbs)")
+kok
+#ggsave("Results/summary/kok-biomass-available-running-avg.png",width = 6, height = 4)
+
+
+# from wide to long
+#head(predict)
+out.result.for.plotting2<-predict%>%dplyr::select(years,Na,Nsubs)%>%
+  rename("Adults" = Na)%>%
+  rename("Sub-Adults" = Nsubs)%>%
+  gather(Group,Abundance,"Adults":"Sub-Adults")
+#head(out.result.for.plotting2)
+
+
+ggplot(out.result.for.plotting2, aes(x=years,y=Abundance,color=Group,group=Group))+
+  geom_point()+geom_line()+
+  theme_bw()+ # ,color=NA
+  scale_color_grey()+
+  scale_x_continuous(expand=c(0,0))+
+  scale_y_continuous(expand=c(0,50000))+
+  theme(legend.position = c(0.68,0.8),
+        legend.title = element_blank())+
+  labs(x="Year",y=" Kokanee (n)")
+#ggsave("Results/summary/kok-population.png",width = 6, height = 4)
+
+
+
+
+
