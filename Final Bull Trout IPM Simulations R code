@@ -1,0 +1,2423 @@
+
+### bull trout integrated population model simulations ###
+
+# 7.9.24
+# madaline cochrane
+
+
+library(egg)
+library(ggplot2)
+library(tidyr)
+library(dplyr)
+library(runjags)
+library(mcmcplots)
+library(egg)
+
+# read in datafile for final bull trout ipm from 'cleaned_bt_ipm_rcode.R' script
+full.mod2 <-readRDS(file="R/full.mod2.ipm")
+
+# start here ##
+#### simulating ipm bull trout model ####
+txtstring2 <- '
+# likelihood
+data{ 
+  
+  for (t in 1:(nYears-4)){
+    # Ricker model for recruitment
+    alpha[t] <- exp(alpha_sr + beta.low.flow*low.flow.recruitment[t] + beta.pool.recruitment*pool.elevation.recruit[t])
+                      
+    # Ricker model for recruitment
+    log_predR[t+4] <- log(b[t]) + log(alpha[t]) - beta_sr*b[t] 
+    
+    b[t]<-ifelse(biomass[t]<0,0.0001,biomass[t])
+    biomass[t]<-weight[t]*Nadults[t]*mean.fish.per.redd # only females spawn
+    
+    #Process Likelihood
+    logR_Obs[t+4] ~ dnorm(log_predR[t+4], tauR_process)
+    Nsubadults[t+4] <- exp(logR_Obs[t+4]) # 4-yr lag and log transformation
+  }
+  
+  for(t in 1:(nYears-1)){
+    S.a.step1[t] <- a.int + beta.dens*(NumbLake[t]/10000) + beta.kok*kok[t] + beta.reg.change*ca.reg.changes[t] # scaling raw abundance
+    mean.S.a[t] <- 1/(1+exp(-S.a.step1[t]))
+    S.a[t] ~ dnorm(mean.S.a[t], tau.S.a)T(0,1) # yr-specific survival includes process error 
+    
+    NA[t]<-ifelse(bt.harv[t]>Nadults[t],0,Nadults[t]) # slightly modified from original (another trick to keep N>0)
+    Nadults[t+1] <- (NA[t]-bt.harv[t])*S.a[t] + transition.prob*Nsubadults[t]
+    
+    lambdaA[t] <-Nadults[t+1]/Nadults[t] # change in adult population size over time
+    lambda[t] <-Nsubadults[t+1]/Nsubadults[t]
+    NumbLake[t]<-Nsubadults[t]+Nadults[t] # using total bt population to understand density dependence
+  }
+  
+  Nadults[1] <- 2967 # 2020 value
+  Nsubadults[1] <- 1649 # 2020 value
+  Nsubadults[2] <- 1731 # 2021 value
+  Nsubadults[3] <- 2794 # 2022 value
+  Nsubadults[4] <- 3399 # 2023 value
+  
+} 
+model{
+  fake <- 0
+}
+'
+
+
+
+
+
+####################################################
+### run simulations for figure in ms with 95% cis
+
+
+### need to bring in some data first
+# read in bull trout gillnet catch data by year
+bull.raw.net.dat<-read.csv("Data/BullTroutCatchRawData.csv",header=TRUE) 
+
+bull.raw.net.dat$Date <- # change date from character to posixct
+  as.POSIXct(bull.raw.net.dat$Date, tz = "", format="%m/%d/%Y") 
+
+bull.raw.net.dat <- bull.raw.net.dat %>%
+  filter(NetType == 2)%>% # only use type 2 data for bull trout
+  filter(Season == "Spring") # only using spring nets
+
+# want to summarize adults by net and year
+adult.bull.net.sum<-bull.raw.net.dat%>%
+  mutate(Stage = if_else(Length_mm >= 500,"A","SA"))%>%  # adults are >= 500 mm
+  filter(Stage == "A")%>%
+  group_by(Section, YYYY,NetNumb) %>%
+  summarise(n = n())
+#head(adult.bull.net.sum)
+
+# weight estimates by year from adult bull trout cpue data
+weight.yr <- bull.raw.net.dat %>% 
+  group_by(YYYY)%>%
+  mutate(Stage = if_else(Length_mm >= 500,"A","SA"))%>% 
+  filter(Stage == "A")%>%
+  mutate(wt_lbs = Weight_g*0.00220462)%>% # converging to lbs
+  summarise(wt=mean(wt_lbs,na.rm=T))%>%
+  rename(Season = YYYY)
+
+# interpolating missing years 
+weight.yr <- weight.yr %>%
+  add_row(Season = 1977)%>% # no data on weight these years
+  add_row(Season = 1979)%>%
+  add_row(Season = 1983)%>%
+  add_row(Season = 1984)%>%
+  add_row(Season = 1985)%>%
+  arrange(Season)
+
+#Interpolate missing years if only a 1 year gap
+weight.yr$wt[which(is.na(weight.yr$wt))] <- lapply(which(is.na(weight.yr$wt)),FUN=function(x){
+  mean(c(weight.yr$wt[x-1],weight.yr$wt[x+1]))
+}) %>% unlist()
+
+# 3 yr gap from 1983 - 1985 so interpolating manually (3.790477+3.857534)/2
+weight.yr$wt[8]<- 3.824006
+weight.yr$wt[9]<- 3.824006
+weight.yr$wt[10]<- 3.824006
+
+
+### get discharge data from bull river
+bull.river.q<-hy_daily_flows(station_number = "08NG002", 
+                             start_date = "1976-01-01", 
+                             end_date = "2022-12-31") # only archived to end of 2022 (as of this analysis 7.3.24)
+# value = daily mean discharge in cms
+
+bull.river.q$Date <- # change date from character to posixct
+  as.POSIXct(bull.river.q$Date, tz = "", format="%Y-%m-%d") 
+
+# exported 2023 (un-archived) bull river data (real-time) to complete dataset
+bull.river.q.23<-read.csv("Data/discharge/bullriver_2023.csv",header=TRUE) 
+
+# Value is discharge in cms
+bull.river.q.23$Date <- # change date from character to posixct
+  as.POSIXct(bull.river.q.23$Date, tz = "", format="%m/%d/%Y %H:%M") 
+
+bull.river.q.23 <- bull.river.q.23 %>%
+  mutate(Date2 = lubridate::date(Date))
+bull.river.q.23 <- bull.river.q.23 %>% 
+  group_by(Date2)%>%
+  summarise(Value2 = mean(Value))%>%
+  rename(Date = Date2)%>%
+  rename(Value = Value2)
+
+# combine historical discharge data with 2023 data 
+bull.river.q2<-full_join(bull.river.q,bull.river.q.23,by=c("Date","Value"))
+
+bull.river.q2 <- bull.river.q2 %>%
+  arrange(Date)%>% tidyr::drop_na(Date)
+
+
+#### calculating the minimum 14-day summer low flow for bull river
+# will need to lag to explain recruitment 
+rollingQ2 <- 
+  zoo::rollapplyr(bull.river.q2$Value,  14, mean,  align='right') # 14-day mean flow from 14 days prior
+# need to add 13 NAs to rollingQ2 column (at beginning of dataset)
+rollingQ2 <- c( rep(NA,13),rollingQ2)
+bull.river.q2$rollingQ2 <- rollingQ2 
+
+bull.river.low <- bull.river.q2 %>%
+  mutate(month = lubridate::month(Date))%>%
+  mutate(Year = lubridate::year(Date))%>%
+  filter(month == 7 | month == 8 | month == 9)%>% # only want summer months
+  group_by(Year)%>%
+  summarise(min(rollingQ2))%>%
+  dplyr::rename(summerLowflow = `min(rollingQ2)`)%>%
+  mutate(scale_summerLowflow = scale(summerLowflow)) # scaling discharge to make comparable to other covariates
+
+
+### read in kokanee data
+predict <-readRDS(file="R/kokanee_biomass")
+# for 3-yr running average of kokanee we need to give the first 2 yrs (1980, 81) the same values as 1983
+predict$running_accessible_biomass[1]<-predict$running_accessible_biomass[3] # giving first and second values the same as third
+predict$running_accessible_biomass[2]<-predict$running_accessible_biomass[3]
+
+predict <- predict %>%
+  mutate(running_biomass_scale = scale(running_accessible_biomass)) # scaling kokanee biomass to make comptabile with discharge, pool elevation data
+
+#### read in pool elevation data
+pool.elev <- read.csv("Data/koocanusa.elevation.csv",header=T)
+
+pool.elev$DateTime <- # change date from character to posixct
+  as.POSIXct(pool.elev$DateTime, tz = "", format="%m/%d/%Y %H:%M") 
+
+# want average elevation from year leading up to count data (gill net occurred in spring) 
+pool.elev <- pool.elev %>%
+  mutate(month = lubridate::month(DateTime))%>% # adding a column for month 
+  mutate(survival_yr = ifelse(month < 6,year-1,year)) # 
+
+pool.elev.sum <- pool.elev %>% filter(survival_yr > 1978)%>%
+  group_by(survival_yr) %>% summarise(meanPoolElev = mean(Forebay_Avg_Elevation_ft))%>% # average elevation
+  mutate(scale_avgPoolElevation = scale(meanPoolElev))%>%ungroup() # scale elevation to be compatible with other covariates
+
+
+
+
+
+########################################################################
+########################################################################
+## comparing harvest changes across different simulations 
+
+# first simulation 
+# co-variates = 500 harvest, current kokanee availability, canadian harvest not allowed (ie catch and release only)
+results <- as.data.frame(c())
+iterations<-100 
+
+### takes some time to run all of these simulations 
+for(i in 1:iterations){
+  sim.data<-list(nYears= 54,
+                 
+                 # DATA
+                 bt.harv = rep(500,53), #  fish harvested each year
+                 weight = rep(weight.yr$wt[48],54), # current bt weight
+                 kok = rep(predict$running_biomass_scale[44],54), # current kok availability 
+                 low.flow.recruitment = rep(mean(bull.river.low$scale_summerLowflow[6:45]),54), # mean flow
+                 pool.elevation.recruit = rep(mean(pool.elev.sum$scale_avgPoolElevation[5:44]),54), # mean lake level
+                 ca.reg.changes = rep(0,54), # catch-and-release in canada
+                 mean.fish.per.redd = 0.5,
+                 
+                 # PARAMETER ESTIMATES - NEED TO SAMPLE
+                 alpha_sr = sample(full.mod2$BUGSoutput$sims.list$alpha_sr,size=1),
+                 beta_sr = sample(full.mod2$BUGSoutput$sims.list$beta_sr,size=1),
+                 
+                 tauR_process=(sample(full.mod2$BUGSoutput$sims.list$sigmaR_process,size=1)^-2),
+                 tau.S.a = (sample(full.mod2$BUGSoutput$sims.list$sd.S.a,size=1)^-2),
+                 
+                 a.int = sample(full.mod2$BUGSoutput$sims.list$a.int,size=1),
+                 beta.kok = sample(full.mod2$BUGSoutput$sims.list$beta.kok,size=1),
+                 beta.dens = sample(full.mod2$BUGSoutput$sims.list$beta.dens,size=1),
+                 beta.low.flow = sample(full.mod2$BUGSoutput$sims.list$beta.low.flow,size=1),
+                 beta.pool.recruitment = sample(full.mod2$BUGSoutput$sims.list$beta.pool.recruitment,size=1),
+                 beta.reg.change = sample(full.mod2$BUGSoutput$sims.list$beta.reg.change,size=1),
+                 transition.prob = full.mod2$BUGSoutput$mean$transition.prob) # holding constant 
+  
+  # parameters monitored 
+  params <- c("Nadults") 
+  
+  # run jags
+  out <- run.jags(txtstring2, data = sim.data, monitor=params,
+                  sample=1, n.chains=1,, summarise=FALSE)
+  Simulated <- coda::as.mcmc(out)
+  results<-rbind(results,Simulated)
+} 
+
+# Results
+results.tibs<-t(results) # transpose
+results.tibs<-data.frame(results.tibs)
+x <- seq(1,iterations,1) # number of iterations
+colnames(results.tibs) <- x
+results.tibs<-results.tibs%>%
+  mutate(yrs=seq(2024,2077,1))
+head(results.tibs)
+results.tibs <- pmax(results.tibs,0) # turns negative numbers to NA
+results.tibs[is.na(results.tibs)] <- 0 # turns na to 0 (can't have negative population size)
+
+sums.500.harvest <- results.tibs %>% 
+  rowwise() %>% # sums across all iterations/rows
+  mutate(low = quantile(c_across(1:100),probs=0.025))%>% # 95% credible interval
+  mutate(high = quantile(c_across(1:100),probs=0.975))%>%
+  mutate(mean = mean(c_across(1:100)))
+
+# view to make sure everything is working
+ggplot(data=sums.500.harvest,aes(x=yrs,y=mean))+geom_line()+
+  geom_ribbon(aes(ymin=low,ymax=high),alpha=0.1)+labs(x="Year",y="Adult Population Size")+
+  theme_minimal()
+
+
+
+#############################################################################################
+# 300 harvest, current kokanee availability, canadian harvest not allowed
+results <- as.data.frame(c())
+iterations<-100
+
+for(i in 1:iterations){
+  sim.data<-list(nYears= 54,
+                 
+                 #DATA
+                 bt.harv = rep(300,53), #  fish harvested each year
+                 weight = rep(weight.yr$wt[48],54), # current bt weight
+                 kok = rep(predict$running_biomass_scale[44],54), # current kok availability 
+                 low.flow.recruitment = rep(mean(bull.river.low$scale_summerLowflow[6:45]),54),
+                 pool.elevation.recruit = rep(mean(pool.elev.sum$scale_avgPoolElevation[5:44]),54),
+                 ca.reg.changes = rep(0,54), 
+                 mean.fish.per.redd = 0.5,
+                 
+                 #PARAMETER ESTIMATES - NEED TO SAMPLE
+                 alpha_sr = sample(full.mod2$BUGSoutput$sims.list$alpha_sr,size=1),
+                 beta_sr = sample(full.mod2$BUGSoutput$sims.list$beta_sr,size=1),
+                 
+                 tauR_process=(sample(full.mod2$BUGSoutput$sims.list$sigmaR_process,size=1)^-2),
+                 tau.S.a = (sample(full.mod2$BUGSoutput$sims.list$sd.S.a,size=1)^-2),
+                 
+                 a.int = sample(full.mod2$BUGSoutput$sims.list$a.int,size=1),
+                 beta.kok = sample(full.mod2$BUGSoutput$sims.list$beta.kok,size=1),
+                 beta.dens = sample(full.mod2$BUGSoutput$sims.list$beta.dens,size=1),
+                 beta.low.flow = sample(full.mod2$BUGSoutput$sims.list$beta.low.flow,size=1),
+                 beta.pool.recruitment = sample(full.mod2$BUGSoutput$sims.list$beta.pool.recruitment,size=1),
+                 beta.reg.change = sample(full.mod2$BUGSoutput$sims.list$beta.reg.change,size=1),
+                 transition.prob = full.mod2$BUGSoutput$mean$transition.prob) # holding constant
+  
+  # parameters monitored 
+  params <- c("Nadults") 
+  
+  # run jags
+  out <- run.jags(txtstring2, data = sim.data, monitor=params,
+                  sample=1, n.chains=1,, summarise=FALSE)
+  Simulated <- coda::as.mcmc(out)
+  results<-rbind(results,Simulated)
+}
+
+# Results
+results.tibs<-t(results) # transpose
+results.tibs<-data.frame(results.tibs)
+x <- seq(1,iterations,1) # number of iterations
+colnames(results.tibs) <- x
+results.tibs<-results.tibs%>%
+  mutate(yrs=seq(2024,2077,1))
+results.tibs <- pmax(results.tibs,0) # turns negative numbers to NA
+results.tibs[is.na(results.tibs)] <- 0 # turns na to 0 (can't have negative population size)
+
+sums.300.harvest <- results.tibs %>% 
+  rowwise() %>% 
+  mutate(mean = mean(c_across(1:100)))%>%
+  mutate(low = quantile(c_across(1:100),probs=0.025))%>% # 95% credible interval
+  mutate(high = quantile(c_across(1:100),probs=0.975))
+
+ggplot(data=sums.300.harvest,aes(x=yrs,y=mean))+geom_line()+
+  geom_ribbon(aes(ymin=low,ymax=high),alpha=0.1)+labs(x="Year",y="Adult Population Size")+
+  theme_minimal()
+
+
+
+#############################################################################################
+# 0 harvest, current kokanee availability, canadian harvest not allowed
+results <- as.data.frame(c())
+iterations<-100
+
+for(i in 1:iterations){
+  sim.data<-list(nYears= 54,
+                 
+                 #DATA
+                 bt.harv = rep(0,53), #  fish harvested each year
+                 weight = rep(weight.yr$wt[48],54), # current bt weight
+                 kok = rep(predict$running_biomass_scale[44],54), # current kok availability 
+                 low.flow.recruitment = rep(mean(bull.river.low$scale_summerLowflow[6:45]),54),
+                 pool.elevation.recruit = rep(mean(pool.elev.sum$scale_avgPoolElevation[5:44]),54),
+                 ca.reg.changes = rep(0,54), 
+                 mean.fish.per.redd = 0.5,
+                 
+                 #PARAMETER ESTIMATES - NEED TO SAMPLE
+                 alpha_sr = sample(full.mod2$BUGSoutput$sims.list$alpha_sr,size=1),
+                 beta_sr = sample(full.mod2$BUGSoutput$sims.list$beta_sr,size=1),
+                 
+                 tauR_process=(sample(full.mod2$BUGSoutput$sims.list$sigmaR_process,size=1)^-2),
+                 tau.S.a = (sample(full.mod2$BUGSoutput$sims.list$sd.S.a,size=1)^-2),
+                 
+                 a.int = sample(full.mod2$BUGSoutput$sims.list$a.int,size=1),
+                 beta.kok = sample(full.mod2$BUGSoutput$sims.list$beta.kok,size=1),
+                 beta.dens = sample(full.mod2$BUGSoutput$sims.list$beta.dens,size=1),
+                 beta.low.flow = sample(full.mod2$BUGSoutput$sims.list$beta.low.flow,size=1),
+                 beta.pool.recruitment = sample(full.mod2$BUGSoutput$sims.list$beta.pool.recruitment,size=1),
+                 beta.reg.change = sample(full.mod2$BUGSoutput$sims.list$beta.reg.change,size=1),
+                 transition.prob = full.mod2$BUGSoutput$mean$transition.prob) # holding constant
+  
+  # parameters monitored 
+  params <- c("Nadults") 
+  
+  # run jags
+  out <- run.jags(txtstring2, data = sim.data, monitor=params,
+                  sample=1, n.chains=1,, summarise=FALSE)
+  Simulated <- coda::as.mcmc(out)
+  results<-rbind(results,Simulated)
+}
+
+# Results
+results.tibs<-t(results) # transpose
+results.tibs<-data.frame(results.tibs)
+x <- seq(1,iterations,1) # number of iterations
+colnames(results.tibs) <- x
+results.tibs<-results.tibs%>%
+  mutate(yrs=seq(2024,2077,1))
+results.tibs <- pmax(results.tibs,0) # turns negative numbers to NA
+results.tibs[is.na(results.tibs)] <- 0 # turns na to 0 (can't have negative population size)
+
+
+sums.0.harvest <- results.tibs %>% 
+  rowwise() %>% 
+  mutate(mean = mean(c_across(1:100)))%>%
+  mutate(low = quantile(c_across(1:100),probs=0.025))%>% # 95% credible interval
+  mutate(high = quantile(c_across(1:100),probs=0.975))
+
+ggplot(data=sums.0.harvest,aes(x=yrs,y=mean))+geom_line()+
+  geom_ribbon(aes(ymin=low,ymax=high),alpha=0.1)+labs(x="Year",y="Adult Population Size")+
+  theme_minimal()
+
+
+# combining first 3 simulations to plot together
+sim.res1<-tibble(yrs,low=sums.500.harvest$low,mean=sums.500.harvest$mean,high=sums.500.harvest$high,
+                 Harvest="500",Group="Normal Flow",Kokanee="Current",CaRegs="Catch Release") 
+sim.res2<-tibble(yrs,low=sums.300.harvest$low,mean=sums.300.harvest$mean,high=sums.300.harvest$high,
+                 Harvest="300",Group="Normal Flow",Kokanee="Current",CaRegs="Catch Release") 
+sim.res3<-tibble(yrs,low=sums.0.harvest$low,mean=sums.0.harvest$mean,high=sums.0.harvest$high,
+                 Harvest="0",Group="Normal Flow",Kokanee="Current",CaRegs="Catch Release") 
+sim.res<-full_join(sim.res1,sim.res2)
+sim.res<-full_join(sim.res,sim.res3)
+
+cbPalette <- c("#009E73", "#56B4E9", "#D55E00") # setting color palette for ggplot
+
+ggplot(data=sim.res, aes(x=yrs,y=mean,group=Harvest,fill=Harvest,color=Harvest))+
+  geom_ribbon(aes(ymin=low,ymax=high,group=Harvest,fill=Harvest,color=Harvest),alpha=0.2,color=NA)+
+  geom_line(size=1.5)+
+  scale_colour_manual(values=cbPalette)+
+  scale_fill_manual(values=cbPalette)+
+  scale_y_continuous(expand=c(0,0))+
+  scale_x_continuous(breaks=c(2030,2050,2070),expand=c(0,0))+
+  labs(x="Year",y="Adult Population Size")+theme_bw()
+
+
+
+
+#################################################################################
+# 500 harvest, max kokanee availability, canadian harvest not allowed
+results <- as.data.frame(c())
+iterations<-100
+
+for(i in 1:iterations){
+  sim.data<-list(nYears= 54,
+                 
+                 #DATA
+                 bt.harv = rep(500,53), #  fish harvested each year
+                 weight = rep(weight.yr$wt[48],54), # current bt weight
+                 #kok = rep(predict$running_biomass_scale[44],54), # current kok availability 
+                 kok = rep(max(predict$running_biomass_scale),54), # max kokanee
+                 low.flow.recruitment = rep(mean(bull.river.low$scale_summerLowflow[6:45]),54),
+                 pool.elevation.recruit = rep(mean(pool.elev.sum$scale_avgPoolElevation[5:44]),54),
+                 ca.reg.changes = rep(0,54), 
+                 mean.fish.per.redd = 0.5,
+                 
+                 #PARAMETER ESTIMATES - NEED TO SAMPLE
+                 alpha_sr = sample(full.mod2$BUGSoutput$sims.list$alpha_sr,size=1),
+                 beta_sr = sample(full.mod2$BUGSoutput$sims.list$beta_sr,size=1),
+                 
+                 tauR_process=(sample(full.mod2$BUGSoutput$sims.list$sigmaR_process,size=1)^-2),
+                 tau.S.a = (sample(full.mod2$BUGSoutput$sims.list$sd.S.a,size=1)^-2),
+                 
+                 a.int = sample(full.mod2$BUGSoutput$sims.list$a.int,size=1),
+                 beta.kok = sample(full.mod2$BUGSoutput$sims.list$beta.kok,size=1),
+                 beta.dens = sample(full.mod2$BUGSoutput$sims.list$beta.dens,size=1),
+                 beta.low.flow = sample(full.mod2$BUGSoutput$sims.list$beta.low.flow,size=1),
+                 beta.pool.recruitment = sample(full.mod2$BUGSoutput$sims.list$beta.pool.recruitment,size=1),
+                 beta.reg.change = sample(full.mod2$BUGSoutput$sims.list$beta.reg.change,size=1),
+                 transition.prob = full.mod2$BUGSoutput$mean$transition.prob) # holding constant
+  
+  # parameters monitored 
+  params <- c("Nadults") 
+  
+  # run jags
+  out <- run.jags(txtstring2, data = sim.data, monitor=params,
+                  sample=1, n.chains=1,, summarise=FALSE)
+  Simulated <- coda::as.mcmc(out)
+  results<-rbind(results,Simulated)
+}
+
+# Results
+results.tibs<-t(results) # transpose
+results.tibs<-data.frame(results.tibs)
+x <- seq(1,iterations,1) # number of iterations
+colnames(results.tibs) <- x
+results.tibs<-results.tibs%>%
+  mutate(yrs=seq(2024,2077,1))
+results.tibs <- pmax(results.tibs,0) # turns negative numbers to NA
+results.tibs[is.na(results.tibs)] <- 0 # turns na to 0 (can't have negative population size)
+
+
+sums.500.harvest.maxkokanee <- results.tibs %>% 
+  rowwise() %>% 
+  mutate(mean = mean(c_across(1:100)))%>%
+  mutate(low = quantile(c_across(1:100),probs=0.025))%>% # 95% credible interval
+  mutate(high = quantile(c_across(1:100),probs=0.975))
+
+
+sums.500.harvest.maxkokanee
+
+ggplot(data=sums.500.harvest.maxkokanee,aes(x=yrs,y=mean))+geom_line()+
+  geom_ribbon(aes(ymin=low,ymax=high),alpha=0.1)+labs(x="Year",y="Adult Population Size")+
+  theme_minimal()
+
+
+
+#############################################################################################
+# 300 harvest, max kokanee availability, canadian harvest not allowed
+results <- as.data.frame(c())
+iterations<-100
+
+for(i in 1:iterations){
+  sim.data<-list(nYears= 54,
+                 
+                 #DATA
+                 bt.harv = rep(300,53), #  fish harvested each year
+                 weight = rep(weight.yr$wt[48],54), # current bt weight
+                 #kok = rep(predict$running_biomass_scale[44],54), # current kok availability 
+                 kok = rep(max(predict$running_biomass_scale),54), # max kokanee
+                 low.flow.recruitment = rep(mean(bull.river.low$scale_summerLowflow[6:45]),54),
+                 pool.elevation.recruit = rep(mean(pool.elev.sum$scale_avgPoolElevation[5:44]),54),
+                 ca.reg.changes = rep(0,54), 
+                 mean.fish.per.redd = 0.5,
+                 
+                 #PARAMETER ESTIMATES - NEED TO SAMPLE
+                 alpha_sr = sample(full.mod2$BUGSoutput$sims.list$alpha_sr,size=1),
+                 beta_sr = sample(full.mod2$BUGSoutput$sims.list$beta_sr,size=1),
+                 
+                 tauR_process=(sample(full.mod2$BUGSoutput$sims.list$sigmaR_process,size=1)^-2),
+                 tau.S.a = (sample(full.mod2$BUGSoutput$sims.list$sd.S.a,size=1)^-2),
+                 
+                 a.int = sample(full.mod2$BUGSoutput$sims.list$a.int,size=1),
+                 beta.kok = sample(full.mod2$BUGSoutput$sims.list$beta.kok,size=1),
+                 beta.dens = sample(full.mod2$BUGSoutput$sims.list$beta.dens,size=1),
+                 beta.low.flow = sample(full.mod2$BUGSoutput$sims.list$beta.low.flow,size=1),
+                 beta.pool.recruitment = sample(full.mod2$BUGSoutput$sims.list$beta.pool.recruitment,size=1),
+                 beta.reg.change = sample(full.mod2$BUGSoutput$sims.list$beta.reg.change,size=1),
+                 transition.prob = full.mod2$BUGSoutput$mean$transition.prob) 
+  
+  # parameters monitored 
+  params <- c("Nadults") 
+  
+  # run jags
+  out <- run.jags(txtstring2, data = sim.data, monitor=params,
+                  sample=1, n.chains=1,, summarise=FALSE)
+  Simulated <- coda::as.mcmc(out)
+  results<-rbind(results,Simulated)
+}
+
+# Results
+results.tibs<-t(results) # transpose
+results.tibs<-data.frame(results.tibs)
+x <- seq(1,iterations,1) # number of iterations
+colnames(results.tibs) <- x
+results.tibs<-results.tibs%>%
+  mutate(yrs=seq(2024,2077,1))
+results.tibs <- pmax(results.tibs,0) # turns negative numbers to NA
+results.tibs[is.na(results.tibs)] <- 0 # turns na to 0 (can't have negative population size)
+
+
+sums.300.harvest.maxkokanee <- results.tibs %>% 
+  rowwise() %>% 
+  mutate(mean = mean(c_across(1:100)))%>%
+  mutate(low = quantile(c_across(1:100),probs=0.025))%>% # 95% credible interval
+  mutate(high = quantile(c_across(1:100),probs=0.975))
+
+ggplot(data=sums.300.harvest.maxkokanee,aes(x=yrs,y=mean))+geom_line()+
+  geom_ribbon(aes(ymin=low,ymax=high),alpha=0.1)+labs(x="Year",y="Adult Population Size")+
+  theme_minimal()
+
+
+
+#############################################################################################
+# 0 harvest, max kokanee availability, canadian harvest not allowed
+results <- as.data.frame(c())
+iterations<-100
+
+for(i in 1:iterations){
+  sim.data<-list(nYears= 54,
+                 
+                 #DATA
+                 bt.harv = rep(0,53), #  fish harvested each year
+                 weight = rep(weight.yr$wt[48],54), # current bt weight
+                 #kok = rep(predict$running_biomass_scale[44],54), # current kok availability 
+                 kok = rep(max(predict$running_biomass_scale),54), # max kokanee
+                 low.flow.recruitment = rep(mean(bull.river.low$scale_summerLowflow[6:45]),54),
+                 pool.elevation.recruit = rep(mean(pool.elev.sum$scale_avgPoolElevation[5:44]),54),
+                 ca.reg.changes = rep(0,54), 
+                 mean.fish.per.redd = 0.5,
+                 
+                 #PARAMETER ESTIMATES - NEED TO SAMPLE
+                 alpha_sr = sample(full.mod2$BUGSoutput$sims.list$alpha_sr,size=1),
+                 beta_sr = sample(full.mod2$BUGSoutput$sims.list$beta_sr,size=1),
+                 
+                 tauR_process=(sample(full.mod2$BUGSoutput$sims.list$sigmaR_process,size=1)^-2),
+                 tau.S.a = (sample(full.mod2$BUGSoutput$sims.list$sd.S.a,size=1)^-2),
+                 
+                 a.int = sample(full.mod2$BUGSoutput$sims.list$a.int,size=1),
+                 beta.kok = sample(full.mod2$BUGSoutput$sims.list$beta.kok,size=1),
+                 beta.dens = sample(full.mod2$BUGSoutput$sims.list$beta.dens,size=1),
+                 beta.low.flow = sample(full.mod2$BUGSoutput$sims.list$beta.low.flow,size=1),
+                 beta.pool.recruitment = sample(full.mod2$BUGSoutput$sims.list$beta.pool.recruitment,size=1),
+                 beta.reg.change = sample(full.mod2$BUGSoutput$sims.list$beta.reg.change,size=1),
+                 transition.prob = full.mod2$BUGSoutput$mean$transition.prob) 
+  
+  # parameters monitored 
+  params <- c("Nadults") 
+  
+  # run jags
+  out <- run.jags(txtstring2, data = sim.data, monitor=params,
+                  sample=1, n.chains=1,, summarise=FALSE)
+  Simulated <- coda::as.mcmc(out)
+  results<-rbind(results,Simulated)
+}
+
+# Results
+results.tibs<-t(results) # transpose
+results.tibs<-data.frame(results.tibs)
+x <- seq(1,iterations,1) # number of iterations
+colnames(results.tibs) <- x
+results.tibs<-results.tibs%>%
+  mutate(yrs=seq(2024,2077,1))
+results.tibs <- pmax(results.tibs,0) # turns negative numbers to NA
+results.tibs[is.na(results.tibs)] <- 0 # turns na to 0 (can't have negative population size)
+
+sums.0.harvest.maxkokanee <- results.tibs %>% 
+  rowwise() %>% 
+  mutate(mean = mean(c_across(1:100)))%>%
+  mutate(low = quantile(c_across(1:100),probs=0.025))%>% # 95% credible interval
+  mutate(high = quantile(c_across(1:100),probs=0.975))
+
+ggplot(data=sums.0.harvest.maxkokanee,aes(x=yrs,y=mean))+geom_line()+
+  geom_ribbon(aes(ymin=low,ymax=high),alpha=0.1)+labs(x="Year",y="Adult Population Size")+
+  theme_minimal()
+
+# combining next 3 simulations into a dataframe
+sim.res4<-tibble(yrs,low=sums.500.harvest.maxkokanee$low,mean=sums.500.harvest.maxkokanee$mean,
+                 high=sums.500.harvest.maxkokanee$high,
+                 Harvest="500",Group="Normal Flow",Kokanee="Max",CaRegs="Catch Release") 
+sim.res5<-tibble(yrs,low=sums.300.harvest.maxkokanee$low,mean=sums.300.harvest.maxkokanee$mean,
+                 high=sums.300.harvest.maxkokanee$high,
+                 Harvest="300",Group="Normal Flow",Kokanee="Max",CaRegs="Catch Release") 
+sim.res6<-tibble(yrs,low=sums.0.harvest.maxkokanee$low,mean=sums.0.harvest.maxkokanee$mean,
+                 high=sums.0.harvest.maxkokanee$high,
+                 Harvest="0",Group="Normal Flow",Kokanee="Max",CaRegs="Catch Release") 
+sim.res<-full_join(sim.res,sim.res4)
+sim.res<-full_join(sim.res,sim.res5)
+sim.res<-full_join(sim.res,sim.res6)
+
+cbPalette <- c("#009E73", "#56B4E9", "#D55E00") 
+
+ggplot(data=sim.res, aes(x=yrs,y=mean,group=Harvest,fill=Harvest,color=Harvest))+
+  geom_ribbon(aes(ymin=low,ymax=high,group=Harvest,fill=Harvest,color=Harvest),alpha=0.2,color=NA)+
+  facet_wrap(~Kokanee)+
+  geom_line(size=1.5)+
+  scale_colour_manual(values=cbPalette)+
+  scale_fill_manual(values=cbPalette)+
+  scale_y_continuous(expand=c(0,0))+
+  scale_x_continuous(breaks=c(2030,2050,2070),expand=c(0,0))+
+  labs(x="Year",y="Adult Population Size")+theme_bw()
+
+
+
+
+
+#################################################################################
+# 500 harvest, min kokanee availability, canadian harvest not allowed
+results <- as.data.frame(c())
+iterations<-100
+
+for(i in 1:iterations){
+  sim.data<-list(nYears= 54,
+                 
+                 #DATA
+                 bt.harv = rep(500,53), #  fish harvested each year
+                 weight = rep(weight.yr$wt[48],54), # current bt weight
+                 #kok = rep(predict$running_biomass_scale[44],54), # current kok availability 
+                 kok = rep(min(predict$running_biomass_scale),54), # min kokanee
+                 low.flow.recruitment = rep(mean(bull.river.low$scale_summerLowflow[6:45]),54),
+                 pool.elevation.recruit = rep(mean(pool.elev.sum$scale_avgPoolElevation[5:44]),54),
+                 ca.reg.changes = rep(0,54), 
+                 mean.fish.per.redd = 0.5,
+                 
+                 #PARAMETER ESTIMATES - NEED TO SAMPLE
+                 alpha_sr = sample(full.mod2$BUGSoutput$sims.list$alpha_sr,size=1),
+                 beta_sr = sample(full.mod2$BUGSoutput$sims.list$beta_sr,size=1),
+                 
+                 tauR_process=(sample(full.mod2$BUGSoutput$sims.list$sigmaR_process,size=1)^-2),
+                 tau.S.a = (sample(full.mod2$BUGSoutput$sims.list$sd.S.a,size=1)^-2),
+                 
+                 a.int = sample(full.mod2$BUGSoutput$sims.list$a.int,size=1),
+                 beta.kok = sample(full.mod2$BUGSoutput$sims.list$beta.kok,size=1),
+                 beta.dens = sample(full.mod2$BUGSoutput$sims.list$beta.dens,size=1),
+                 beta.low.flow = sample(full.mod2$BUGSoutput$sims.list$beta.low.flow,size=1),
+                 beta.pool.recruitment = sample(full.mod2$BUGSoutput$sims.list$beta.pool.recruitment,size=1),
+                 beta.reg.change = sample(full.mod2$BUGSoutput$sims.list$beta.reg.change,size=1),
+                 transition.prob = full.mod2$BUGSoutput$mean$transition.prob) 
+  
+  # parameters monitored 
+  params <- c("Nadults") 
+  
+  # run jags
+  out <- run.jags(txtstring2, data = sim.data, monitor=params,
+                  sample=1, n.chains=1,, summarise=FALSE)
+  Simulated <- coda::as.mcmc(out)
+  results<-rbind(results,Simulated)
+}
+
+# Results
+results.tibs<-t(results) # transpose
+results.tibs<-data.frame(results.tibs)
+x <- seq(1,iterations,1) # number of iterations
+colnames(results.tibs) <- x
+results.tibs<-results.tibs%>%
+  mutate(yrs=seq(2024,2077,1))
+results.tibs <- pmax(results.tibs,0) # turns negative numbers to NA
+results.tibs[is.na(results.tibs)] <- 0 # turns na to 0 (can't have negative population size)
+
+
+sums.500.harvest.minkokanee <- results.tibs %>% 
+  rowwise() %>% 
+  mutate(mean = mean(c_across(1:100)))%>%
+  mutate(low = quantile(c_across(1:100),probs=0.025))%>% # 95% credible interval
+  mutate(high = quantile(c_across(1:100),probs=0.975))
+
+ggplot(data=sums.500.harvest.minkokanee,aes(x=yrs,y=mean))+geom_line()+
+  geom_ribbon(aes(ymin=low,ymax=high),alpha=0.1)+labs(x="Year",y="Adult Population Size")+
+  theme_minimal()
+
+
+
+#############################################################################################
+# 300 harvest, min kokanee availability, canadian harvest not allowed
+results <- as.data.frame(c())
+iterations<-100
+
+for(i in 1:iterations){
+  sim.data<-list(nYears= 54,
+                 
+                 #DATA
+                 bt.harv = rep(300,53), #  fish harvested each year
+                 weight = rep(weight.yr$wt[48],54), # current bt weight
+                 #kok = rep(predict$running_biomass_scale[44],54), # current kok availability 
+                 kok = rep(min(predict$running_biomass_scale),54), # min kokanee
+                 low.flow.recruitment = rep(mean(bull.river.low$scale_summerLowflow[6:45]),54),
+                 pool.elevation.recruit = rep(mean(pool.elev.sum$scale_avgPoolElevation[5:44]),54),
+                 ca.reg.changes = rep(0,54), 
+                 mean.fish.per.redd = 0.5,
+                 
+                 #PARAMETER ESTIMATES - NEED TO SAMPLE
+                 alpha_sr = sample(full.mod2$BUGSoutput$sims.list$alpha_sr,size=1),
+                 beta_sr = sample(full.mod2$BUGSoutput$sims.list$beta_sr,size=1),
+                 
+                 tauR_process=(sample(full.mod2$BUGSoutput$sims.list$sigmaR_process,size=1)^-2),
+                 tau.S.a = (sample(full.mod2$BUGSoutput$sims.list$sd.S.a,size=1)^-2),
+                 
+                 a.int = sample(full.mod2$BUGSoutput$sims.list$a.int,size=1),
+                 beta.kok = sample(full.mod2$BUGSoutput$sims.list$beta.kok,size=1),
+                 beta.dens = sample(full.mod2$BUGSoutput$sims.list$beta.dens,size=1),
+                 beta.low.flow = sample(full.mod2$BUGSoutput$sims.list$beta.low.flow,size=1),
+                 beta.pool.recruitment = sample(full.mod2$BUGSoutput$sims.list$beta.pool.recruitment,size=1),
+                 beta.reg.change = sample(full.mod2$BUGSoutput$sims.list$beta.reg.change,size=1),
+                 transition.prob = full.mod2$BUGSoutput$mean$transition.prob) # holding constant
+  
+  # parameters monitored 
+  params <- c("Nadults") 
+  
+  # run jags
+  out <- run.jags(txtstring2, data = sim.data, monitor=params,
+                  sample=1, n.chains=1,, summarise=FALSE)
+  Simulated <- coda::as.mcmc(out)
+  results<-rbind(results,Simulated)
+}
+
+# Results
+results.tibs<-t(results) # transpose
+results.tibs<-data.frame(results.tibs)
+x <- seq(1,iterations,1) # number of iterations
+colnames(results.tibs) <- x
+results.tibs<-results.tibs%>%
+  mutate(yrs=seq(2024,2077,1))
+results.tibs <- pmax(results.tibs,0) # turns negative numbers to NA
+results.tibs[is.na(results.tibs)] <- 0 # turns na to 0 (can't have negative population size)
+
+
+sums.300.harvest.minkokanee <- results.tibs %>% 
+  rowwise() %>% 
+  mutate(mean = mean(c_across(1:100)))%>%
+  mutate(low = quantile(c_across(1:100),probs=0.025))%>% # 95% credible interval
+  mutate(high = quantile(c_across(1:100),probs=0.975))
+
+ggplot(data=sums.300.harvest.minkokanee,aes(x=yrs,y=mean))+geom_line()+
+  geom_ribbon(aes(ymin=low,ymax=high),alpha=0.1)+labs(x="Year",y="Adult Population Size")+
+  theme_minimal()
+
+
+
+#############################################################################################
+# 0 harvest, min kokanee availability, canadian harvest not allowed
+results <- as.data.frame(c())
+iterations<-100
+
+for(i in 1:iterations){
+  sim.data<-list(nYears= 54,
+                 
+                 #DATA
+                 bt.harv = rep(0,53), #  fish harvested each year
+                 weight = rep(weight.yr$wt[48],54), # current bt weight
+                 #kok = rep(predict$running_biomass_scale[44],54), # current kok availability 
+                 kok = rep(min(predict$running_biomass_scale),54), # min kokanee
+                 low.flow.recruitment = rep(mean(bull.river.low$scale_summerLowflow[6:45]),54),
+                 pool.elevation.recruit = rep(mean(pool.elev.sum$scale_avgPoolElevation[5:44]),54),
+                 ca.reg.changes = rep(0,54), 
+                 mean.fish.per.redd = 0.5,
+                 
+                 #PARAMETER ESTIMATES - NEED TO SAMPLE
+                 alpha_sr = sample(full.mod2$BUGSoutput$sims.list$alpha_sr,size=1),
+                 beta_sr = sample(full.mod2$BUGSoutput$sims.list$beta_sr,size=1),
+                 
+                 tauR_process=(sample(full.mod2$BUGSoutput$sims.list$sigmaR_process,size=1)^-2),
+                 tau.S.a = (sample(full.mod2$BUGSoutput$sims.list$sd.S.a,size=1)^-2),
+                 
+                 a.int = sample(full.mod2$BUGSoutput$sims.list$a.int,size=1),
+                 beta.kok = sample(full.mod2$BUGSoutput$sims.list$beta.kok,size=1),
+                 beta.dens = sample(full.mod2$BUGSoutput$sims.list$beta.dens,size=1),
+                 beta.low.flow = sample(full.mod2$BUGSoutput$sims.list$beta.low.flow,size=1),
+                 beta.pool.recruitment = sample(full.mod2$BUGSoutput$sims.list$beta.pool.recruitment,size=1),
+                 beta.reg.change = sample(full.mod2$BUGSoutput$sims.list$beta.reg.change,size=1),
+                 transition.prob = full.mod2$BUGSoutput$mean$transition.prob) # holding constant
+  
+  # parameters monitored 
+  params <- c("Nadults") 
+  
+  # run jags
+  out <- run.jags(txtstring2, data = sim.data, monitor=params,
+                  sample=1, n.chains=1,, summarise=FALSE)
+  Simulated <- coda::as.mcmc(out)
+  results<-rbind(results,Simulated)
+}
+
+# Results
+results.tibs<-t(results) # transpose
+results.tibs<-data.frame(results.tibs)
+x <- seq(1,iterations,1) # number of iterations
+colnames(results.tibs) <- x
+results.tibs<-results.tibs%>%
+  mutate(yrs=seq(2024,2077,1))
+results.tibs <- pmax(results.tibs,0) # turns negative numbers to NA
+results.tibs[is.na(results.tibs)] <- 0 # turns na to 0 (can't have negative population size)
+
+
+sums.0.harvest.minkokanee <- results.tibs %>% 
+  rowwise() %>% 
+  mutate(mean = mean(c_across(1:100)))%>%
+  mutate(low = quantile(c_across(1:100),probs=0.025))%>% # 95% credible interval
+  mutate(high = quantile(c_across(1:100),probs=0.975))
+
+
+ggplot(data=sums.0.harvest.minkokanee,aes(x=yrs,y=mean))+geom_line()+
+  geom_ribbon(aes(ymin=low,ymax=high),alpha=0.1)+labs(x="Year",y="Adult Population Size")+
+  theme_minimal()
+
+# combining simulation results
+sim.res7<-tibble(yrs,low=sums.500.harvest.minkokanee$low,mean=sums.500.harvest.minkokanee$mean,
+                 high=sums.500.harvest.minkokanee$high,
+                 Harvest="500",Group="Normal Flow",Kokanee="Min",CaRegs="Catch Release") 
+sim.res8<-tibble(yrs,low=sums.300.harvest.minkokanee$low,mean=sums.300.harvest.minkokanee$mean,
+                 high=sums.300.harvest.minkokanee$high,
+                 Harvest="300",Group="Normal Flow",Kokanee="Min",CaRegs="Catch Release") 
+sim.res9<-tibble(yrs,low=sums.0.harvest.minkokanee$low,mean=sums.0.harvest.minkokanee$mean,
+                 high=sums.0.harvest.minkokanee$high,
+                 Harvest="0",Group="Normal Flow",Kokanee="Min",CaRegs="Catch Release") 
+sim.res<-full_join(sim.res,sim.res7)
+sim.res<-full_join(sim.res,sim.res8)
+sim.res<-full_join(sim.res,sim.res9)
+
+cbPalette <- c( "#56B4E9","#999999" ,"#D55E00") #"#009E73",
+
+# change order of factors
+sim.res$Kokanee <- factor(sim.res$Kokanee, levels=c("Min", "Current", "Max"))
+
+ggplot(data=sim.res, aes(x=yrs,y=mean,group=Harvest,fill=Harvest,color=Harvest))+
+  geom_ribbon(aes(ymin=low,ymax=high,group=Harvest,fill=Harvest,color=Harvest),alpha=0.4,color=NA)+
+  facet_wrap(~Kokanee, labeller = labeller(Kokanee = 
+                                             c("Min" = "Min Kokanee",
+                                               "Current" = "Current Kokanee",
+                                               "Max" = "Max Kokanee")))+
+  geom_line(size=1)+
+  scale_colour_manual(values=cbPalette)+
+  scale_fill_manual(values=cbPalette)+
+  scale_y_continuous(expand=c(0,0))+
+  scale_x_continuous(breaks=c(2030,2050,2070),expand=c(0,0))+
+  labs(x="Year",y="Adult Population Size")+theme_bw()+
+  theme(
+    #plot.margin = unit(c(0.5,0.5,0.5,0.5),"cm"),
+    #strip.background = element_blank(),
+    #strip.text.x = element_text(size=0),
+    #strip.text.y = element_blank(),
+    legend.position = "bottom")
+
+
+ggplot(data=sim.res, aes(x=yrs,y=mean,group=Harvest,fill=Harvest,color=Harvest))+
+  geom_ribbon(aes(ymin=low,ymax=high,group=Harvest,fill=Harvest,color=Harvest),alpha=0.7)+ #,color=NA
+  facet_wrap(~Kokanee, labeller = labeller(Kokanee = 
+                                             c("Min" = "Min Kokanee",
+                                               "Current" = "Current Kokanee",
+                                               "Max" = "Max Kokanee")))+
+  #geom_line(size=1.5)+
+  scale_colour_manual(values=cbPalette)+
+  scale_fill_manual(values=cbPalette)+
+  scale_y_continuous(expand=c(0,0))+
+  scale_x_continuous(breaks=c(2030,2050,2070),expand=c(0,0))+
+  labs(x="Year",y="Adult Population Size")+theme_bw()+
+  theme(
+    #plot.margin = unit(c(0.5,0.5,0.5,0.5),"cm"),
+    #strip.background = element_blank(),
+    #strip.text.x = element_text(size=0),
+    #strip.text.y = element_blank(),
+    legend.position = "bottom")
+#ggsave("Results/summary/simulation.harvest.kokanee.png",width = 6, height =4)
+
+
+
+
+####################################################################################
+####################################################################################
+## comparing harvest changes
+# 500 harvest, current kokanee availability, canadian harvest allowed
+results <- as.data.frame(c())
+iterations<-100
+
+for(i in 1:iterations){
+  sim.data<-list(nYears= 54,
+                 
+                 #DATA
+                 bt.harv = rep(500,53), #  fish harvested each year
+                 weight = rep(weight.yr$wt[48],54), # current bt weight
+                 kok = rep(predict$running_biomass_scale[44],54), # current kok availability 
+                 low.flow.recruitment = rep(mean(bull.river.low$scale_summerLowflow[6:45]),54),
+                 pool.elevation.recruit = rep(mean(pool.elev.sum$scale_avgPoolElevation[5:44]),54),
+                 ca.reg.changes = rep(1,54), 
+                 mean.fish.per.redd = 0.5,
+                 
+                 #PARAMETER ESTIMATES - NEED TO SAMPLE
+                 alpha_sr = sample(full.mod2$BUGSoutput$sims.list$alpha_sr,size=1),
+                 beta_sr = sample(full.mod2$BUGSoutput$sims.list$beta_sr,size=1),
+                 
+                 tauR_process=(sample(full.mod2$BUGSoutput$sims.list$sigmaR_process,size=1)^-2),
+                 tau.S.a = (sample(full.mod2$BUGSoutput$sims.list$sd.S.a,size=1)^-2),
+                 
+                 a.int = sample(full.mod2$BUGSoutput$sims.list$a.int,size=1),
+                 beta.kok = sample(full.mod2$BUGSoutput$sims.list$beta.kok,size=1),
+                 beta.dens = sample(full.mod2$BUGSoutput$sims.list$beta.dens,size=1),
+                 beta.low.flow = sample(full.mod2$BUGSoutput$sims.list$beta.low.flow,size=1),
+                 beta.pool.recruitment = sample(full.mod2$BUGSoutput$sims.list$beta.pool.recruitment,size=1),
+                 beta.reg.change = sample(full.mod2$BUGSoutput$sims.list$beta.reg.change,size=1),
+                 transition.prob = full.mod2$BUGSoutput$mean$transition.prob) # holding constant
+  
+  # parameters monitored 
+  params <- c("Nadults") 
+  
+  # run jags
+  out <- run.jags(txtstring2, data = sim.data, monitor=params,
+                  sample=1, n.chains=1,, summarise=FALSE)
+  Simulated <- coda::as.mcmc(out)
+  results<-rbind(results,Simulated)
+}
+#results
+results.tibs<-t(results) # transpose
+results.tibs<-data.frame(results.tibs)
+x <- seq(1,iterations,1) # number of iterations
+colnames(results.tibs) <- x
+results.tibs<-results.tibs%>%
+  mutate(yrs=seq(2024,2077,1))
+head(results.tibs)
+results.tibs <- pmax(results.tibs,0) # turns negative numbers to NA
+results.tibs[is.na(results.tibs)] <- 0 # turns na to 0 (can't have negative population size)
+
+sums.500.harvest.ca <- results.tibs %>% 
+  rowwise() %>% # sums across all iterations/rows
+  mutate(low = quantile(c_across(1:100),probs=0.025))%>% # 95% credible interval
+  mutate(high = quantile(c_across(1:100),probs=0.975))%>%
+  mutate(mean = mean(c_across(1:100)))
+
+ggplot(data=sums.500.harvest.ca,aes(x=yrs,y=mean))+geom_line()+
+  geom_ribbon(aes(ymin=low,ymax=high),alpha=0.1)+labs(x="Year",y="Adult Population Size")+
+  theme_minimal()
+
+
+
+#############################################################################################
+#  300 harvest,current kokanee  availability, canadian harvest allowed
+results <- as.data.frame(c())
+iterations<-100
+
+for(i in 1:iterations){
+  sim.data<-list(nYears= 54,
+                 
+                 #DATA
+                 bt.harv = rep(300,53), #  fish harvested each year
+                 weight = rep(weight.yr$wt[48],54), # current bt weight
+                 kok = rep(predict$running_biomass_scale[44],54), # current kok availability 
+                 low.flow.recruitment = rep(mean(bull.river.low$scale_summerLowflow[6:45]),54),
+                 pool.elevation.recruit = rep(mean(pool.elev.sum$scale_avgPoolElevation[5:44]),54),
+                 ca.reg.changes = rep(1,54), 
+                 mean.fish.per.redd = 0.5,
+                 
+                 #PARAMETER ESTIMATES - NEED TO SAMPLE
+                 alpha_sr = sample(full.mod2$BUGSoutput$sims.list$alpha_sr,size=1),
+                 beta_sr = sample(full.mod2$BUGSoutput$sims.list$beta_sr,size=1),
+                 
+                 tauR_process=(sample(full.mod2$BUGSoutput$sims.list$sigmaR_process,size=1)^-2),
+                 tau.S.a = (sample(full.mod2$BUGSoutput$sims.list$sd.S.a,size=1)^-2),
+                 
+                 a.int = sample(full.mod2$BUGSoutput$sims.list$a.int,size=1),
+                 beta.kok = sample(full.mod2$BUGSoutput$sims.list$beta.kok,size=1),
+                 beta.dens = sample(full.mod2$BUGSoutput$sims.list$beta.dens,size=1),
+                 beta.low.flow = sample(full.mod2$BUGSoutput$sims.list$beta.low.flow,size=1),
+                 beta.pool.recruitment = sample(full.mod2$BUGSoutput$sims.list$beta.pool.recruitment,size=1),
+                 beta.reg.change = sample(full.mod2$BUGSoutput$sims.list$beta.reg.change,size=1),
+                 transition.prob = full.mod2$BUGSoutput$mean$transition.prob) # holding constant
+  
+  # parameters monitored 
+  params <- c("Nadults") 
+  
+  # run jags
+  out <- run.jags(txtstring2, data = sim.data, monitor=params,
+                  sample=1, n.chains=1,, summarise=FALSE)
+  Simulated <- coda::as.mcmc(out)
+  results<-rbind(results,Simulated)
+}
+#results
+results.tibs<-t(results) # transpose
+results.tibs<-data.frame(results.tibs)
+x <- seq(1,iterations,1) # number of iterations
+colnames(results.tibs) <- x
+results.tibs<-results.tibs%>%
+  mutate(yrs=seq(2024,2077,1))
+results.tibs <- pmax(results.tibs,0) # turns negative numbers to NA
+results.tibs[is.na(results.tibs)] <- 0 # turns na to 0 (can't have negative population size)
+
+
+sums.300.harvest.ca <- results.tibs %>% 
+  rowwise() %>% 
+  mutate(mean = mean(c_across(1:100)))%>%
+  mutate(low = quantile(c_across(1:100),probs=0.025))%>% # 95% credible interval
+  mutate(high = quantile(c_across(1:100),probs=0.975))
+
+ggplot(data=sums.300.harvest.ca,aes(x=yrs,y=mean))+geom_line()+
+  geom_ribbon(aes(ymin=low,ymax=high),alpha=0.1)+labs(x="Year",y="Adult Population Size")+
+  theme_minimal()
+
+
+
+#############################################################################################
+# 0 harvest,current kokanee availability, canadian harvest allowed
+results <- as.data.frame(c())
+iterations<-100
+
+for(i in 1:iterations){
+  sim.data<-list(nYears= 54,
+                 
+                 #DATA
+                 bt.harv = rep(0,53), #  fish harvested each year
+                 weight = rep(weight.yr$wt[48],54), # current bt weight
+                 kok = rep(predict$running_biomass_scale[44],54), # current kok availability 
+                 low.flow.recruitment = rep(mean(bull.river.low$scale_summerLowflow[6:45]),54),
+                 pool.elevation.recruit = rep(mean(pool.elev.sum$scale_avgPoolElevation[5:44]),54),
+                 ca.reg.changes = rep(1,54), 
+                 mean.fish.per.redd = 0.5,
+                 
+                 #PARAMETER ESTIMATES - NEED TO SAMPLE
+                 alpha_sr = sample(full.mod2$BUGSoutput$sims.list$alpha_sr,size=1),
+                 beta_sr = sample(full.mod2$BUGSoutput$sims.list$beta_sr,size=1),
+                 
+                 tauR_process=(sample(full.mod2$BUGSoutput$sims.list$sigmaR_process,size=1)^-2),
+                 tau.S.a = (sample(full.mod2$BUGSoutput$sims.list$sd.S.a,size=1)^-2),
+                 
+                 a.int = sample(full.mod2$BUGSoutput$sims.list$a.int,size=1),
+                 beta.kok = sample(full.mod2$BUGSoutput$sims.list$beta.kok,size=1),
+                 beta.dens = sample(full.mod2$BUGSoutput$sims.list$beta.dens,size=1),
+                 beta.low.flow = sample(full.mod2$BUGSoutput$sims.list$beta.low.flow,size=1),
+                 beta.pool.recruitment = sample(full.mod2$BUGSoutput$sims.list$beta.pool.recruitment,size=1),
+                 beta.reg.change = sample(full.mod2$BUGSoutput$sims.list$beta.reg.change,size=1),
+                 transition.prob = full.mod2$BUGSoutput$mean$transition.prob) # holding constant
+  
+  # parameters monitored 
+  params <- c("Nadults") 
+  
+  # run jags
+  out <- run.jags(txtstring2, data = sim.data, monitor=params,
+                  sample=1, n.chains=1,, summarise=FALSE)
+  Simulated <- coda::as.mcmc(out)
+  results<-rbind(results,Simulated)
+}
+#results
+results.tibs<-t(results) # transpose
+results.tibs<-data.frame(results.tibs)
+x <- seq(1,iterations,1) # number of iterations
+colnames(results.tibs) <- x
+results.tibs<-results.tibs%>%
+  mutate(yrs=seq(2024,2077,1))
+results.tibs <- pmax(results.tibs,0) # turns negative numbers to NA
+results.tibs[is.na(results.tibs)] <- 0 # turns na to 0 (can't have negative population size)
+
+
+sums.0.harvest.ca <- results.tibs %>% 
+  rowwise() %>% 
+  mutate(mean = mean(c_across(1:100)))%>%
+  mutate(low = quantile(c_across(1:100),probs=0.025))%>% # 95% credible interval
+  mutate(high = quantile(c_across(1:100),probs=0.975))
+
+
+ggplot(data=sums.0.harvest.ca,aes(x=yrs,y=mean))+geom_line()+
+  geom_ribbon(aes(ymin=low,ymax=high),alpha=0.1)+labs(x="Year",y="Adult Population Size")+
+  theme_minimal()
+
+
+sim.res10<-tibble(yrs,low=sums.500.harvest.ca$low,mean=sums.500.harvest.ca$mean,high=sums.500.harvest.ca$high,
+                  Harvest="500",Group="Normal Flow",Kokanee="Current",CaRegs="Not Catch Release") 
+sim.res11<-tibble(yrs,low=sums.300.harvest.ca$low,mean=sums.300.harvest.ca$mean,high=sums.300.harvest.ca$high,
+                  Harvest="300",Group="Normal Flow",Kokanee="Current",CaRegs="Not Catch Release") 
+sim.res12<-tibble(yrs,low=sums.0.harvest.ca$low,mean=sums.0.harvest.ca$mean,high=sums.0.harvest.ca$high,
+                  Harvest="0",Group="Normal Flow",Kokanee="Current",CaRegs="Not Catch Release") 
+#rm(sim.res)
+sim.res<-full_join(sim.res,sim.res10)
+sim.res<-full_join(sim.res,sim.res11)
+sim.res<-full_join(sim.res,sim.res12)
+
+cbPalette <- c("#009E73", "#56B4E9", "#D55E00") #"#999999", 
+
+ggplot(data=sim.res, aes(x=yrs,y=mean,group=Harvest,fill=Harvest,color=Harvest))+
+  geom_ribbon(aes(ymin=low,ymax=high,group=Harvest,fill=Harvest,color=Harvest),alpha=0.2,color=NA)+
+  facet_grid(CaRegs~Kokanee)+
+  geom_line(size=1.5)+
+  scale_colour_manual(values=cbPalette)+
+  scale_fill_manual(values=cbPalette)+
+  scale_y_continuous(expand=c(0,0))+
+  scale_x_continuous(breaks=c(2030,2050,2070),expand=c(0,0))+
+  labs(x="Year",y="Adult Population Size")+theme_bw()
+
+
+
+
+
+#################################################################################
+## comparing harvest changes
+# 500 harvest, max kokanee  availability, canadian harvest allowed
+results <- as.data.frame(c())
+iterations<-100
+
+for(i in 1:iterations){
+  sim.data<-list(nYears= 54,
+                 
+                 #DATA
+                 bt.harv = rep(500,53), #  fish harvested each year
+                 weight = rep(weight.yr$wt[48],54), # current bt weight
+                 #kok = rep(predict$running_biomass_scale[44],54), # current kok availability 
+                 kok = rep(max(predict$running_biomass_scale),54), # max kokanee
+                 low.flow.recruitment = rep(mean(bull.river.low$scale_summerLowflow[6:45]),54),
+                 pool.elevation.recruit = rep(mean(pool.elev.sum$scale_avgPoolElevation[5:44]),54),
+                 ca.reg.changes = rep(1,54), 
+                 mean.fish.per.redd = 0.5,
+                 
+                 #PARAMETER ESTIMATES - NEED TO SAMPLE
+                 alpha_sr = sample(full.mod2$BUGSoutput$sims.list$alpha_sr,size=1),
+                 beta_sr = sample(full.mod2$BUGSoutput$sims.list$beta_sr,size=1),
+                 
+                 tauR_process=(sample(full.mod2$BUGSoutput$sims.list$sigmaR_process,size=1)^-2),
+                 tau.S.a = (sample(full.mod2$BUGSoutput$sims.list$sd.S.a,size=1)^-2),
+                 
+                 a.int = sample(full.mod2$BUGSoutput$sims.list$a.int,size=1),
+                 beta.kok = sample(full.mod2$BUGSoutput$sims.list$beta.kok,size=1),
+                 beta.dens = sample(full.mod2$BUGSoutput$sims.list$beta.dens,size=1),
+                 beta.low.flow = sample(full.mod2$BUGSoutput$sims.list$beta.low.flow,size=1),
+                 beta.pool.recruitment = sample(full.mod2$BUGSoutput$sims.list$beta.pool.recruitment,size=1),
+                 beta.reg.change = sample(full.mod2$BUGSoutput$sims.list$beta.reg.change,size=1),
+                 transition.prob = full.mod2$BUGSoutput$mean$transition.prob) # holding constant
+  
+  # parameters monitored 
+  params <- c("Nadults") 
+  
+  # run jags
+  out <- run.jags(txtstring2, data = sim.data, monitor=params,
+                  sample=1, n.chains=1,, summarise=FALSE)
+  Simulated <- coda::as.mcmc(out)
+  results<-rbind(results,Simulated)
+}
+#results
+results.tibs<-t(results) # transpose
+results.tibs<-data.frame(results.tibs)
+x <- seq(1,iterations,1) # number of iterations
+colnames(results.tibs) <- x
+results.tibs<-results.tibs%>%
+  mutate(yrs=seq(2024,2077,1))
+results.tibs <- pmax(results.tibs,0) # turns negative numbers to NA
+results.tibs[is.na(results.tibs)] <- 0 # turns na to 0 (can't have negative population size)
+
+
+sums.500.harvest.maxkokanee.ca <- results.tibs %>% 
+  rowwise() %>% 
+  mutate(mean = mean(c_across(1:100)))%>%
+  mutate(low = quantile(c_across(1:100),probs=0.025))%>% # 95% credible interval
+  mutate(high = quantile(c_across(1:100),probs=0.975))
+
+
+ggplot(data=sums.500.harvest.maxkokanee.ca,aes(x=yrs,y=mean))+geom_line()+
+  geom_ribbon(aes(ymin=low,ymax=high),alpha=0.1)+labs(x="Year",y="Adult Population Size")+
+  theme_minimal()
+
+
+
+#############################################################################################
+# 300 harvest,max kokanee  availability, canadian harvest allowed
+results <- as.data.frame(c())
+iterations<-100
+
+for(i in 1:iterations){
+  sim.data<-list(nYears= 54,
+                 
+                 #DATA
+                 bt.harv = rep(300,53), #  fish harvested each year
+                 weight = rep(weight.yr$wt[48],54), # current bt weight
+                 #kok = rep(predict$running_biomass_scale[44],54), # current kok availability 
+                 kok = rep(max(predict$running_biomass_scale),54), # max kokanee
+                 low.flow.recruitment = rep(mean(bull.river.low$scale_summerLowflow[6:45]),54),
+                 pool.elevation.recruit = rep(mean(pool.elev.sum$scale_avgPoolElevation[5:44]),54),
+                 ca.reg.changes = rep(1,54), 
+                 mean.fish.per.redd = 0.5,
+                 
+                 #PARAMETER ESTIMATES - NEED TO SAMPLE
+                 alpha_sr = sample(full.mod2$BUGSoutput$sims.list$alpha_sr,size=1),
+                 beta_sr = sample(full.mod2$BUGSoutput$sims.list$beta_sr,size=1),
+                 
+                 tauR_process=(sample(full.mod2$BUGSoutput$sims.list$sigmaR_process,size=1)^-2),
+                 tau.S.a = (sample(full.mod2$BUGSoutput$sims.list$sd.S.a,size=1)^-2),
+                 
+                 a.int = sample(full.mod2$BUGSoutput$sims.list$a.int,size=1),
+                 beta.kok = sample(full.mod2$BUGSoutput$sims.list$beta.kok,size=1),
+                 beta.dens = sample(full.mod2$BUGSoutput$sims.list$beta.dens,size=1),
+                 beta.low.flow = sample(full.mod2$BUGSoutput$sims.list$beta.low.flow,size=1),
+                 beta.pool.recruitment = sample(full.mod2$BUGSoutput$sims.list$beta.pool.recruitment,size=1),
+                 beta.reg.change = sample(full.mod2$BUGSoutput$sims.list$beta.reg.change,size=1),
+                 transition.prob = full.mod2$BUGSoutput$mean$transition.prob) # holding constant
+  
+  # parameters monitored 
+  params <- c("Nadults") 
+  
+  # run jags
+  out <- run.jags(txtstring2, data = sim.data, monitor=params,
+                  sample=1, n.chains=1,, summarise=FALSE)
+  Simulated <- coda::as.mcmc(out)
+  results<-rbind(results,Simulated)
+}
+#results
+results.tibs<-t(results) # transpose
+results.tibs<-data.frame(results.tibs)
+x <- seq(1,iterations,1) # number of iterations
+colnames(results.tibs) <- x
+results.tibs<-results.tibs%>%
+  mutate(yrs=seq(2024,2077,1))
+results.tibs <- pmax(results.tibs,0) # turns negative numbers to NA
+results.tibs[is.na(results.tibs)] <- 0 # turns na to 0 (can't have negative population size)
+
+
+sums.300.harvest.maxkokanee.ca <- results.tibs %>% 
+  rowwise() %>% 
+  mutate(mean = mean(c_across(1:100)))%>%
+  mutate(low = quantile(c_across(1:100),probs=0.025))%>% # 95% credible interval
+  mutate(high = quantile(c_across(1:100),probs=0.975))
+
+
+ggplot(data=sums.300.harvest.maxkokanee.ca,aes(x=yrs,y=mean))+geom_line()+
+  geom_ribbon(aes(ymin=low,ymax=high),alpha=0.1)+labs(x="Year",y="Adult Population Size")+
+  theme_minimal()
+
+
+
+#############################################################################################
+# 0 harvest, max kokanee availability, canadian harvest allowed
+results <- as.data.frame(c())
+iterations<-100
+
+for(i in 1:iterations){
+  sim.data<-list(nYears= 54,
+                 
+                 #DATA
+                 bt.harv = rep(0,53), #  fish harvested each year
+                 weight = rep(weight.yr$wt[48],54), # current bt weight
+                 #kok = rep(predict$running_biomass_scale[44],54), # current kok availability 
+                 kok = rep(max(predict$running_biomass_scale),54), # max kokanee
+                 low.flow.recruitment = rep(mean(bull.river.low$scale_summerLowflow[6:45]),54),
+                 pool.elevation.recruit = rep(mean(pool.elev.sum$scale_avgPoolElevation[5:44]),54),
+                 ca.reg.changes = rep(1,54), 
+                 mean.fish.per.redd = 0.5,
+                 
+                 #PARAMETER ESTIMATES - NEED TO SAMPLE
+                 alpha_sr = sample(full.mod2$BUGSoutput$sims.list$alpha_sr,size=1),
+                 beta_sr = sample(full.mod2$BUGSoutput$sims.list$beta_sr,size=1),
+                 
+                 tauR_process=(sample(full.mod2$BUGSoutput$sims.list$sigmaR_process,size=1)^-2),
+                 tau.S.a = (sample(full.mod2$BUGSoutput$sims.list$sd.S.a,size=1)^-2),
+                 
+                 a.int = sample(full.mod2$BUGSoutput$sims.list$a.int,size=1),
+                 beta.kok = sample(full.mod2$BUGSoutput$sims.list$beta.kok,size=1),
+                 beta.dens = sample(full.mod2$BUGSoutput$sims.list$beta.dens,size=1),
+                 beta.low.flow = sample(full.mod2$BUGSoutput$sims.list$beta.low.flow,size=1),
+                 beta.pool.recruitment = sample(full.mod2$BUGSoutput$sims.list$beta.pool.recruitment,size=1),
+                 beta.reg.change = sample(full.mod2$BUGSoutput$sims.list$beta.reg.change,size=1),
+                 transition.prob = full.mod2$BUGSoutput$mean$transition.prob) # holding constant
+  
+  # parameters monitored 
+  params <- c("Nadults") 
+  
+  # run jags
+  out <- run.jags(txtstring2, data = sim.data, monitor=params,
+                  sample=1, n.chains=1,, summarise=FALSE)
+  Simulated <- coda::as.mcmc(out)
+  results<-rbind(results,Simulated)
+}
+#results
+results.tibs<-t(results) # transpose
+results.tibs<-data.frame(results.tibs)
+x <- seq(1,iterations,1) # number of iterations
+colnames(results.tibs) <- x
+results.tibs<-results.tibs%>%
+  mutate(yrs=seq(2024,2077,1))
+results.tibs <- pmax(results.tibs,0) # turns negative numbers to NA
+results.tibs[is.na(results.tibs)] <- 0 # turns na to 0 (can't have negative population size)
+
+
+sums.0.harvest.maxkokanee.ca <- results.tibs %>% 
+  rowwise() %>% 
+  mutate(mean = mean(c_across(1:100)))%>%
+  mutate(low = quantile(c_across(1:100),probs=0.025))%>% # 95% credible interval
+  mutate(high = quantile(c_across(1:100),probs=0.975))
+
+
+
+ggplot(data=sums.0.harvest.maxkokanee.ca,aes(x=yrs,y=mean))+geom_line()+
+  geom_ribbon(aes(ymin=low,ymax=high),alpha=0.1)+labs(x="Year",y="Adult Population Size")+
+  theme_minimal()
+
+# combining simulations
+sim.res13<-tibble(yrs,low=sums.500.harvest.maxkokanee.ca$low,mean=sums.500.harvest.maxkokanee.ca$mean,
+                  high=sums.500.harvest.maxkokanee.ca$high,
+                  Harvest="500",Group="Normal Flow",Kokanee="Max",CaRegs="Not Catch Release") 
+sim.res14<-tibble(yrs,low=sums.300.harvest.maxkokanee.ca$low,mean=sums.300.harvest.maxkokanee.ca$mean,
+                  high=sums.300.harvest.maxkokanee.ca$high,
+                  Harvest="300",Group="Normal Flow",Kokanee="Max",CaRegs="Not Catch Release") 
+sim.res15<-tibble(yrs,low=sums.0.harvest.maxkokanee.ca$low,mean=sums.0.harvest.maxkokanee.ca$mean,
+                  high=sums.0.harvest.maxkokanee.ca$high,
+                  Harvest="0",Group="Normal Flow",Kokanee="Max",CaRegs="Not Catch Release") 
+sim.res<-full_join(sim.res,sim.res13)
+sim.res<-full_join(sim.res,sim.res14)
+sim.res<-full_join(sim.res,sim.res15)
+
+cbPalette <- c("#009E73", "#56B4E9", "#D55E00") #"#999999", 
+
+ggplot(data=sim.res, aes(x=yrs,y=mean,group=Harvest,fill=Harvest,color=Harvest))+
+  geom_ribbon(aes(ymin=low,ymax=high,group=Harvest,fill=Harvest,color=Harvest),alpha=0.2,color=NA)+
+  facet_grid(~Kokanee+CaRegs)+
+  geom_line(size=1.5)+
+  scale_colour_manual(values=cbPalette)+
+  scale_fill_manual(values=cbPalette)+
+  scale_y_continuous(expand=c(0,0))+
+  scale_x_continuous(breaks=c(2030,2050,2070),expand=c(0,0))+
+  labs(x="Year",y="Adult Population Size")+theme_bw()
+
+
+
+
+
+
+#################################################################################
+# 500 harvest, min kokanee  availability, canadian harvest allowed
+results <- as.data.frame(c())
+iterations<-100
+
+for(i in 1:iterations){
+  sim.data<-list(nYears= 54,
+                 
+                 #DATA
+                 bt.harv = rep(500,53), #  fish harvested each year
+                 weight = rep(weight.yr$wt[48],54), # current bt weight
+                 #kok = rep(predict$running_biomass_scale[44],54), # current kok availability 
+                 kok = rep(min(predict$running_biomass_scale),54), # min kokanee
+                 low.flow.recruitment = rep(mean(bull.river.low$scale_summerLowflow[6:45]),54),
+                 pool.elevation.recruit = rep(mean(pool.elev.sum$scale_avgPoolElevation[5:44]),54),
+                 ca.reg.changes = rep(1,54), 
+                 mean.fish.per.redd = 0.5,
+                 
+                 #PARAMETER ESTIMATES - NEED TO SAMPLE
+                 alpha_sr = sample(full.mod2$BUGSoutput$sims.list$alpha_sr,size=1),
+                 beta_sr = sample(full.mod2$BUGSoutput$sims.list$beta_sr,size=1),
+                 
+                 tauR_process=(sample(full.mod2$BUGSoutput$sims.list$sigmaR_process,size=1)^-2),
+                 tau.S.a = (sample(full.mod2$BUGSoutput$sims.list$sd.S.a,size=1)^-2),
+                 
+                 a.int = sample(full.mod2$BUGSoutput$sims.list$a.int,size=1),
+                 beta.kok = sample(full.mod2$BUGSoutput$sims.list$beta.kok,size=1),
+                 beta.dens = sample(full.mod2$BUGSoutput$sims.list$beta.dens,size=1),
+                 beta.low.flow = sample(full.mod2$BUGSoutput$sims.list$beta.low.flow,size=1),
+                 beta.pool.recruitment = sample(full.mod2$BUGSoutput$sims.list$beta.pool.recruitment,size=1),
+                 beta.reg.change = sample(full.mod2$BUGSoutput$sims.list$beta.reg.change,size=1),
+                 transition.prob = full.mod2$BUGSoutput$mean$transition.prob) # holding constant
+  
+  # parameters monitored 
+  params <- c("Nadults") 
+  
+  # run jags
+  out <- run.jags(txtstring2, data = sim.data, monitor=params,
+                  sample=1, n.chains=1,, summarise=FALSE)
+  Simulated <- coda::as.mcmc(out)
+  results<-rbind(results,Simulated)
+}
+#results
+results.tibs<-t(results) # transpose
+results.tibs<-data.frame(results.tibs)
+x <- seq(1,iterations,1) # number of iterations
+colnames(results.tibs) <- x
+results.tibs<-results.tibs%>%
+  mutate(yrs=seq(2024,2077,1))
+results.tibs <- pmax(results.tibs,0) # turns negative numbers to NA
+results.tibs[is.na(results.tibs)] <- 0 # turns na to 0 (can't have negative population size)
+
+
+sums.500.harvest.minkokanee.ca <- results.tibs %>% 
+  rowwise() %>% 
+  mutate(mean = mean(c_across(1:100)))%>%
+  mutate(low = quantile(c_across(1:100),probs=0.025))%>% # 95% credible interval
+  mutate(high = quantile(c_across(1:100),probs=0.975))
+
+ggplot(data=sums.500.harvest.minkokanee.ca,aes(x=yrs,y=mean))+geom_line()+
+  geom_ribbon(aes(ymin=low,ymax=high),alpha=0.1)+labs(x="Year",y="Adult Population Size")+
+  theme_minimal()
+
+
+
+#############################################################################################
+# 300 harvest, min kokanee  availability, canadian harvest allowed
+results <- as.data.frame(c())
+iterations<-100
+
+for(i in 1:iterations){
+  sim.data<-list(nYears= 54,
+                 
+                 #DATA
+                 bt.harv = rep(300,53), #  fish harvested each year
+                 weight = rep(weight.yr$wt[48],54), # current bt weight
+                 #kok = rep(predict$running_biomass_scale[44],54), # current kok availability 
+                 kok = rep(min(predict$running_biomass_scale),54), # min kokanee
+                 low.flow.recruitment = rep(mean(bull.river.low$scale_summerLowflow[6:45]),54),
+                 pool.elevation.recruit = rep(mean(pool.elev.sum$scale_avgPoolElevation[5:44]),54),
+                 ca.reg.changes = rep(1,54), 
+                 mean.fish.per.redd = 0.5,
+                 
+                 #PARAMETER ESTIMATES - NEED TO SAMPLE
+                 alpha_sr = sample(full.mod2$BUGSoutput$sims.list$alpha_sr,size=1),
+                 beta_sr = sample(full.mod2$BUGSoutput$sims.list$beta_sr,size=1),
+                 
+                 tauR_process=(sample(full.mod2$BUGSoutput$sims.list$sigmaR_process,size=1)^-2),
+                 tau.S.a = (sample(full.mod2$BUGSoutput$sims.list$sd.S.a,size=1)^-2),
+                 
+                 a.int = sample(full.mod2$BUGSoutput$sims.list$a.int,size=1),
+                 beta.kok = sample(full.mod2$BUGSoutput$sims.list$beta.kok,size=1),
+                 beta.dens = sample(full.mod2$BUGSoutput$sims.list$beta.dens,size=1),
+                 beta.low.flow = sample(full.mod2$BUGSoutput$sims.list$beta.low.flow,size=1),
+                 beta.pool.recruitment = sample(full.mod2$BUGSoutput$sims.list$beta.pool.recruitment,size=1),
+                 beta.reg.change = sample(full.mod2$BUGSoutput$sims.list$beta.reg.change,size=1),
+                 transition.prob = full.mod2$BUGSoutput$mean$transition.prob) # holding constant
+  
+  # parameters monitored 
+  params <- c("Nadults") 
+  
+  # run jags
+  out <- run.jags(txtstring2, data = sim.data, monitor=params,
+                  sample=1, n.chains=1,, summarise=FALSE)
+  Simulated <- coda::as.mcmc(out)
+  results<-rbind(results,Simulated)
+}
+#results
+results.tibs<-t(results) # transpose
+results.tibs<-data.frame(results.tibs)
+x <- seq(1,iterations,1) # number of iterations
+colnames(results.tibs) <- x
+results.tibs<-results.tibs%>%
+  mutate(yrs=seq(2024,2077,1))
+results.tibs <- pmax(results.tibs,0) # turns negative numbers to NA
+results.tibs[is.na(results.tibs)] <- 0 # turns na to 0 (can't have negative population size)
+
+
+sums.300.harvest.minkokanee.ca <- results.tibs %>% 
+  rowwise() %>% 
+  mutate(mean = mean(c_across(1:100)))%>%
+  mutate(low = quantile(c_across(1:100),probs=0.025))%>% # 95% credible interval
+  mutate(high = quantile(c_across(1:100),probs=0.975))
+
+ggplot(data=sums.300.harvest.minkokanee.ca,aes(x=yrs,y=mean))+geom_line()+
+  geom_ribbon(aes(ymin=low,ymax=high),alpha=0.1)+labs(x="Year",y="Adult Population Size")+
+  theme_minimal()
+
+
+
+#############################################################################################
+# 0 harvest, min kokanee  availability, canadian harvest allowed
+results <- as.data.frame(c())
+iterations<-100
+
+for(i in 1:iterations){
+  sim.data<-list(nYears= 54,
+                 
+                 #DATA
+                 bt.harv = rep(0,53), #  fish harvested each year
+                 weight = rep(weight.yr$wt[48],54), # current bt weight
+                 #kok = rep(predict$running_biomass_scale[44],54), # current kok availability 
+                 kok = rep(min(predict$running_biomass_scale),54), # min kokanee
+                 low.flow.recruitment = rep(mean(bull.river.low$scale_summerLowflow[6:45]),54),
+                 pool.elevation.recruit = rep(mean(pool.elev.sum$scale_avgPoolElevation[5:44]),54),
+                 ca.reg.changes = rep(1,54), 
+                 mean.fish.per.redd = 0.5,
+                 
+                 #PARAMETER ESTIMATES - NEED TO SAMPLE
+                 alpha_sr = sample(full.mod2$BUGSoutput$sims.list$alpha_sr,size=1),
+                 beta_sr = sample(full.mod2$BUGSoutput$sims.list$beta_sr,size=1),
+                 
+                 tauR_process=(sample(full.mod2$BUGSoutput$sims.list$sigmaR_process,size=1)^-2),
+                 tau.S.a = (sample(full.mod2$BUGSoutput$sims.list$sd.S.a,size=1)^-2),
+                 
+                 a.int = sample(full.mod2$BUGSoutput$sims.list$a.int,size=1),
+                 beta.kok = sample(full.mod2$BUGSoutput$sims.list$beta.kok,size=1),
+                 beta.dens = sample(full.mod2$BUGSoutput$sims.list$beta.dens,size=1),
+                 beta.low.flow = sample(full.mod2$BUGSoutput$sims.list$beta.low.flow,size=1),
+                 beta.pool.recruitment = sample(full.mod2$BUGSoutput$sims.list$beta.pool.recruitment,size=1),
+                 beta.reg.change = sample(full.mod2$BUGSoutput$sims.list$beta.reg.change,size=1),
+                 transition.prob = full.mod2$BUGSoutput$mean$transition.prob) # holding constant
+  
+  # parameters monitored 
+  params <- c("Nadults") 
+  
+  # run jags
+  out <- run.jags(txtstring2, data = sim.data, monitor=params,
+                  sample=1, n.chains=1,, summarise=FALSE)
+  Simulated <- coda::as.mcmc(out)
+  results<-rbind(results,Simulated)
+}
+#results
+results.tibs<-t(results) # transpose
+results.tibs<-data.frame(results.tibs)
+x <- seq(1,iterations,1) # number of iterations
+colnames(results.tibs) <- x
+results.tibs<-results.tibs%>%
+  mutate(yrs=seq(2024,2077,1))
+results.tibs <- pmax(results.tibs,0) # turns negative numbers to NA
+results.tibs[is.na(results.tibs)] <- 0 # turns na to 0 (can't have negative population size)
+
+
+sums.0.harvest.minkokanee.ca <- results.tibs %>% 
+  rowwise() %>% 
+  mutate(mean = mean(c_across(1:100)))%>%
+  mutate(low = quantile(c_across(1:100),probs=0.025))%>% # 95% credible interval
+  mutate(high = quantile(c_across(1:100),probs=0.975))
+
+
+
+ggplot(data=sums.0.harvest.minkokanee.ca,aes(x=yrs,y=mean))+geom_line()+
+  geom_ribbon(aes(ymin=low,ymax=high),alpha=0.1)+labs(x="Year",y="Adult Population Size")+
+  theme_minimal()
+
+
+sim.res16<-tibble(yrs,low=sums.500.harvest.minkokanee.ca$low,mean=sums.500.harvest.minkokanee.ca$mean,
+                  high=sums.500.harvest.minkokanee.ca$high,
+                  Harvest="500",Group="Normal Flow",Kokanee="Min",CaRegs="Not Catch Release") 
+sim.res17<-tibble(yrs,low=sums.300.harvest.minkokanee.ca$low,mean=sums.300.harvest.minkokanee.ca$mean,
+                  high=sums.300.harvest.minkokanee.ca$high,
+                  Harvest="300",Group="Normal Flow",Kokanee="Min",CaRegs="Not Catch Release") 
+sim.res18<-tibble(yrs,low=sums.0.harvest.minkokanee.ca$low,mean=sums.0.harvest.minkokanee.ca$mean,
+                  high=sums.0.harvest.minkokanee.ca$high,
+                  Harvest="0",Group="Normal Flow",Kokanee="Min",CaRegs="Not Catch Release") 
+sim.res<-full_join(sim.res,sim.res16)
+sim.res<-full_join(sim.res,sim.res17)
+sim.res<-full_join(sim.res,sim.res18)
+
+
+
+
+# save all simulations
+#saveRDS(sim.res, file="R/sim.res") 
+# read in datafile
+#sim.res <-readRDS(file="R/sim.res")
+
+
+
+# mean from 2050 - 2077
+mean(sim.res$mean[81:108]) # harvest =300, current kokanee
+mean(sim.res$low[81:108])
+mean(sim.res$high[81:108])
+
+mean(sim.res$mean[405:432]) # harvest =300, min kokanee
+mean(sim.res$low[405:432])
+mean(sim.res$high[405:432])
+
+
+
+cbPalette <- c( "#56B4E9","#999999" ,"#D55E00") #"#009E73",
+
+# change order of factors
+sim.res$Kokanee <- factor(sim.res$Kokanee, levels=c("Min", "Current", "Max"))
+
+sim.res%>%filter(Group=="Normal Flow") %>%
+ggplot(aes(x=yrs,y=mean,group=Harvest,fill=Harvest,color=Harvest))+
+  geom_ribbon(aes(ymin=low,ymax=high,group=Harvest,fill=Harvest,color=Harvest),alpha=0.4,color=NA)+
+  #facet_wrap(~Kokanee, labeller = labeller(Kokanee = 
+  #                                          c("Min" = "Min Kokanee",
+  #                                           "Current" = "Current Kokanee",
+  #                                          "Max" = "Max Kokanee")))+
+  facet_grid(CaRegs~Kokanee)+
+  geom_line(size=1)+
+  scale_colour_manual(values=cbPalette)+
+  scale_fill_manual(values=cbPalette)+
+  scale_y_continuous(expand=c(0,0))+
+  scale_x_continuous(breaks=c(2030,2050,2070),expand=c(0,0))+
+  labs(x="Year",y="Adult Population Size")+theme_bw()+
+  theme(
+    #plot.margin = unit(c(0.5,0.5,0.5,0.5),"cm"),
+    #strip.background = element_blank(),
+    #strip.text.x = element_text(size=0),
+    #strip.text.y = element_blank(),
+    legend.position = "bottom")
+
+l<-sim.res%>%filter(Group=="Normal Flow") %>%
+  ggplot( aes(x=yrs,y=mean,group=Harvest,fill=Harvest,color=Harvest))+
+  geom_ribbon(aes(ymin=low,ymax=high,group=Harvest,fill=Harvest,color=Harvest),alpha=0.7)+ #,color=NA
+  #facet_wrap(~Kokanee, labeller = labeller(Kokanee = 
+  #                                          c("Min" = "Min Kokanee",
+  #                                           "Current" = "Current Kokanee",
+  #                                          "Max" = "Max Kokanee")))+
+  facet_grid(CaRegs~Kokanee,
+             labeller = labeller(Kokanee = c("Min" = "Min Kokanee",
+                                             "Current" = "Current Kokanee",
+                                             "Max" = "Max Kokanee")))+
+  #geom_line(size=1.5)+
+  scale_colour_manual(values=cbPalette)+
+  scale_fill_manual(values=cbPalette)+
+  scale_y_continuous(expand=c(0,0))+
+  scale_x_continuous(breaks=c(2030,2050,2070),expand=c(0,0))+
+  labs(x="Year",y="Adult Population Size")+theme_bw()+
+  theme(
+    plot.margin = unit(c(0.2,0.2,0.2,0.2),"cm"),
+    strip.background = element_blank(),
+    #strip.text.x = element_text(size=0),
+    #strip.text.y = element_blank(),
+    legend.title = element_text( size=10), legend.text=element_text(size=10),
+    legend.key.size = unit(0.3, "cm"),legend.box.margin=margin(0,0,0,0),
+    legend.margin=margin(0,0,0,0),
+    legend.position = "bottom")
+l
+#ggsave("Results/summary/simulation.harvest.kokanee.CanadianRegs.png",width = 6, height =4)
+
+
+
+
+
+### final plot, start here ###
+p<-sim.res%>%filter(Group=="Normal Flow") %>%
+  ggplot( aes(x=yrs,y=mean,group=Harvest,fill=Harvest,color=Harvest))+
+  geom_ribbon(aes(ymin=low,ymax=high,group=Harvest,fill=Harvest,color=Harvest),alpha=0.7)+ #,color=NA
+  facet_grid(CaRegs~Kokanee)+
+  #facet_grid(CaRegs~Kokanee,
+  #          labeller = labeller(Kokanee = c("Min" = "Min Kokanee",
+  #                                         "Current" = "Current Kokanee",
+  #                                        "Max" = "Max Kokanee")))+
+  #geom_line(size=1.5)+
+  scale_colour_manual(values=cbPalette)+
+  scale_fill_manual(values=cbPalette)+
+  scale_y_continuous(expand=c(0,0))+
+  scale_x_continuous(breaks=c(2030,2050,2070),expand=c(0,0))+
+  labs(x="Year",y="Adult Population Size")+theme_bw()+
+  theme(
+    plot.margin = unit(c(0.2,0.2,0.2,0.2),"cm"),
+    strip.background = element_blank(),
+    #strip.text.x = element_text(size=0),
+    #strip.text.y = element_blank(),
+    legend.title = element_text( size=10), legend.text=element_text(size=10),
+    legend.key.size = unit(0.3, "cm"),legend.box.margin=margin(0,0,0,0),
+    legend.margin=margin(0,0,0,0),
+    legend.position = "bottom")
+#p <- p + guides(shape = guide_legend(override.aes = list(size = 0.2)))
+tag_facet(p, open = "", close = "")
+#ggsave("Results/summary/simulation.harvest.kokanee.CanadianRegs2.png",width = 6, height =4)
+
+
+
+
+
+###########################################################################
+### manipulating hydro-logical variables 
+####################################################
+
+
+## comparing harvest changes
+# 300 harvest, current kokanee, canadian harvest not allowed, low flows 
+results <- as.data.frame(c())
+iterations<-100
+
+for(i in 1:iterations){
+  sim.data<-list(nYears= 54,
+                 
+                 #DATA
+                 bt.harv = rep(300,53), #  fish harvested each year
+                 weight = rep(weight.yr$wt[48],54), # current bt weight
+                 kok = rep(predict$running_biomass_scale[44],54), # current kok availability 
+                 low.flow.recruitment = rep(min(bull.river.low$scale_summerLowflow[6:45]),54), # minimum 
+                 pool.elevation.recruit = rep(min(pool.elev.sum$scale_avgPoolElevation[5:44]),54), # minimum
+                 ca.reg.changes = rep(0,54), 
+                 mean.fish.per.redd = 0.5,
+                 
+                 #PARAMETER ESTIMATES - NEED TO SAMPLE
+                 alpha_sr = sample(full.mod2$BUGSoutput$sims.list$alpha_sr,size=1),
+                 beta_sr = sample(full.mod2$BUGSoutput$sims.list$beta_sr,size=1),
+                 
+                 tauR_process=(sample(full.mod2$BUGSoutput$sims.list$sigmaR_process,size=1)^-2),
+                 tau.S.a = (sample(full.mod2$BUGSoutput$sims.list$sd.S.a,size=1)^-2),
+                 
+                 a.int = sample(full.mod2$BUGSoutput$sims.list$a.int,size=1),
+                 beta.kok = sample(full.mod2$BUGSoutput$sims.list$beta.kok,size=1),
+                 beta.dens = sample(full.mod2$BUGSoutput$sims.list$beta.dens,size=1),
+                 beta.low.flow = sample(full.mod2$BUGSoutput$sims.list$beta.low.flow,size=1),
+                 beta.pool.recruitment = sample(full.mod2$BUGSoutput$sims.list$beta.pool.recruitment,size=1),
+                 beta.reg.change = sample(full.mod2$BUGSoutput$sims.list$beta.reg.change,size=1),
+                 transition.prob = full.mod2$BUGSoutput$mean$transition.prob) # holding constant
+  
+  # parameters monitored 
+  params <- c("Nadults") 
+  
+  # run jags
+  out <- run.jags(txtstring2, data = sim.data, monitor=params,
+                  sample=1, n.chains=1,, summarise=FALSE)
+  Simulated <- coda::as.mcmc(out)
+  results<-rbind(results,Simulated)
+}
+#results
+results.tibs<-t(results) # transpose
+results.tibs<-data.frame(results.tibs)
+x <- seq(1,iterations,1) # number of iterations
+colnames(results.tibs) <- x
+results.tibs<-results.tibs%>%
+  mutate(yrs=seq(2024,2077,1))
+head(results.tibs)
+results.tibs <- pmax(results.tibs,0) # turns negative numbers to NA
+results.tibs[is.na(results.tibs)] <- 0 # turns na to 0 (can't have negative population size)
+
+sums.300.harvest.lowflow <- results.tibs %>% 
+  rowwise() %>% # sums across all iterations/rows
+  mutate(low = quantile(c_across(1:100),probs=0.025))%>% # 95% credible interval
+  mutate(high = quantile(c_across(1:100),probs=0.975))%>%
+  mutate(mean = mean(c_across(1:100)))
+
+
+ggplot(data=sums.300.harvest.lowflow,aes(x=yrs,y=mean))+geom_line()+
+  geom_ribbon(aes(ymin=low,ymax=high),alpha=0.1)+labs(x="Year",y="Adult Population Size")+
+  theme_minimal()
+
+
+
+#############################################################################################
+# 500 harvest,current kokanee, canadian harvest not allowed, low flows
+results <- as.data.frame(c())
+iterations<-100
+
+for(i in 1:iterations){
+  sim.data<-list(nYears= 54,
+                 
+                 #DATA
+                 bt.harv = rep(500,53), #  fish harvested each year
+                 weight = rep(weight.yr$wt[48],54), # current bt weight
+                 kok = rep(predict$running_biomass_scale[44],54), # current kok availability 
+                 low.flow.recruitment = rep(min(bull.river.low$scale_summerLowflow[6:45]),54), # min
+                 pool.elevation.recruit = rep(min(pool.elev.sum$scale_avgPoolElevation[5:44]),54), #min
+                 ca.reg.changes = rep(0,54), 
+                 mean.fish.per.redd = 0.5,
+                 
+                 #PARAMETER ESTIMATES - NEED TO SAMPLE
+                 alpha_sr = sample(full.mod2$BUGSoutput$sims.list$alpha_sr,size=1),
+                 beta_sr = sample(full.mod2$BUGSoutput$sims.list$beta_sr,size=1),
+                 
+                 tauR_process=(sample(full.mod2$BUGSoutput$sims.list$sigmaR_process,size=1)^-2),
+                 tau.S.a = (sample(full.mod2$BUGSoutput$sims.list$sd.S.a,size=1)^-2),
+                 
+                 a.int = sample(full.mod2$BUGSoutput$sims.list$a.int,size=1),
+                 beta.kok = sample(full.mod2$BUGSoutput$sims.list$beta.kok,size=1),
+                 beta.dens = sample(full.mod2$BUGSoutput$sims.list$beta.dens,size=1),
+                 beta.low.flow = sample(full.mod2$BUGSoutput$sims.list$beta.low.flow,size=1),
+                 beta.pool.recruitment = sample(full.mod2$BUGSoutput$sims.list$beta.pool.recruitment,size=1),
+                 beta.reg.change = sample(full.mod2$BUGSoutput$sims.list$beta.reg.change,size=1),
+                 transition.prob = full.mod2$BUGSoutput$mean$transition.prob) # holding constant
+  
+  # parameters monitored 
+  params <- c("Nadults") 
+  
+  # run jags
+  out <- run.jags(txtstring2, data = sim.data, monitor=params,
+                  sample=1, n.chains=1,, summarise=FALSE)
+  Simulated <- coda::as.mcmc(out)
+  results<-rbind(results,Simulated)
+}
+#results
+results.tibs<-t(results) # transpose
+results.tibs<-data.frame(results.tibs)
+x <- seq(1,iterations,1) # number of iterations
+colnames(results.tibs) <- x
+results.tibs<-results.tibs%>%
+  mutate(yrs=seq(2024,2077,1))
+results.tibs <- pmax(results.tibs,0) # turns negative numbers to NA
+results.tibs[is.na(results.tibs)] <- 0 # turns na to 0 (can't have negative population size)
+
+
+sums.500.harvest.lowflows <- results.tibs %>% 
+  rowwise() %>% 
+  mutate(mean = mean(c_across(1:100)))%>%
+  mutate(low = quantile(c_across(1:100),probs=0.025))%>% # 95% credible interval
+  mutate(high = quantile(c_across(1:100),probs=0.975))
+
+
+ggplot(data=sums.500.harvest.lowflows,aes(x=yrs,y=mean))+geom_line()+
+  geom_ribbon(aes(ymin=low,ymax=high),alpha=0.1)+labs(x="Year",y="Adult Population Size")+
+  theme_minimal()
+
+
+
+#############################################################################################
+# 0 harvest,current kokanee, canadian harvest not allowed, low flows
+results <- as.data.frame(c())
+iterations<-100
+
+for(i in 1:iterations){
+  sim.data<-list(nYears= 54,
+                 
+                 #DATA
+                 bt.harv = rep(0,53), #  fish harvested each year
+                 weight = rep(weight.yr$wt[48],54), # current bt weight
+                 kok = rep(predict$running_biomass_scale[44],54), # current kok availability 
+                 low.flow.recruitment = rep(min(bull.river.low$scale_summerLowflow[6:45]),54), # min
+                 pool.elevation.recruit = rep(min(pool.elev.sum$scale_avgPoolElevation[5:44]),54), # min
+                 ca.reg.changes = rep(0,54), 
+                 mean.fish.per.redd = 0.5,
+                 
+                 #PARAMETER ESTIMATES - NEED TO SAMPLE
+                 alpha_sr = sample(full.mod2$BUGSoutput$sims.list$alpha_sr,size=1),
+                 beta_sr = sample(full.mod2$BUGSoutput$sims.list$beta_sr,size=1),
+                 
+                 tauR_process=(sample(full.mod2$BUGSoutput$sims.list$sigmaR_process,size=1)^-2),
+                 tau.S.a = (sample(full.mod2$BUGSoutput$sims.list$sd.S.a,size=1)^-2),
+                 
+                 a.int = sample(full.mod2$BUGSoutput$sims.list$a.int,size=1),
+                 beta.kok = sample(full.mod2$BUGSoutput$sims.list$beta.kok,size=1),
+                 beta.dens = sample(full.mod2$BUGSoutput$sims.list$beta.dens,size=1),
+                 beta.low.flow = sample(full.mod2$BUGSoutput$sims.list$beta.low.flow,size=1),
+                 beta.pool.recruitment = sample(full.mod2$BUGSoutput$sims.list$beta.pool.recruitment,size=1),
+                 beta.reg.change = sample(full.mod2$BUGSoutput$sims.list$beta.reg.change,size=1),
+                 transition.prob = full.mod2$BUGSoutput$mean$transition.prob) # holding constant
+  
+  # parameters monitored 
+  params <- c("Nadults") 
+  
+  # run jags
+  out <- run.jags(txtstring2, data = sim.data, monitor=params,
+                  sample=1, n.chains=1,, summarise=FALSE)
+  Simulated <- coda::as.mcmc(out)
+  results<-rbind(results,Simulated)
+}
+#results
+results.tibs<-t(results) # transpose
+results.tibs<-data.frame(results.tibs)
+x <- seq(1,iterations,1) # number of iterations
+colnames(results.tibs) <- x
+results.tibs<-results.tibs%>%
+  mutate(yrs=seq(2024,2077,1))
+results.tibs <- pmax(results.tibs,0) # turns negative numbers to NA
+results.tibs[is.na(results.tibs)] <- 0 # turns na to 0 (can't have negative population size)
+
+
+sums.0.harvest.lowflows <- results.tibs %>% 
+  rowwise() %>% 
+  mutate(mean = mean(c_across(1:100)))%>%
+  mutate(low = quantile(c_across(1:100),probs=0.025))%>% # 95% credible interval
+  mutate(high = quantile(c_across(1:100),probs=0.975))
+#sums.0.harvest
+
+ggplot(data=sums.0.harvest.lowflows,aes(x=yrs,y=mean))+geom_line()+
+  geom_ribbon(aes(ymin=low,ymax=high),alpha=0.1)+labs(x="Year",y="Adult Population Size")+
+  theme_minimal()
+
+
+sim.res19<-tibble(yrs,low=sums.500.harvest.lowflows$low,mean=sums.500.harvest.lowflows$mean,high=sums.500.harvest.lowflows$high,
+                  Harvest="500",Group="Low Flow",Kokanee="Current",CaRegs="Catch Release") 
+
+sim.res20<-tibble(yrs,low=sums.300.harvest.lowflow$low,mean=sums.300.harvest.lowflow$mean,high=sums.300.harvest.lowflow$high,
+                  Harvest="300",Group="Low Flow",Kokanee="Current",CaRegs="Catch Release") 
+
+sim.res21<-tibble(yrs,low=sums.0.harvest.lowflows$low,mean=sums.0.harvest.lowflows$mean,high=sums.0.harvest.lowflows$high,
+                  Harvest="0",Group="Low Flow",Kokanee="Current",CaRegs="Catch Release") 
+#rm(sim.res)
+sim.res<-full_join(sim.res,sim.res19)
+sim.res<-full_join(sim.res,sim.res20)
+sim.res<-full_join(sim.res,sim.res21)
+
+cbPalette <- c("#009E73", "#56B4E9", "#D55E00") #"#999999", 
+
+sim.res%>% filter(Kokanee=="Current")%>%filter(CaRegs=="Catch Release")%>%
+  ggplot(aes(x=yrs,y=mean,group=Harvest,fill=Harvest,color=Harvest))+
+  geom_ribbon(aes(ymin=low,ymax=high,group=Harvest,fill=Harvest,color=Harvest),alpha=0.2,color=NA)+
+  facet_wrap(~Group)+
+  geom_line(size=1.5)+
+  scale_colour_manual(values=cbPalette)+
+  scale_fill_manual(values=cbPalette)+
+  scale_y_continuous(expand=c(0,0))+
+  scale_x_continuous(breaks=c(2030,2050,2070),expand=c(0,0))+
+  labs(x="Year",y="Adult Population Size")+theme_bw()
+
+
+
+################################################################################################
+# 300 harvest, max kokanee, canadian harvest not allowed, low flows 
+results <- as.data.frame(c())
+iterations<-100
+
+for(i in 1:iterations){
+  sim.data<-list(nYears= 54,
+                 
+                 #DATA
+                 bt.harv = rep(300,53), #  fish harvested each year
+                 weight = rep(weight.yr$wt[48],54), # current bt weight
+                 #kok = rep(predict$running_biomass_scale[44],54), # current kok availability 
+                 kok = rep(max(predict$running_biomass_scale),54), # max kok availability 
+                 low.flow.recruitment = rep(min(bull.river.low$scale_summerLowflow[6:45]),54), # minimum 
+                 pool.elevation.recruit = rep(min(pool.elev.sum$scale_avgPoolElevation[5:44]),54), # minimum
+                 ca.reg.changes = rep(0,54), 
+                 mean.fish.per.redd = 0.5,
+                 
+                 #PARAMETER ESTIMATES - NEED TO SAMPLE
+                 alpha_sr = sample(full.mod2$BUGSoutput$sims.list$alpha_sr,size=1),
+                 beta_sr = sample(full.mod2$BUGSoutput$sims.list$beta_sr,size=1),
+                 
+                 tauR_process=(sample(full.mod2$BUGSoutput$sims.list$sigmaR_process,size=1)^-2),
+                 tau.S.a = (sample(full.mod2$BUGSoutput$sims.list$sd.S.a,size=1)^-2),
+                 
+                 a.int = sample(full.mod2$BUGSoutput$sims.list$a.int,size=1),
+                 beta.kok = sample(full.mod2$BUGSoutput$sims.list$beta.kok,size=1),
+                 beta.dens = sample(full.mod2$BUGSoutput$sims.list$beta.dens,size=1),
+                 beta.low.flow = sample(full.mod2$BUGSoutput$sims.list$beta.low.flow,size=1),
+                 beta.pool.recruitment = sample(full.mod2$BUGSoutput$sims.list$beta.pool.recruitment,size=1),
+                 beta.reg.change = sample(full.mod2$BUGSoutput$sims.list$beta.reg.change,size=1),
+                 transition.prob = full.mod2$BUGSoutput$mean$transition.prob) # holding constant
+  
+  # parameters monitored 
+  params <- c("Nadults") 
+  
+  # run jags
+  out <- run.jags(txtstring2, data = sim.data, monitor=params,
+                  sample=1, n.chains=1,, summarise=FALSE)
+  Simulated <- coda::as.mcmc(out)
+  results<-rbind(results,Simulated)
+}
+#results
+results.tibs<-t(results) # transpose
+results.tibs<-data.frame(results.tibs)
+x <- seq(1,iterations,1) # number of iterations
+colnames(results.tibs) <- x
+results.tibs<-results.tibs%>%
+  mutate(yrs=seq(2024,2077,1))
+head(results.tibs)
+results.tibs <- pmax(results.tibs,0) # turns negative numbers to NA
+results.tibs[is.na(results.tibs)] <- 0 # turns na to 0 (can't have negative population size)
+
+sums.300.harvest.lowflow.maxkok <- results.tibs %>% 
+  rowwise() %>% # sums across all iterations/rows
+  mutate(low = quantile(c_across(1:100),probs=0.025))%>% # 95% credible interval
+  mutate(high = quantile(c_across(1:100),probs=0.975))%>%
+  mutate(mean = mean(c_across(1:100)))
+
+
+ggplot(data=sums.300.harvest.lowflow.maxkok,aes(x=yrs,y=mean))+geom_line()+
+  geom_ribbon(aes(ymin=low,ymax=high),alpha=0.1)+labs(x="Year",y="Adult Population Size")+
+  theme_minimal()
+
+
+
+#############################################################################################
+# 500 harvest, max kokanee, canadian harvest not allowed, low flows
+results <- as.data.frame(c())
+iterations<-100
+
+for(i in 1:iterations){
+  sim.data<-list(nYears= 54,
+                 
+                 #DATA
+                 bt.harv = rep(500,53), #  fish harvested each year
+                 weight = rep(weight.yr$wt[48],54), # current bt weight
+                 #kok = rep(predict$running_biomass_scale[44],54), # current kok availability 
+                 kok = rep(max(predict$running_biomass_scale),54), # max kok availability 
+                 low.flow.recruitment = rep(min(bull.river.low$scale_summerLowflow[6:45]),54), # min
+                 pool.elevation.recruit = rep(min(pool.elev.sum$scale_avgPoolElevation[5:44]),54), #min
+                 ca.reg.changes = rep(0,54), 
+                 mean.fish.per.redd = 0.5,
+                 
+                 #PARAMETER ESTIMATES - NEED TO SAMPLE
+                 alpha_sr = sample(full.mod2$BUGSoutput$sims.list$alpha_sr,size=1),
+                 beta_sr = sample(full.mod2$BUGSoutput$sims.list$beta_sr,size=1),
+                 
+                 tauR_process=(sample(full.mod2$BUGSoutput$sims.list$sigmaR_process,size=1)^-2),
+                 tau.S.a = (sample(full.mod2$BUGSoutput$sims.list$sd.S.a,size=1)^-2),
+                 
+                 a.int = sample(full.mod2$BUGSoutput$sims.list$a.int,size=1),
+                 beta.kok = sample(full.mod2$BUGSoutput$sims.list$beta.kok,size=1),
+                 beta.dens = sample(full.mod2$BUGSoutput$sims.list$beta.dens,size=1),
+                 beta.low.flow = sample(full.mod2$BUGSoutput$sims.list$beta.low.flow,size=1),
+                 beta.pool.recruitment = sample(full.mod2$BUGSoutput$sims.list$beta.pool.recruitment,size=1),
+                 beta.reg.change = sample(full.mod2$BUGSoutput$sims.list$beta.reg.change,size=1),
+                 transition.prob = full.mod2$BUGSoutput$mean$transition.prob) # holding constant
+  
+  # parameters monitored 
+  params <- c("Nadults") 
+  
+  # run jags
+  out <- run.jags(txtstring2, data = sim.data, monitor=params,
+                  sample=1, n.chains=1,, summarise=FALSE)
+  Simulated <- coda::as.mcmc(out)
+  results<-rbind(results,Simulated)
+}
+#results
+results.tibs<-t(results) # transpose
+results.tibs<-data.frame(results.tibs)
+x <- seq(1,iterations,1) # number of iterations
+colnames(results.tibs) <- x
+results.tibs<-results.tibs%>%
+  mutate(yrs=seq(2024,2077,1))
+results.tibs <- pmax(results.tibs,0) # turns negative numbers to NA
+results.tibs[is.na(results.tibs)] <- 0 # turns na to 0 (can't have negative population size)
+
+
+sums.500.harvest.lowflows.maxkok <- results.tibs %>% 
+  rowwise() %>% 
+  mutate(mean = mean(c_across(1:100)))%>%
+  mutate(low = quantile(c_across(1:100),probs=0.025))%>% # 95% credible interval
+  mutate(high = quantile(c_across(1:100),probs=0.975))
+
+
+ggplot(data=sums.500.harvest.lowflows.maxkok,aes(x=yrs,y=mean))+geom_line()+
+  geom_ribbon(aes(ymin=low,ymax=high),alpha=0.1)+labs(x="Year",y="Adult Population Size")+
+  theme_minimal()
+
+
+
+#############################################################################################
+# 0 harvest, max kokanee, canadian harvest not allowed, low flows
+results <- as.data.frame(c())
+iterations<-100
+
+for(i in 1:iterations){
+  sim.data<-list(nYears= 54,
+                 
+                 #DATA
+                 bt.harv = rep(0,53), #  fish harvested each year
+                 weight = rep(weight.yr$wt[48],54), # current bt weight
+                 #kok = rep(predict$running_biomass_scale[44],54), # current kok availability 
+                 kok = rep(max(predict$running_biomass_scale),54), # max kok availability 
+                 low.flow.recruitment = rep(min(bull.river.low$scale_summerLowflow[6:45]),54), # min
+                 pool.elevation.recruit = rep(min(pool.elev.sum$scale_avgPoolElevation[5:44]),54), # min
+                 ca.reg.changes = rep(0,54), 
+                 mean.fish.per.redd = 0.5,
+                 
+                 #PARAMETER ESTIMATES - NEED TO SAMPLE
+                 alpha_sr = sample(full.mod2$BUGSoutput$sims.list$alpha_sr,size=1),
+                 beta_sr = sample(full.mod2$BUGSoutput$sims.list$beta_sr,size=1),
+                 
+                 tauR_process=(sample(full.mod2$BUGSoutput$sims.list$sigmaR_process,size=1)^-2),
+                 tau.S.a = (sample(full.mod2$BUGSoutput$sims.list$sd.S.a,size=1)^-2),
+                 
+                 a.int = sample(full.mod2$BUGSoutput$sims.list$a.int,size=1),
+                 beta.kok = sample(full.mod2$BUGSoutput$sims.list$beta.kok,size=1),
+                 beta.dens = sample(full.mod2$BUGSoutput$sims.list$beta.dens,size=1),
+                 beta.low.flow = sample(full.mod2$BUGSoutput$sims.list$beta.low.flow,size=1),
+                 beta.pool.recruitment = sample(full.mod2$BUGSoutput$sims.list$beta.pool.recruitment,size=1),
+                 beta.reg.change = sample(full.mod2$BUGSoutput$sims.list$beta.reg.change,size=1),
+                 transition.prob = full.mod2$BUGSoutput$mean$transition.prob) # holding constant
+  
+  # parameters monitored 
+  params <- c("Nadults") 
+  
+  # run jags
+  out <- run.jags(txtstring2, data = sim.data, monitor=params,
+                  sample=1, n.chains=1,, summarise=FALSE)
+  Simulated <- coda::as.mcmc(out)
+  results<-rbind(results,Simulated)
+}
+#results
+results.tibs<-t(results) # transpose
+results.tibs<-data.frame(results.tibs)
+x <- seq(1,iterations,1) # number of iterations
+colnames(results.tibs) <- x
+results.tibs<-results.tibs%>%
+  mutate(yrs=seq(2024,2077,1))
+results.tibs <- pmax(results.tibs,0) # turns negative numbers to NA
+results.tibs[is.na(results.tibs)] <- 0 # turns na to 0 (can't have negative population size)
+
+
+sums.0.harvest.lowflows.maxkok <- results.tibs %>% 
+  rowwise() %>% 
+  mutate(mean = mean(c_across(1:100)))%>%
+  mutate(low = quantile(c_across(1:100),probs=0.025))%>% # 95% credible interval
+  mutate(high = quantile(c_across(1:100),probs=0.975))
+#sums.0.harvest
+
+ggplot(data=sums.0.harvest.lowflows.maxkok,aes(x=yrs,y=mean))+geom_line()+
+  geom_ribbon(aes(ymin=low,ymax=high),alpha=0.1)+labs(x="Year",y="Adult Population Size")+
+  theme_minimal()
+
+
+sim.res22<-tibble(yrs,low=sums.500.harvest.lowflows.maxkok$low,mean=sums.500.harvest.lowflows.maxkok$mean,
+                  high=sums.500.harvest.lowflows.maxkok$high,
+                  Harvest="500",Group="Low Flow",Kokanee="Max",CaRegs="Catch Release") 
+
+sim.res23<-tibble(yrs,low=sums.300.harvest.lowflow.maxkok$low,mean=sums.300.harvest.lowflow.maxkok$mean,high=sums.300.harvest.lowflow.maxkok$high,
+                  Harvest="300",Group="Low Flow",Kokanee="Max",CaRegs="Catch Release") 
+
+sim.res24<-tibble(yrs,low=sums.0.harvest.lowflows$low,mean=sums.0.harvest.lowflows$mean,high=sums.0.harvest.lowflows$high,
+                  Harvest="0",Group="Low Flow",Kokanee="Max",CaRegs="Catch Release") 
+#rm(sim.res)
+sim.res<-full_join(sim.res,sim.res22)
+sim.res<-full_join(sim.res,sim.res23)
+sim.res<-full_join(sim.res,sim.res24)
+
+cbPalette <- c("#009E73", "#56B4E9", "#D55E00") #"#999999", 
+
+sim.res%>%filter(CaRegs=="Catch Release")%>%
+  ggplot(aes(x=yrs,y=mean,group=Harvest,fill=Harvest,color=Harvest))+
+  geom_ribbon(aes(ymin=low,ymax=high,group=Harvest,fill=Harvest,color=Harvest),alpha=0.2,color=NA)+
+  facet_grid(Group~Kokanee)+
+  geom_line(size=1.5)+
+  scale_colour_manual(values=cbPalette)+
+  scale_fill_manual(values=cbPalette)+
+  scale_y_continuous(expand=c(0,0))+
+  scale_x_continuous(breaks=c(2030,2050,2070),expand=c(0,0))+
+  labs(x="Year",y="Adult Population Size")+theme_bw()
+
+
+
+
+
+
+#####################################################################################
+# 300 harvest, min kokanee, canadian harvest not allowed, low flows 
+results <- as.data.frame(c())
+iterations<-100
+
+for(i in 1:iterations){
+  sim.data<-list(nYears= 54,
+                 
+                 #DATA
+                 bt.harv = rep(300,53), #  fish harvested each year
+                 weight = rep(weight.yr$wt[48],54), # current bt weight
+                 #kok = rep(predict$running_biomass_scale[44],54), # current kok availability 
+                 kok = rep(min(predict$running_biomass_scale),54), # min kok availability 
+                 low.flow.recruitment = rep(min(bull.river.low$scale_summerLowflow[6:45]),54), # minimum 
+                 pool.elevation.recruit = rep(min(pool.elev.sum$scale_avgPoolElevation[5:44]),54), # minimum
+                 ca.reg.changes = rep(0,54), 
+                 mean.fish.per.redd = 0.5,
+                 
+                 #PARAMETER ESTIMATES - NEED TO SAMPLE
+                 alpha_sr = sample(full.mod2$BUGSoutput$sims.list$alpha_sr,size=1),
+                 beta_sr = sample(full.mod2$BUGSoutput$sims.list$beta_sr,size=1),
+                 
+                 tauR_process=(sample(full.mod2$BUGSoutput$sims.list$sigmaR_process,size=1)^-2),
+                 tau.S.a = (sample(full.mod2$BUGSoutput$sims.list$sd.S.a,size=1)^-2),
+                 
+                 a.int = sample(full.mod2$BUGSoutput$sims.list$a.int,size=1),
+                 beta.kok = sample(full.mod2$BUGSoutput$sims.list$beta.kok,size=1),
+                 beta.dens = sample(full.mod2$BUGSoutput$sims.list$beta.dens,size=1),
+                 beta.low.flow = sample(full.mod2$BUGSoutput$sims.list$beta.low.flow,size=1),
+                 beta.pool.recruitment = sample(full.mod2$BUGSoutput$sims.list$beta.pool.recruitment,size=1),
+                 beta.reg.change = sample(full.mod2$BUGSoutput$sims.list$beta.reg.change,size=1),
+                 transition.prob = full.mod2$BUGSoutput$mean$transition.prob) # holding constant
+  
+  # parameters monitored 
+  params <- c("Nadults") 
+  
+  # run jags
+  out <- run.jags(txtstring2, data = sim.data, monitor=params,
+                  sample=1, n.chains=1,, summarise=FALSE)
+  Simulated <- coda::as.mcmc(out)
+  results<-rbind(results,Simulated)
+}
+#results
+results.tibs<-t(results) # transpose
+results.tibs<-data.frame(results.tibs)
+x <- seq(1,iterations,1) # number of iterations
+colnames(results.tibs) <- x
+results.tibs<-results.tibs%>%
+  mutate(yrs=seq(2024,2077,1))
+head(results.tibs)
+results.tibs <- pmax(results.tibs,0) # turns negative numbers to NA
+results.tibs[is.na(results.tibs)] <- 0 # turns na to 0 (can't have negative population size)
+
+sums.300.harvest.lowflow.minkok <- results.tibs %>% 
+  rowwise() %>% # sums across all iterations/rows
+  mutate(low = quantile(c_across(1:100),probs=0.025))%>% # 95% credible interval
+  mutate(high = quantile(c_across(1:100),probs=0.975))%>%
+  mutate(mean = mean(c_across(1:100)))
+
+
+ggplot(data=sums.300.harvest.lowflow.minkok,aes(x=yrs,y=mean))+geom_line()+
+  geom_ribbon(aes(ymin=low,ymax=high),alpha=0.1)+labs(x="Year",y="Adult Population Size")+
+  theme_minimal()
+
+
+
+#############################################################################################
+# 500 harvest, min kokanee, canadian harvest not allowed, low flows
+results <- as.data.frame(c())
+iterations<-100
+
+for(i in 1:iterations){
+  sim.data<-list(nYears= 54,
+                 
+                 #DATA
+                 bt.harv = rep(500,53), #  fish harvested each year
+                 weight = rep(weight.yr$wt[48],54), # current bt weight
+                 #kok = rep(predict$running_biomass_scale[44],54), # current kok availability 
+                 kok = rep(min(predict$running_biomass_scale),54), # min kok availability 
+                 low.flow.recruitment = rep(min(bull.river.low$scale_summerLowflow[6:45]),54), # min
+                 pool.elevation.recruit = rep(min(pool.elev.sum$scale_avgPoolElevation[5:44]),54), #min
+                 ca.reg.changes = rep(0,54), 
+                 mean.fish.per.redd = 0.5,
+                 
+                 #PARAMETER ESTIMATES - NEED TO SAMPLE
+                 alpha_sr = sample(full.mod2$BUGSoutput$sims.list$alpha_sr,size=1),
+                 beta_sr = sample(full.mod2$BUGSoutput$sims.list$beta_sr,size=1),
+                 
+                 tauR_process=(sample(full.mod2$BUGSoutput$sims.list$sigmaR_process,size=1)^-2),
+                 tau.S.a = (sample(full.mod2$BUGSoutput$sims.list$sd.S.a,size=1)^-2),
+                 
+                 a.int = sample(full.mod2$BUGSoutput$sims.list$a.int,size=1),
+                 beta.kok = sample(full.mod2$BUGSoutput$sims.list$beta.kok,size=1),
+                 beta.dens = sample(full.mod2$BUGSoutput$sims.list$beta.dens,size=1),
+                 beta.low.flow = sample(full.mod2$BUGSoutput$sims.list$beta.low.flow,size=1),
+                 beta.pool.recruitment = sample(full.mod2$BUGSoutput$sims.list$beta.pool.recruitment,size=1),
+                 beta.reg.change = sample(full.mod2$BUGSoutput$sims.list$beta.reg.change,size=1),
+                 transition.prob = full.mod2$BUGSoutput$mean$transition.prob) # holding constant
+  
+  # parameters monitored 
+  params <- c("Nadults") 
+  
+  # run jags
+  out <- run.jags(txtstring2, data = sim.data, monitor=params,
+                  sample=1, n.chains=1,, summarise=FALSE)
+  Simulated <- coda::as.mcmc(out)
+  results<-rbind(results,Simulated)
+}
+#results
+results.tibs<-t(results) # transpose
+results.tibs<-data.frame(results.tibs)
+x <- seq(1,iterations,1) # number of iterations
+colnames(results.tibs) <- x
+results.tibs<-results.tibs%>%
+  mutate(yrs=seq(2024,2077,1))
+results.tibs <- pmax(results.tibs,0) # turns negative numbers to NA
+results.tibs[is.na(results.tibs)] <- 0 # turns na to 0 (can't have negative population size)
+
+
+sums.500.harvest.lowflows.minkok <- results.tibs %>% 
+  rowwise() %>% 
+  mutate(mean = mean(c_across(1:100)))%>%
+  mutate(low = quantile(c_across(1:100),probs=0.025))%>% # 95% credible interval
+  mutate(high = quantile(c_across(1:100),probs=0.975))
+
+
+ggplot(data=sums.500.harvest.lowflows.minkok,aes(x=yrs,y=mean))+geom_line()+
+  geom_ribbon(aes(ymin=low,ymax=high),alpha=0.1)+labs(x="Year",y="Adult Population Size")+
+  theme_minimal()
+
+
+
+#############################################################################################
+# 0 harvest, min kokanee, canadian harvest not allowed, low flows
+results <- as.data.frame(c())
+iterations<-100
+
+for(i in 1:iterations){
+  sim.data<-list(nYears= 54,
+                 
+                 #DATA
+                 bt.harv = rep(0,53), #  fish harvested each year
+                 weight = rep(weight.yr$wt[48],54), # current bt weight
+                 #kok = rep(predict$running_biomass_scale[44],54), # current kok availability 
+                 kok = rep(min(predict$running_biomass_scale),54), # min kok availability 
+                 low.flow.recruitment = rep(min(bull.river.low$scale_summerLowflow[6:45]),54), # min
+                 pool.elevation.recruit = rep(min(pool.elev.sum$scale_avgPoolElevation[5:44]),54), # min
+                 ca.reg.changes = rep(0,54), 
+                 mean.fish.per.redd = 0.5,
+                 
+                 #PARAMETER ESTIMATES - NEED TO SAMPLE
+                 alpha_sr = sample(full.mod2$BUGSoutput$sims.list$alpha_sr,size=1),
+                 beta_sr = sample(full.mod2$BUGSoutput$sims.list$beta_sr,size=1),
+                 
+                 tauR_process=(sample(full.mod2$BUGSoutput$sims.list$sigmaR_process,size=1)^-2),
+                 tau.S.a = (sample(full.mod2$BUGSoutput$sims.list$sd.S.a,size=1)^-2),
+                 
+                 a.int = sample(full.mod2$BUGSoutput$sims.list$a.int,size=1),
+                 beta.kok = sample(full.mod2$BUGSoutput$sims.list$beta.kok,size=1),
+                 beta.dens = sample(full.mod2$BUGSoutput$sims.list$beta.dens,size=1),
+                 beta.low.flow = sample(full.mod2$BUGSoutput$sims.list$beta.low.flow,size=1),
+                 beta.pool.recruitment = sample(full.mod2$BUGSoutput$sims.list$beta.pool.recruitment,size=1),
+                 beta.reg.change = sample(full.mod2$BUGSoutput$sims.list$beta.reg.change,size=1),
+                 transition.prob = full.mod2$BUGSoutput$mean$transition.prob) # holding constant
+  
+  # parameters monitored 
+  params <- c("Nadults") 
+  
+  # run jags
+  out <- run.jags(txtstring2, data = sim.data, monitor=params,
+                  sample=1, n.chains=1,, summarise=FALSE)
+  Simulated <- coda::as.mcmc(out)
+  results<-rbind(results,Simulated)
+}
+#results
+results.tibs<-t(results) # transpose
+results.tibs<-data.frame(results.tibs)
+x <- seq(1,iterations,1) # number of iterations
+colnames(results.tibs) <- x
+results.tibs<-results.tibs%>%
+  mutate(yrs=seq(2024,2077,1))
+results.tibs <- pmax(results.tibs,0) # turns negative numbers to NA
+results.tibs[is.na(results.tibs)] <- 0 # turns na to 0 (can't have negative population size)
+
+
+sums.0.harvest.lowflows.minkok <- results.tibs %>% 
+  rowwise() %>% 
+  mutate(mean = mean(c_across(1:100)))%>%
+  mutate(low = quantile(c_across(1:100),probs=0.025))%>% # 95% credible interval
+  mutate(high = quantile(c_across(1:100),probs=0.975))
+#sums.0.harvest
+
+ggplot(data=sums.0.harvest.lowflows.minkok,aes(x=yrs,y=mean))+geom_line()+
+  geom_ribbon(aes(ymin=low,ymax=high),alpha=0.1)+labs(x="Year",y="Adult Population Size")+
+  theme_minimal()
+
+
+sim.res25<-tibble(yrs,low=sums.500.harvest.lowflows.minkok$low,mean=sums.500.harvest.lowflows.minkok$mean,
+                  high=sums.500.harvest.lowflows.minkok$high,
+                  Harvest="500",Group="Low Flow",Kokanee="Min",CaRegs="Catch Release") 
+
+sim.res26<-tibble(yrs,low=sums.300.harvest.lowflow.minkok$low,mean=sums.300.harvest.lowflow.minkok$mean,high=sums.300.harvest.lowflow.minkok$high,
+                  Harvest="300",Group="Low Flow",Kokanee="Min",CaRegs="Catch Release") 
+
+sim.res27<-tibble(yrs,low=sums.0.harvest.lowflows$low,mean=sums.0.harvest.lowflows$mean,high=sums.0.harvest.lowflows$high,
+                  Harvest="0",Group="Low Flow",Kokanee="Min",CaRegs="Catch Release") 
+#rm(sim.res)
+sim.res<-full_join(sim.res,sim.res25)
+sim.res<-full_join(sim.res,sim.res26)
+sim.res<-full_join(sim.res,sim.res27)
+
+
+# save all simulations
+#saveRDS(sim.res, file="R/sim.res") 
+# read in datafile
+#sim.res <-readRDS(file="R/sim.res")
+
+
+
+
+
+cbPalette <- c( "#56B4E9","#999999" ,"#D55E00") #"#009E73",
+
+
+# change order of factors
+sim.res$Kokanee <- factor(sim.res$Kokanee, levels=c("Min", "Current", "Max"))
+sim.res$Group <- factor(sim.res$Group, levels=c("Low Flow", "Normal Flow"))
+
+
+sim.res %>% filter(CaRegs=="Catch Release")%>%
+  ggplot(aes(x=yrs,y=mean,group=Harvest,fill=Harvest,color=Harvest))+
+  geom_ribbon(aes(ymin=low,ymax=high,group=Harvest,fill=Harvest,color=Harvest),alpha=0.7)+ #,color=NA
+  #facet_wrap(~Kokanee, labeller = labeller(Kokanee = 
+  #                                          c("Min" = "Min Kokanee",
+  #                                           "Current" = "Current Kokanee",
+  #                                          "Max" = "Max Kokanee")))+
+  facet_grid(Kokanee~Group,
+             labeller = labeller(Kokanee = c("Min" = "Min Kokanee",
+                                             "Current" = "Current Kokanee",
+                                             "Max" = "Max Kokanee")))+
+  #geom_line(size=1.5)+
+  scale_colour_manual(values=cbPalette)+
+  scale_fill_manual(values=cbPalette)+
+  scale_y_continuous(expand=c(0,0))+
+  scale_x_continuous(breaks=c(2030,2050,2070),expand=c(0,0))+
+  labs(x="Year",y="Adult Population Size")+theme_bw()+
+  theme(
+    plot.margin = unit(c(0.2,0.2,0.2,0.2),"cm"),
+    strip.background = element_blank(),
+    #strip.text.x = element_text(size=0),
+    #strip.text.y = element_blank(),
+    legend.title = element_text( size=10), legend.text=element_text(size=10),
+    legend.key.size = unit(0.3, "cm"),legend.box.margin=margin(0,0,0,0),
+    legend.margin=margin(0,0,0,0),
+    legend.position = "bottom")
+#ggsave("Results/summary/simulation.harvest.kokanee.flows.png",width = 5, height =5)
+
+### final plot, start here ###
+t<-sim.res %>% filter(CaRegs=="Catch Release")%>%
+  ggplot(aes(x=yrs,y=mean,group=Harvest,fill=Harvest,color=Harvest))+
+  geom_ribbon(aes(ymin=low,ymax=high,group=Harvest,fill=Harvest,color=Harvest),alpha=0.7)+ #,color=NA
+  facet_grid(Group~Kokanee)+
+  #facet_grid(CaRegs~Kokanee,
+  #          labeller = labeller(Kokanee = c("Min" = "Min Kokanee",
+  #                                         "Current" = "Current Kokanee",
+  #                                        "Max" = "Max Kokanee")))+
+  #geom_line(size=1.5)+
+  scale_colour_manual(values=cbPalette)+
+  scale_fill_manual(values=cbPalette)+
+  scale_y_continuous(expand=c(0,0))+
+  scale_x_continuous(breaks=c(2030,2050,2070),expand=c(0,0))+
+  labs(x="Year",y="Adult Population Size")+theme_bw()+
+  theme(
+    plot.margin = unit(c(0.2,0.2,0.2,0.2),"cm"),
+    strip.background = element_blank(),
+    #strip.text.x = element_text(size=0),
+    #strip.text.y = element_blank(),
+    legend.title = element_text( size=10), legend.text=element_text(size=10),
+    legend.key.size = unit(0.3, "cm"),legend.box.margin=margin(0,0,0,0),
+    legend.margin=margin(0,0,0,0),
+    legend.position = "bottom")
+tag_facet(t, open = "", close = "")
+
+
+
+
+
+
+
