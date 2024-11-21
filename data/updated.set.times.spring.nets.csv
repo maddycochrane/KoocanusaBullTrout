@@ -1,0 +1,965 @@
+Record,Spp #,Species,Length (mm),Weight (g),Length (in),Weight (lbs),Sex,Maturity,MM,DD,YYYY,Date,WaterBody,Section,Count,Notes,LOC_Name,LOC_Number,NetType,Position,Season,TimeSet,TimePulled,HoursSet,H2O Temp (F),H2O Temp (C),NetNumb,NetCount,Condition (Fulton's K),Condition Filtered,Strategy,Length (cm),100 mm Group
+12,58,LS SU,221,95,8.7,0.21,,,5,8,1973,5/8/1973,Koocanusa,Tenmile,1,2 nets,,,2,,Spring,15:00,11:00,40,,,3,2,88.27,TRUE,Pre-Biop,22,200
+62,58,LS SU,180,50,7.1,0.11,,,5,8,1973,5/8/1973,Koocanusa,Tenmile,1,3 nets,,,2,,Spring,15:00,11:00,60,,,5,3,85.07,TRUE,Pre-Biop,18,100
+150,29,PEA,185,,7.3,,,,5,8,1973,5/8/1973,Koocanusa,Tenmile,1,,,,2,,Spring,15:00,11:00,20,,,8,1,,FALSE,Pre-Biop,18,100
+268,58,LS SU,234,,9.2,,,,5,9,1973,5/9/1973,Koocanusa,Tenmile,1,,,,2,,Spring,16:00,10:00,18,,,11,1,,FALSE,Pre-Biop,23,200
+336,12,WCT,241,141,9.5,0.31,,,5,9,1973,5/9/1973,Koocanusa,Tenmile,1,,,,2,,Spring,16:00,10:00,18,,,12,1,100.08,TRUE,Pre-Biop,24,200
+367,12,WCT,297,290,11.7,0.64,,,5,9,1973,5/9/1973,Koocanusa,Tenmile,1,,,,2,,Spring,16:00,10:00,18,,,13,1,110.61,TRUE,Pre-Biop,29,200
+412,1,RB,361,458,14.2,1.01,,,5,9,1973,5/9/1973,Koocanusa,Tenmile,1,,,,2,,Spring,16:00,10:00,18,,,14,1,97.64,TRUE,Pre-Biop,36,300
+425,58,LS SU,307,290,12.1,0.64,,,5,9,1973,5/9/1973,Koocanusa,Tenmile,1,,,,2,,Spring,16:00,10:00,18,,,15,1,100,TRUE,Pre-Biop,30,300
+508,58,LS SU,330,,13,,,,5,9,1973,5/9/1973,Koocanusa,Tenmile,1,,,,2,,Spring,16:00,10:00,18,,,16,1,,FALSE,Pre-Biop,33,300
+9091,1,RB,594,2676,23.4,5.9,,,3,30,1976,3/30/1976,Koocanusa,Tenmile,1,,,,2,,Spring,15:00,10:00,19,,,910,1,127.68,TRUE,Pre-Biop,59,500
+9104,1,RB,307,353,12.1,0.78,,,3,30,1976,3/30/1976,Koocanusa,Tenmile,1,,,,2,,Spring,15:00,10:00,19,,,911,1,122,TRUE,Pre-Biop,30,300
+9111,1,RB,414,689,16.3,1.52,,,3,30,1976,3/30/1976,Koocanusa,Tenmile,1,,,,2,,Spring,15:00,10:00,19,,,912,1,97.1,TRUE,Pre-Biop,41,400
+9298,5,BULL,297,213,11.7,0.47,,,5,16,1976,5/16/1976,Koocanusa,Rexford,1,,Mid Sophie,15,2,,Spring,20:00,8:00,12,,,449,1,81.3,TRUE,Pre-Biop,29,200
+9305,5,BULL,314,,12.4,,,,5,16,1976,5/16/1976,Koocanusa,Rexford,1,,Mid Sophie,15,2,,Spring,20:00,8:00,12,,,450,1,,FALSE,Pre-Biop,31,300
+9313,5,BULL,325,,12.8,,,,5,16,1976,5/16/1976,Koocanusa,Rexford,1,,Mid Sophie,15,2,,Spring,20:00,8:00,12,,,451,1,,FALSE,Pre-Biop,32,300
+9353,5,BULL,358,390,14.1,0.86,,,5,16,1976,5/16/1976,Koocanusa,Rexford,1,,Mid Sophie,15,2,,Spring,20:00,8:00,12,,,452,1,85,TRUE,Pre-Biop,35,300
+9378,5,BULL,284,185,11.2,0.41,,,5,16,1976,5/16/1976,Koocanusa,Rexford,1,,Mid Sophie,15,2,,Spring,20:00,8:00,12,,,453,1,80.76,TRUE,Pre-Biop,28,200
+9413,5,BULL,302,235,11.9,0.52,,,5,16,1976,5/16/1976,Koocanusa,Rexford,1,,Mid Sophie,15,2,,Spring,19:00,8:00,13,,,454,1,85.32,TRUE,Pre-Biop,30,300
+9442,5,BULL,520,1288,20.5,2.84,,,5,16,1976,5/16/1976,Koocanusa,Rexford,1,,Mid Sophie,15,2,,Spring,19:00,8:00,13,,,455,1,91.6,TRUE,Pre-Biop,52,500
+9152,5,BULL,317,,12.5,,,,5,16,1976,5/16/1976,Koocanusa,Rexford,1,,North Black Lake,3,2,,Spring,20:00,8:00,12,,,462,1,,FALSE,Pre-Biop,31,300
+9163,5,BULL,312,263,12.3,0.58,,,5,16,1976,5/16/1976,Koocanusa,Rexford,1,,North Black Lake,3,2,,Spring,20:00,8:00,12,,,463,1,86.59,TRUE,Pre-Biop,31,300
+9198,85,MWF,279,,11,,,,5,16,1976,5/16/1976,Koocanusa,Rexford,1,,North Black Lake,3,2,,Spring,20:00,8:00,12,,,464,1,,FALSE,Pre-Biop,27,200
+9206,5,BULL,325,,12.8,,,,5,16,1976,5/16/1976,Koocanusa,Rexford,1,,North Black Lake,3,2,,Spring,20:00,8:00,12,,,465,1,,FALSE,Pre-Biop,32,300
+9230,5,BULL,350,390,13.8,0.86,,,5,16,1976,5/16/1976,Koocanusa,Rexford,1,,North Point Tobacco,8,2,,Spring,20:00,8:00,12,,,439,1,90.96,TRUE,Pre-Biop,35,300
+9286,5,BULL,388,,15.3,,,,5,16,1976,5/16/1976,Koocanusa,Rexford,1,,North Point Tobacco,8,2,,Spring,20:00,8:00,12,,,440,1,,FALSE,Pre-Biop,38,300
+9290,85,MWF,299,,11.8,,,,5,16,1976,5/16/1976,Koocanusa,Rexford,1,,North Point Tobacco,8,2,,Spring,20:00,8:00,12,,,441,1,,FALSE,Pre-Biop,29,200
+9296,26,LING,368,471,14.5,1.04,,,5,16,1976,5/16/1976,Koocanusa,Rexford,1,,North Point Tobacco,8,2,,Spring,20:00,8:00,12,,,477,1,94.51,TRUE,Pre-Biop,36,300
+9642,5,BULL,325,294,12.8,0.65,,,5,17,1976,5/17/1976,Koocanusa,Rexford,1,,Mid Sophie,15,2,,Spring,21:00,8:00,11,,,456,1,85.64,TRUE,Pre-Biop,32,300
+9693,5,BULL,312,254,12.3,0.56,,,5,17,1976,5/17/1976,Koocanusa,Rexford,1,,Mid Sophie,15,2,,Spring,21:00,8:00,11,,,457,1,83.63,TRUE,Pre-Biop,31,300
+9481,26,LING,416,494,16.4,1.09,,,5,17,1976,5/17/1976,Koocanusa,Rexford,1,,North Black Lake,3,2,,Spring,21:00,8:00,11,,,466,1,68.62,TRUE,Pre-Biop,41,400
+9496,12,WCT,388,657,15.3,1.45,,,5,17,1976,5/17/1976,Koocanusa,Rexford,1,,North Black Lake,3,2,,Spring,21:00,8:00,11,,,467,1,112.48,TRUE,Pre-Biop,38,300
+9512,85,MWF,325,335,12.8,0.74,,,5,17,1976,5/17/1976,Koocanusa,Rexford,1,,North Black Lake,3,2,,Spring,21:00,8:00,11,,,468,1,97.59,TRUE,Pre-Biop,32,300
+9570,85,MWF,307,272,12.1,0.6,,,5,17,1976,5/17/1976,Koocanusa,Rexford,1,,North Black Lake,3,2,,Spring,21:00,8:00,11,,,475,1,94.01,TRUE,Pre-Biop,30,300
+9572,56,LN SU,,,,,,,5,17,1976,5/17/1976,Koocanusa,Rexford,1,,North Black Lake,3,2,,Spring,21:00,8:00,11,,,476,1,,FALSE,Pre-Biop,,
+9574,5,BULL,233,108,9.2,0.24,,,5,17,1976,5/17/1976,Koocanusa,Rexford,1,,North Point Tobacco,8,2,,Spring,21:00,8:00,11,,,442,1,85.38,TRUE,Pre-Biop,23,200
+9598,85,MWF,309,,12.2,,,,5,17,1976,5/17/1976,Koocanusa,Rexford,1,,North Point Tobacco,8,2,,Spring,21:00,8:00,11,,,443,1,,FALSE,Pre-Biop,30,300
+9617,85,MWF,302,226,11.9,0.5,,,5,17,1976,5/17/1976,Koocanusa,Rexford,1,,North Point Tobacco,8,2,,Spring,21:00,8:00,11,,,444,1,82.05,TRUE,Pre-Biop,30,300
+9827,5,BULL,365,430,14.4,0.95,,,5,18,1976,5/18/1976,Koocanusa,Rexford,1,,Mid Sophie,15,2,,Spring,21:00,8:00,11,,,458,1,88.43,TRUE,Pre-Biop,36,300
+9839,5,BULL,330,308,13,0.68,,,5,18,1976,5/18/1976,Koocanusa,Rexford,1,,Mid Sophie,15,2,,Spring,21:00,8:00,11,,,459,1,85.71,TRUE,Pre-Biop,33,300
+9845,5,BULL,287,195,11.3,0.43,,,5,18,1976,5/18/1976,Koocanusa,Rexford,1,,Mid Sophie,15,2,,Spring,21:00,8:00,11,,,460,1,82.49,TRUE,Pre-Biop,28,200
+9877,85,MWF,325,,12.8,,,,5,18,1976,5/18/1976,Koocanusa,Rexford,1,,Mid Sophie,15,2,,Spring,21:00,8:00,11,,,461,1,,FALSE,Pre-Biop,32,300
+9717,58,LS SU,,,,,,,5,18,1976,5/18/1976,Koocanusa,Rexford,24,,North Black Lake,3,2,,Spring,21:00,8:00,11,,,469,1,,FALSE,Pre-Biop,,
+9727,58,LS SU,,,,,,,5,18,1976,5/18/1976,Koocanusa,Rexford,10,,North Black Lake,3,2,,Spring,21:00,8:00,11,,,470,1,,FALSE,Pre-Biop,,
+9737,56,LN SU,,,,,,,5,18,1976,5/18/1976,Koocanusa,Rexford,9,,North Black Lake,3,2,,Spring,21:00,8:00,11,,,471,1,,FALSE,Pre-Biop,,
+9747,12,WCT,383,,15.1,,,,5,18,1976,5/18/1976,Koocanusa,Rexford,1,,North Black Lake,3,2,,Spring,21:00,8:00,11,,,472,1,,FALSE,Pre-Biop,38,300
+9758,5,BULL,386,535,15.2,1.18,,,5,18,1976,5/18/1976,Koocanusa,Rexford,1,,North Black Lake,3,2,,Spring,21:00,8:00,11,,,473,1,93.02,TRUE,Pre-Biop,38,300
+9763,5,BULL,314,,12.4,,,,5,18,1976,5/18/1976,Koocanusa,Rexford,1,,North Black Lake,3,2,,Spring,21:00,8:00,11,,,474,1,,FALSE,Pre-Biop,31,300
+9812,85,MWF,,,,,,,5,18,1976,5/18/1976,Koocanusa,Rexford,18,,North Point Murray,13,2,,Spring,21:00,9:00,12,,,434,1,,FALSE,Pre-Biop,,
+9824,5,BULL,233,108,9.2,0.24,,,5,18,1976,5/18/1976,Koocanusa,Rexford,1,,North Point Murray,13,2,,Spring,21:00,9:00,12,,,435,1,85.38,TRUE,Pre-Biop,23,200
+9789,5,BULL,378,489,14.9,1.08,,,5,18,1976,5/18/1976,Koocanusa,Rexford,1,,North Point Tobacco,8,2,,Spring,21:00,8:00,11,,,445,1,90.54,TRUE,Pre-Biop,37,300
+9795,26,LING,492,975,19.4,2.15,,,5,18,1976,5/18/1976,Koocanusa,Rexford,1,,North Point Tobacco,8,2,,Spring,21:00,8:00,11,,,446,1,81.87,TRUE,Pre-Biop,49,400
+9803,85,MWF,,,,,,,5,18,1976,5/18/1976,Koocanusa,Rexford,4,,North Point Tobacco,8,2,,Spring,21:00,8:00,11,,,447,1,,FALSE,Pre-Biop,,
+9807,26,LING,495,,19.5,,,,5,18,1976,5/18/1976,Koocanusa,Rexford,1,,North Point Tobacco,8,2,,Spring,21:00,8:00,11,,,448,1,,FALSE,Pre-Biop,49,400
+9883,58,LS SU,,,,,,,5,18,1976,5/18/1976,Koocanusa,Rexford,21,,,,2,,Spring,21:00,9:00,12,,,436,1,,FALSE,Pre-Biop,,
+9885,5,BULL,320,263,12.6,0.58,,,5,18,1976,5/18/1976,Koocanusa,Rexford,1,,,,2,,Spring,21:00,9:00,12,,,437,1,80.26,TRUE,Pre-Biop,32,300
+9895,5,BULL,424,698,16.7,1.54,,,5,18,1976,5/18/1976,Koocanusa,Rexford,1,,,,2,,Spring,21:00,9:00,12,,,438,1,91.57,TRUE,Pre-Biop,42,400
+12214,1,RB,,,,,,,3,21,1977,3/21/1977,Koocanusa,Tenmile,1,,,,2,,Spring,16:00,7:30,93,,,604,6,,FALSE,Pre-Biop,,
+12225,1,RB,,,,,,,3,21,1977,3/21/1977,Koocanusa,Tenmile,7,,,,2,,Spring,19:00,7:30,50,,,610,4,,FALSE,Pre-Biop,,
+12246,1,RB,,,,,,,3,22,1977,3/22/1977,Koocanusa,Tenmile,7,,,,2,,Spring,8:00,9:30,153,,,598,6,,FALSE,Pre-Biop,,
+12453,1,RB,431,689,17,1.52,Male,,3,28,1978,3/28/1978,Koocanusa,Tenmile,1,,,,2,,Spring,15:00,10:00,19,38,3,814,1,86.06,TRUE,Pre-Biop,43,400
+12927,56,LN SU,391,671,15.4,1.48,,,5,15,1978,5/15/1978,Koocanusa,Rexford,1,,Mid Sophie,15,2,,Spring,21:00,7:30,10.5,,,494,1,112.25,TRUE,Pre-Biop,39,300
+12969,58,LS SU,307,294,12.1,0.65,,,5,15,1978,5/15/1978,Koocanusa,Rexford,1,,Mid Sophie,15,2,,Spring,21:00,7:30,10.5,,,495,1,101.61,TRUE,Pre-Biop,30,300
+12461,58,LS SU,248,136,9.8,0.3,,,5,15,1978,5/15/1978,Koocanusa,Rexford,1,,North Black Lake,3,2,,Spring,21:00,8:00,11,,,514,1,89.16,TRUE,Pre-Biop,24,200
+12509,58,LS SU,228,104,9,0.23,,,5,15,1978,5/15/1978,Koocanusa,Rexford,1,,North Black Lake,3,2,,Spring,21:00,8:00,11,,,515,1,87.75,TRUE,Pre-Biop,22,200
+12793,58,LS SU,,,,,,,5,15,1978,5/15/1978,Koocanusa,Rexford,20,,North Point Murray,13,2,,Spring,21:00,7:00,10,,,506,1,,FALSE,Pre-Biop,,
+12807,58,LS SU,388,435,15.3,0.96,,,5,15,1978,5/15/1978,Koocanusa,Rexford,1,,North Point Murray,13,2,,Spring,21:00,7:30,10.5,,,507,1,74.47,TRUE,Pre-Biop,38,300
+12842,58,LS SU,548,1161,21.6,2.56,,,5,15,1978,5/15/1978,Koocanusa,Rexford,1,,North Point Murray,13,2,,Spring,21:00,7:30,10.5,,,508,1,70.55,TRUE,Pre-Biop,54,500
+12910,58,LS SU,,,,,,,5,15,1978,5/15/1978,Koocanusa,Rexford,36,,North Point Murray,13,2,,Spring,21:00,8:00,11,,,509,1,,FALSE,Pre-Biop,,
+12709,58,LS SU,375,589,14.8,1.3,,,5,15,1978,5/15/1978,Koocanusa,Rexford,1,,North Point Tobacco,8,2,,Spring,21:00,7:30,10.5,,,478,1,111.69,TRUE,Pre-Biop,37,300
+12749,58,LS SU,322,331,12.7,0.73,,,5,15,1978,5/15/1978,Koocanusa,Rexford,1,,North Point Tobacco,8,2,,Spring,21:00,7:30,10.5,,,479,1,99.14,TRUE,Pre-Biop,32,300
+12545,58,LS SU,342,235,13.5,0.52,,,5,15,1978,5/15/1978,Koocanusa,Rexford,1,,South Tobacco,7,2,,Spring,21:00,8:00,11,,,485,1,58.75,TRUE,Pre-Biop,34,300
+12588,58,LS SU,347,439,13.7,0.97,,,5,15,1978,5/15/1978,Koocanusa,Rexford,1,,South Tobacco,7,2,,Spring,21:00,9:00,12,,,486,1,105.07,TRUE,Pre-Biop,34,300
+12616,58,LS SU,358,417,14.1,0.92,,,5,15,1978,5/15/1978,Koocanusa,Rexford,1,,South Tobacco,7,2,,Spring,21:00,8:30,11.5,,,487,1,90.88,TRUE,Pre-Biop,35,300
+12672,58,LS SU,302,263,11.9,0.58,,,5,15,1978,5/15/1978,Koocanusa,Rexford,1,,South Tobacco,7,2,,Spring,21:00,9:00,12,,,488,1,95.48,TRUE,Pre-Biop,30,300
+13118,58,LS SU,,,,,,,5,16,1978,5/16/1978,Koocanusa,Rexford,35,,Mid Sophie,15,2,,Spring,21:00,8:00,11,,,496,1,,FALSE,Pre-Biop,,
+13142,58,LS SU,,,,,,,5,16,1978,5/16/1978,Koocanusa,Rexford,39,,Mid Sophie,15,2,,Spring,21:00,8:00,11,,,497,1,,FALSE,Pre-Biop,,
+13077,58,LS SU,,,,,,,5,16,1978,5/16/1978,Koocanusa,Rexford,41,,North Point Murray,13,2,,Spring,21:00,8:00,11,,,500,1,,FALSE,Pre-Biop,,
+13100,58,LS SU,,,,,,,5,16,1978,5/16/1978,Koocanusa,Rexford,33,,North Point Murray,13,2,,Spring,21:00,8:00,11,,,501,1,,FALSE,Pre-Biop,,
+13034,58,LS SU,,,,,,,5,16,1978,5/16/1978,Koocanusa,Rexford,28,,North Point Tobacco,8,2,,Spring,21:00,8:00,11,,,480,1,,FALSE,Pre-Biop,,
+13040,58,LS SU,,,,,,,5,16,1978,5/16/1978,Koocanusa,Rexford,31,,North Point Tobacco,8,2,,Spring,21:00,8:00,11,,,481,1,,FALSE,Pre-Biop,,
+13048,58,LS SU,,,,,,,5,16,1978,5/16/1978,Koocanusa,Rexford,7,,North Point Tobacco,8,2,,Spring,21:00,8:00,11,,,482,1,,FALSE,Pre-Biop,,
+13052,58,LS SU,,,,,,,5,16,1978,5/16/1978,Koocanusa,Rexford,20,,North Point Tobacco,8,2,,Spring,21:00,8:00,11,,,483,1,,FALSE,Pre-Biop,,
+13068,58,LS SU,,,,,,,5,16,1978,5/16/1978,Koocanusa,Rexford,33,,North Point Tobacco,8,2,,Spring,21:00,9:30,12.5,,,484,1,,FALSE,Pre-Biop,,
+13353,58,LS SU,,,,,,,5,17,1978,5/17/1978,Koocanusa,Rexford,26,,Mid Sophie,15,2,,Spring,21:00,9:30,12.5,,,498,1,,FALSE,Pre-Biop,,
+13361,58,LS SU,,,,,,,5,17,1978,5/17/1978,Koocanusa,Rexford,16,,Mid Sophie,15,2,,Spring,20:00,9:00,13,,,499,1,,FALSE,Pre-Biop,,
+13156,58,LS SU,515,1016,20.3,2.24,,,5,17,1978,5/17/1978,Koocanusa,Rexford,1,,North Black Lake,3,2,,Spring,21:00,8:30,11.5,,,512,1,74.38,TRUE,Pre-Biop,51,500
+13182,58,LS SU,243,,9.6,,,,5,17,1978,5/17/1978,Koocanusa,Rexford,1,,North Black Lake,3,2,,Spring,21:00,8:00,11,,,513,1,,FALSE,Pre-Biop,24,200
+13218,58,LS SU,,,,,,,5,17,1978,5/17/1978,Koocanusa,Rexford,14,,North Black Lake,3,2,,Spring,21:00,8:30,11.5,,,516,1,,FALSE,Pre-Biop,,
+13224,58,LS SU,,,,,,,5,17,1978,5/17/1978,Koocanusa,Rexford,22,,North Black Lake,3,2,,Spring,21:00,8:00,11,,,517,1,,FALSE,Pre-Biop,,
+13231,58,LS SU,,,,,,,5,17,1978,5/17/1978,Koocanusa,Rexford,27,,North Black Lake,3,2,,Spring,22:00,8:00,10,,,518,1,,FALSE,Pre-Biop,,
+13299,58,LS SU,,,,,,,5,17,1978,5/17/1978,Koocanusa,Rexford,13,,North Point Murray,13,2,,Spring,22:00,9:00,11,,,502,1,,FALSE,Pre-Biop,,
+13307,58,LS SU,,,,,,,5,17,1978,5/17/1978,Koocanusa,Rexford,39,,North Point Murray,13,2,,Spring,22:00,9:00,11,,,503,1,,FALSE,Pre-Biop,,
+13315,56,LN SU,,,,,,,5,17,1978,5/17/1978,Koocanusa,Rexford,14,,North Point Murray,13,2,,Spring,21:00,8:00,11,,,504,1,,FALSE,Pre-Biop,,
+13325,5,BULL,711,3991,28,8.8,,,5,17,1978,5/17/1978,Koocanusa,Rexford,1,,North Point Murray,13,2,,Spring,21:00,8:00,11,,,505,1,111.04,TRUE,Pre-Biop,71,700
+13342,58,LS SU,,,,,,,5,17,1978,5/17/1978,Koocanusa,Rexford,29,,North Point Murray,13,2,,Spring,21:00,9:30,12.5,,,510,1,,FALSE,Pre-Biop,,
+13349,58,LS SU,,,,,,,5,17,1978,5/17/1978,Koocanusa,Rexford,19,,North Point Murray,13,2,,Spring,21:00,8:00,11,,,511,1,,FALSE,Pre-Biop,,
+13250,58,LS SU,,,,,,,5,17,1978,5/17/1978,Koocanusa,Rexford,26,,South Tobacco,7,2,,Spring,21:00,10:00,13,,,489,1,,FALSE,Pre-Biop,,
+13260,58,LS SU,,,,,,,5,17,1978,5/17/1978,Koocanusa,Rexford,34,,South Tobacco,7,2,,Spring,22:00,9:00,11,,,490,1,,FALSE,Pre-Biop,,
+13268,58,LS SU,,,,,,,5,17,1978,5/17/1978,Koocanusa,Rexford,21,,South Tobacco,7,2,,Spring,21:00,9:00,12,,,491,1,,FALSE,Pre-Biop,,
+13273,58,LS SU,,,,,,,5,17,1978,5/17/1978,Koocanusa,Rexford,11,,South Tobacco,7,2,,Spring,22:00,9:30,11.5,,,492,1,,FALSE,Pre-Biop,,
+13286,58,LS SU,,,,,,,5,17,1978,5/17/1978,Koocanusa,Rexford,19,,South Tobacco,7,2,,Spring,21:00,9:00,12,,,493,1,,FALSE,Pre-Biop,,
+16742,1,RB,431,752,17,1.66,,,5,5,1980,5/5/1980,Koocanusa,Rexford,1,1R03301,Far South Tobacco,6,2,,Spring,21:00,8:00,11,,,252,1,93.93,TRUE,Pre-Biop,43,400
+16991,5,BULL,312,258,12.3,0.57,,,5,5,1980,5/5/1980,Koocanusa,Rexford,1,,Mid Sophie,15,2,,Spring,21:00,10:00,13,,,224,1,84.95,TRUE,Pre-Biop,31,300
+17008,26,LING,561,1070,22.1,2.36,,,5,5,1980,5/5/1980,Koocanusa,Rexford,1,,Mid Sophie,15,2,,Spring,21:00,9:00,12,,,225,1,60.6,TRUE,Pre-Biop,56,500
+16657,26,LING,528,1043,20.8,2.3,,,5,5,1980,5/5/1980,Koocanusa,Rexford,1,,North Black Lake,3,2,,Spring,21:00,11:00,14,,,242,1,70.86,TRUE,Pre-Biop,52,500
+16661,26,LING,515,1002,20.3,2.21,,,5,5,1980,5/5/1980,Koocanusa,Rexford,1,,North Black Lake,3,2,,Spring,21:00,11:00,14,,,243,1,73.36,TRUE,Pre-Biop,51,500
+16670,26,LING,530,970,20.9,2.14,,,5,5,1980,5/5/1980,Koocanusa,Rexford,1,,North Black Lake,3,2,,Spring,21:00,11:00,14,,,244,1,65.15,TRUE,Pre-Biop,53,500
+16699,5,BULL,398,508,15.7,1.12,,,5,5,1980,5/5/1980,Koocanusa,Rexford,1,,North Black Lake,3,2,,Spring,21:00,11:00,14,,,245,1,80.58,TRUE,Pre-Biop,39,300
+16709,26,LING,462,485,18.2,1.07,,,5,5,1980,5/5/1980,Koocanusa,Rexford,1,,North Black Lake,3,2,,Spring,21:00,11:00,14,,,246,1,49.18,FALSE,Pre-Biop,46,400
+16713,85,MWF,292,222,11.5,0.49,,,5,5,1980,5/5/1980,Koocanusa,Rexford,1,,North Black Lake,3,2,,Spring,21:00,9:00,12,,,247,1,89.17,TRUE,Pre-Biop,29,200
+16725,85,MWF,251,127,9.9,0.28,,,5,5,1980,5/5/1980,Koocanusa,Rexford,1,,North Black Lake,3,2,,Spring,21:00,11:00,14,,,251,1,80.31,TRUE,Pre-Biop,25,200
+16739,58,LS SU,,,,,,,5,5,1980,5/5/1980,Koocanusa,Rexford,20,,North Black Lake,3,2,,Spring,21:00,8:00,11,,,253,1,,FALSE,Pre-Biop,,
+16894,5,BULL,302,263,11.9,0.58,,,5,5,1980,5/5/1980,Koocanusa,Rexford,1,,North Point Murray,13,2,,Spring,21:00,11:00,14,,,229,1,95.48,TRUE,Pre-Biop,30,300
+16902,5,BULL,391,580,15.4,1.28,,,5,5,1980,5/5/1980,Koocanusa,Rexford,1,,North Point Murray,13,2,,Spring,21:00,11:00,14,,,230,1,97.03,TRUE,Pre-Biop,39,300
+16918,1,RB,307,263,12.1,0.58,,,5,5,1980,5/5/1980,Koocanusa,Rexford,1,,North Point Murray,13,2,,Spring,21:00,9:00,12,,,231,1,90.9,TRUE,Pre-Biop,30,300
+16934,1,RB,160,36,6.3,0.08,,,5,5,1980,5/5/1980,Koocanusa,Rexford,1,,North Point Murray,13,2,,Spring,21:00,10:00,13,,,232,1,87.89,TRUE,Pre-Biop,16,100
+16963,85,MWF,264,149,10.4,0.33,,,5,5,1980,5/5/1980,Koocanusa,Rexford,1,,North Point Murray,13,2,,Spring,21:00,9:00,12,,,233,1,80.98,TRUE,Pre-Biop,26,200
+16818,5,BULL,505,1079,19.9,2.38,,,5,5,1980,5/5/1980,Koocanusa,Rexford,1,,North Point Tobacco,8,2,,Spring,21:00,8:00,11,,,258,1,83.78,TRUE,Pre-Biop,50,500
+16852,5,BULL,259,172,10.2,0.38,,,5,5,1980,5/5/1980,Koocanusa,Rexford,1,,North Point Tobacco,8,2,,Spring,21:00,8:00,11,,,261,1,99,TRUE,Pre-Biop,25,200
+16782,58,LS SU,228,108,9,0.24,,,5,5,1980,5/5/1980,Koocanusa,Rexford,1,,South Tobacco,7,2,,Spring,21:00,8:00,11,,,250,1,91.12,TRUE,Pre-Biop,22,200
+17039,85,MWF,279,185,11,0.41,,,5,6,1980,5/6/1980,Koocanusa,Rexford,1,,North Black Lake,3,2,,Spring,20:00,7:00,11,,,248,1,85.18,TRUE,Pre-Biop,27,200
+17049,85,MWF,228,108,9,0.24,,,5,6,1980,5/6/1980,Koocanusa,Rexford,1,,North Black Lake,3,2,,Spring,20:00,7:00,11,,,249,1,91.12,TRUE,Pre-Biop,22,200
+17053,1,RB,424,644,16.7,1.42,,,5,6,1980,5/6/1980,Koocanusa,Rexford,1,,North Black Lake,3,2,,Spring,20:00,7:00,11,,,254,1,84.49,TRUE,Pre-Biop,42,400
+17059,1,RB,396,521,15.6,1.15,,,5,6,1980,5/6/1980,Koocanusa,Rexford,1,,North Black Lake,3,2,,Spring,20:00,7:00,11,,,255,1,83.9,TRUE,Pre-Biop,39,300
+17066,58,LS SU,,,,,,,5,6,1980,5/6/1980,Koocanusa,Rexford,24,,North Black Lake,3,2,,Spring,20:00,7:00,11,,,256,1,,FALSE,Pre-Biop,,
+17125,58,LS SU,,,,,,,5,6,1980,5/6/1980,Koocanusa,Rexford,3,,North Point Murray,13,2,,Spring,20:00,7:00,11,,,234,1,,FALSE,Pre-Biop,,
+17128,1,RB,414,648,16.3,1.43,,,5,6,1980,5/6/1980,Koocanusa,Rexford,1,,North Point Murray,13,2,,Spring,20:00,7:00,11,,,235,1,91.32,TRUE,Pre-Biop,41,400
+17132,26,LING,546,1133,21.5,2.5,,,5,6,1980,5/6/1980,Koocanusa,Rexford,1,,North Point Murray,13,2,,Spring,20:00,7:00,11,,,236,1,69.61,TRUE,Pre-Biop,54,500
+17149,1,RB,408,607,16.1,1.34,,,5,6,1980,5/6/1980,Koocanusa,Rexford,1,,North Point Murray,13,2,,Spring,20:00,7:00,11,,,237,1,89.37,TRUE,Pre-Biop,40,400
+17159,58,LS SU,,,,,,,5,6,1980,5/6/1980,Koocanusa,Rexford,9,,North Point Murray,13,2,,Spring,20:00,7:00,11,,,238,1,,FALSE,Pre-Biop,,
+17162,33,N PMN,,,,,,,5,6,1980,5/6/1980,Koocanusa,Rexford,4,,North Point Murray,13,2,,Spring,20:00,7:00,11,,,239,1,,FALSE,Pre-Biop,,
+17183,1,RB,419,149,16.5,0.33,,,5,6,1980,5/6/1980,Koocanusa,Rexford,1,,North Point Murray,13,2,,Spring,20:00,7:00,11,,,240,1,20.26,FALSE,Pre-Biop,41,400
+17201,5,BULL,500,1093,19.7,2.41,,,5,6,1980,5/6/1980,Koocanusa,Rexford,1,,North Point Murray,13,2,,Spring,20:00,7:00,11,,,241,1,87.44,TRUE,Pre-Biop,50,500
+17073,85,MWF,332,322,13.1,0.71,,,5,6,1980,5/6/1980,Koocanusa,Rexford,1,,North Point Tobacco,8,2,,Spring,20:00,7:00,11,,,259,1,87.99,TRUE,Pre-Biop,33,300
+17119,1,RB,495,961,19.5,2.12,,,5,6,1980,5/6/1980,Koocanusa,Rexford,1,,North Point Tobacco,8,2,,Spring,20:00,7:00,11,,,260,1,79.23,TRUE,Pre-Biop,49,400
+17206,1,RB,304,290,12,0.64,,,5,6,1980,5/6/1980,Koocanusa,Rexford,1,,North Sophie,18,2,,Spring,20:00,7:00,11,,,226,1,103.22,TRUE,Pre-Biop,30,300
+17219,5,BULL,320,254,12.6,0.56,,,5,6,1980,5/6/1980,Koocanusa,Rexford,1,,North Sophie,18,2,,Spring,20:00,7:00,11,,,227,1,77.51,TRUE,Pre-Biop,32,300
+17224,58,LS SU,,,,,,,5,6,1980,5/6/1980,Koocanusa,Rexford,4,,North Sophie,18,2,,Spring,20:00,7:00,11,,,228,1,,FALSE,Pre-Biop,,
+17070,58,LS SU,,,,,,,5,6,1980,5/6/1980,Koocanusa,Rexford,11,,South of Far South Tobacco,5,2,,Spring,20:00,7:00,11,,,257,1,,FALSE,Pre-Biop,,
+18728,1,RB,365,467,14.4,1.03,,,5,4,1981,5/4/1981,Koocanusa,Rexford,1,,,,2,,Spring,20:00,8:00,12,,,276,1,96.04,TRUE,Pre-Biop,36,300
+18768,1,RB,424,72,16.7,0.16,,,5,4,1981,5/4/1981,Koocanusa,Rexford,1,,,,2,,Spring,20:00,8:00,12,,,277,1,9.45,FALSE,Pre-Biop,42,400
+18785,85,MWF,254,127,10,0.28,,,5,4,1981,5/4/1981,Koocanusa,Rexford,1,,,,2,,Spring,20:00,8:00,12,,,278,1,77.5,TRUE,Pre-Biop,25,200
+18799,1,RB,327,385,12.9,0.85,,,5,4,1981,5/4/1981,Koocanusa,Rexford,1,,,,2,,Spring,20:00,8:00,12,,,279,1,110.11,TRUE,Pre-Biop,32,300
+18814,85,MWF,279,199,11,0.44,,,5,4,1981,5/4/1981,Koocanusa,Rexford,1,,,,2,,Spring,20:00,8:00,12,,,280,1,91.63,TRUE,Pre-Biop,27,200
+18824,26,LING,553,1025,21.8,2.26,,,5,4,1981,5/4/1981,Koocanusa,Rexford,1,,,,2,,Spring,20:00,8:00,12,,,281,1,60.61,TRUE,Pre-Biop,55,500
+18836,12,WCT,279,213,11,0.47,,,5,4,1981,5/4/1981,Koocanusa,Rexford,1,,,,2,,Spring,20:00,8:00,12,,,282,1,98.08,TRUE,Pre-Biop,27,200
+18903,1,RB,398,621,15.7,1.37,,,5,4,1981,5/4/1981,Koocanusa,Rexford,1,,,,2,,Spring,20:00,8:00,12,,,283,1,98.5,TRUE,Pre-Biop,39,300
+18911,12,WCT,241,131,9.5,0.29,,,5,4,1981,5/4/1981,Koocanusa,Rexford,1,,,,2,,Spring,20:00,8:00,12,,,284,1,93.59,TRUE,Pre-Biop,24,200
+18934,26,LING,584,1152,23,2.54,,,5,4,1981,5/4/1981,Koocanusa,Rexford,1,,,,2,,Spring,20:00,8:00,12,,,285,1,57.84,TRUE,Pre-Biop,58,500
+18943,5,BULL,375,349,14.8,0.77,,,5,4,1981,5/4/1981,Koocanusa,Rexford,1,,,,2,,Spring,20:00,8:00,12,,,286,1,66.18,TRUE,Pre-Biop,37,300
+18970,1,RB,441,689,17.4,1.52,,,5,4,1981,5/4/1981,Koocanusa,Rexford,1,,,,2,,Spring,20:00,8:00,12,,,287,1,80.33,TRUE,Pre-Biop,44,400
+18990,26,LING,556,1115,21.9,2.46,,,5,4,1981,5/4/1981,Koocanusa,Rexford,1,,,,2,,Spring,20:00,8:00,12,,,288,1,64.87,TRUE,Pre-Biop,55,500
+18996,1,RB,398,607,15.7,1.34,,,5,4,1981,5/4/1981,Koocanusa,Rexford,1,,,,2,,Spring,20:00,8:00,12,,,289,1,96.28,TRUE,Pre-Biop,39,300
+19018,1,RB,337,408,13.3,0.9,,,5,4,1981,5/4/1981,Koocanusa,Rexford,1,,,,2,,Spring,20:00,8:00,12,,,290,1,106.6,TRUE,Pre-Biop,33,300
+19040,85,MWF,297,240,11.7,0.53,,,5,4,1981,5/4/1981,Koocanusa,Rexford,1,,,,2,,Spring,20:00,8:00,12,,,291,1,91.61,TRUE,Pre-Biop,29,200
+19057,1,RB,403,625,15.9,1.38,,,5,4,1981,5/4/1981,Koocanusa,Rexford,1,,,,2,,Spring,20:00,8:00,12,,,292,1,95.49,TRUE,Pre-Biop,40,400
+19065,1,RB,322,353,12.7,0.78,,,5,4,1981,5/4/1981,Koocanusa,Rexford,1,,,,2,,Spring,20:00,8:00,12,,,293,1,105.73,TRUE,Pre-Biop,32,300
+19095,26,LING,574,1152,22.6,2.54,,,5,4,1981,5/4/1981,Koocanusa,Rexford,1,,,,2,,Spring,20:00,8:00,12,,,294,1,60.91,TRUE,Pre-Biop,57,500
+19105,1,RB,429,145,16.9,0.32,,,5,4,1981,5/4/1981,Koocanusa,Rexford,1,,,,2,,Spring,20:00,8:00,12,,,295,1,18.37,FALSE,Pre-Biop,42,400
+19289,5,BULL,556,1714,21.9,3.78,,,5,5,1981,5/5/1981,Koocanusa,Rexford,1,,North Point Tobacco,8,2,,Spring,20:00,8:00,12,,,262,1,99.72,TRUE,Pre-Biop,55,500
+19298,12,WCT,294,176,11.6,0.39,,,5,5,1981,5/5/1981,Koocanusa,Rexford,1,,North Point Tobacco,8,2,,Spring,20:00,8:00,12,,,263,1,69.26,TRUE,Pre-Biop,29,200
+19304,12,WCT,279,231,11,0.51,,,5,5,1981,5/5/1981,Koocanusa,Rexford,1,,North Point Tobacco,8,2,,Spring,20:00,8:00,12,,,268,1,106.37,TRUE,Pre-Biop,27,200
+19308,1,RB,373,503,14.7,1.11,,,5,5,1981,5/5/1981,Koocanusa,Rexford,1,,North Point Tobacco,8,2,,Spring,20:00,8:00,12,,,269,1,96.93,TRUE,Pre-Biop,37,300
+19314,12,WCT,177,49,7,0.11,,,5,5,1981,5/5/1981,Koocanusa,Rexford,1,,North Point Tobacco,8,2,,Spring,20:00,8:00,12,,,270,1,88.36,TRUE,Pre-Biop,17,100
+19342,58,LS SU,,,,,,,5,5,1981,5/5/1981,Koocanusa,Rexford,34,,North Point Tobacco,8,2,,Spring,20:00,8:00,12,,,271,1,,FALSE,Pre-Biop,,
+19356,26,LING,525,752,20.7,1.66,,,5,5,1981,5/5/1981,Koocanusa,Rexford,1,,North Point Tobacco,8,2,,Spring,20:00,8:00,12,,,272,1,51.97,TRUE,Pre-Biop,52,500
+19366,20,YP,238,181,9.4,0.4,,,5,5,1981,5/5/1981,Koocanusa,Rexford,1,,North Point Tobacco,8,2,,Spring,20:00,8:00,12,,,273,1,134.26,TRUE,Pre-Biop,23,200
+19375,5,BULL,309,263,12.2,0.58,,,5,5,1981,5/5/1981,Koocanusa,Rexford,1,,North Point Tobacco,8,2,,Spring,20:00,8:00,12,,,274,1,89.14,TRUE,Pre-Biop,30,300
+19117,5,BULL,190,58,7.5,0.13,,,5,5,1981,5/5/1981,Koocanusa,Rexford,1,,South Tobacco,7,2,,Spring,20:00,8:00,12,,,264,1,84.56,TRUE,Pre-Biop,19,100
+19141,12,WCT,350,435,13.8,0.96,,,5,5,1981,5/5/1981,Koocanusa,Rexford,1,,South Tobacco,7,2,,Spring,20:00,8:00,12,,,265,1,101.46,TRUE,Pre-Biop,35,300
+19156,26,LING,353,294,13.9,0.65,,,5,5,1981,5/5/1981,Koocanusa,Rexford,1,,South Tobacco,7,2,,Spring,20:00,8:00,12,,,266,1,66.84,TRUE,Pre-Biop,35,300
+19181,12,WCT,160,45,6.3,0.1,,,5,5,1981,5/5/1981,Koocanusa,Rexford,1,,South Tobacco,7,2,,Spring,20:00,8:00,12,,,267,1,109.86,TRUE,Pre-Biop,16,100
+19203,85,MWF,256,154,10.1,0.34,,,5,5,1981,5/5/1981,Koocanusa,Rexford,1,,South Tobacco,7,2,,Spring,20:00,8:00,12,,,275,1,91.79,TRUE,Pre-Biop,25,200
+19221,85,MWF,347,399,13.7,0.88,,,5,5,1981,5/5/1981,Koocanusa,Rexford,1,,South Tobacco,7,2,,Spring,20:00,8:00,12,,,296,1,95.5,TRUE,Pre-Biop,34,300
+19251,58,LS SU,365,485,14.4,1.07,,,5,5,1981,5/5/1981,Koocanusa,Rexford,1,,South Tobacco,7,2,,Spring,20:00,8:00,12,,,297,1,99.74,TRUE,Pre-Biop,36,300
+19261,58,LS SU,304,244,12,0.54,,,5,5,1981,5/5/1981,Koocanusa,Rexford,1,,South Tobacco,7,2,,Spring,20:00,8:00,12,,,298,1,86.85,TRUE,Pre-Biop,30,300
+20129,12,WCT,213,81,8.4,0.18,,,5,24,1982,5/24/1982,Koocanusa,Rexford,1,,North Black Lake,3,2,,Spring,19:00,6:00,11,,,1869,1,83.82,TRUE,Pre-Biop,21,200
+20135,85,MWF,330,317,13,0.7,,,5,24,1982,5/24/1982,Koocanusa,Rexford,1,,North Black Lake,3,2,,Spring,19:00,6:00,11,,,1871,1,88.21,TRUE,Pre-Biop,33,300
+20148,5,BULL,269,163,10.6,0.36,,,5,24,1982,5/24/1982,Koocanusa,Rexford,1,,North Black Lake,3,2,,Spring,19:00,6:00,11,,,1872,1,83.74,TRUE,Pre-Biop,26,200
+20156,85,MWF,302,353,11.9,0.78,,,5,24,1982,5/24/1982,Koocanusa,Rexford,1,,North Black Lake,3,2,,Spring,19:00,6:00,11,,,1873,1,128.16,TRUE,Pre-Biop,30,300
+20170,1,RB,358,,14.1,,,,5,24,1982,5/24/1982,Koocanusa,Rexford,1,,North Black Lake,3,2,,Spring,19:00,6:00,11,,,1874,1,,FALSE,Pre-Biop,35,300
+20176,5,BULL,502,1133,19.8,2.5,,,5,24,1982,5/24/1982,Koocanusa,Rexford,1,,North Black Lake,3,2,,Spring,19:00,6:00,11,,,1875,1,89.56,TRUE,Pre-Biop,50,500
+20187,56,LN SU,,,,,,,5,24,1982,5/24/1982,Koocanusa,Rexford,8,,North Black Lake,3,2,,Spring,19:00,6:00,11,,,1882,1,,FALSE,Pre-Biop,,
+20263,1,RB,406,,16,,,,5,24,1982,5/24/1982,Koocanusa,Rexford,1,,North Point Murray,13,2,,Spring,19:00,6:00,11,,,1854,1,,FALSE,Pre-Biop,40,400
+20281,85,MWF,289,217,11.4,0.48,,,5,24,1982,5/24/1982,Koocanusa,Rexford,1,,North Point Murray,13,2,,Spring,19:00,6:00,11,,,1867,1,89.9,TRUE,Pre-Biop,28,200
+20327,20,YP,134,27,5.3,0.06,,,5,24,1982,5/24/1982,Koocanusa,Rexford,1,,North Point Murray,13,2,,Spring,19:00,6:00,11,,,1868,1,112.21,TRUE,Pre-Biop,13,100
+20224,85,MWF,170,36,6.7,0.08,,,5,24,1982,5/24/1982,Koocanusa,Rexford,1,,North Point Tobacco,8,2,,Spring,19:00,6:00,11,,,1855,1,73.27,TRUE,Pre-Biop,17,100
+20240,85,MWF,297,244,11.7,0.54,,,5,24,1982,5/24/1982,Koocanusa,Rexford,1,,North Point Tobacco,8,2,,Spring,19:00,6:00,11,,,1856,1,93.14,TRUE,Pre-Biop,29,200
+20191,1,RB,431,,17,,,,5,24,1982,5/24/1982,Koocanusa,Rexford,1,,South Tobacco,7,2,,Spring,19:00,6:00,11,,,1850,1,,FALSE,Pre-Biop,43,400
+20201,1,RB,391,,15.4,,,,5,24,1982,5/24/1982,Koocanusa,Rexford,1,,South Tobacco,7,2,,Spring,19:00,6:00,11,,,1851,1,,FALSE,Pre-Biop,39,300
+20206,85,MWF,292,235,11.5,0.52,,,5,24,1982,5/24/1982,Koocanusa,Rexford,1,,South Tobacco,7,2,,Spring,19:00,6:00,11,,,1852,1,94.39,TRUE,Pre-Biop,29,200
+20219,1,RB,335,,13.2,,,,5,24,1982,5/24/1982,Koocanusa,Rexford,1,,South Tobacco,7,2,,Spring,19:00,6:00,11,,,1853,1,,FALSE,Pre-Biop,33,300
+20600,85,MWF,297,281,11.7,0.62,,,5,25,1982,5/25/1982,Koocanusa,Rexford,1,,Mid Sophie,15,2,,Spring,19:00,6:00,11,,,1860,1,107.26,TRUE,Pre-Biop,29,200
+20638,85,MWF,307,272,12.1,0.6,,,5,25,1982,5/25/1982,Koocanusa,Rexford,1,,Mid Sophie,15,2,,Spring,20:00,6:00,10,,,1861,1,94.01,TRUE,Pre-Biop,30,300
+20692,1,RB,421,,16.6,,,,5,25,1982,5/25/1982,Koocanusa,Rexford,1,,Mid Sophie,15,2,,Spring,20:00,6:00,10,,,1862,1,,FALSE,Pre-Biop,42,400
+20338,1,RB,398,,15.7,,,,5,25,1982,5/25/1982,Koocanusa,Rexford,1,,North Black Lake,3,2,,Spring,19:00,6:00,11,,,1870,1,,FALSE,Pre-Biop,39,300
+20353,85,MWF,299,254,11.8,0.56,,,5,25,1982,5/25/1982,Koocanusa,Rexford,1,,North Black Lake,3,2,,Spring,19:00,6:00,11,,,1876,1,95.02,TRUE,Pre-Biop,29,200
+20376,85,MWF,317,312,12.5,0.69,,,5,25,1982,5/25/1982,Koocanusa,Rexford,1,,North Black Lake,3,2,,Spring,20:00,6:00,10,,,1877,1,97.94,TRUE,Pre-Biop,31,300
+20384,5,BULL,563,1923,22.2,4.24,,,5,25,1982,5/25/1982,Koocanusa,Rexford,1,,North Black Lake,3,2,,Spring,20:00,6:00,10,,,1878,1,107.76,TRUE,Pre-Biop,56,500
+20390,20,YP,152,,6,,,,5,25,1982,5/25/1982,Koocanusa,Rexford,1,,North Black Lake,3,2,,Spring,21:00,5:30,8.5,,,1879,1,,FALSE,Pre-Biop,15,100
+20399,5,BULL,248,117,9.8,0.26,,,5,25,1982,5/25/1982,Koocanusa,Rexford,1,,North Black Lake,3,2,,Spring,20:00,5:30,9.5,,,1880,1,76.71,TRUE,Pre-Biop,24,200
+20405,56,LN SU,,,,,,,5,25,1982,5/25/1982,Koocanusa,Rexford,5,,North Black Lake,3,2,,Spring,20:00,6:00,10,,,1883,1,,FALSE,Pre-Biop,,
+20408,33,N PMN,,,,,,,5,25,1982,5/25/1982,Koocanusa,Rexford,1,,North Black Lake,3,2,,Spring,21:00,6:00,9,,,1884,1,,FALSE,Pre-Biop,,
+20505,1,RB,358,,14.1,,,,5,25,1982,5/25/1982,Koocanusa,Rexford,1,,North Point Murray,13,2,,Spring,21:00,6:00,9,,,1863,1,,FALSE,Pre-Biop,35,300
+20522,1,RB,436,,17.2,,,,5,25,1982,5/25/1982,Koocanusa,Rexford,1,,North Point Murray,13,2,,Spring,19:00,6:00,11,,,1864,1,,FALSE,Pre-Biop,43,400
+20543,5,BULL,462,925,18.2,2.04,,,5,25,1982,5/25/1982,Koocanusa,Rexford,1,,North Point Murray,13,2,,Spring,19:00,6:00,11,,,1865,1,93.8,TRUE,Pre-Biop,46,400
+20557,85,MWF,271,158,10.7,0.35,,,5,25,1982,5/25/1982,Koocanusa,Rexford,1,,North Point Murray,13,2,,Spring,19:00,6:00,11,,,1866,1,79.39,TRUE,Pre-Biop,27,200
+20488,20,YP,193,,7.6,,,,5,25,1982,5/25/1982,Koocanusa,Rexford,1,,North Point Tobacco,8,2,,Spring,,,10.5,,,1848,1,,FALSE,Pre-Biop,19,100
+20499,1,RB,396,,15.6,,,,5,25,1982,5/25/1982,Koocanusa,Rexford,1,,North Point Tobacco,8,2,,Spring,,,10.5,,,1849,1,,FALSE,Pre-Biop,39,300
+20411,1,RB,335,,13.2,,,,5,25,1982,5/25/1982,Koocanusa,Rexford,1,,South Tobacco,7,2,,Spring,21:00,6:00,9,,,1857,1,,FALSE,Pre-Biop,33,300
+20423,5,BULL,538,1161,21.2,2.56,,,5,25,1982,5/25/1982,Koocanusa,Rexford,1,,South Tobacco,7,2,,Spring,19:00,6:00,11,,,1858,1,74.56,TRUE,Pre-Biop,53,500
+20426,5,BULL,627,3764,24.7,8.3,,,5,25,1982,5/25/1982,Koocanusa,Rexford,1,,South Tobacco,7,2,,Spring,19:00,6:00,11,,,1859,1,152.7,FALSE,Pre-Biop,62,600
+20467,56,LN SU,312,335,12.3,0.74,,,5,25,1982,5/25/1982,Koocanusa,Rexford,1,,South Tobacco,7,2,,Spring,,,10.5,,,1881,1,110.3,TRUE,Pre-Biop,31,300
+20704,26,LING,,,22.8,2.23,,,5,25,1982,5/25/1982,Koocanusa,Rexford,1,,,,2,,Spring,20:00,6:00,10,,,1845,1,,FALSE,Pre-Biop,,
+20709,5,BULL,439,752,17.3,1.66,,,5,25,1982,5/25/1982,Koocanusa,Rexford,1,,,,2,,Spring,20:00,6:00,10,,,1846,1,88.88,TRUE,Pre-Biop,43,400
+20717,85,MWF,289,217,11.4,0.48,,,5,25,1982,5/25/1982,Koocanusa,Rexford,1,,,,2,,Spring,20:00,6:00,10,,,1847,1,89.9,TRUE,Pre-Biop,28,200
+25535,29,PEA,246,112,9.69,0.25,,,3,19,1984,3/19/1984,Koocanusa,Tenmile,1,,North Point Bristow (sinker),8,2,,Spring,17:00,10:00,17,38,3.3,910,1,75.23,TRUE,Pre-Biop,24,200
+25497,29,PEA,253,115,9.96,0.25,Female,,3,19,1984,3/19/1984,Koocanusa,Tenmile,1,,North Point Fivemile,7,2,,Spring,17:00,10:00,17,38,3.3,909,1,71.01,TRUE,Pre-Biop,25,200
+25682,33,N PMN,453,871,17.83,1.92,Female,,3,22,1984,3/22/1984,Koocanusa,Rexford,1,,North Point Dodge,10,2,,Spring,16:30,9:30,17,38,,975,1,93.7,TRUE,Pre-Biop,45,400
+25609,56,LN SU,394,608,15.51,1.34,Female,,3,22,1984,3/22/1984,Koocanusa,Rexford,1,,North Point Tobacco,8,2,,Spring,16:30,9:30,17,38,,974,1,99.41,TRUE,Pre-Biop,39,300
+26073,29,PEA,254,151,10,0.33,,,4,24,1984,4/24/1984,Koocanusa,Tenmile,1,,North Point Bristow (sinker),8,2,,Spring,18:00,10:00,16,41.4,5.2,926,1,92.15,TRUE,Pre-Biop,25,200
+25940,29,PEA,220,88,8.66,0.19,,,4,24,1984,4/24/1984,Koocanusa,Tenmile,1,,North Point Fivemile,7,2,,Spring,18:00,10:00,16,41.4,5.2,925,1,82.64,TRUE,Pre-Biop,22,200
+26180,85,MWF,362,404,14.25,0.89,Male,,4,25,1984,4/25/1984,Koocanusa,Rexford,1,,North Point Tobacco,8,2,,Spring,17:00,9:00,16,,8.4,986,1,85.16,TRUE,Pre-Biop,36,300
+26451,5,BULL,603,,23.74,,,,4,25,1984,4/25/1984,Koocanusa,Rexford,1,,,,2,,Spring,17:00,9:00,16,,8.4,987,1,,FALSE,Pre-Biop,60,600
+26771,29,PEA,,,,,,,5,22,1984,5/22/1984,Koocanusa,Tenmile,20,,North Point Bristow (sinker),8,2,,Spring,21:00,8:30,11.5,46,7.8,937,1,,FALSE,Pre-Biop,,
+26698,29,PEA,,,,,,,5,22,1984,5/22/1984,Koocanusa,Tenmile,29,,North Point Fivemile,7,2,,Spring,21:00,8:30,11.5,46,7.8,938,1,,FALSE,Pre-Biop,,
+26997,5,BULL,,,,,,,5,24,1984,5/24/1984,Koocanusa,Rexford,1,1,North Point Dodge,10,2,,Spring,21:30,9:00,11.5,49.5,9.7,1005,1,,FALSE,Pre-Biop,,
+26795,5,BULL,201,60,7.91,0.13,Female,,5,24,1984,5/24/1984,Koocanusa,Rexford,1,,North Point Tobacco,8,2,,Spring,21:30,9:00,11.5,49.5,9.7,1004,1,73.89,TRUE,Pre-Biop,20,200
+31135,29,PEA,,,,,,,4,9,1985,4/9/1985,Koocanusa,Rexford,14,,North Point Dodge,10,2,,Spring,19:00,9:30,14.5,40,4.7,1306,1,,FALSE,Pre-Biop,,
+31056,29,PEA,,,,,,,4,9,1985,4/9/1985,Koocanusa,Rexford,22,,North Point Tobacco,8,2,,Spring,19:00,9:30,14.5,40,4.7,1303,1,,FALSE,Pre-Biop,,
+31582,29,PEA,,,,,,,5,9,1985,5/9/1985,Koocanusa,Tenmile,35,,North Point Bristow (sinker),8,2,,Spring,18:00,9:00,15,,7.1,1224,1,,FALSE,Pre-Biop,,
+31526,29,PEA,,,,,,,5,9,1985,5/9/1985,Koocanusa,Tenmile,27,,North Point Fivemile,7,2,,Spring,18:00,9:00,15,45,7.1,1225,1,,FALSE,Pre-Biop,,
+34821,29,PEA,261,167,10.28,0.37,,,4,24,1986,4/24/1986,Koocanusa,Tenmile,1,,North Point Bristow (sinker),8,2,,Spring,17:00,9:00,16,41,5,1425,1,93.93,TRUE,Pre-Biop,26,200
+34791,29,PEA,251,120,9.88,0.26,,,4,24,1986,4/24/1986,Koocanusa,Tenmile,1,,North Point Fivemile,7,2,,Spring,19:00,9:00,14,41,5,1424,1,75.89,TRUE,Pre-Biop,25,200
+35156,29,PEA,249,139,9.8,0.31,,,4,25,1986,4/25/1986,Koocanusa,Tenmile,1,,North Point Bristow (sinker),8,2,,Spring,18:30,10:00,15.5,41,5,1438,1,90.04,TRUE,Pre-Biop,24,200
+35128,29,PEA,263,156,10.35,0.34,,,4,25,1986,4/25/1986,Koocanusa,Tenmile,1,,North Point Fivemile,7,2,,Spring,18:30,10:00,15.5,41,5,1437,1,85.75,TRUE,Pre-Biop,26,200
+35309,29,PEA,,,,,,,5,8,1986,5/8/1986,Koocanusa,Rexford,25,,4,4,2,Inner,Spring,21:30,8:00,10.5,53.4,11.9,89,1,,FALSE,Pre-Biop,,
+35582,29,PEA,,,,,,,5,8,1986,5/8/1986,Koocanusa,Rexford,38,,11,11,2,Inner,Spring,,,13,53.4,11.9,95,1,,FALSE,Pre-Biop,,
+35623,29,PEA,,,,,,,5,8,1986,5/8/1986,Koocanusa,Rexford,2,,12,12,2,Inner,Spring,20:00,9:30,13.5,53.4,11.9,96,1,,FALSE,Pre-Biop,,
+35755,29,PEA,,,,,,,5,8,1986,5/8/1986,Koocanusa,Rexford,36,,16,16,2,Inner,Spring,,,13,53.4,11.9,99,1,,FALSE,Pre-Biop,,
+35362,29,PEA,,,,,,,5,8,1986,5/8/1986,Koocanusa,Rexford,40,,Far South Tobacco,6,2,Inner,Spring,,,13,53.4,11.9,90,1,,FALSE,Pre-Biop,,
+35724,29,PEA,272,181,10.71,0.4,,,5,8,1986,5/8/1986,Koocanusa,Rexford,1,,Mid Sophie,15,2,Inner,Spring,,,13,53.4,11.9,98,1,89.94,TRUE,Pre-Biop,27,200
+35266,29,PEA,,,,,,,5,8,1986,5/8/1986,Koocanusa,Rexford,59,,North Black Lake,3,2,Inner,Spring,,,13,53.4,11.9,88,1,,FALSE,Pre-Biop,,
+35484,29,PEA,,,,,,,5,8,1986,5/8/1986,Koocanusa,Rexford,8,,North of North Point Tobacco,9,2,Inner,Spring,,,13,53.4,11.9,93,1,,FALSE,Pre-Biop,,
+35547,29,PEA,,,,,,,5,8,1986,5/8/1986,Koocanusa,Rexford,48,,North Point Dodge,10,2,Inner,Spring,,,13,53.4,11.9,94,1,,FALSE,Pre-Biop,,
+35442,29,PEA,,,,,,,5,8,1986,5/8/1986,Koocanusa,Rexford,2,,North Point Tobacco,8,2,Inner,Spring,,,13,53.4,11.9,92,1,,FALSE,Pre-Biop,,
+35802,29,PEA,202,55,7.95,0.12,,,5,8,1986,5/8/1986,Koocanusa,Rexford,1,,North Sophie,18,2,Inner,Spring,,,13,53.4,11.9,100,1,66.73,TRUE,Pre-Biop,20,200
+35216,29,PEA,,,,,,,5,8,1986,5/8/1986,Koocanusa,Rexford,53,,South Black Lake,2,2,Inner,Spring,,,13,53.4,11.9,87,1,,FALSE,Pre-Biop,,
+35668,29,PEA,,,,,,,5,8,1986,5/8/1986,Koocanusa,Rexford,5,,South Sophie,14,2,Inner,Spring,,,13,53.4,11.9,97,1,,FALSE,Pre-Biop,,
+35407,29,PEA,,,,,,,5,8,1986,5/8/1986,Koocanusa,Rexford,13,,South Tobacco,7,2,Inner,Spring,,,13,53.4,11.9,91,1,,FALSE,Pre-Biop,,
+35934,29,PEA,,,,,,,5,9,1986,5/9/1986,Koocanusa,Rexford,7,,4,4,2,Inner,Spring,21:00,9:00,12,53.4,11.9,103,1,,FALSE,Pre-Biop,,
+36163,29,PEA,,,,,,,5,9,1986,5/9/1986,Koocanusa,Rexford,37,,11,11,2,Inner,Spring,,,13,53.4,11.9,109,1,,FALSE,Pre-Biop,,
+36205,29,PEA,,,,,,,5,9,1986,5/9/1986,Koocanusa,Rexford,63,,12,12,2,Inner,Spring,21:30,8:00,10.5,53.4,11.9,110,1,,FALSE,Pre-Biop,,
+36320,29,PEA,,,,,,,5,9,1986,5/9/1986,Koocanusa,Rexford,59,,16,16,2,Inner,Spring,,,13,53.4,11.9,113,1,,FALSE,Pre-Biop,,
+35973,29,PEA,,,,,,,5,9,1986,5/9/1986,Koocanusa,Rexford,5,,Far South Tobacco,6,2,Inner,Spring,20:00,9:00,13,53.4,11.9,104,1,,FALSE,Pre-Biop,,
+36281,29,PEA,273,190,10.75,0.42,,,5,9,1986,5/9/1986,Koocanusa,Rexford,1,,Mid Sophie,15,2,Inner,Spring,,,13,53.4,11.9,112,1,93.38,TRUE,Pre-Biop,27,200
+35871,29,PEA,,,,,,,5,9,1986,5/9/1986,Koocanusa,Rexford,46,,North Black Lake,3,2,Inner,Spring,,,13,53.4,11.9,102,1,,FALSE,Pre-Biop,,
+36088,29,PEA,,,,,,,5,9,1986,5/9/1986,Koocanusa,Rexford,29,,North of North Point Tobacco,9,2,Inner,Spring,,,13,53.4,11.9,107,1,,FALSE,Pre-Biop,,
+36126,29,PEA,,,,,,,5,9,1986,5/9/1986,Koocanusa,Rexford,42,,North Point Dodge,10,2,Inner,Spring,21:30,8:00,10.5,53.4,11.9,108,1,,FALSE,Pre-Biop,,
+36034,29,PEA,,,,,,,5,9,1986,5/9/1986,Koocanusa,Rexford,5,,North Point Tobacco,8,2,Inner,Spring,19:00,9:00,14,53.4,11.9,106,1,,FALSE,Pre-Biop,,
+36362,29,PEA,223,70,8.78,0.15,,,5,9,1986,5/9/1986,Koocanusa,Rexford,1,,North Sophie,18,2,Inner,Spring,,,13,53.4,11.9,114,1,63.12,TRUE,Pre-Biop,22,200
+35828,29,PEA,,,,,,,5,9,1986,5/9/1986,Koocanusa,Rexford,29,,South Black Lake,2,2,Inner,Spring,,,13,53.4,11.9,101,1,,FALSE,Pre-Biop,,
+36252,29,PEA,230,100,9.06,0.22,,,5,9,1986,5/9/1986,Koocanusa,Rexford,1,,South Sophie,14,2,Inner,Spring,,,13,53.4,11.9,111,1,82.19,TRUE,Pre-Biop,23,200
+35998,29,PEA,,,,,,,5,9,1986,5/9/1986,Koocanusa,Rexford,39,,South Tobacco,7,2,Inner,Spring,21:30,8:30,11,53.4,11.9,105,1,,FALSE,Pre-Biop,,
+39876,29,PEA,295,270,11.61,0.6,Female,,5,5,1987,5/5/1987,Koocanusa,Rexford,1,,16,16,2,,Spring,20:30,9:30,13,51.4,10.8,126,1,105.17,TRUE,Pre-Biop,29,200
+39261,29,PEA,215,174,8.46,0.38,Female,,5,5,1987,5/5/1987,Koocanusa,Rexford,1,,Far South Tobacco,6,2,,Spring,20:30,9:30,13,51.4,10.8,118,1,175.08,FALSE,Pre-Biop,21,200
+39803,29,PEA,250,149,9.84,0.33,Female,,5,5,1987,5/5/1987,Koocanusa,Rexford,1,,Mid Sophie,15,2,,Spring,20:30,9:30,13,51.4,10.8,125,1,95.36,TRUE,Pre-Biop,25,200
+39131,29,PEA,207,72,8.15,0.16,Male,,5,5,1987,5/5/1987,Koocanusa,Rexford,1,,North Black Lake,3,2,,Spring,20:30,9:30,13,51.4,10.8,116,1,81.17,TRUE,Pre-Biop,20,200
+39486,33,N PMN,315,246,12.4,0.54,Male,,5,5,1987,5/5/1987,Koocanusa,Rexford,1,,North of North Point Tobacco,9,2,,Spring,20:30,9:30,13,51.4,10.8,121,1,78.71,TRUE,Pre-Biop,31,300
+39563,29,PEA,213,70,8.39,0.15,Male,,5,5,1987,5/5/1987,Koocanusa,Rexford,1,,North Point Dodge,10,2,,Spring,20:30,9:30,13,51.4,10.8,122,1,72.44,TRUE,Pre-Biop,21,200
+39646,29,PEA,190,54,7.48,0.12,Male,,5,5,1987,5/5/1987,Koocanusa,Rexford,1,,North Point Murray,13,2,,Spring,20:30,9:30,13,51.4,10.8,123,1,78.73,TRUE,Pre-Biop,19,100
+39445,29,PEA,228,91,8.98,0.2,Female,,5,5,1987,5/5/1987,Koocanusa,Rexford,1,,North Point Tobacco,8,2,,Spring,20:30,9:30,13,51.4,10.8,120,1,76.78,TRUE,Pre-Biop,22,200
+39938,58,LS SU,330,365,12.99,0.8,Male,,5,5,1987,5/5/1987,Koocanusa,Rexford,1,,North Point Young,17,2,,Spring,20:30,9:30,13,51.4,10.8,127,1,101.57,TRUE,Pre-Biop,33,300
+39967,33,N PMN,318,255,12.52,0.56,Female,,5,5,1987,5/5/1987,Koocanusa,Rexford,1,,North Sophie,18,2,,Spring,20:30,9:30,13,51.4,10.8,128,1,79.3,TRUE,Pre-Biop,31,300
+39071,29,PEA,206,70,8.11,0.15,Female,,5,5,1987,5/5/1987,Koocanusa,Rexford,1,,South Black Lake,2,2,,Spring,20:30,9:30,13,51.4,10.8,115,1,80.07,TRUE,Pre-Biop,20,200
+39200,29,PEA,227,77,8.94,0.17,,,5,5,1987,5/5/1987,Koocanusa,Rexford,1,,South of Far South Tobacco,5,2,,Spring,20:30,9:30,13,51.4,10.8,117,1,65.83,TRUE,Pre-Biop,22,200
+39724,29,PEA,250,138,9.84,0.3,,,5,5,1987,5/5/1987,Koocanusa,Rexford,1,,South Sophie,14,2,,Spring,20:30,9:30,13,51.4,10.8,124,1,88.32,TRUE,Pre-Biop,25,200
+39354,29,PEA,,,,,,,5,5,1987,5/5/1987,Koocanusa,Rexford,22,,South Tobacco,7,2,,Spring,20:30,9:30,13,51.4,10.8,119,1,,FALSE,Pre-Biop,,
+40623,29,PEA,,,,,,,5,6,1987,5/6/1987,Koocanusa,Rexford,5,,16,16,2,,Spring,19:00,12:00,17,51.4,10.8,140,1,,FALSE,Pre-Biop,,
+40192,29,PEA,223,85,8.78,0.19,Female,,5,6,1987,5/6/1987,Koocanusa,Rexford,1,,Far South Tobacco,6,2,,Spring,19:00,10:00,15,51.4,10.8,132,1,76.65,TRUE,Pre-Biop,22,200
+40576,29,PEA,308,250,12.13,0.55,Female,,5,6,1987,5/6/1987,Koocanusa,Rexford,1,,Mid Sophie,15,2,,Spring,19:00,10:00,15,51.4,10.8,139,1,85.56,TRUE,Pre-Biop,30,300
+40037,29,PEA,,,,,,,5,6,1987,5/6/1987,Koocanusa,Rexford,86,,North Black Lake,3,2,,Spring,19:00,10:00,15,51.4,10.8,130,1,,FALSE,Pre-Biop,,
+40347,29,PEA,221,86,8.7,0.19,Male,,5,6,1987,5/6/1987,Koocanusa,Rexford,1,,North of North Point Tobacco,9,2,,Spring,19:00,10:00,15,51.4,10.8,135,1,79.67,TRUE,Pre-Biop,22,200
+40395,29,PEA,,,,,,,5,6,1987,5/6/1987,Koocanusa,Rexford,73,,North Point Dodge,10,2,,Spring,19:00,10:00,15,51.4,10.8,136,1,,FALSE,Pre-Biop,,
+40457,29,PEA,313,248,12.32,0.55,Female,,5,6,1987,5/6/1987,Koocanusa,Rexford,1,,North Point Murray,13,2,,Spring,19:00,10:00,15,51.4,10.8,137,1,80.88,TRUE,Pre-Biop,31,300
+40329,58,LS SU,290,220,11.42,0.49,Male,,5,6,1987,5/6/1987,Koocanusa,Rexford,1,,North Point Tobacco,8,2,,Spring,19:00,10:00,15,51.4,10.8,134,1,90.2,TRUE,Pre-Biop,29,200
+40703,29,PEA,230,104,9.06,0.23,Female,,5,6,1987,5/6/1987,Koocanusa,Rexford,1,,North Point Young,17,2,,Spring,19:00,10:00,15,51.4,10.8,141,1,85.48,TRUE,Pre-Biop,23,200
+40709,58,LS SU,380,453,14.96,1,Male,,5,6,1987,5/6/1987,Koocanusa,Rexford,1,,North Sophie,18,2,,Spring,19:00,10:00,15,51.4,10.8,142,1,82.56,TRUE,Pre-Biop,38,300
+40028,58,LS SU,344,354,13.54,0.78,Male,,5,6,1987,5/6/1987,Koocanusa,Rexford,1,,South Black Lake,2,2,,Spring,19:30,10:00,14.5,51.4,10.8,129,1,86.96,TRUE,Pre-Biop,34,300
+40127,29,PEA,216,70,8.5,0.15,Male,,5,6,1987,5/6/1987,Koocanusa,Rexford,1,,South of Far South Tobacco,5,2,,Spring,19:00,9:30,14.5,51.4,10.8,131,1,69.46,TRUE,Pre-Biop,21,200
+40501,29,PEA,,,,,,,5,6,1987,5/6/1987,Koocanusa,Rexford,21,,South Sophie,14,2,,Spring,19:00,10:00,15,51.4,10.8,138,1,,FALSE,Pre-Biop,,
+40257,29,PEA,,,,,,,5,6,1987,5/6/1987,Koocanusa,Rexford,38,,South Tobacco,7,2,,Spring,19:00,10:00,15,51.4,10.8,133,1,,FALSE,Pre-Biop,,
+44081,29,PEA,,,,,,,5,12,1988,5/12/1988,Koocanusa,Rexford,41,,Far South Tobacco,6,2,Inner,Spring,20:30,9:00,12.5,53.6,12,146,1,,FALSE,Pre-Biop,,
+44420,29,PEA,,,,,,,5,12,1988,5/12/1988,Koocanusa,Rexford,42,,Mid Sophie,15,2,Inner,Spring,21:30,10:00,12.5,53.6,12,153,1,,FALSE,Pre-Biop,,
+44027,29,PEA,,,,,,,5,12,1988,5/12/1988,Koocanusa,Rexford,21,,North Black Lake,3,2,Inner,Spring,20:30,9:00,12.5,53.6,12,144,1,,FALSE,Pre-Biop,,
+44217,29,PEA,,,,,,,5,12,1988,5/12/1988,Koocanusa,Rexford,36,,North of North Point Tobacco,9,2,Inner,Spring,21:30,10:00,12.5,53.6,12,149,1,,FALSE,Pre-Biop,,
+44267,29,PEA,273,160,10.75,0.35,,,5,12,1988,5/12/1988,Koocanusa,Rexford,1,,North Point Dodge,10,2,Inner,Spring,21:30,10:00,12.5,53.6,12,150,1,78.64,TRUE,Pre-Biop,27,200
+44301,29,PEA,,,,,,,5,12,1988,5/12/1988,Koocanusa,Rexford,12,,North Point Murray,13,2,Inner,Spring,21:30,10:00,12.5,53.6,12,151,1,,FALSE,Pre-Biop,,
+44165,29,PEA,314,224,12.36,0.49,,,5,12,1988,5/12/1988,Koocanusa,Rexford,1,,North Point Tobacco,8,2,Inner,Spring,20:50,9:00,12.16666667,53.6,12,148,1,72.35,TRUE,Pre-Biop,31,300
+44473,29,PEA,,,,,,,5,12,1988,5/12/1988,Koocanusa,Rexford,52,,North Point Young,17,2,Inner,Spring,21:30,10:00,12.5,53.6,12,154,1,,FALSE,Pre-Biop,,
+44518,29,PEA,,,,,,,5,12,1988,5/12/1988,Koocanusa,Rexford,30,,North Sophie,18,2,Inner,Spring,21:30,10:00,12.5,53.6,12,155,1,,FALSE,Pre-Biop,,
+44578,29,PEA,240,115,9.45,0.25,,,5,12,1988,5/12/1988,Koocanusa,Rexford,1,,Sandhill,19,2,Inner,Spring,21:30,10:00,12.5,53.6,12,156,1,83.19,TRUE,Pre-Biop,24,200
+43968,29,PEA,,,,,,,5,12,1988,5/12/1988,Koocanusa,Rexford,63,,South Black Lake,2,2,Inner,Spring,20:30,9:00,12.5,53.6,12,143,1,,FALSE,Pre-Biop,,
+44065,29,PEA,291,194,11.46,0.43,,,5,12,1988,5/12/1988,Koocanusa,Rexford,1,,South of Far South Tobacco,5,2,Inner,Spring,20:30,9:00,12.5,53.6,12,145,1,78.73,TRUE,Pre-Biop,29,200
+44349,29,PEA,,,,,,,5,12,1988,5/12/1988,Koocanusa,Rexford,9,,South Sophie,14,2,Inner,Spring,21:30,10:00,12.5,53.6,12,152,1,,FALSE,Pre-Biop,,
+44130,29,PEA,183,41,7.2,0.09,,,5,12,1988,5/12/1988,Koocanusa,Rexford,1,,South Tobacco,7,2,Inner,Spring,20:30,9:00,12.5,53.6,12,147,1,66.9,TRUE,Pre-Biop,18,100
+44725,29,PEA,,,,,,,5,13,1988,5/13/1988,Koocanusa,Rexford,63,,Far South Tobacco,6,2,Inner,Spring,18:30,13:00,18.5,53.6,12,160,1,,FALSE,Pre-Biop,,
+45073,29,PEA,,,,,,,5,13,1988,5/13/1988,Koocanusa,Rexford,73,,Mid Sophie,15,2,Inner,Spring,18:30,13:00,18.5,53.6,12,167,1,,FALSE,Pre-Biop,,
+44665,29,PEA,248,123,9.76,0.27,,,5,13,1988,5/13/1988,Koocanusa,Rexford,1,,North Black Lake,3,2,Inner,Spring,18:30,13:00,18.5,53.6,12,158,1,80.64,TRUE,Pre-Biop,24,200
+44890,29,PEA,,,,,,,5,13,1988,5/13/1988,Koocanusa,Rexford,114,,North of North Point Tobacco,9,2,Inner,Spring,18:30,13:00,18.5,53.6,12,163,1,,FALSE,Pre-Biop,,
+44955,29,PEA,,,,,,,5,13,1988,5/13/1988,Koocanusa,Rexford,37,,North Point Dodge,10,2,Inner,Spring,18:30,13:00,18.5,53.6,12,164,1,,FALSE,Pre-Biop,,
+44998,29,PEA,,,,,,,5,13,1988,5/13/1988,Koocanusa,Rexford,56,,North Point Murray,13,2,Inner,Spring,18:30,13:00,18.5,53.6,12,165,1,,FALSE,Pre-Biop,,
+44808,29,PEA,,,,,,,5,13,1988,5/13/1988,Koocanusa,Rexford,111,,North Point Tobacco,8,2,Inner,Spring,18:30,13:00,18.5,53.6,12,162,1,,FALSE,Pre-Biop,,
+45143,29,PEA,,,,,,,5,13,1988,5/13/1988,Koocanusa,Rexford,100,,North Point Young,17,2,Inner,Spring,18:30,13:00,18.5,53.6,12,168,1,,FALSE,Pre-Biop,,
+45179,29,PEA,,,,,,,5,13,1988,5/13/1988,Koocanusa,Rexford,42,,Sandhill,19,2,Inner,Spring,18:30,13:00,18.5,53.6,12,169,1,,FALSE,Pre-Biop,,
+44626,29,PEA,297,236,11.69,0.52,,,5,13,1988,5/13/1988,Koocanusa,Rexford,1,,South Black Lake,2,2,Inner,Spring,18:30,13:00,18.5,53.6,12,157,1,90.08,TRUE,Pre-Biop,29,200
+44707,29,PEA,221,87,8.7,0.19,,,5,13,1988,5/13/1988,Koocanusa,Rexford,1,,South of Far South Tobacco,5,2,Inner,Spring,18:30,13:00,18.5,53.6,12,159,1,80.6,TRUE,Pre-Biop,22,200
+45031,29,PEA,,,,,,,5,13,1988,5/13/1988,Koocanusa,Rexford,243,,South Sophie,14,2,Inner,Spring,18:30,13:00,18.5,53.6,12,166,1,,FALSE,Pre-Biop,,
+44768,29,PEA,,,,,,,5,13,1988,5/13/1988,Koocanusa,Rexford,21,,South Tobacco,7,2,Inner,Spring,18:30,13:00,18.5,53.6,12,161,1,,FALSE,Pre-Biop,,
+49487,29,PEA,,,,,,,5,10,1989,5/10/1989,Koocanusa,Rexford,21,,Far South Tobacco,6,2,Inner,Spring,18:30,10:00,15.5,48,8.9,204,1,,FALSE,Pre-Biop,,
+49861,29,PEA,,,,,,,5,10,1989,5/10/1989,Koocanusa,Rexford,160,,Mid Sophie,15,2,Inner,Spring,18:30,10:00,15.5,48,8.9,211,1,,FALSE,Pre-Biop,,
+49368,29,PEA,,,,,,,5,10,1989,5/10/1989,Koocanusa,Rexford,3,,North Black Lake,3,2,Inner,Spring,18:30,10:00,15.5,48,8.9,202,1,,FALSE,Pre-Biop,,
+49641,29,PEA,,,,,,,5,10,1989,5/10/1989,Koocanusa,Rexford,17,,North of North Point Tobacco,9,2,Inner,Spring,18:30,10:00,15.5,48,8.9,207,1,,FALSE,Pre-Biop,,
+49712,29,PEA,284,145,11.18,0.32,Female,,5,10,1989,5/10/1989,Koocanusa,Rexford,1,,North Point Dodge,10,2,Inner,Spring,18:30,10:00,15.5,48,8.9,208,1,63.3,TRUE,Pre-Biop,28,200
+49741,29,PEA,,,,,,,5,10,1989,5/10/1989,Koocanusa,Rexford,123,,North Point Murray,13,2,Inner,Spring,18:30,10:00,15.5,48,8.9,209,1,,FALSE,Pre-Biop,,
+49584,29,PEA,,,,,,,5,10,1989,5/10/1989,Koocanusa,Rexford,34,,North Point Tobacco,8,2,Inner,Spring,18:30,10:00,15.5,48,8.9,206,1,,FALSE,Pre-Biop,,
+49933,29,PEA,,,,,,,5,10,1989,5/10/1989,Koocanusa,Rexford,42,,North Point Young,17,2,Inner,Spring,18:30,10:00,15.5,48,,212,1,,FALSE,Pre-Biop,,
+49980,29,PEA,,,,,,,5,10,1989,5/10/1989,Koocanusa,Rexford,96,,North Sophie,18,2,Inner,Spring,18:30,10:00,15.5,48,,213,1,,FALSE,Pre-Biop,,
+50047,29,PEA,317,263,12.48,0.58,Female,,5,10,1989,5/10/1989,Koocanusa,Rexford,1,,Sandhill,19,2,Inner,Spring,18:30,10:00,15.5,48,,214,1,82.56,TRUE,Pre-Biop,31,300
+49325,29,PEA,,,,,,,5,10,1989,5/10/1989,Koocanusa,Rexford,7,,South Black Lake,2,2,Inner,Spring,18:30,10:00,15.5,48,8.9,201,1,,FALSE,Pre-Biop,,
+49430,29,PEA,,,,,,,5,10,1989,5/10/1989,Koocanusa,Rexford,56,,South of Far South Tobacco,5,2,Inner,Spring,18:30,10:00,15.5,48,8.9,203,1,,FALSE,Pre-Biop,,
+49811,29,PEA,,,,,,,5,10,1989,5/10/1989,Koocanusa,Rexford,13,,South Sophie,14,2,Inner,Spring,18:30,10:00,15.5,48,8.9,210,1,,FALSE,Pre-Biop,,
+49560,29,PEA,260,120,10.24,0.26,Female,,5,10,1989,5/10/1989,Koocanusa,Rexford,1,,South Tobacco,7,2,Inner,Spring,18:30,10:00,15.5,48,8.9,205,1,68.27,TRUE,Pre-Biop,26,200
+50085,29,PEA,253,104,9.96,0.23,Female,,5,11,1989,5/11/1989,Koocanusa,Rexford,1,,Far South Tobacco,6,2,Inner,Spring,20:00,10:00,14,48,,216,1,64.22,TRUE,Pre-Biop,25,200
+50357,29,PEA,,,,,,,5,11,1989,5/11/1989,Koocanusa,Rexford,67,,Mid Sophie,15,2,Inner,Spring,20:00,10:00,14,48,,222,1,,FALSE,Pre-Biop,,
+50190,29,PEA,,,,,,,5,11,1989,5/11/1989,Koocanusa,Rexford,39,,North of North Point Tobacco,9,2,Inner,Spring,20:00,10:00,14,48,,219,1,,FALSE,Pre-Biop,,
+50249,29,PEA,,,,,,,5,11,1989,5/11/1989,Koocanusa,Rexford,31,,North Point Dodge,10,2,Inner,Spring,20:00,10:00,14,48,,220,1,,FALSE,Pre-Biop,,
+50295,29,PEA,,,,,,,5,11,1989,5/11/1989,Koocanusa,Rexford,13,,North Point Murray,13,2,Inner,Spring,20:00,10:00,14,48,,221,1,,FALSE,Pre-Biop,,
+50158,29,PEA,,,,,,,5,11,1989,5/11/1989,Koocanusa,Rexford,3,,North Point Tobacco,8,2,Inner,Spring,20:00,10:00,14,48,,218,1,,FALSE,Pre-Biop,,
+50407,29,PEA,,,,,,,5,11,1989,5/11/1989,Koocanusa,Rexford,91,,North Point Young,17,2,Inner,Spring,20:00,10:00,14,48,,223,1,,FALSE,Pre-Biop,,
+50457,29,PEA,208,80,8.19,0.18,Male,,5,11,1989,5/11/1989,Koocanusa,Rexford,1,,North Sophie,18,2,Inner,Spring,20:00,10:00,14,48,,224,1,88.9,TRUE,Pre-Biop,20,200
+50494,29,PEA,,,,,,,5,11,1989,5/11/1989,Koocanusa,Rexford,64,,Sandhill,19,2,Inner,Spring,20:00,10:00,14,48,,225,1,,FALSE,Pre-Biop,,
+50053,29,PEA,,,,,,,5,11,1989,5/11/1989,Koocanusa,Rexford,47,,South of Far South Tobacco,5,2,Inner,Spring,20:00,10:00,14,48,,215,1,,FALSE,Pre-Biop,,
+50105,29,PEA,,,,,,,5,11,1989,5/11/1989,Koocanusa,Rexford,66,,South Tobacco,7,2,Inner,Spring,20:00,10:00,14,48,,217,1,,FALSE,Pre-Biop,,
+54339,29,PEA,,,,,,,5,10,1990,5/10/1990,Koocanusa,Rexford,95,,Far South Tobacco,6,2,Inner,Spring,20:00,10:00,14,53,11.7,229,1,,FALSE,Pre-Biop,,
+54676,29,PEA,,,,,,,5,10,1990,5/10/1990,Koocanusa,Rexford,51,,Mid Sophie,15,2,Inner,Spring,20:00,10:00,14,53,11.7,236,1,,FALSE,Pre-Biop,,
+54263,29,PEA,,,,,,,5,10,1990,5/10/1990,Koocanusa,Rexford,106,,North Black Lake,3,2,Inner,Spring,20:00,10:00,14,53,11.7,227,1,,FALSE,Pre-Biop,,
+54470,29,PEA,208,62,8.19,0.14,,,5,10,1990,5/10/1990,Koocanusa,Rexford,1,,North of North Point Tobacco,9,2,Inner,Spring,20:00,10:00,14,53,11.7,232,1,68.9,TRUE,Pre-Biop,20,200
+54526,29,PEA,,,,,,,5,10,1990,5/10/1990,Koocanusa,Rexford,27,,North Point Dodge,10,2,Inner,Spring,20:00,10:00,14,53,11.7,233,1,,FALSE,Pre-Biop,,
+54552,29,PEA,,,,,,,5,10,1990,5/10/1990,Koocanusa,Rexford,57,,North Point Murray,13,2,Inner,Spring,20:00,10:00,14,53,11.7,234,1,,FALSE,Pre-Biop,,
+54428,29,PEA,,,,,,,5,10,1990,5/10/1990,Koocanusa,Rexford,78,,North Point Tobacco,8,2,Inner,Spring,20:00,10:00,14,53,11.7,231,1,,FALSE,Pre-Biop,,
+54728,29,PEA,,,,,,,5,10,1990,5/10/1990,Koocanusa,Rexford,39,,North Point Young,17,2,Inner,Spring,20:00,10:00,14,53,11.7,237,1,,FALSE,Pre-Biop,,
+54759,29,PEA,,,,,,,5,10,1990,5/10/1990,Koocanusa,Rexford,82,,North Sophie,18,2,Inner,Spring,20:00,10:00,14,53,11.7,238,1,,FALSE,Pre-Biop,,
+54809,29,PEA,,,,,,,5,10,1990,5/10/1990,Koocanusa,Rexford,84,,Sandhill,19,2,Inner,Spring,20:00,10:00,14,53,11.7,239,1,,FALSE,Pre-Biop,,
+54197,29,PEA,,,,,,,5,10,1990,5/10/1990,Koocanusa,Rexford,156,,South Black Lake,2,2,Inner,Spring,18:00,9:30,15.5,53,11.7,226,1,,FALSE,Pre-Biop,,
+54303,29,PEA,,,,,,,5,10,1990,5/10/1990,Koocanusa,Rexford,170,,South of Far South Tobacco,5,2,Inner,Spring,20:00,10:00,14,53,11.7,228,1,,FALSE,Pre-Biop,,
+54620,29,PEA,,,,,,,5,10,1990,5/10/1990,Koocanusa,Rexford,43,,South Sophie,14,2,Inner,Spring,20:00,10:00,14,53,11.7,235,1,,FALSE,Pre-Biop,,
+54376,29,PEA,,,,,,,5,10,1990,5/10/1990,Koocanusa,Rexford,88,,South Tobacco,7,2,Inner,Spring,20:00,10:00,14,53,11.7,230,1,,FALSE,Pre-Biop,,
+54959,29,PEA,,,,,,,5,11,1990,5/11/1990,Koocanusa,Rexford,276,,Far South Tobacco,6,2,Inner,Spring,20:30,10:00,13.5,54,12.2,243,1,,FALSE,Pre-Biop,,
+55160,29,PEA,,,,,,,5,11,1990,5/11/1990,Koocanusa,Rexford,78,,Mid Sophie,15,2,Inner,Spring,20:30,10:00,13.5,54,12.2,247,1,,FALSE,Pre-Biop,,
+54886,29,PEA,,,,,,,5,11,1990,5/11/1990,Koocanusa,Rexford,138,,North Black Lake,3,2,Inner,Spring,20:30,10:00,13.5,54,12.2,241,1,,FALSE,Pre-Biop,,
+55069,29,PEA,,,,,,,5,11,1990,5/11/1990,Koocanusa,Rexford,76,,North of North Point Tobacco,9,2,Inner,Spring,20:30,10:00,13.5,54,12.2,245,1,,FALSE,Pre-Biop,,
+55108,29,PEA,,,,,,,5,11,1990,5/11/1990,Koocanusa,Rexford,75,,North Point Murray,13,2,Inner,Spring,20:30,10:00,13.5,54,12.2,246,1,,FALSE,Pre-Biop,,
+55197,29,PEA,,,,,,,5,11,1990,5/11/1990,Koocanusa,Rexford,42,,North Point Young,17,2,Inner,Spring,20:30,10:00,13.5,54,12.2,248,1,,FALSE,Pre-Biop,,
+55232,29,PEA,,,,,,,5,11,1990,5/11/1990,Koocanusa,Rexford,62,,North Sophie,18,2,Inner,Spring,20:30,10:00,13.5,54,12.2,249,1,,FALSE,Pre-Biop,,
+54845,29,PEA,,,,,,,5,11,1990,5/11/1990,Koocanusa,Rexford,81,,South Black Lake,2,2,Inner,Spring,20:30,10:00,13.5,54,12.2,240,1,,FALSE,Pre-Biop,,
+54921,29,PEA,,,,,,,5,11,1990,5/11/1990,Koocanusa,Rexford,34,,South of Far South Tobacco,5,2,Inner,Spring,20:30,10:00,13.5,54,12.2,242,1,,FALSE,Pre-Biop,,
+55029,29,PEA,,,,,,,5,11,1990,5/11/1990,Koocanusa,Rexford,58,,South Tobacco,7,2,Inner,Spring,20:30,10:00,13.5,54,12.2,244,1,,FALSE,Pre-Biop,,
+55293,29,PEA,,,,,,,5,11,1990,5/11/1990,Koocanusa,Rexford,96,,,,2,Inner,Spring,20:30,10:00,13.5,54,12.2,250,1,,FALSE,Pre-Biop,,
+55329,29,PEA,,,,,,,5,11,1990,5/11/1990,Koocanusa,Rexford,94,,,,2,Inner,Spring,20:30,10:00,13.5,54,12.2,251,1,,FALSE,Pre-Biop,,
+55369,29,PEA,,,,,,,5,11,1990,5/11/1990,Koocanusa,Rexford,108,,,,2,Inner,Spring,20:30,10:00,13.5,54,12.2,252,1,,FALSE,Pre-Biop,,
+57634,29,PEA,199,55,7.83,0.12,Male,,5,15,1991,5/15/1991,Koocanusa,Rexford,1,,Far South Tobacco,6,2,Inner,Spring,21:25,8:59,11.57,,9.8,256,1,69.79,TRUE,Pre-Biop,19,100
+57848,29,PEA,,,,,,,5,15,1991,5/15/1991,Koocanusa,Rexford,4,,Mid Sophie,15,2,Inner,Spring,19:50,10:02,14.2,,9.8,263,1,,FALSE,Pre-Biop,,
+57605,29,PEA,250,108,9.84,0.24,Female,,5,15,1991,5/15/1991,Koocanusa,Rexford,1,,North Black Lake,3,2,Inner,Spring,21:18,8:55,11.62,,9.8,254,1,69.12,TRUE,Pre-Biop,25,200
+57728,20,YP,198,80,7.8,0.18,Female,,5,15,1991,5/15/1991,Koocanusa,Rexford,1,,North of North Point Tobacco,9,2,Inner,Spring,19:20,10:25,15.08,,9.8,259,1,103.06,TRUE,Pre-Biop,19,100
+57761,29,PEA,,,,,,,5,15,1991,5/15/1991,Koocanusa,Rexford,9,,North Point Dodge,10,2,Inner,Spring,21:05,8:34,11.48,,9.8,260,1,,FALSE,Pre-Biop,,
+57790,29,PEA,,,,,,,5,15,1991,5/15/1991,Koocanusa,Rexford,2,,North Point Murray,13,2,Inner,Spring,19:30,10:15,14.75,,9.8,261,1,,FALSE,Pre-Biop,,
+57679,29,PEA,207,55,8.15,0.12,Male,,5,15,1991,5/15/1991,Koocanusa,Rexford,1,,North Point Tobacco,8,2,Inner,Spring,19:10,10:33,15.38,,9.8,258,1,62.01,TRUE,Pre-Biop,20,200
+57885,29,PEA,,,,,,,5,15,1991,5/15/1991,Koocanusa,Rexford,27,,North Point Young,17,2,Inner,Spring,20:09,9:47,13.63,,9.8,264,1,,FALSE,Pre-Biop,,
+57916,29,PEA,206,62,8.11,0.14,Female,,5,15,1991,5/15/1991,Koocanusa,Rexford,1,,North Sophie,18,2,Inner,Spring,20:00,9:54,13.9,,9.8,265,1,70.92,TRUE,Pre-Biop,20,200
+57927,58,LS SU,424,650,16.69,1.43,Female,,5,15,1991,5/15/1991,Koocanusa,Rexford,1,,Sandhill,19,2,Inner,Spring,21:28,9:33,12.08,,9.8,266,1,85.27,TRUE,Pre-Biop,42,400
+57584,29,PEA,,,,,,,5,15,1991,5/15/1991,Koocanusa,Rexford,81,,South Black Lake,2,2,Inner,Spring,21:12,8:42,11.5,,9.8,253,1,,FALSE,Pre-Biop,,
+57617,29,PEA,251,,9.88,,Female,,5,15,1991,5/15/1991,Koocanusa,Rexford,1,,South of Far South Tobacco,5,2,Inner,Spring,21:31,9:05,11.57,,9.8,255,1,,FALSE,Pre-Biop,25,200
+57837,29,PEA,223,94,8.78,0.21,Female,,5,15,1991,5/15/1991,Koocanusa,Rexford,1,,South Sophie,14,2,Inner,Spring,19:42,10:09,14.45,,9.8,262,1,84.76,TRUE,Pre-Biop,22,200
+57646,56,LN SU,335,343,13.19,0.76,Male,,5,15,1991,5/15/1991,Koocanusa,Rexford,1,,South Tobacco,7,2,Inner,Spring,21:38,9:11,11.55,,9.8,257,1,91.23,TRUE,Pre-Biop,33,300
+58100,29,PEA,,,,,,,5,16,1991,5/16/1991,Koocanusa,Rexford,6,,Far South Tobacco,6,2,Inner,Spring,20:25,10:29,14.07,,9.8,270,1,,FALSE,Pre-Biop,,
+58310,29,PEA,227,90,8.94,0.2,Female,,5,16,1991,5/16/1991,Koocanusa,Rexford,1,,Mid Sophie,15,2,Inner,Spring,19:25,9:00,13.58,,9.8,277,1,76.94,TRUE,Pre-Biop,22,200
+58015,29,PEA,,,,,,,5,16,1991,5/16/1991,Koocanusa,Rexford,37,,North Black Lake,3,2,Inner,Spring,20:15,10:10,13.92,,9.8,268,1,,FALSE,Pre-Biop,,
+58186,85,MWF,235,110,9.25,0.24,Female,,5,16,1991,5/16/1991,Koocanusa,Rexford,1,,North of North Point Tobacco,9,2,Inner,Spring,19:00,9:24,14.4,,9.8,273,1,84.76,TRUE,Pre-Biop,23,200
+58232,29,PEA,230,90,9.06,0.2,Female,,5,16,1991,5/16/1991,Koocanusa,Rexford,1,,North Point Dodge,10,2,Inner,Spring,20:00,9:55,13.92,,9.8,274,1,73.97,TRUE,Pre-Biop,23,200
+58247,29,PEA,,,,,,,5,16,1991,5/16/1991,Koocanusa,Rexford,10,,North Point Murray,13,2,Inner,Spring,19:19,9:13,13.9,,9.8,275,1,,FALSE,Pre-Biop,,
+58152,29,PEA,,,,,,,5,16,1991,5/16/1991,Koocanusa,Rexford,41,,North Point Tobacco,8,2,Inner,Spring,18:50,9:28,14.63,,9.8,272,1,,FALSE,Pre-Biop,,
+58349,29,PEA,228,86,8.98,0.19,Male,,5,16,1991,5/16/1991,Koocanusa,Rexford,1,,North Point Young,17,2,Inner,Spring,19:37,8:22,12.75,,9.8,278,1,72.56,TRUE,Pre-Biop,22,200
+58364,29,PEA,229,94,9.02,0.21,Female,,5,16,1991,5/16/1991,Koocanusa,Rexford,1,,North Sophie,18,2,Inner,Spring,19:32,8:30,12.97,,9.8,279,1,78.27,TRUE,Pre-Biop,22,200
+58381,29,PEA,185,44,7.28,0.1,Male,,5,16,1991,5/16/1991,Koocanusa,Rexford,1,,Sandhill,19,2,Inner,Spring,19:47,9:42,13.92,,9.8,280,1,69.49,TRUE,Pre-Biop,18,100
+57950,29,PEA,198,52,7.8,0.11,,,5,16,1991,5/16/1991,Koocanusa,Rexford,1,,South Black Lake,2,2,Inner,Spring,20:07,10:07,14,,9.8,267,1,66.99,TRUE,Pre-Biop,19,100
+58068,29,PEA,,,,,,,5,16,1991,5/16/1991,Koocanusa,Rexford,4,,South of Far South Tobacco,5,2,Inner,Spring,20:20,10:21,14.02,,9.8,269,1,,FALSE,Pre-Biop,,
+58288,29,PEA,224,92,8.82,0.2,Female,,5,16,1991,5/16/1991,Koocanusa,Rexford,1,,South Sophie,14,2,Inner,Spring,19:10,9:01,13.85,,9.8,276,1,81.85,TRUE,Pre-Biop,22,200
+58142,29,PEA,242,110,9.53,0.24,Female,,5,16,1991,5/16/1991,Koocanusa,Rexford,1,,South Tobacco,7,2,Inner,Spring,20:30,10:35,14.08,,9.8,271,1,77.62,TRUE,Pre-Biop,24,200
+59697,29,PEA,233,130,9.17,0.29,,,4,2,1992,4/2/1992,Koocanusa,Tenmile,1,,,,2,,Spring,13:45,7:40,17.92,,,281,1,102.77,TRUE,Pre-Biop,23,200
+59710,29,PEA,230,105,9.06,0.23,,,4,2,1992,4/2/1992,Koocanusa,Tenmile,1,,,,2,,Spring,13:40,7:30,17.83,,,282,1,86.3,TRUE,Pre-Biop,23,200
+59894,29,PEA,,,,,,,5,5,1992,5/5/1992,Koocanusa,Rexford,109,,Far South Tobacco,6,2,,Spring,18:45,10:10,15.42,59.5,15.3,285,1,,FALSE,Pre-Biop,,
+60248,29,PEA,,,,,,,5,5,1992,5/5/1992,Koocanusa,Rexford,67,,Mid Sophie,15,2,,Spring,17:35,8:45,15.17,59.5,15.3,292,1,,FALSE,Pre-Biop,,
+60043,29,PEA,,,,,,,5,5,1992,5/5/1992,Koocanusa,Rexford,159,,North of North Point Tobacco,9,2,,Spring,16:50,10:45,17.92,59.5,15.3,288,1,,FALSE,Pre-Biop,,
+60090,29,PEA,,,,,,,5,5,1992,5/5/1992,Koocanusa,Rexford,97,,North Point Dodge,10,2,,Spring,18:10,9:35,15.42,59.5,15.3,289,1,,FALSE,Pre-Biop,,
+60129,29,PEA,216,102,8.5,0.22,Female,,5,5,1992,5/5/1992,Koocanusa,Rexford,1,,North Point Murray,13,2,,Spring,17:10,8:30,15.33,59.5,15.3,290,1,101.21,TRUE,Pre-Biop,21,200
+60002,29,PEA,,,,,,,5,5,1992,5/5/1992,Koocanusa,Rexford,40,,North Point Tobacco,8,2,,Spring,17:00,10:30,17.5,59.5,15.3,287,1,,FALSE,Pre-Biop,,
+60307,29,PEA,,,,,,,5,5,1992,5/5/1992,Koocanusa,Rexford,69,,North Point Young,17,2,,Spring,17:55,9:00,15.08,59.5,15.3,293,1,,FALSE,Pre-Biop,,
+60357,29,PEA,,,,,,,5,5,1992,5/5/1992,Koocanusa,Rexford,119,,North Sophie,18,2,,Spring,17:45,8:55,15.17,59.5,15.3,294,1,,FALSE,Pre-Biop,,
+60429,29,PEA,,,,,,,5,5,1992,5/5/1992,Koocanusa,Rexford,43,,Sandhill,19,2,,Spring,18:00,9:50,15.83,59.5,15.3,295,1,,FALSE,Pre-Biop,,
+59739,29,PEA,,,,,,,5,5,1992,5/5/1992,Koocanusa,Rexford,168,,South Black Lake,2,2,,Spring,18:40,9:50,15.17,59.5,15.3,283,1,,FALSE,Pre-Biop,,
+59793,29,PEA,,,,,,,5,5,1992,5/5/1992,Koocanusa,Rexford,123,,South Black Lake,2,2,Inner,Spring,18:20,9:45,15.42,59.5,15.3,297,1,,FALSE,Pre-Biop,,
+59845,29,PEA,,,,,,,5,5,1992,5/5/1992,Koocanusa,Rexford,209,,South of Far South Tobacco,5,2,,Spring,18:30,10:00,15.5,59.5,15.3,284,1,,FALSE,Pre-Biop,,
+60180,29,PEA,210,85,8.27,0.19,,,5,5,1992,5/5/1992,Koocanusa,Rexford,1,,South Sophie,14,2,,Spring,17:20,8:40,15.33,59.5,15.3,291,1,91.78,TRUE,Pre-Biop,21,200
+59938,29,PEA,,,,,,,5,5,1992,5/5/1992,Koocanusa,Rexford,107,,South Tobacco,7,2,,Spring,18:15,10:15,16,59.5,15.3,286,1,,FALSE,Pre-Biop,,
+60655,29,PEA,,,,,,,5,6,1992,5/6/1992,Koocanusa,Rexford,114,,Far South Tobacco,6,2,,Spring,18:36,10:03,15.45,59.5,15.3,300,1,,FALSE,Pre-Biop,,
+61050,29,PEA,200,50,7.87,0.11,Male,,5,6,1992,5/6/1992,Koocanusa,Rexford,1,,Mid Sophie,15,2,,Spring,17:45,8:43,14.97,59.5,15.3,307,1,62.5,TRUE,Pre-Biop,20,200
+60548,29,PEA,240,98,9.45,0.22,Male,,5,6,1992,5/6/1992,Koocanusa,Rexford,1,,North Black Lake,3,2,,Spring,18:27,9:51,15.4,59.5,15.3,298,1,70.89,TRUE,Pre-Biop,24,200
+60828,29,PEA,,,,,,,5,6,1992,5/6/1992,Koocanusa,Rexford,94,,North of North Point Tobacco,9,2,,Spring,17:20,8:16,14.93,59.5,15.3,303,1,,FALSE,Pre-Biop,,
+60887,29,PEA,,,,,,,5,6,1992,5/6/1992,Koocanusa,Rexford,147,,North Point Dodge,10,2,,Spring,18:10,9:33,15.38,59.5,15.3,304,1,,FALSE,Pre-Biop,,
+60933,29,PEA,,,,,,,5,6,1992,5/6/1992,Koocanusa,Rexford,109,,North Point Murray,13,2,,Spring,17:27,8:28,15.02,59.5,15.3,305,1,,FALSE,Pre-Biop,,
+60762,29,PEA,,,,,,,5,6,1992,5/6/1992,Koocanusa,Rexford,19,,North Point Tobacco,8,2,,Spring,17:15,8:10,14.92,59.5,15.3,302,1,,FALSE,Pre-Biop,,
+61063,29,PEA,,,,,,,5,6,1992,5/6/1992,Koocanusa,Rexford,70,,North Point Young,17,2,,Spring,17:58,9:05,15.12,59.5,15.3,308,1,,FALSE,Pre-Biop,,
+61103,29,PEA,,,,,,,5,6,1992,5/6/1992,Koocanusa,Rexford,142,,North Sophie,18,2,,Spring,17:50,8:49,14.98,59.5,15.3,309,1,,FALSE,Pre-Biop,,
+61165,29,PEA,310,255,12.2,0.56,Female,,5,6,1992,5/6/1992,Koocanusa,Rexford,1,,Sandhill,19,2,,Spring,18:04,9:09,15.08,59.5,15.3,310,1,85.6,TRUE,Pre-Biop,31,300
+60490,29,PEA,,,,,,,5,6,1992,5/6/1992,Koocanusa,Rexford,97,,South Black Lake,2,2,,Spring,18:20,9:43,15.38,59.5,15.3,296,1,,FALSE,Pre-Biop,,
+60591,29,PEA,,,,,,,5,6,1992,5/6/1992,Koocanusa,Rexford,110,,South of Far South Tobacco,5,2,,Spring,18:31,9:56,15.42,59.5,15.3,299,1,,FALSE,Pre-Biop,,
+60992,29,PEA,,,,,,,5,6,1992,5/6/1992,Koocanusa,Rexford,102,,South Sophie,14,2,,Spring,17:36,8:35,14.98,59.5,15.3,306,1,,FALSE,Pre-Biop,,
+60700,29,PEA,,,,,,,5,6,1992,5/6/1992,Koocanusa,Rexford,105,,South Tobacco,7,2,,Spring,18:41,10:10,15.48,59.5,15.3,301,1,,FALSE,Pre-Biop,,
+62416,29,PEA,210,62,8.27,0.14,,,5,18,1993,5/18/1993,Koocanusa,Rexford,1,,Far South Tobacco,6,2,,Spring,19:05,11:27,16.37,,,314,1,66.95,TRUE,Pre-Biop,21,200
+62778,29,PEA,,,,,,,5,18,1993,5/18/1993,Koocanusa,Rexford,80,,Mid Sophie,15,2,,Spring,17:50,0:00,16.17,,,321,1,,FALSE,Pre-Biop,,
+62304,29,PEA,263,130,10.35,0.29,,,5,18,1993,5/18/1993,Koocanusa,Rexford,1,,North Black Lake,3,2,,Spring,18:50,11:16,16.43,,,312,1,71.46,TRUE,Pre-Biop,26,200
+62563,29,PEA,,,,,,,5,18,1993,5/18/1993,Koocanusa,Rexford,7,,North of North Point Tobacco,9,2,,Spring,,,15,,,317,1,,FALSE,Pre-Biop,,
+62612,29,PEA,,,,,,,5,18,1993,5/18/1993,Koocanusa,Rexford,61,,North Point Dodge,10,2,,Spring,18:35,11:00,16.42,,,318,1,,FALSE,Pre-Biop,,
+62659,29,PEA,,,,,,,5,18,1993,5/18/1993,Koocanusa,Rexford,59,,North Point Murray,13,2,,Spring,,,15,,,319,1,,FALSE,Pre-Biop,,
+62501,29,PEA,,,,,,,5,18,1993,5/18/1993,Koocanusa,Rexford,43,,North Point Tobacco,8,2,,Spring,17:25,8:37,15.2,,,316,1,,FALSE,Pre-Biop,,
+62845,29,PEA,225,85,8.86,0.19,,,5,18,1993,5/18/1993,Koocanusa,Rexford,1,,North Point Young,17,2,,Spring,18:20,10:40,16.33,,,322,1,74.62,TRUE,Pre-Biop,22,200
+62871,12,WCT,306,260,12.05,0.57,Female,,5,18,1993,5/18/1993,Koocanusa,Rexford,1,,North Sophie,18,2,,Spring,17:55,9:15,15.33,,,323,1,90.74,TRUE,Pre-Biop,30,300
+62905,29,PEA,,,,,,,5,18,1993,5/18/1993,Koocanusa,Rexford,53,,Sandhill,19,2,,Spring,18:25,10:45,16.33,,,324,1,,FALSE,Pre-Biop,,
+62246,29,PEA,,,,,,,5,18,1993,5/18/1993,Koocanusa,Rexford,59,,South Black Lake,2,2,,Spring,18:50,11:10,16.33,,,311,1,,FALSE,Pre-Biop,,
+62364,29,PEA,,,,,,,5,18,1993,5/18/1993,Koocanusa,Rexford,89,,South of Far South Tobacco,5,2,,Spring,19:00,11:21,16.35,,,313,1,,FALSE,Pre-Biop,,
+62718,29,PEA,,,,,,,5,18,1993,5/18/1993,Koocanusa,Rexford,52,,South Sophie,14,2,,Spring,17:40,0:00,16.33,,,320,1,,FALSE,Pre-Biop,,
+62455,29,PEA,,,,,,,5,18,1993,5/18/1993,Koocanusa,Rexford,12,,South Tobacco,7,2,,Spring,19:10,11:34,16.4,,,315,1,,FALSE,Pre-Biop,,
+62940,29,PEA,233,95,9.17,0.21,,,5,18,1993,5/18/1993,Koocanusa,Rexford,1,,,,2,,Spring,,,15,,,325,1,75.1,TRUE,Pre-Biop,23,200
+62961,29,PEA,206,70,8.11,0.15,,,5,18,1993,5/18/1993,Koocanusa,Rexford,1,,,,2,,Spring,,,15,,,326,1,80.07,TRUE,Pre-Biop,20,200
+62988,29,PEA,,,,,,,5,18,1993,5/18/1993,Koocanusa,Rexford,46,,,,2,,Spring,18:35,11:00,16.42,,,327,1,,FALSE,Pre-Biop,,
+63147,29,PEA,,,,,,,5,19,1993,5/19/1993,Koocanusa,Rexford,28,,Far South Tobacco,6,2,,Spring,19:20,10:35,15.25,,,331,1,,FALSE,Pre-Biop,,
+63513,29,PEA,,,,,,,5,19,1993,5/19/1993,Koocanusa,Rexford,55,,Mid Sophie,15,2,,Spring,18:00,8:48,14.8,,,338,1,,FALSE,Pre-Biop,,
+63082,29,PEA,250,119,9.84,0.26,,,5,19,1993,5/19/1993,Koocanusa,Rexford,1,,North Black Lake,3,2,,Spring,19:10,10:25,15.25,,,329,1,76.16,TRUE,Pre-Biop,25,200
+63281,29,PEA,,,,,,,5,19,1993,5/19/1993,Koocanusa,Rexford,22,,North of North Point Tobacco,9,2,,Spring,17:37,8:26,14.82,,,334,1,,FALSE,Pre-Biop,,
+63349,29,PEA,,,,,,,5,19,1993,5/19/1993,Koocanusa,Rexford,48,,North Point Dodge,10,2,,Spring,18:30,9:43,15.22,,,335,1,,FALSE,Pre-Biop,,
+63384,29,PEA,,,,,,,5,19,1993,5/19/1993,Koocanusa,Rexford,8,,North Point Murray,13,2,,Spring,17:45,8:33,14.8,,,336,1,,FALSE,Pre-Biop,,
+63244,29,PEA,,,,,,,5,19,1993,5/19/1993,Koocanusa,Rexford,23,,North Point Tobacco,8,2,,Spring,17:30,8:20,14.83,,,333,1,,FALSE,Pre-Biop,,
+63576,29,PEA,,,,,,,5,19,1993,5/19/1993,Koocanusa,Rexford,30,,North Point Young,17,2,,Spring,18:15,9:30,15.25,,,339,1,,FALSE,Pre-Biop,,
+63612,29,PEA,255,134,10.04,0.3,,,5,19,1993,5/19/1993,Koocanusa,Rexford,1,,North Sophie,18,2,Inner,Spring,18:10,8:55,14.75,,,340,1,80.81,TRUE,Pre-Biop,25,200
+63620,29,PEA,,,,,,,5,19,1993,5/19/1993,Koocanusa,Rexford,8,,North Sophie,18,2,Outer,Spring,18:10,8:55,14.75,,,341,1,,FALSE,Pre-Biop,,
+63650,29,PEA,,,,,,,5,19,1993,5/19/1993,Koocanusa,Rexford,50,,Sandhill,19,2,,Spring,16:22,10:32,18.17,,,342,1,,FALSE,Pre-Biop,,
+63025,29,PEA,,,,,,,5,19,1993,5/19/1993,Koocanusa,Rexford,31,,South Black Lake,2,2,,Spring,18:40,10:15,15.58,,,328,1,,FALSE,Pre-Biop,,
+63092,29,PEA,,,,,,,5,19,1993,5/19/1993,Koocanusa,Rexford,58,,South of Far South Tobacco,5,2,,Spring,19:15,10:30,15.25,,,330,1,,FALSE,Pre-Biop,,
+63436,29,PEA,,,,,,,5,19,1993,5/19/1993,Koocanusa,Rexford,28,,South Sophie,14,2,,Spring,17:55,8:40,14.75,,,337,1,,FALSE,Pre-Biop,,
+63194,29,PEA,,,,,,,5,19,1993,5/19/1993,Koocanusa,Rexford,12,,South Tobacco,7,2,,Spring,19:25,10:50,15.42,,,332,1,,FALSE,Pre-Biop,,
+64763,29,PEA,,,,,,,5,16,1994,5/16/1994,Koocanusa,Rexford,37,,Far South Tobacco,6,2,Inner,Spring,16:32,10:32,18,,13.3,374,1,,FALSE,Pre-Biop,,
+65179,29,PEA,,,,,,,5,16,1994,5/16/1994,Koocanusa,Rexford,15,,Mid Sophie,15,2,Inner,Spring,15:35,9:23,17.8,,13.3,381,1,,FALSE,Pre-Biop,,
+64656,29,PEA,,,,,,,5,16,1994,5/16/1994,Koocanusa,Rexford,65,,North Black Lake,3,2,Inner,Spring,16:17,10:15,17.97,,13.3,372,1,,FALSE,Pre-Biop,,
+64939,29,PEA,,,,,,,5,16,1994,5/16/1994,Koocanusa,Rexford,20,,North of North Point Tobacco,9,2,Inner,Spring,15:10,8:50,17.67,,13.3,377,1,,FALSE,Pre-Biop,,
+64992,29,PEA,,,,,,,5,16,1994,5/16/1994,Koocanusa,Rexford,89,,North Point Dodge,10,2,Inner,Spring,16:00,9:55,17.92,,13.3,378,1,,FALSE,Pre-Biop,,
+65059,29,PEA,,,,,,,5,16,1994,5/16/1994,Koocanusa,Rexford,51,,North Point Murray,13,2,Inner,Spring,15:20,9:05,17.75,,13.3,379,1,,FALSE,Pre-Biop,,
+64883,29,PEA,,,,,,,5,16,1994,5/16/1994,Koocanusa,Rexford,71,,North Point Tobacco,8,2,Inner,Spring,15:04,8:45,17.68,,13.3,376,1,,FALSE,Pre-Biop,,
+65244,29,PEA,255,112,10.04,0.25,,,5,16,1994,5/16/1994,Koocanusa,Rexford,1,,North Point Young,17,2,Inner,Spring,15:50,9:40,17.83,,13.3,382,1,67.55,TRUE,Pre-Biop,25,200
+65278,29,PEA,,,,,,,5,16,1994,5/16/1994,Koocanusa,Rexford,65,,North Sophie,18,2,Inner,Spring,15:40,9:30,17.83,,13.3,383,1,,FALSE,Pre-Biop,,
+65349,29,PEA,,,,,,,5,16,1994,5/16/1994,Koocanusa,Rexford,50,,Sandhill,19,2,Inner,Spring,15:45,9:45,18,,13.3,384,1,,FALSE,Pre-Biop,,
+64585,29,PEA,,,,,,,5,16,1994,5/16/1994,Koocanusa,Rexford,85,,South Black Lake,2,2,Inner,Spring,16:12,10:10,17.97,,13.3,371,1,,FALSE,Pre-Biop,,
+64711,29,PEA,,,,,,,5,16,1994,5/16/1994,Koocanusa,Rexford,55,,South of Far South Tobacco,5,2,Inner,Spring,16:25,10:20,17.92,,13.3,373,1,,FALSE,Pre-Biop,,
+65113,29,PEA,,,,,,,5,16,1994,5/16/1994,Koocanusa,Rexford,73,,South Sophie,14,2,Inner,Spring,15:26,9:15,17.82,,13.3,380,1,,FALSE,Pre-Biop,,
+64827,29,PEA,,,,,,,5,16,1994,5/16/1994,Koocanusa,Rexford,52,,South Tobacco,7,2,Inner,Spring,16:43,11:45,19.03,,13.3,375,1,,FALSE,Pre-Biop,,
+65541,29,PEA,,,,,,,5,17,1994,5/17/1994,Koocanusa,Rexford,64,,Far South Tobacco,6,2,Inner,Spring,17:15,11:09,17.9,,13.3,388,1,,FALSE,Pre-Biop,,
+65907,29,PEA,,,,,,,5,17,1994,5/17/1994,Koocanusa,Rexford,19,,Mid Sophie,15,2,Inner,Spring,16:00,9:35,17.58,,13.3,395,1,,FALSE,Pre-Biop,,
+65445,29,PEA,,,,,,,5,17,1994,5/17/1994,Koocanusa,Rexford,68,,North Black Lake,3,2,Inner,Spring,16:55,10:51,17.93,,13.3,386,1,,FALSE,Pre-Biop,,
+65697,29,PEA,,,,,,,5,17,1994,5/17/1994,Koocanusa,Rexford,47,,North of North Point Tobacco,9,2,Inner,Spring,15:31,8:55,17.4,,13.3,391,1,,FALSE,Pre-Biop,,
+65737,29,PEA,,,,,,,5,17,1994,5/17/1994,Koocanusa,Rexford,129,,North Point Dodge,10,2,Inner,Spring,16:37,10:30,17.88,,13.3,392,1,,FALSE,Pre-Biop,,
+65778,29,PEA,,,,,,,5,17,1994,5/17/1994,Koocanusa,Rexford,58,,North Point Murray,13,2,Inner,Spring,15:40,9:22,17.7,,13.3,393,1,,FALSE,Pre-Biop,,
+65645,29,PEA,,,,,,,5,17,1994,5/17/1994,Koocanusa,Rexford,54,,North Point Tobacco,8,2,Inner,Spring,15:28,8:47,17.32,,13.3,390,1,,FALSE,Pre-Biop,,
+65956,29,PEA,,,,,,,5,17,1994,5/17/1994,Koocanusa,Rexford,31,,North Point Young,17,2,Inner,Spring,16:25,10:10,17.75,,13.3,396,1,,FALSE,Pre-Biop,,
+65993,29,PEA,,,,,,,5,17,1994,5/17/1994,Koocanusa,Rexford,219,,North Sophie,18,2,Inner,Spring,16:10,9:50,17.67,,13.3,397,1,,FALSE,Pre-Biop,,
+66057,29,PEA,,,,,,,5,17,1994,5/17/1994,Koocanusa,Rexford,104,,Sandhill,19,2,Inner,Spring,16:30,10:17,17.78,,13.3,398,1,,FALSE,Pre-Biop,,
+65392,29,PEA,,,,,,,5,17,1994,5/17/1994,Koocanusa,Rexford,112,,South Black Lake,2,2,Inner,Spring,16:47,10:45,17.97,,13.3,385,1,,FALSE,Pre-Biop,,
+65484,29,PEA,,,,,,,5,17,1994,5/17/1994,Koocanusa,Rexford,200,,South of Far South Tobacco,5,2,Inner,Spring,17:10,10:56,17.77,,13.3,387,1,,FALSE,Pre-Biop,,
+65840,29,PEA,,,,,,,5,17,1994,5/17/1994,Koocanusa,Rexford,52,,South Sophie,14,2,Inner,Spring,15:50,9:28,17.63,,13.3,394,1,,FALSE,Pre-Biop,,
+65603,29,PEA,,,,,,,5,17,1994,5/17/1994,Koocanusa,Rexford,56,,South Tobacco,7,2,Inner,Spring,17:25,11:22,17.95,,13.3,389,1,,FALSE,Pre-Biop,,
+67411,29,PEA,250,138,9.84,0.3,,,5,8,1995,5/8/1995,Koocanusa,Rexford,1,,Far South Tobacco,6,2,,Spring,19:28,11:51,16.38,,13.5,402,1,88.32,TRUE,Biop,25,200
+67831,29,PEA,248,144,9.76,0.32,,,5,8,1995,5/8/1995,Koocanusa,Rexford,1,,Mid Sophie,15,2,,Spring,18:15,10:05,15.83,,13.5,410,1,94.41,TRUE,Biop,24,200
+67279,29,PEA,237,130,9.33,0.29,,,5,8,1995,5/8/1995,Koocanusa,Rexford,1,,North Black Lake,3,2,,Spring,19:13,11:29,16.27,,13.5,400,1,97.66,TRUE,Biop,23,200
+67590,29,PEA,270,160,10.63,0.35,,,5,8,1995,5/8/1995,Koocanusa,Rexford,1,,North of North Point Tobacco,9,2,,Spring,17:50,9:18,15.47,,13.5,406,1,81.29,TRUE,Biop,27,200
+67642,29,PEA,257,137,10.12,0.3,,,5,8,1995,5/8/1995,Koocanusa,Rexford,1,,North Point Dodge,10,2,,Spring,19:00,11:00,16,,13.5,407,1,80.71,TRUE,Biop,25,200
+67681,29,PEA,275,198,10.83,0.44,,,5,8,1995,5/8/1995,Koocanusa,Rexford,1,,North Point Murray,13,2,,Spring,18:00,9:31,15.52,,13.5,408,1,95.21,TRUE,Biop,27,200
+67547,29,PEA,183,54,7.2,0.12,,,5,8,1995,5/8/1995,Koocanusa,Rexford,1,,North Point Tobacco,8,2,,Spring,17:45,9:13,15.47,,13.5,405,1,88.11,TRUE,Biop,18,100
+67939,29,PEA,283,88,11.14,0.19,,,5,8,1995,5/8/1995,Koocanusa,Rexford,1,,North Point Young,17,2,,Spring,18:45,10:35,15.83,,13.5,412,1,38.83,FALSE,Biop,28,200
+67998,29,PEA,245,118,9.65,0.26,,,5,8,1995,5/8/1995,Koocanusa,Rexford,1,,North Sophie,18,2,,Spring,18:25,10:15,15.83,,13.5,413,1,80.24,TRUE,Biop,24,200
+68086,29,PEA,286,206,11.26,0.45,,,5,8,1995,5/8/1995,Koocanusa,Rexford,1,,Sandhill,19,2,,Spring,18:50,10:50,16,,13.5,414,1,88.06,TRUE,Biop,28,200
+67234,29,PEA,262,142,10.31,0.31,,,5,8,1995,5/8/1995,Koocanusa,Rexford,1,,South Black Lake,2,2,,Spring,19:08,11:20,16.2,,13.5,399,1,78.96,TRUE,Biop,26,200
+67333,29,PEA,210,80,8.27,0.18,,,5,8,1995,5/8/1995,Koocanusa,Rexford,1,,South of Far South Tobacco,5,2,,Spring,19:20,11:35,16.25,,13.5,401,1,86.38,TRUE,Biop,21,200
+67739,29,PEA,238,124,9.37,0.27,,,5,8,1995,5/8/1995,Koocanusa,Rexford,1,,South Sophie,14,2,,Spring,18:07,9:41,15.57,,13.5,409,1,91.98,TRUE,Biop,23,200
+67479,23,NP,810,4200,31.89,9.26,Male,,5,8,1995,5/8/1995,Koocanusa,Rexford,1,,South Tobacco,7,2,,Spring,19:31,11:58,16.45,,13.5,403,1,79.03,TRUE,Biop,81,800
+68298,29,PEA,249,124,9.8,0.27,,,5,9,1995,5/9/1995,Koocanusa,Rexford,1,,Far South Tobacco,6,2,,Spring,16:30,11:31,19.02,,13.5,418,1,80.32,TRUE,Biop,24,200
+68662,29,PEA,232,100,9.13,0.22,,,5,9,1995,5/9/1995,Koocanusa,Rexford,1,,Mid Sophie,15,2,,Spring,15:45,8:50,17.08,,13.5,425,1,80.08,TRUE,Biop,23,200
+68192,56,LN SU,355,,13.98,,,,5,9,1995,5/9/1995,Koocanusa,Rexford,1,,North Black Lake,3,2,,Spring,16:36,9:59,17.38,,13.5,416,1,,FALSE,Biop,35,300
+68433,29,PEA,247,118,9.72,0.26,,,5,9,1995,5/9/1995,Koocanusa,Rexford,1,,North of North Point Tobacco,9,2,,Spring,15:22,12:01,20.65,,13.5,421,1,78.31,TRUE,Biop,24,200
+68493,29,PEA,,,,,,,5,9,1995,5/9/1995,Koocanusa,Rexford,42,,North Point Dodge,10,2,,Spring,16:13,9:22,17.15,,13.5,422,1,,FALSE,Biop,,
+68538,20,YP,325,,12.8,,,,5,9,1995,5/9/1995,Koocanusa,Rexford,1,,North Point Murray,13,2,,Spring,15:31,8:32,17.02,,13.5,423,1,,FALSE,Biop,32,300
+68392,29,PEA,265,127,10.43,0.28,,,5,9,1995,5/9/1995,Koocanusa,Rexford,1,,North Point Tobacco,8,2,,Spring,15:17,11:53,20.6,,13.5,420,1,68.24,TRUE,Biop,26,200
+68733,29,PEA,235,32,9.25,0.07,,,5,9,1995,5/9/1995,Koocanusa,Rexford,1,,North Point Young,17,2,,Spring,16:00,9:08,17.13,,13.5,426,1,24.66,FALSE,Biop,23,200
+68811,29,PEA,247,128,9.72,0.28,,,5,9,1995,5/9/1995,Koocanusa,Rexford,1,,North Sophie,18,2,,Spring,15:53,9:00,17.12,,13.5,427,1,84.94,TRUE,Biop,24,200
+68887,29,PEA,235,112,9.25,0.25,,,5,9,1995,5/9/1995,Koocanusa,Rexford,1,,Sandhill,19,2,,Spring,16:06,9:15,17.15,,13.5,428,1,86.3,TRUE,Biop,23,200
+68136,58,LS SU,380,,14.96,,,,5,9,1995,5/9/1995,Koocanusa,Rexford,1,,South Black Lake,2,2,,Spring,16:24,9:53,17.48,,13.5,415,1,,FALSE,Biop,38,300
+68244,29,PEA,265,,10.43,,,,5,9,1995,5/9/1995,Koocanusa,Rexford,1,,South of Far South Tobacco,5,2,,Spring,16:42,10:06,17.4,,13.5,417,1,,FALSE,Biop,26,200
+68599,29,PEA,242,120,9.53,0.26,,,5,9,1995,5/9/1995,Koocanusa,Rexford,1,,South Sophie,14,2,,Spring,15:38,8:39,17.02,,13.5,424,1,84.67,TRUE,Biop,24,200
+68336,29,PEA,230,90,9.06,0.2,,,5,9,1995,5/9/1995,Koocanusa,Rexford,1,,South Tobacco,7,2,,Spring,16:46,11:36,18.83,,13.5,419,1,73.97,TRUE,Biop,23,200
+70701,29,PEA,200,85,7.87,0.19,,,5,12,1996,5/12/1996,Koocanusa,Rexford,1,2 nets,6 AND 7,6 AND 7,2,,Spring,17:20,8:36,15.27,48,,457,1,106.25,TRUE,Biop,20,200
+70702,29,PEA,,,,,,,5,12,1996,5/12/1996,Koocanusa,Rexford,115,2 nets,6 AND 7,6 AND 7,2,,Spring,17:17,8:42,15.42,48,,457B,1,,FALSE,Biop,,
+70377,29,PEA,220,90,8.66,0.2,,,5,12,1996,5/12/1996,Koocanusa,Rexford,1,,Mid Sophie,15,2,,Spring,16:47,9:11,16.4,48,,453,1,84.52,TRUE,Biop,22,200
+69874,29,PEA,,,,,,,5,12,1996,5/12/1996,Koocanusa,Rexford,53,,North Black Lake,3,2,,Spring,17:26,10:09,16.72,48,,446,1,,FALSE,Biop,,
+70096,29,PEA,,,,,,,5,12,1996,5/12/1996,Koocanusa,Rexford,25,,North of North Point Tobacco,9,2,,Spring,16:23,8:29,16.1,48,,449,1,,FALSE,Biop,,
+70174,29,PEA,,,,,,,5,12,1996,5/12/1996,Koocanusa,Rexford,93,,North Point Dodge,10,2,,Spring,17:08,9:37,16.48,48,,450,1,,FALSE,Biop,,
+70237,29,PEA,,,,,,,5,12,1996,5/12/1996,Koocanusa,Rexford,52,,North Point Murray,13,2,,Spring,19:03,8:58,13.92,48,,451,1,,FALSE,Biop,,
+70020,29,PEA,256,138,10.08,0.3,,,5,12,1996,5/12/1996,Koocanusa,Rexford,1,,North Point Tobacco,8,2,,Spring,16:19,8:23,16.07,48,,448,1,82.25,TRUE,Biop,25,200
+70458,29,PEA,,,,,,,5,12,1996,5/12/1996,Koocanusa,Rexford,13,,North Point Young,17,2,,Spring,16:55,9:24,16.48,48,,454,1,,FALSE,Biop,,
+70520,29,PEA,,,,,,,5,12,1996,5/12/1996,Koocanusa,Rexford,118,,North Sophie,18,2,,Spring,16:52,9:17,16.42,48,,455,1,,FALSE,Biop,,
+70608,29,PEA,,,,,,,5,12,1996,5/12/1996,Koocanusa,Rexford,32,,Sandhill,19,2,,Spring,17:05,9:31,16.43,48,,456,1,,FALSE,Biop,,
+69809,29,PEA,,,,,,,5,12,1996,5/12/1996,Koocanusa,Rexford,88,,South Black Lake,2,2,,Spring,17:24,20:00,26.6,48,,445,1,,FALSE,Biop,,
+69945,29,PEA,,,,,,,5,12,1996,5/12/1996,Koocanusa,Rexford,21,,South of Far South Tobacco,5,2,,Spring,17:22,10:13,16.85,48,,447,1,,FALSE,Biop,,
+70298,29,PEA,,,,,,,5,12,1996,5/12/1996,Koocanusa,Rexford,38,,South Sophie,14,2,,Spring,16:40,9:02,16.37,48,,452,1,,FALSE,Biop,,
+71465,29,PEA,,,,,,,5,13,1996,5/13/1996,Koocanusa,Rexford,21,,Mid Sophie,15,2,,Spring,17:15,8:32,15.28,48,,468,1,,FALSE,Biop,,
+70866,29,PEA,,,,,,,5,13,1996,5/13/1996,Koocanusa,Rexford,54,,North Black Lake,3,2,,Spring,17:51,9:33,15.7,48,,460,1,,FALSE,Biop,,
+71151,29,PEA,,,,,,,5,13,1996,5/13/1996,Koocanusa,Rexford,1,,North of North Point Tobacco,9,2,,Spring,17:00,8:13,15.22,48,,464,1,,FALSE,Biop,,
+71232,29,PEA,,,,,,,5,13,1996,5/13/1996,Koocanusa,Rexford,34,,North Point Dodge,10,2,,Spring,17:36,9:14,15.63,48,,465,1,,FALSE,Biop,,
+71306,29,PEA,,,,,,,5,13,1996,5/13/1996,Koocanusa,Rexford,45,,North Point Murray,13,2,,Spring,17:07,8:20,15.22,48,,466,1,,FALSE,Biop,,
+71083,29,PEA,,,,,,,5,13,1996,5/13/1996,Koocanusa,Rexford,2,,North Point Tobacco,8,2,,Spring,16:58,10:32,17.57,48,,463,1,,FALSE,Biop,,
+71528,29,PEA,211,62,8.31,0.14,,,5,13,1996,5/13/1996,Koocanusa,Rexford,1,,North Point Young,17,2,,Spring,17:25,8:42,15.28,48,,469,1,66,TRUE,Biop,21,200
+71582,29,PEA,,,,,,,5,13,1996,5/13/1996,Koocanusa,Rexford,38,,North Sophie,18,2,,Spring,17:20,8:37,15.28,48,,470,1,,FALSE,Biop,,
+71671,29,PEA,265,168,10.43,0.37,,,5,13,1996,5/13/1996,Koocanusa,Rexford,1,,Sandhill,19,2,,Spring,17:30,9:06,15.6,48,,471,1,90.28,TRUE,Biop,26,200
+70804,29,PEA,,,,,,,5,13,1996,5/13/1996,Koocanusa,Rexford,55,,South Black Lake,2,2,,Spring,17:45,9:26,15.68,48,,459,1,,FALSE,Biop,,
+70917,29,PEA,,,,,,,5,13,1996,5/13/1996,Koocanusa,Rexford,91,,South of Far South Tobacco,5,2,,Spring,17:57,9:44,15.78,48,,461,1,,FALSE,Biop,,
+71379,29,PEA,,,,,,,5,13,1996,5/13/1996,Koocanusa,Rexford,37,,South Sophie,14,2,,Spring,17:11,8:26,15.25,48,,467,1,,FALSE,Biop,,
+71022,29,PEA,190,58,7.48,0.13,,,5,13,1996,5/13/1996,Koocanusa,Rexford,1,,South Tobacco,7,2,,Spring,18:00,10:17,16.28,48,,462,1,84.56,TRUE,Biop,19,100
+72786,29,PEA,206,64,8.11,0.14,,,5,12,1997,5/12/1997,Koocanusa,Rexford,1,,Far South Tobacco,6,2,,Spring,20:03,10:12,14.15,52,,475,1,73.21,TRUE,Biop,20,200
+73299,29,PEA,,,,,,,5,12,1997,5/12/1997,Koocanusa,Rexford,97,,Mid Sophie,15,2,,Spring,19:18,8:52,13.57,52,,482,1,,FALSE,Biop,,
+72629,29,PEA,,,,,,,5,12,1997,5/12/1997,Koocanusa,Rexford,54,,North Black Lake,3,2,,Spring,19:55,10:00,14.08,52,,473,1,,FALSE,Biop,,
+72964,29,PEA,,,,,,,5,12,1997,5/12/1997,Koocanusa,Rexford,4,,North of North Point Tobacco,9,2,,Spring,18:54,8:26,13.53,52,,478,1,,FALSE,Biop,,
+73030,29,PEA,,,,,,,5,12,1997,5/12/1997,Koocanusa,Rexford,17,,North Point Dodge,10,2,,Spring,19:42,9:43,14.02,52,,479,1,,FALSE,Biop,,
+73088,29,PEA,,,,,,,5,12,1997,5/12/1997,Koocanusa,Rexford,32,,North Point Murray,13,2,,Spring,19:05,8:33,13.47,52,,480,1,,FALSE,Biop,,
+72881,29,PEA,,,,,,,5,12,1997,5/12/1997,Koocanusa,Rexford,26,,North Point Tobacco,8,2,,Spring,18:51,10:49,15.97,52,,477,1,,FALSE,Biop,,
+73378,29,PEA,,,,,,,5,12,1997,5/12/1997,Koocanusa,Rexford,89,,North Point Young,17,2,,Spring,19:28,9:11,13.72,52,,483,1,,FALSE,Biop,,
+73441,29,PEA,222,86,8.74,0.19,,,5,12,1997,5/12/1997,Koocanusa,Rexford,1,,North Sophie,18,2,,Spring,19:22,9:05,13.72,52,,484,1,78.6,TRUE,Biop,22,200
+73471,29,PEA,,,,,,,5,12,1997,5/12/1997,Koocanusa,Rexford,64,,Sandhill,19,2,,Spring,19:33,9:36,14.05,52,,485,1,,FALSE,Biop,,
+72565,29,PEA,,,,,,,5,12,1997,5/12/1997,Koocanusa,Rexford,60,,South Black Lake,2,2,,Spring,19:51,9:53,14.03,52,,472,1,,FALSE,Biop,,
+72700,29,PEA,,,,,,,5,12,1997,5/12/1997,Koocanusa,Rexford,1,,South of Far South Tobacco,5,2,,Spring,19:59,10:06,14.12,52,,474,1,,FALSE,Biop,,
+73191,29,PEA,,,,,,,5,12,1997,5/12/1997,Koocanusa,Rexford,38,,South Sophie,14,2,,Spring,19:11,8:45,13.57,52,,481,1,,FALSE,Biop,,
+72855,29,PEA,195,58,7.68,0.13,,,5,12,1997,5/12/1997,Koocanusa,Rexford,1,,South Tobacco,7,2,,Spring,20:07,10:35,14.47,52,,476,1,78.22,TRUE,Biop,19,100
+73729,29,PEA,,,,,,,5,13,1997,5/13/1997,Koocanusa,Rexford,10,,Far South Tobacco,6,2,,Spring,18:31,10:10,15.65,52,,489,1,,FALSE,Biop,,
+74216,29,PEA,,,,,,,5,13,1997,5/13/1997,Koocanusa,Rexford,77,,Mid Sophie,15,2,,Spring,17:51,8:48,14.95,52,,496,1,,FALSE,Biop,,
+73594,29,PEA,,,,,,,5,13,1997,5/13/1997,Koocanusa,Rexford,69,,North Black Lake,3,2,,Spring,18:23,9:57,15.57,52,,487,1,,FALSE,Biop,,
+73949,29,PEA,213,64,8.39,0.14,,,5,13,1997,5/13/1997,Koocanusa,Rexford,1,,North of North Point Tobacco,9,2,,Spring,17:31,8:23,14.87,52,,492,1,66.23,TRUE,Biop,21,200
+73997,29,PEA,,,,,,,5,13,1997,5/13/1997,Koocanusa,Rexford,32,,North Point Dodge,10,2,,Spring,18:10,9:21,15.18,52,,493,1,,FALSE,Biop,,
+74055,29,PEA,,,,,,,5,13,1997,5/13/1997,Koocanusa,Rexford,54,,North Point Murray,13,2,,Spring,17:40,8:31,14.85,52,,494,1,,FALSE,Biop,,
+73873,29,PEA,235,115,9.25,0.25,,,5,13,1997,5/13/1997,Koocanusa,Rexford,1,,North Point Tobacco,8,2,,Spring,17:28,10:36,17.13,52,,491,1,88.61,TRUE,Biop,23,200
+74319,29,PEA,264,160,10.39,0.35,,,5,13,1997,5/13/1997,Koocanusa,Rexford,1,,North Point Young,17,2,,Spring,17:59,9:08,15.15,52,,497,1,86.96,TRUE,Biop,26,200
+74339,29,PEA,227,196,8.94,0.43,,,5,13,1997,5/13/1997,Koocanusa,Rexford,1,,North Sophie,18,2,,Spring,17:54,8:58,15.07,52,,498,1,167.56,FALSE,Biop,22,200
+74360,29,PEA,270,154,10.63,0.34,,,5,13,1997,5/13/1997,Koocanusa,Rexford,1,,Sandhill,19,2,,Spring,18:04,9:14,15.17,52,,499,1,78.24,TRUE,Biop,27,200
+73524,29,PEA,,,,,,,5,13,1997,5/13/1997,Koocanusa,Rexford,29,,South Black Lake,2,2,,Spring,18:19,9:51,15.53,52,,486,1,,FALSE,Biop,,
+73646,29,PEA,,,,,,,5,13,1997,5/13/1997,Koocanusa,Rexford,22,,South of Far South Tobacco,5,2,,Spring,18:26,10:05,15.65,52,,488,1,,FALSE,Biop,,
+74130,29,PEA,,,,,,,5,13,1997,5/13/1997,Koocanusa,Rexford,33,,South Sophie,14,2,,Spring,17:45,8:41,14.93,52,,495,1,,FALSE,Biop,,
+73785,29,PEA,,,,,,,5,13,1997,5/13/1997,Koocanusa,Rexford,15,,South Tobacco,7,2,,Spring,18:35,10:52,16.28,52,,490,1,,FALSE,Biop,,
+75717,29,PEA,,,,,,,5,11,1998,5/11/1998,Koocanusa,Rexford,82,,Far South Tobacco,6,2,,Spring,16:40,8:35,15.92,,,503,1,,FALSE,Biop,,
+76251,29,PEA,,,,,,,5,11,1998,5/11/1998,Koocanusa,Rexford,119,,Mid Sophie,15,2,,Spring,15:55,9:15,17.33,,,510,1,,FALSE,Biop,,
+75564,29,PEA,,,,,,,5,11,1998,5/11/1998,Koocanusa,Rexford,207,,North Black Lake,3,2,,Spring,16:31,11:21,18.83,,,501,1,,FALSE,Biop,,
+75938,29,PEA,,,,,,,5,11,1998,5/11/1998,Koocanusa,Rexford,99,,North of North Point Tobacco,9,2,,Spring,15:36,8:27,16.85,,,506,1,,FALSE,Biop,,
+76018,146,PEAxRSSH,187,58,7.36,0.13,,,5,11,1998,5/11/1998,Koocanusa,Rexford,1,,North Point Dodge,10,2,,Spring,16:19,11:03,18.73,,,507,1,88.7,TRUE,Biop,18,100
+76072,29,PEA,,,,,,,5,11,1998,5/11/1998,Koocanusa,Rexford,205,,North Point Murray,13,2,,Spring,15:45,8:59,17.23,,,508,1,,FALSE,Biop,,
+75853,29,PEA,,,,,,,5,11,1998,5/11/1998,Koocanusa,Rexford,94,,North Point Tobacco,8,2,,Spring,15:33,8:23,16.83,,,505,1,,FALSE,Biop,,
+76334,29,PEA,,,,,,,5,11,1998,5/11/1998,Koocanusa,Rexford,144,,North Point Young,17,2,,Spring,16:07,9:30,17.38,,,511,1,,FALSE,Biop,,
+76438,29,PEA,,,,,,,5,11,1998,5/11/1998,Koocanusa,Rexford,238,,North Sophie,18,2,,Spring,16:00,9:20,17.33,,,512,1,,FALSE,Biop,,
+76514,29,PEA,236,104,9.29,0.23,,,5,11,1998,5/11/1998,Koocanusa,Rexford,1,,Sandhill,19,2,,Spring,16:12,9:36,17.4,,,513,1,79.12,TRUE,Biop,23,200
+75493,29,PEA,,,,,,,5,11,1998,5/11/1998,Koocanusa,Rexford,285,,South Black Lake,2,2,,Spring,16:27,11:12,18.75,,,500,1,,FALSE,Biop,,
+75633,29,PEA,,,,,,,5,11,1998,5/11/1998,Koocanusa,Rexford,249,,South of Far South Tobacco,5,2,,Spring,16:35,11:30,18.92,,,502,1,,FALSE,Biop,,
+76163,29,PEA,,,,,,,5,11,1998,5/11/1998,Koocanusa,Rexford,130,,South Sophie,14,2,,Spring,15:49,9:05,17.27,,,509,1,,FALSE,Biop,,
+75771,29,PEA,,,,,,,5,11,1998,5/11/1998,Koocanusa,Rexford,176,,South Tobacco,7,2,,Spring,16:42,8:42,16,,,504,1,,FALSE,Biop,,
+76789,29,PEA,,,,,,,5,12,1998,5/12/1998,Koocanusa,Rexford,109,,Far South Tobacco,6,2,,Spring,17:06,8:25,15.32,,,517,1,,FALSE,Biop,,
+77322,29,PEA,,,,,,,5,12,1998,5/12/1998,Koocanusa,Rexford,150,,Mid Sophie,15,2,,Spring,16:22,9:07,16.75,,,524,1,,FALSE,Biop,,
+76641,29,PEA,,,,,,,5,12,1998,5/12/1998,Koocanusa,Rexford,109,,North Black Lake,3,2,,Spring,17:00,8:14,15.23,,,515,1,,FALSE,Biop,,
+77031,29,PEA,,,,,,,5,12,1998,5/12/1998,Koocanusa,Rexford,112,,North of North Point Tobacco,9,2,,Spring,16:08,8:40,16.53,,,520,1,,FALSE,Biop,,
+77096,29,PEA,,,,,,,5,12,1998,5/12/1998,Koocanusa,Rexford,211,,North Point Dodge,10,2,,Spring,16:45,11:22,18.62,,,521,1,,FALSE,Biop,,
+77174,29,PEA,,,,,,,5,12,1998,5/12/1998,Koocanusa,Rexford,52,,North Point Murray,13,2,,Spring,16:14,8:51,16.62,,,522,1,,FALSE,Biop,,
+76947,29,PEA,,,,,,,5,12,1998,5/12/1998,Koocanusa,Rexford,57,,North Point Tobacco,8,2,,Spring,16:05,11:12,19.12,,,519,1,,FALSE,Biop,,
+77411,29,PEA,,,,,,,5,12,1998,5/12/1998,Koocanusa,Rexford,33,,North Point Young,17,2,,Spring,16:34,9:22,16.8,,,525,1,,FALSE,Biop,,
+77469,29,PEA,,,,,,,5,12,1998,5/12/1998,Koocanusa,Rexford,102,,North Sophie,18,2,,Spring,16:28,9:15,16.78,,,526,1,,FALSE,Biop,,
+76578,29,PEA,,,,,,,5,12,1998,5/12/1998,Koocanusa,Rexford,140,,South Black Lake,2,2,,Spring,16:52,8:10,15.3,,,514,1,,FALSE,Biop,,
+76719,29,PEA,,,,,,,5,12,1998,5/12/1998,Koocanusa,Rexford,71,,South of Far South Tobacco,5,2,,Spring,16:57,8:19,15.37,,,516,1,,FALSE,Biop,,
+77258,29,PEA,,,,,,,5,12,1998,5/12/1998,Koocanusa,Rexford,105,,South Sophie,14,2,,Spring,16:18,9:00,16.7,,,523,1,,FALSE,Biop,,
+76869,29,PEA,,,,,,,5,12,1998,5/12/1998,Koocanusa,Rexford,142,,South Tobacco,7,2,,Spring,17:09,11:30,18.35,,,518,1,,FALSE,Biop,,
+79708,29,PEA,211,70,8.31,0.15,,,5,17,1999,5/17/1999,Koocanusa,Rexford,1,2 nets,19 AND 17,19 AND 17,2,,Spring,16:33,9:35,17.03,,,540,1,74.52,TRUE,Biop,21,200
+79709,29,PEA,,,,,,,5,17,1999,5/17/1999,Koocanusa,Rexford,30,2 nets,19 AND 17,19 AND 17,2,,Spring,16:33,9:35,17.03,,,540B,1,,FALSE,Biop,,
+79014,29,PEA,,,,,,,5,17,1999,5/17/1999,Koocanusa,Rexford,11,,Far South Tobacco,6,2,,Spring,17:15,10:50,17.58,,,531,1,,FALSE,Biop,,
+79546,29,PEA,,,,,,,5,17,1999,5/17/1999,Koocanusa,Rexford,1,,Mid Sophie,15,2,,Spring,16:21,8:50,16.48,,,538,1,,FALSE,Biop,,
+78896,29,PEA,,,,,,,5,17,1999,5/17/1999,Koocanusa,Rexford,14,,North Black Lake,3,2,,Spring,17:02,10:35,17.55,,,529,1,,FALSE,Biop,,
+79212,29,PEA,,,,,,,5,17,1999,5/17/1999,Koocanusa,Rexford,21,,North of North Point Tobacco,9,2,,Spring,15:54,12:00,20.1,,,534,1,,FALSE,Biop,,
+79301,29,PEA,,,,,,,5,17,1999,5/17/1999,Koocanusa,Rexford,75,,North Point Dodge,10,2,,Spring,16:47,10:00,17.22,,,535,1,,FALSE,Biop,,
+79376,29,PEA,,,,,,,5,17,1999,5/17/1999,Koocanusa,Rexford,53,,North Point Murray,13,2,,Spring,16:00,9:07,17.12,,,536,1,,FALSE,Biop,,
+79135,29,PEA,,,,,,,5,17,1999,5/17/1999,Koocanusa,Rexford,81,,North Point Tobacco,8,2,,Spring,15:50,11:40,19.83,,,533,1,,FALSE,Biop,,
+79616,29,PEA,,,,,,,5,17,1999,5/17/1999,Koocanusa,Rexford,1,,North Sophie,18,2,,Spring,16:28,8:45,16.28,,,539,1,,FALSE,Biop,,
+78842,29,PEA,,,,,,,5,17,1999,5/17/1999,Koocanusa,Rexford,90,,South Black Lake,2,2,,Spring,16:57,10:25,17.47,,,528,1,,FALSE,Biop,,
+78937,29,PEA,,,,,,,5,17,1999,5/17/1999,Koocanusa,Rexford,50,,South of Far South Tobacco,5,2,,Spring,17:07,10:43,17.6,,,530,1,,FALSE,Biop,,
+79468,29,PEA,,,,,,,5,17,1999,5/17/1999,Koocanusa,Rexford,27,,South Sophie,14,2,,Spring,16:15,9:00,16.75,,,537,1,,FALSE,Biop,,
+79068,29,PEA,,,,,,,5,17,1999,5/17/1999,Koocanusa,Rexford,34,,South Tobacco,7,2,,Spring,17:20,11:15,17.92,,,532,1,,FALSE,Biop,,
+79960,29,PEA,,,,,,,5,18,1999,5/18/1999,Koocanusa,Rexford,30,,Far South Tobacco,6,2,,Spring,17:50,9:47,15.95,,,545,1,,FALSE,Biop,,
+80412,29,PEA,,,,,,,5,18,1999,5/18/1999,Koocanusa,Rexford,33,,Mid Sophie,15,2,,Spring,17:04,8:39,15.58,,,552,1,,FALSE,Biop,,
+79848,29,PEA,286,202,11.26,0.45,,,5,18,1999,5/18/1999,Koocanusa,Rexford,1,,North Black Lake,3,2,,Spring,17:43,9:36,15.88,,,543,1,86.35,TRUE,Biop,28,200
+80124,29,PEA,,,,,,,5,18,1999,5/18/1999,Koocanusa,Rexford,23,,North of North Point Tobacco,9,2,,Spring,16:41,10:44,18.05,,,548,1,,FALSE,Biop,,
+80195,29,PEA,,,,,,,5,18,1999,5/18/1999,Koocanusa,Rexford,46,,North Point Dodge,10,2,,Spring,17:29,9:17,15.8,,,549,1,,FALSE,Biop,,
+80265,29,PEA,,,,,,,5,18,1999,5/18/1999,Koocanusa,Rexford,26,,North Point Murray,13,2,,Spring,16:50,8:24,15.57,,,550,1,,FALSE,Biop,,
+80073,29,PEA,,,,,,,5,18,1999,5/18/1999,Koocanusa,Rexford,35,,North Point Tobacco,8,2,,Spring,16:37,10:24,17.78,,,547,1,,FALSE,Biop,,
+80499,29,PEA,,,,,,,5,18,1999,5/18/1999,Koocanusa,Rexford,1,,North Point Young,17,2,,Spring,17:18,8:53,15.58,,,553,1,,FALSE,Biop,,
+80569,29,PEA,270,166,10.63,0.37,,,5,18,1999,5/18/1999,Koocanusa,Rexford,1,,North Sophie,18,2,,Spring,17:10,8:44,15.57,,,554,1,84.34,TRUE,Biop,27,200
+80630,29,PEA,,,,,,,5,18,1999,5/18/1999,Koocanusa,Rexford,25,,Sandhill,19,2,,Spring,17:22,8:58,15.6,,,555,1,,FALSE,Biop,,
+79790,29,PEA,,,,,,,5,18,1999,5/18/1999,Koocanusa,Rexford,31,,South Black Lake,2,2,,Spring,17:38,9:25,15.78,,,542,1,,FALSE,Biop,,
+79897,29,PEA,,,,,,,5,18,1999,5/18/1999,Koocanusa,Rexford,48,,South of Far South Tobacco,5,2,,Spring,17:46,9:42,15.93,,,544,1,,FALSE,Biop,,
+80330,29,PEA,,,,,,,5,18,1999,5/18/1999,Koocanusa,Rexford,63,,South Sophie,14,2,,Spring,16:58,8:34,15.6,,,551,1,,FALSE,Biop,,
+80018,29,PEA,,,,,,,5,18,1999,5/18/1999,Koocanusa,Rexford,28,,South Tobacco,7,2,,Spring,17:54,10:14,16.33,,,546,1,,FALSE,Biop,,
+80694,5,BULL,403,617,15.87,1.36,,,5,18,1999,5/18/1999,Koocanusa,Rexford,1,genetics,,,2,,Spring,,,16.8,,,556,1,94.27,TRUE,Biop,40,400
+82299,146,PEAxRSSH,200,66,7.87,0.15,,,5,14,2000,5/14/2000,Koocanusa,Rexford,1,,Far South Tobacco,6,2,,Spring,17:06,10:58,17.87,,,560,1,82.5,TRUE,Transition,20,200
+82754,29,PEA,,,,,,,5,14,2000,5/14/2000,Koocanusa,Rexford,15,,Mid Sophie,15,2,,Spring,16:15,9:38,17.38,,,567,1,,FALSE,Transition,,
+82174,29,PEA,,,,,,,5,14,2000,5/14/2000,Koocanusa,Rexford,51,,North Black Lake,3,2,,Spring,16:56,10:30,17.57,,,558,1,,FALSE,Transition,,
+82492,29,PEA,,,,,,,5,14,2000,5/14/2000,Koocanusa,Rexford,50,,North of North Point Tobacco,9,2,,Spring,15:55,8:55,17,,,563,1,,FALSE,Transition,,
+82549,29,PEA,,,,,,,5,14,2000,5/14/2000,Koocanusa,Rexford,45,,North Point Dodge,10,2,,Spring,16:42,10:05,17.38,,,564,1,,FALSE,Transition,,
+82606,29,PEA,,,,,,,5,14,2000,5/14/2000,Koocanusa,Rexford,57,,North Point Murray,13,2,,Spring,16:05,9:05,17,,,565,1,,FALSE,Transition,,
+82428,29,PEA,,,,,,,5,14,2000,5/14/2000,Koocanusa,Rexford,29,,North Point Tobacco,8,2,,Spring,11:50,8:50,21,,,562,1,,FALSE,Transition,,
+82813,29,PEA,,,,,,,5,14,2000,5/14/2000,Koocanusa,Rexford,82,,North Point Young,17,2,,Spring,16:26,9:50,17.4,,,568,1,,FALSE,Transition,,
+82898,29,PEA,,,,,,,5,14,2000,5/14/2000,Koocanusa,Rexford,95,,North Sophie,18,2,,Spring,16:21,9:43,17.37,,,569,1,,FALSE,Transition,,
+82961,29,PEA,,,,,,,5,14,2000,5/14/2000,Koocanusa,Rexford,60,,Sandhill,19,2,,Spring,16:34,9:58,17.4,,,570,1,,FALSE,Transition,,
+82117,29,PEA,,,,,,,5,14,2000,5/14/2000,Koocanusa,Rexford,38,,South Black Lake,2,2,,Spring,16:52,10:25,17.55,,,557,1,,FALSE,Transition,,
+82232,29,PEA,,,,,,,5,14,2000,5/14/2000,Koocanusa,Rexford,41,,South of Far South Tobacco,5,2,,Spring,17:01,10:26,17.42,,,559,1,,FALSE,Transition,,
+82675,29,PEA,,,,,,,5,14,2000,5/14/2000,Koocanusa,Rexford,68,,South Sophie,14,2,,Spring,16:10,9:10,17,,,566,1,,FALSE,Transition,,
+82352,29,PEA,,,,,,,5,14,2000,5/14/2000,Koocanusa,Rexford,37,,South Tobacco,7,2,,Spring,17:10,11:15,18.08,,,561,1,,FALSE,Transition,,
+84430,29,PEA,262,136,10.31,0.3,,,5,15,2001,5/15/2001,Koocanusa,Rexford,1,,Far South Tobacco,6,2,,Spring,16:10,9:43,17.55,,,574,1,75.62,TRUE,Transition,26,200
+84846,29,PEA,,,,,,,5,15,2001,5/15/2001,Koocanusa,Rexford,31,,Mid Sophie,15,2,,Spring,15:05,12:04,20.98,,,581,1,,FALSE,Transition,,
+84324,29,PEA,302,266,11.89,0.59,,,5,15,2001,5/15/2001,Koocanusa,Rexford,1,,North Black Lake,3,2,,Spring,15:59,9:30,17.52,,,572,1,96.57,TRUE,Transition,30,300
+84582,29,PEA,,,,,,,5,15,2001,5/15/2001,Koocanusa,Rexford,55,,North of North Point Tobacco,9,2,,Spring,14:40,10:59,20.32,,,577,1,,FALSE,Transition,,
+84645,29,PEA,,,,,,,5,15,2001,5/15/2001,Koocanusa,Rexford,48,,North Point Dodge,10,2,,Spring,15:43,12:58,21.25,,,578,1,,FALSE,Transition,,
+84687,29,PEA,,,,,,,5,15,2001,5/15/2001,Koocanusa,Rexford,69,,North Point Murray,13,2,,Spring,14:51,11:11,20.33,,,579,1,,FALSE,Transition,,
+84530,29,PEA,,,,,,,5,15,2001,5/15/2001,Koocanusa,Rexford,95,,North Point Tobacco,8,2,,Spring,14:36,10:32,19.93,,,576,1,,FALSE,Transition,,
+84913,29,PEA,,,,,,,5,15,2001,5/15/2001,Koocanusa,Rexford,66,,North Point Young,17,2,,Spring,15:25,12:25,21,,,582,1,,FALSE,Transition,,
+84968,29,PEA,,,,,,,5,15,2001,5/15/2001,Koocanusa,Rexford,96,,North Sophie,18,2,,Spring,15:15,12:16,21.02,,,583,1,,FALSE,Transition,,
+85052,29,PEA,,,,,,,5,15,2001,5/15/2001,Koocanusa,Rexford,87,,Sandhill,19,2,,Spring,15:32,12:36,21.07,,,584,1,,FALSE,Transition,,
+84270,29,PEA,270,208,10.63,0.46,,,5,15,2001,5/15/2001,Koocanusa,Rexford,1,,South Black Lake,2,2,,Spring,15:54,9:24,17.5,,,571,1,105.67,TRUE,Transition,27,200
+84375,29,PEA,,,,,,,5,15,2001,5/15/2001,Koocanusa,Rexford,61,,South of Far South Tobacco,5,2,,Spring,16:04,9:36,17.53,,,573,1,,FALSE,Transition,,
+84774,29,PEA,,,,,,,5,15,2001,5/15/2001,Koocanusa,Rexford,90,,South Sophie,14,2,,Spring,14:57,11:54,20.95,,,580,1,,FALSE,Transition,,
+84477,29,PEA,,,,,,,5,15,2001,5/15/2001,Koocanusa,Rexford,56,,South Tobacco,7,2,,Spring,16:15,10:15,18,,,575,1,,FALSE,Transition,,
+85943,29,PEA,241,82,9.49,0.18,,,5,13,2002,5/13/2002,Koocanusa,Rexford,1,,Far South Tobacco,6,2,,Spring,16:30,12:41,20.18,,,588,1,58.58,TRUE,Transition,24,200
+86338,29,PEA,,,,,,,5,13,2002,5/13/2002,Koocanusa,Rexford,41,,Mid Sophie,15,2,,Spring,15:36,9:45,18.15,,,595,1,,FALSE,Transition,,
+85840,29,PEA,,,,,,,5,13,2002,5/13/2002,Koocanusa,Rexford,29,,North Black Lake,3,2,,Spring,16:19,12:06,19.78,,,586,1,,FALSE,Transition,,
+86104,29,PEA,,,,,,,5,13,2002,5/13/2002,Koocanusa,Rexford,32,,North of North Point Tobacco,9,2,,Spring,15:15,9:18,18.05,,,591,1,,FALSE,Transition,,
+86160,29,PEA,,,,,,,5,13,2002,5/13/2002,Koocanusa,Rexford,48,,North Point Dodge,10,2,,Spring,16:02,11:15,19.22,,,592,1,,FALSE,Transition,,
+86214,29,PEA,,,,,,,5,13,2002,5/13/2002,Koocanusa,Rexford,3,,North Point Murray,13,2,,Spring,15:23,9:30,18.12,,,593,1,,FALSE,Transition,,
+86047,29,PEA,,,,,,,5,13,2002,5/13/2002,Koocanusa,Rexford,52,,North Point Tobacco,8,2,,Spring,15:10,11:36,20.43,,,590,1,,FALSE,Transition,,
+86402,29,PEA,270,170,10.63,0.37,,,5,13,2002,5/13/2002,Koocanusa,Rexford,1,,North Point Young,17,2,,Spring,15:50,10:45,18.92,,,596,1,86.37,TRUE,Transition,27,200
+86427,29,PEA,,,,,,,5,13,2002,5/13/2002,Koocanusa,Rexford,27,,North Sophie,18,2,,Spring,15:43,10:32,18.82,,,597,1,,FALSE,Transition,,
+86516,29,PEA,,,,,,,5,13,2002,5/13/2002,Koocanusa,Rexford,46,,Sandhill,19,2,,Spring,15:56,11:00,19.07,,,598,1,,FALSE,Transition,,
+85784,29,PEA,,,,,,,5,13,2002,5/13/2002,Koocanusa,Rexford,2,,South Black Lake,2,2,,Spring,16:14,12:00,19.77,,,585,1,,FALSE,Transition,,
+85884,29,PEA,,,,,,,5,13,2002,5/13/2002,Koocanusa,Rexford,16,,South of Far South Tobacco,5,2,,Spring,16:24,12:13,19.82,,,587,1,,FALSE,Transition,,
+86274,29,PEA,,,,,,,5,13,2002,5/13/2002,Koocanusa,Rexford,36,,South Sophie,14,2,,Spring,15:30,9:42,18.2,,,594,1,,FALSE,Transition,,
+85988,29,PEA,,,,,,,5,13,2002,5/13/2002,Koocanusa,Rexford,64,,South Tobacco,7,2,,Spring,16:34,12:47,20.22,,,589,1,,FALSE,Transition,,
+87910,29,PEA,,,,,,,5,13,2003,5/13/2003,Koocanusa,Rexford,26,,Far South Tobacco,6,2,,Spring,16:13,11:03,18.83,,,602,1,,FALSE,VARQ,,
+88314,29,PEA,,,,,,,5,13,2003,5/13/2003,Koocanusa,Rexford,33,,Mid Sophie,15,2,,Spring,18:04,9:55,15.85,,,609,1,,FALSE,VARQ,,
+87780,29,PEA,,,,,,,5,13,2003,5/13/2003,Koocanusa,Rexford,13,,North Black Lake,3,2,,Spring,16:02,10:52,18.83,,,600,1,,FALSE,VARQ,,
+88071,29,PEA,,,,,,,5,13,2003,5/13/2003,Koocanusa,Rexford,5,,North of North Point Tobacco,9,2,,Spring,14:41,9:09,18.47,,,605,1,,FALSE,VARQ,,
+88122,29,PEA,305,278,12.01,0.61,,,5,13,2003,5/13/2003,Koocanusa,Rexford,1,,North Point Dodge,10,2,,Spring,15:44,10:23,18.65,,,606,1,97.98,TRUE,VARQ,30,300
+88167,29,PEA,,,,,,,5,13,2003,5/13/2003,Koocanusa,Rexford,10,,North Point Murray,13,2,,Spring,14:50,9:19,18.48,,,607,1,,FALSE,VARQ,,
+88012,29,PEA,,,,,,,5,13,2003,5/13/2003,Koocanusa,Rexford,27,,North Point Tobacco,8,2,,Spring,14:36,9:02,18.43,,,604,1,,FALSE,VARQ,,
+88382,29,PEA,,,,,,,5,13,2003,5/13/2003,Koocanusa,Rexford,38,,North Point Young,17,2,,Spring,15:21,10:10,18.82,,,610,1,,FALSE,VARQ,,
+88441,29,PEA,176,49,6.93,0.11,,,5,13,2003,5/13/2003,Koocanusa,Rexford,1,,North Sophie,18,2,,Spring,15:13,10:03,18.83,,,611,1,89.88,TRUE,VARQ,17,100
+88501,29,PEA,,,,,,,5,13,2003,5/13/2003,Koocanusa,Rexford,1,,Sandhill,19,2,,Spring,15:29,10:16,18.78,,,612,1,,FALSE,VARQ,,
+87721,29,PEA,,,,,,,5,13,2003,5/13/2003,Koocanusa,Rexford,4,,South Black Lake,2,2,,Spring,14:41,9:09,18.47,,,599,1,,FALSE,VARQ,,
+87850,29,PEA,,,,,,,5,13,2003,5/13/2003,Koocanusa,Rexford,44,,South of Far South Tobacco,5,2,,Spring,16:08,10:57,18.82,,,601,1,,FALSE,VARQ,,
+88249,29,PEA,,,,,,,5,13,2003,5/13/2003,Koocanusa,Rexford,14,,South Sophie,14,2,,Spring,14:57,9:27,18.5,,,608,1,,FALSE,VARQ,,
+87974,29,PEA,,,,,,,5,13,2003,5/13/2003,Koocanusa,Rexford,17,,South Tobacco,7,2,,Spring,16:20,11:09,18.82,,,603,1,,FALSE,VARQ,,
+89553,29,PEA,,,,,,,5,11,2004,5/11/2004,Koocanusa,Rexford,18,,Far South Tobacco,6,2,,Spring,15:47,8:50,17.05,48,,616,1,,FALSE,VARQ,,
+89918,29,PEA,,,,,,,5,11,2004,5/11/2004,Koocanusa,Rexford,19,,Mid Sophie,15,2,,Spring,14:47,10:01,19.23,48,,622,1,,FALSE,VARQ,,
+89457,29,PEA,202,61,7.95,0.13,,,5,11,2004,5/11/2004,Koocanusa,Rexford,1,,North Black Lake,3,2,,Spring,15:33,9:15,17.7,48,,614,1,74.01,TRUE,VARQ,20,200
+89688,29,PEA,,,,,,,5,11,2004,5/11/2004,Koocanusa,Rexford,25,,North of North Point Tobacco,9,2,,Spring,14:10,8:32,18.37,48,,618,1,,FALSE,VARQ,,
+89739,29,PEA,,,,,,,5,11,2004,5/11/2004,Koocanusa,Rexford,17,,North Point Dodge,10,2,,Spring,15:18,10:40,19.37,48,,619,1,,FALSE,VARQ,,
+89792,29,PEA,,,,,,,5,11,2004,5/11/2004,Koocanusa,Rexford,32,,North Point Murray,13,2,,Spring,14:30,9:42,19.2,48,,620,1,,FALSE,VARQ,,
+89641,29,PEA,,,,,,,5,11,2004,5/11/2004,Koocanusa,Rexford,19,,North Point Tobacco,8,2,,Spring,14:05,8:26,18.35,48,,617a,1,,FALSE,VARQ,,
+89988,29,PEA,,,,,,,5,11,2004,5/11/2004,Koocanusa,Rexford,57,,North Point Young,17,2,,Spring,15:07,10:20,19.22,48,,623,1,,FALSE,VARQ,,
+90044,29,PEA,,,,,,,5,11,2004,5/11/2004,Koocanusa,Rexford,1,,North Sophie,18,2,,Spring,14:55,10:10,19.25,48,,624,1,,FALSE,VARQ,,
+90094,29,PEA,,,,,,,5,11,2004,5/11/2004,Koocanusa,Rexford,22,,Sandhill,19,2,,Spring,15:12,10:24,19.2,48,,625,1,,FALSE,VARQ,,
+89430,29,PEA,284,198,11.18,0.44,,,5,11,2004,5/11/2004,Koocanusa,Rexford,1,,South Black Lake,2,2,,Spring,15:27,9:10,17.72,48,,613,1,86.44,TRUE,VARQ,28,200
+89502,29,PEA,250,118,9.84,0.26,,,5,11,2004,5/11/2004,Koocanusa,Rexford,1,,South of Far South Tobacco,5,2,,Spring,15:40,9:22,17.7,48,,615,1,75.52,TRUE,VARQ,25,200
+89850,29,PEA,,,,,,,5,11,2004,5/11/2004,Koocanusa,Rexford,9,,South Sophie,14,2,,Spring,14:37,9:50,19.22,48,,621,1,,FALSE,VARQ,,
+89597,29,PEA,260,149,10.24,0.33,,,5,11,2004,5/11/2004,Koocanusa,Rexford,1,,South Tobacco,7,2,,Spring,16:00,8:45,16.75,48,,617,1,84.77,TRUE,VARQ,26,200
+90942,29,PEA,200,60,7.87,0.13,,,5,10,2005,5/10/2005,Koocanusa,Rexford,1,,Far South Tobacco,6,2,,Spring,16:55,11:30,18.58,50.9,10.5,2060,1,75,TRUE,VARQ,20,200
+91345,29,PEA,253,149,9.96,0.33,,,5,10,2005,5/10/2005,Koocanusa,Rexford,1,,Mid Sophie,15,2,,Spring,15:47,10:00,18.22,50.9,10.5,2067,1,92.01,TRUE,VARQ,25,200
+90820,29,PEA,278,216,10.94,0.48,,,5,10,2005,5/10/2005,Koocanusa,Rexford,1,,North Black Lake,3,2,,Spring,16:40,11:10,18.5,50.9,10.5,2058,1,100.54,TRUE,VARQ,27,200
+91105,58,LS SU,503,1190,19.8,2.62,,,5,10,2005,5/10/2005,Koocanusa,Rexford,1,,North of North Point Tobacco,9,2,,Spring,15:22,9:10,17.8,50.9,10.5,2063,1,93.51,TRUE,VARQ,50,500
+91186,29,PEA,266,180,10.47,0.4,,,5,10,2005,5/10/2005,Koocanusa,Rexford,1,,North Point Dodge,10,2,,Spring,16:12,10:35,18.38,50.9,10.5,2064,1,95.64,TRUE,VARQ,26,200
+91240,58,LS SU,393,702,15.47,1.55,,,5,10,2005,5/10/2005,Koocanusa,Rexford,1,,North Point Murray,13,2,,Spring,15:30,9:20,17.83,50.9,10.5,2065,1,115.65,TRUE,VARQ,39,300
+91052,29,PEA,258,132,10.16,0.29,,,5,10,2005,5/10/2005,Koocanusa,Rexford,1,,North Point Tobacco,8,2,,Spring,15:14,9:00,17.77,50.9,10.5,2062,1,76.86,TRUE,VARQ,25,200
+91367,58,LS SU,443,857,17.44,1.89,,,5,10,2005,5/10/2005,Koocanusa,Rexford,1,,North Point Young,17,2,,Spring,16:00,10:15,18.25,50.9,10.5,2068,1,98.58,TRUE,VARQ,44,400
+91424,33,N PMN,491,1424,19.33,3.14,,,5,10,2005,5/10/2005,Koocanusa,Rexford,1,,North Sophie,18,2,,Spring,15:53,10:05,18.2,50.9,10.5,2069,1,120.3,TRUE,VARQ,49,400
+91486,33,N PMN,641,2734,25.24,6.03,,,5,10,2005,5/10/2005,Koocanusa,Rexford,1,,Sandhill,19,2,,Spring,16:26,10:20,17.9,50.9,10.5,2070,1,103.81,TRUE,VARQ,64,600
+90758,29,PEA,,,,,,,5,10,2005,5/10/2005,Koocanusa,Rexford,46,46,South Black Lake,2,2,,Spring,16:30,11:00,18.5,50.9,10.5,2057,1,,FALSE,VARQ,,
+90883,29,PEA,209,68,8.23,0.15,,,5,10,2005,5/10/2005,Koocanusa,Rexford,1,,South of Far South Tobacco,5,2,,Spring,16:45,11:20,18.58,50.9,10.5,2059,1,74.49,TRUE,VARQ,20,200
+91289,29,PEA,300,198,11.81,0.44,,,5,10,2005,5/10/2005,Koocanusa,Rexford,1,,South Sophie,14,2,,Spring,15:40,9:30,17.83,50.9,10.5,2066,1,73.33,TRUE,VARQ,30,300
+91005,29,PEA,270,168,10.63,0.37,,,5,10,2005,5/10/2005,Koocanusa,Rexford,1,,South Tobacco,7,2,,Spring,17:00,10:45,17.75,50.9,10.5,2061,1,85.35,TRUE,VARQ,27,200
+93040,29,PEA,270,174,10.63,0.38,,,5,10,2006,5/10/2006,Koocanusa,Rexford,1,,Far South Tobacco,6,2,,spring,14:40,9:00,18.33,50,10,1,1,88.4,TRUE,VARQ,27,200
+92648,33,N PMN,552,1960,21.73,4.32,,,5,10,2006,5/10/2006,Koocanusa,Rexford,1,,Mid Sophie,15,2,,spring,15:45,10:10,18.42,50,10,5,1,116.53,TRUE,VARQ,55,500
+92943,33,N PMN,535,1802,21.06,3.97,,,5,10,2006,5/10/2006,Koocanusa,Rexford,1,,North Black Lake,3,2,,spring,15:00,9:15,18.25,50,10,6,1,117.68,TRUE,VARQ,53,500
+93180,29,PEA,263,175,10.35,0.39,,,5,10,2006,5/10/2006,Koocanusa,Rexford,1,,North of North Point Tobacco,9,2,,spring,16:05,9:50,17.75,50,10,7,1,96.2,TRUE,VARQ,26,200
+92495,29,PEA,182,50,7.17,0.11,,,5,10,2006,5/10/2006,Koocanusa,Rexford,1,,North Point Dodge,10,2,,spring,15:15,10:50,19.58,50,10,13,1,82.94,TRUE,VARQ,18,100
+92547,29,PEA,280,192,11.02,0.42,,,5,10,2006,5/10/2006,Koocanusa,Rexford,1,,North Point Murray,13,2,,spring,16:00,9:55,17.92,50,10,14,1,87.46,TRUE,VARQ,28,200
+93124,29,PEA,210,69,8.27,0.15,,,5,10,2006,5/10/2006,Koocanusa,Rexford,1,,North Point Tobacco,8,2,,spring,16:10,9:30,17.33,50,10,2,1,74.51,TRUE,VARQ,21,200
+92706,58,LS SU,382,560,15.04,1.23,,,5,10,2006,5/10/2006,Koocanusa,Rexford,1,,North Point Young,17,2,,spring,15:30,10:30,19,50,10,4,1,100.46,TRUE,VARQ,38,300
+92766,29,PEA,261,186,10.28,0.41,,,5,10,2006,5/10/2006,Koocanusa,Rexford,1,,North Sophie,18,2,,spring,15:40,10:20,18.66,50,10,12,1,104.61,TRUE,VARQ,26,200
+92840,29,PEA,256,134,10.08,0.3,,,5,10,2006,5/10/2006,Koocanusa,Rexford,1,,Sandhill,19,2,,spring,15:25,10:40,18.25,50,10,8,1,79.87,TRUE,VARQ,25,200
+92892,29,PEA,240,124,9.45,0.27,,,5,10,2006,5/10/2006,Koocanusa,Rexford,1,,South Black Lake,2,2,,spring,15:05,9:20,18.25,50,10,9,1,89.7,TRUE,VARQ,24,200
+92991,29,PEA,282,210,11.1,0.46,,,5,10,2006,5/10/2006,Koocanusa,Rexford,1,,South of Far South Tobacco,5,2,,spring,14:53,9:05,19.2,50,10,11,1,93.64,TRUE,VARQ,28,200
+92594,58,LS SU,432,796,17.01,1.75,,,5,10,2006,5/10/2006,Koocanusa,Rexford,1,,South Sophie,14,2,,spring,15:55,10:00,18.08,50,10,3,1,98.73,TRUE,VARQ,43,400
+93088,29,PEA,245,136,9.65,0.3,,,5,10,2006,5/10/2006,Koocanusa,Rexford,1,,South Tobacco,7,2,,spring,14:45,8:50,18.08,50,10,10,1,92.48,TRUE,VARQ,24,200
+94283,29,PEA,242,112,9.53,0.25,,,5,21,2007,5/21/2007,Koocanusa,Rexford,1,,Far South Tobacco,6,2,,spring,17:30,10:27,16.95,56.5,13.6,35,1,79.03,TRUE,VARQ,24,200
+94773,1,RB,352,372,13.86,0.82,,,5,21,2007,5/21/2007,Koocanusa,Rexford,1,LKGN001,Mid Sophie,15,2,,spring,16:15,9:05,16.83,56.5,13.6,42,1,85.29,TRUE,VARQ,35,300
+94168,33,N PMN,470,1292,18.5,2.85,,,5,21,2007,5/21/2007,Koocanusa,Rexford,1,,North Black Lake,3,2,,spring,17:13,10:37,17.4,56.5,13.6,33,1,124.44,TRUE,VARQ,47,400
+94474,29,PEA,231,98,9.09,0.22,,,5,21,2007,5/21/2007,Koocanusa,Rexford,1,,North of North Point Tobacco,9,2,,spring,15:51,9:41,17.83,56.5,13.6,38,1,79.5,TRUE,VARQ,23,200
+94551,29,PEA,301,249,11.85,0.55,,,5,21,2007,5/21/2007,Koocanusa,Rexford,1,,North Point Dodge,10,2,,spring,16:55,10:05,17.17,56.5,13.6,39,1,91.31,TRUE,VARQ,30,300
+94613,29,PEA,199,55,7.83,0.12,,,5,21,2007,5/21/2007,Koocanusa,Rexford,1,,North Point Murray,13,2,,spring,16:00,9:20,17.33,56.5,13.6,40,1,69.79,TRUE,VARQ,19,100
+94396,29,PEA,294,229,11.57,0.5,,,5,21,2007,5/21/2007,Koocanusa,Rexford,1,,North Point Tobacco,8,2,,spring,15:37,11:20,19.72,56.5,13.6,37,1,90.11,TRUE,VARQ,29,200
+94854,29,PEA,231,94,9.09,0.21,,,5,21,2007,5/21/2007,Koocanusa,Rexford,1,,North Point Young,17,2,,spring,16:43,9:50,17.12,56.5,13.6,43,1,76.26,TRUE,VARQ,23,200
+94936,33,N PMN,485,1384,19.09,3.05,,,5,21,2007,5/21/2007,Koocanusa,Rexford,1,,North Sophie,18,2,,spring,16:26,8:56,16.5,56.5,13.6,44,1,121.31,TRUE,VARQ,48,400
+95002,29,PEA,259,136,10.2,0.3,,,5,21,2007,5/21/2007,Koocanusa,Rexford,1,,Sandhill,19,2,,spring,16:48,10:00,17.2,56.5,13.6,45,1,78.28,TRUE,VARQ,25,200
+94115,58,LS SU,465,1108,18.31,2.44,,,5,21,2007,5/21/2007,Koocanusa,Rexford,1,,South Black Lake,2,2,,spring,17:06,10:46,17.67,56.5,13.6,32,1,110.2,TRUE,VARQ,46,400
+94220,29,PEA,283,202,11.14,0.44,,,5,21,2007,5/21/2007,Koocanusa,Rexford,1,,South of Far South Tobacco,5,2,,spring,17:20,10:32,17.2,56.5,13.6,34,1,89.12,TRUE,VARQ,28,200
+94680,29,PEA,236,97,9.29,0.21,,,5,21,2007,5/21/2007,Koocanusa,Rexford,1,,South Sophie,14,2,,spring,16:07,9:12,17.08,56.5,13.6,41,1,73.8,TRUE,VARQ,23,200
+94344,29,PEA,215,76,8.46,0.17,,,5,21,2007,5/21/2007,Koocanusa,Rexford,1,,South Tobacco,7,2,,spring,17:35,11:45,18.17,56.5,13.6,36,1,76.47,TRUE,VARQ,21,200
+96207,5,BULL,503,1301,19.8,2.87,,,5,13,2008,5/13/2008,Koocanusa,Rexford,1,,Far South Tobacco,6,2,,Spring,15:36,11:20,19.73,48.2,9,65,1,102.23,TRUE,VARQ,50,500
+96615,5,BULL,623,2290,24.53,5.04,Male,,5,13,2008,5/13/2008,Koocanusa,Rexford,1,stomach with fish parts,Mid Sophie,15,2,,Spring,14:33,9:50,19.28,48.2,9,72,1,94.7,TRUE,VARQ,62,600
+96109,5,BULL,293,227,11.54,0.5,,,5,13,2008,5/13/2008,Koocanusa,Rexford,1,,North Black Lake,3,2,,Spring,15:26,11:05,19.65,48.2,9,63,1,90.24,TRUE,VARQ,29,200
+96353,5,BULL,787,,30.98,,,,5,13,2008,5/13/2008,Koocanusa,Rexford,1,live release,North of North Point Tobacco,9,2,,Spring,14:15,9:00,18.75,48.2,9,68,1,,FALSE,VARQ,78,700
+96413,5,BULL,433,750,17.05,1.65,,,5,13,2008,5/13/2008,Koocanusa,Rexford,1,,North Point Dodge,10,2,,Spring,15:10,10:45,19.58,48.2,9,69,1,92.38,TRUE,VARQ,43,400
+96466,5,BULL,350,366,13.78,0.81,Female,,5,13,2008,5/13/2008,Koocanusa,Rexford,1,stomach empty,North Point Murray,13,2,,Spring,14:20,9:10,18.83,48.2,9,70,1,85.36,TRUE,VARQ,35,300
+96305,5,BULL,399,592,15.71,1.3,,,5,13,2008,5/13/2008,Koocanusa,Rexford,1,,North Point Tobacco,8,2,,Spring,14:05,8:50,18.75,48.2,9,67,1,93.2,TRUE,VARQ,39,300
+96683,58,LS SU,355,450,13.98,0.99,,,5,13,2008,5/13/2008,Koocanusa,Rexford,1,,North Point Young,17,2,,Spring,14:55,10:12,19.28,48.2,9,73,1,100.58,TRUE,VARQ,35,300
+96763,5,BULL,305,256,12.01,0.56,Female,,5,13,2008,5/13/2008,Koocanusa,Rexford,1,,North Sophie,18,2,,Spring,14:46,10:00,19.23,48.2,9,74,1,90.23,TRUE,VARQ,30,300
+96842,5,BULL,425,808,16.73,1.78,Male,,5,13,2008,5/13/2008,Koocanusa,Rexford,1,empty stomach,Sandhill,19,2,,Spring,15:00,10:18,19.3,48.2,9,75,1,105.26,TRUE,VARQ,42,400
+96045,5,BULL,559,,22.01,,,,5,13,2008,5/13/2008,Koocanusa,Rexford,1,live release,South Black Lake,2,2,,Spring,15:20,11:00,19.67,48.2,9,62,1,,FALSE,VARQ,55,500
+96164,5,BULL,353,391,13.9,0.86,,,5,13,2008,5/13/2008,Koocanusa,Rexford,1,,South of Far South Tobacco,5,2,,Spring,15:31,11:15,19.73,48.2,9,64,1,88.89,TRUE,VARQ,35,300
+96538,5,BULL,382,385,15.04,0.85,Female,,5,13,2008,5/13/2008,Koocanusa,Rexford,1,No otoliths,South Sophie,14,2,,Spring,14:26,9:15,18.82,48.2,9,71,1,69.07,TRUE,VARQ,38,300
+96266,5,BULL,730,4434,28.74,9.77,Male,,5,13,2008,5/13/2008,Koocanusa,Rexford,1,No otoliths taken,South Tobacco,7,2,,Spring,15:40,11:26,19.77,48.2,9,66,1,113.98,TRUE,VARQ,73,700
+98363,29,PEA,197,68,7.76,0.15,,,5,18,2009,5/18/2009,Koocanusa,Rexford,1,,Far South Tobacco,6,2,,Spring,17:23,11:46,18.38,53,11.7,11,1,88.94,TRUE,Mainstem,19,100
+97923,33,N PMN,494,1262,19.45,2.78,,,5,18,2009,5/18/2009,Koocanusa,Rexford,1,,Mid Sophie,15,2,,Spring,16:12,9:47,17.58,53,11.7,4,1,104.68,TRUE,Mainstem,49,400
+98234,29,PEA,230,101,9.06,0.22,,,5,18,2009,5/18/2009,Koocanusa,Rexford,1,,North Black Lake,3,2,,Spring,17:12,11:36,18.4,53,11.7,9,1,83.01,TRUE,Mainstem,23,200
+98507,29,PEA,238,121,9.37,0.27,,,5,18,2009,5/18/2009,Koocanusa,Rexford,1,,North of North Point Tobacco,9,2,,Spring,15:48,9:25,17.62,53,11.7,14,1,89.75,TRUE,Mainstem,23,200
+97736,29,PEA,270,180,10.63,0.4,,,5,18,2009,5/18/2009,Koocanusa,Rexford,1,,North Point Dodge,10,2,,Spring,16:53,10:57,18.07,53,11.7,1,1,91.45,TRUE,Mainstem,27,200
+97785,29,PEA,265,176,10.43,0.39,,,5,18,2009,5/18/2009,Koocanusa,Rexford,1,,North Point Murray,13,2,,Spring,16:00,9:34,17.57,53,11.7,2,1,94.57,TRUE,Mainstem,26,200
+98462,29,PEA,248,140,9.76,0.31,,,5,18,2009,5/18/2009,Koocanusa,Rexford,1,,North Point Tobacco,8,2,,Spring,15:42,9:20,17.63,53,11.7,13,1,91.79,TRUE,Mainstem,24,200
+97991,29,PEA,222,79,8.74,0.17,,,5,18,2009,5/18/2009,Koocanusa,Rexford,1,,North Point Young,17,2,,Spring,16:39,10:39,18,53,11.7,5,1,72.21,TRUE,Mainstem,22,200
+98050,33,N PMN,472,1034,18.58,2.28,,,5,18,2009,5/18/2009,Koocanusa,Rexford,1,,North Sophie,18,2,,Spring,16:25,9:59,17.57,53,11.7,6,1,98.33,TRUE,Mainstem,47,400
+98130,29,PEA,302,268,11.89,0.59,,,5,18,2009,5/18/2009,Koocanusa,Rexford,1,,Sandhill,19,2,,Spring,16:48,10:49,18.02,53,11.7,7,1,97.3,TRUE,Mainstem,30,300
+98181,29,PEA,295,204,11.61,0.45,,,5,18,2009,5/18/2009,Koocanusa,Rexford,1,,South Black Lake,2,2,,Spring,17:05,11:28,18.38,53,11.7,8,1,79.46,TRUE,Mainstem,29,200
+98295,29,PEA,188,60,7.4,0.13,,,5,18,2009,5/18/2009,Koocanusa,Rexford,1,,South of Far South Tobacco,5,2,,Spring,17:18,11:41,18.38,53,11.7,10,1,90.3,TRUE,Mainstem,18,100
+97848,29,PEA,275,190,10.83,0.42,,,5,18,2009,5/18/2009,Koocanusa,Rexford,1,,South Sophie,14,2,,Spring,16:05,9:40,17.58,53,11.7,3,1,91.36,TRUE,Mainstem,27,200
+98416,29,PEA,242,120,9.53,0.26,,,5,18,2009,5/18/2009,Koocanusa,Rexford,1,,South Tobacco,7,2,,Spring,17:28,11:09,17.68,53,11.7,12,1,84.67,TRUE,Mainstem,24,200
+100057,29,PEA,245,158,9.65,0.35,,,5,17,2010,5/17/2010,Koocanusa,Rexford,1,,Far South Tobacco,6,2,,Spring,15:33,11:38,20.08,55.4,,4,1,107.44,TRUE,Mainstem,24,200
+99614,33,N PMN,444,942,17.48,2.07,,,5,17,2010,5/17/2010,Koocanusa,Rexford,1,,Mid Sophie,15,2,,Spring,14:25,10:17,19.87,55.4,,11,1,107.62,TRUE,Mainstem,44,400
+99928,29,PEA,256,156,10.08,0.34,,,5,17,2010,5/17/2010,Koocanusa,Rexford,1,,North Black Lake,3,2,,Spring,15:20,11:27,20.12,55.4,,2,1,92.98,TRUE,Mainstem,25,200
+100218,29,PEA,273,175,10.75,0.39,,,5,17,2010,5/17/2010,,Rexford,1,,North of North Point Tobacco,9,2,,Spring,14:04,9:35,19.52,55.4,,7,1,86.01,TRUE,Mainstem,27,200
+99425,29,PEA,252,110,9.92,0.24,,,5,17,2010,5/17/2010,Koocanusa,Rexford,1,,North Point Dodge,10,2,,Spring,15:03,11:07,20.07,55.4,,8,1,68.74,TRUE,Mainstem,25,200
+99467,29,PEA,220,90,8.66,0.2,,,5,17,2010,5/17/2010,Koocanusa,Rexford,1,,North Point Murray,13,2,,Spring,14:11,9:43,19.53,55.4,,9,1,84.52,TRUE,Mainstem,22,200
+100165,29,PEA,206,68,8.11,0.15,,,5,17,2010,5/17/2010,Koocanusa,Rexford,1,,North Point Tobacco,8,2,,Spring,13:53,9:28,19.58,55.4,,6,1,77.79,TRUE,Mainstem,20,200
+99671,33,N PMN,530,1732,20.87,3.81,,,5,17,2010,5/17/2010,Koocanusa,Rexford,1,,North Point Young,17,2,,Spring,14:48,10:37,19.82,55.4,,12,1,116.34,TRUE,Mainstem,53,500
+99746,33,N PMN,254,132,10,0.29,,,5,17,2010,5/17/2010,Koocanusa,Rexford,1,,North Sophie,18,2,,Spring,14:35,10:37,20.03,55.4,,13,1,80.55,TRUE,Mainstem,25,200
+99816,29,PEA,275,179,10.83,0.39,,,5,17,2010,5/17/2010,Koocanusa,Rexford,1,,Sandhill,19,2,,Spring,14:55,10:45,19.83,55.4,,14,1,86.07,TRUE,Mainstem,27,200
+99868,29,PEA,248,118,9.76,0.26,,,5,17,2010,5/17/2010,Koocanusa,Rexford,1,,South Black Lake,2,2,,Spring,15:14,11:20,20.1,55.4,,1,1,77.36,TRUE,Mainstem,24,200
+99993,29,PEA,194,56,7.64,0.12,,,5,17,2010,5/17/2010,Koocanusa,Rexford,1,,South of Far South Tobacco,5,2,,Spring,15:26,11:33,20.12,55.4,,3,1,76.7,TRUE,Mainstem,19,100
+99529,29,PEA,187,53,7.36,0.12,,,5,17,2010,5/17/2010,Koocanusa,Rexford,1,,South Sophie,14,2,,Spring,14:11,9:43,19.53,55.4,,10,1,81.05,TRUE,Mainstem,18,100
+100125,29,PEA,250,124,9.84,0.27,,,5,17,2010,5/17/2010,Koocanusa,Rexford,1,,South Tobacco,7,2,,Spring,15:37,11:43,20.1,55.4,,5,1,79.36,TRUE,Mainstem,25,200
+101974,29,PEA,222,84,8.74,0.19,,,5,16,2011,5/16/2011,Koocanusa,Rexford,1,,Far South Tobacco,6,2,,Spring,14:43,9:24,18.68,48,,4,1,76.78,TRUE,Mainstem,22,200
+101478,58,LS SU,234,123,9.21,0.27,,,5,16,2011,5/16/2011,Koocanusa,Rexford,1,,Mid Sophie,15,2,,Spring,15:25,10:15,18.83,48,,11,1,96,TRUE,Mainstem,23,200
+101815,29,PEA,212,72,8.35,0.16,,,5,16,2011,5/16/2011,Koocanusa,Rexford,1,,North Black Lake,3,2,,Spring,14:27,9:10,18.72,48,,2,1,75.57,TRUE,Mainstem,21,200
+102214,29,PEA,213,78,8.39,0.17,,,5,16,2011,5/16/2011,Koocanusa,Rexford,1,,North of North Point Tobacco,9,2,,Spring,15:05,9:58,18.88,48,,7,1,80.72,TRUE,Mainstem,21,200
+101271,29,PEA,300,232,11.81,0.51,,,5,16,2011,5/16/2011,Koocanusa,Rexford,1,,North Point Dodge,10,2,,Spring,16:00,10:47,18.78,48,,8,1,85.93,TRUE,Mainstem,30,300
+101350,29,PEA,201,60,7.91,0.13,,,5,16,2011,5/16/2011,Koocanusa,Rexford,1,,North Point Murray,13,2,,Spring,15:12,10:04,18.87,48,,9,1,73.89,TRUE,Mainstem,20,200
+102153,29,PEA,297,219,11.69,0.48,,,5,16,2011,5/16/2011,Koocanusa,Rexford,1,,North Point Tobacco,8,2,,Spring,14:57,9:36,18.65,48,,6,1,83.59,TRUE,Mainstem,29,200
+101544,29,PEA,274,176,10.79,0.39,,,5,16,2011,5/16/2011,Koocanusa,Rexford,1,,North Point Young,17,2,,Spring,15:45,10:32,18.78,48,,12,1,85.56,TRUE,Mainstem,27,200
+101608,29,PEA,212,74,8.35,0.16,,,5,16,2011,5/16/2011,Koocanusa,Rexford,1,,North Sophie,18,2,,Spring,15:36,10:23,18.78,48,,13,1,77.66,TRUE,Mainstem,21,200
+101663,29,PEA,242,114,9.53,0.25,,,5,16,2011,5/16/2011,Koocanusa,Rexford,1,,Sandhill,19,2,,Spring,15:52,10:39,18.78,48,,14,1,80.44,TRUE,Mainstem,24,200
+101726,29,PEA,287,251,11.3,0.55,,,5,16,2011,5/16/2011,Koocanusa,Rexford,1,,South Black Lake,2,2,,Spring,14:20,9:01,18.68,48,,1,1,106.18,TRUE,Mainstem,28,200
+101903,29,PEA,215,68,8.46,0.15,,,5,16,2011,5/16/2011,Koocanusa,Rexford,1,,South of Far South Tobacco,5,2,,Spring,14:37,9:18,18.68,48,,3,1,68.42,TRUE,Mainstem,21,200
+101425,29,PEA,212,66,8.35,0.15,,,5,16,2011,5/16/2011,Koocanusa,Rexford,1,,South Sophie,14,2,,Spring,15:19,10:10,18.85,48,,10,1,69.27,TRUE,Mainstem,21,200
+102046,58,LS SU,455,821,17.91,1.81,,,5,16,2011,5/16/2011,Koocanusa,Rexford,1,,South Tobacco,7,2,,Spring,14:51,9:28,18.62,48,,5,1,87.16,TRUE,Mainstem,45,400
+103124,29,PEA,255,157,10.04,0.35,,,5,14,2012,5/14/2012,Koocanusa,Rexford,1,,Far South Tobacco,6,2,,Spring,16:57,10:54,17.95,60,,6,1,94.68,TRUE,Mainstem,25,200
+103194,29,PEA,213,82,8.39,0.18,,,5,14,2012,5/14/2012,Koocanusa,Rexford,1,,Mid Sophie,15,2,,Spring,15:50,9:15,17.42,60,,15,1,84.85,TRUE,Mainstem,21,200
+103248,58,LS SU,346,388,13.62,0.85,,,5,14,2012,5/14/2012,Koocanusa,Rexford,1,,North Black Lake,3,2,,Spring,16:47,10:39,17.87,60,,3,1,93.67,TRUE,Mainstem,34,300
+103678,29,PEA,207,68,8.15,0.15,,,5,14,2012,5/14/2012,Koocanusa,Rexford,1,,North of North Point Tobacco,9,2,,Spring,15:30,8:50,17.33,60,,9,1,76.67,TRUE,Mainstem,20,200
+103326,29,PEA,293,226,11.54,0.5,,,5,14,2012,5/14/2012,Koocanusa,Rexford,1,,North Point Dodge,10,2,,Spring,16:30,10:07,17.62,60,,10,1,89.85,TRUE,Mainstem,29,200
+103383,29,PEA,213,88,8.39,0.19,,,5,14,2012,5/14/2012,Koocanusa,Rexford,1,,North Point Murray,13,2,,Spring,15:38,9:00,17.37,60,,13,1,91.06,TRUE,Mainstem,21,200
+103459,58,LS SU,440,862,17.32,1.9,,,5,14,2012,5/14/2012,Koocanusa,Rexford,1,,North Point Tobacco,8,2,,Spring,15:24,8:40,17.27,60,,8,1,101.19,TRUE,Mainstem,44,400
+103532,29,PEA,215,72,8.46,0.16,,,5,14,2012,5/14/2012,Koocanusa,Rexford,1,,North Point Young,17,2,,Spring,16:14,9:50,17.6,60,,17,1,72.45,TRUE,Mainstem,21,200
+103591,29,PEA,258,147,10.16,0.32,,,5,14,2012,5/14/2012,Koocanusa,Rexford,1,,North Sophie,18,2,,Spring,16:05,9:25,17.33,60,,18,1,85.6,TRUE,Mainstem,25,200
+103739,29,PEA,245,112,9.65,0.25,,,5,14,2012,5/14/2012,Koocanusa,Rexford,1,,Sandhill,19,2,,Spring,16:23,10:00,17.62,60,,19,1,76.16,TRUE,Mainstem,24,200
+103789,29,PEA,233,96,9.17,0.21,,,5,14,2012,5/14/2012,Koocanusa,Rexford,1,,South Black Lake,2,2,,Spring,16:42,10:39,17.95,60,,2,1,75.89,TRUE,Mainstem,23,200
+103854,29,PEA,198,64,7.8,0.14,,,5,14,2012,5/14/2012,Koocanusa,Rexford,1,,South of Far South Tobacco,5,2,,Spring,16:52,10:26,17.57,60,,5,1,82.45,TRUE,Mainstem,19,100
+103919,29,PEA,180,54,7.09,0.12,,,5,14,2012,5/14/2012,Koocanusa,Rexford,1,,South Sophie,14,2,,Spring,15:44,9:07,17.38,60,,14,1,92.59,TRUE,Mainstem,18,100
+104004,58,LS SU,445,895,17.52,1.97,,,5,14,2012,5/14/2012,Koocanusa,Rexford,1,,South Tobacco,7,2,,Spring,17:02,10:16,17.23,60,,7,1,101.56,TRUE,Mainstem,44,400
+104841,33,N PMN,484,1128,19.06,2.48,,,5,13,2013,5/13/2013,Koocanusa,Rexford,1,,Far South Tobacco,6,2,,Spring,15:24,10:34,19.17,55,,6,1,99.49,TRUE,Mainstem,48,400
+104957,1,RB,220,90,8.66,0.2,,immature,5,13,2013,5/13/2013,Koocanusa,Rexford,1,"immature, Genetics 13007",Mid Sophie,15,2,,Spring,14:15,11:18,21.05,55,,15,1,84.52,TRUE,Mainstem,22,200
+104975,29,PEA,289,218,11.38,0.48,,,5,13,2013,5/13/2013,Koocanusa,Rexford,1,,North Black Lake,3,2,,Spring,15:14,10:23,19.15,55,,3,1,90.32,TRUE,Mainstem,28,200
+105027,29,PEA,190,54,7.48,0.12,,,5,13,2013,5/13/2013,Koocanusa,Rexford,1,,North of North Point Tobacco,9,2,,Spring,13:55,10:55,21,55,,9,1,78.73,TRUE,Mainstem,19,100
+105107,29,PEA,298,240,11.73,0.53,,,5,13,2013,5/13/2013,Koocanusa,Rexford,1,,North Point Dodge,10,2,,Spring,14:55,9:48,18.88,55,,10,1,90.69,TRUE,Mainstem,29,200
+105174,29,PEA,250,130,9.84,0.29,,,5,13,2013,5/13/2013,Koocanusa,Rexford,1,,North Point Murray,13,2,,Spring,14:02,11:03,21.02,55,,13,1,83.2,TRUE,Mainstem,25,200
+105270,29,PEA,269,156,10.59,0.34,,,5,13,2013,5/13/2013,Koocanusa,Rexford,1,,North Point Tobacco,8,2,,Spring,13:48,10:00,20.2,55,,8,1,80.14,TRUE,Mainstem,26,200
+105342,58,LS SU,448,838,17.64,1.85,,,5,13,2013,5/13/2013,Koocanusa,Rexford,1,,North Point Young,17,2,,Spring,14:40,9:34,18.9,55,,17,1,93.2,TRUE,Mainstem,44,400
+105426,33,N PMN,358,446,14.09,0.98,,,5,13,2013,5/13/2013,Koocanusa,Rexford,1,,North Sophie,18,2,,Spring,14:25,9:25,19,55,,18,1,97.2,TRUE,Mainstem,35,300
+105506,29,PEA,237,104,9.33,0.23,,,5,13,2013,5/13/2013,Koocanusa,Rexford,1,,Sandhill,19,2,,Spring,14:47,9:42,18.92,55,,19,1,78.12,TRUE,Mainstem,23,200
+105567,33,N PMN,463,1062,18.23,2.34,,,5,13,2013,5/13/2013,Koocanusa,Rexford,1,,South Black Lake,2,2,,Spring,15:08,10:17,19.15,55,,2,1,107,TRUE,Mainstem,46,400
+105641,29,PEA,290,228,11.42,0.5,,,5,13,2013,5/13/2013,Koocanusa,Rexford,1,,South of Far South Tobacco,5,2,,Spring,15:19,10:29,19.17,55,,5,1,93.48,TRUE,Mainstem,29,200
+105717,58,LS SU,385,538,15.16,1.19,,,5,13,2013,5/13/2013,Koocanusa,Rexford,1,,South Sophie,14,2,,Spring,16:08,11:11,19.05,55,,14,1,94.28,TRUE,Mainstem,38,300
+105796,58,LS SU,453,886,17.83,1.95,,,5,13,2013,5/13/2013,Koocanusa,Rexford,1,,South Tobacco,7,2,,Spring,15:28,10:40,19.2,55,,7,1,95.31,TRUE,Mainstem,45,400
+106517,58,LS SU,480,1092,18.9,2.41,,,5,19,2014,5/19/2014,Koocanusa,Rexford,1,,Far South Tobacco,6,2,,Spring,16:33,10:08,17.58,,,6,1,98.74,TRUE,Mainstem,48,400
+106603,33,N PMN,504,1292,19.84,2.85,,,5,19,2014,5/19/2014,Koocanusa,Rexford,1,,Mid Sophie,15,2,,Spring,15:26,9:37,18.18,,,15,1,100.92,TRUE,Mainstem,50,500
+106690,33,N PMN,393,588,15.47,1.3,,,5,19,2014,5/19/2014,Koocanusa,Rexford,1,,North Black Lake,3,2,,Spring,16:23,11:13,18.83,,,3,1,96.87,TRUE,Mainstem,39,300
+106763,58,LS SU,454,930,17.87,2.05,,,5,19,2014,5/19/2014,Koocanusa,Rexford,1,,North of North Point Tobacco,9,2,,Spring,15:00,9:14,18.23,,,9,1,99.38,TRUE,Mainstem,45,400
+106855,58,LS SU,425,740,16.73,1.63,,,5,19,2014,5/19/2014,Koocanusa,Rexford,1,,North Point Dodge,10,2,,Spring,16:06,10:50,18.73,,,10,1,96.4,TRUE,Mainstem,42,400
+106940,33,N PMN,476,1080,18.74,2.38,,,5,19,2014,5/19/2014,Koocanusa,Rexford,1,,North Point Murray,13,2,,Spring,15:10,9:24,18.23,,,13,1,100.14,TRUE,Mainstem,47,400
+107019,33,N PMN,438,817,17.24,1.8,,,5,19,2014,5/19/2014,Koocanusa,Rexford,1,,North Point Tobacco,8,2,,Spring,14:55,9:07,18.2,,,8,1,97.23,TRUE,Mainstem,43,400
+107093,58,LS SU,440,868,17.32,1.91,,,5,19,2014,5/19/2014,Koocanusa,Rexford,1,,North Point Young,17,2,,Spring,15:46,10:34,18.8,,,17,1,101.9,TRUE,Mainstem,44,400
+107182,33,N PMN,432,675,17.01,1.49,,,5,19,2014,5/19/2014,Koocanusa,Rexford,1,,North Sophie,18,2,,Spring,15:37,9:45,18.13,,,18,1,83.72,TRUE,Mainstem,43,400
+107275,29,PEA,283,182,11.14,0.4,,,5,19,2014,5/19/2014,Koocanusa,Rexford,1,,Sandhill,19,2,,Spring,15:55,10:42,18.78,,,19,1,80.3,TRUE,Mainstem,28,200
+107338,29,PEA,205,66,8.07,0.15,,,5,19,2014,5/19/2014,Koocanusa,Rexford,1,,South Black Lake,2,2,,Spring,16:16,11:05,18.82,,,2,1,76.61,TRUE,Mainstem,20,200
+107402,58,LS SU,422,769,16.61,1.69,,,5,19,2014,5/19/2014,Koocanusa,Rexford,1,,South of Far South Tobacco,5,2,,Spring,16:28,10:21,17.88,,,5,1,102.33,TRUE,Mainstem,42,400
+107483,58,LS SU,365,456,14.37,1,,,5,19,2014,5/19/2014,Koocanusa,Rexford,1,,South Sophie,14,2,,Spring,15:18,9:30,18.2,,,14,1,93.77,TRUE,Mainstem,36,300
+107565,29,PEA,246,122,9.69,0.27,,,5,19,2014,5/19/2014,Koocanusa,Rexford,1,,South Tobacco,7,2,,Spring,16:38,10:13,17.58,,,7,1,81.95,TRUE,Mainstem,24,200
+108361,29,PEA,296,,11.65,,,,5,11,2015,5/11/2015,Koocanusa,Rexford,1,,Far South Tobacco,6,2,,Spring,15:55,11:00,19.08,,54,6,1,,FALSE,Mainstem,29,200
+108410,33,N PMN,491,1328,19.33,2.93,,,5,11,2015,5/11/2015,Koocanusa,Rexford,1,,Mid Sophie,15,2,,Spring,14:51,9:33,18.7,,54,15,1,112.19,TRUE,Mainstem,49,400
+108490,33,N PMN,486,1467,19.13,3.23,,,5,11,2015,5/11/2015,Koocanusa,Rexford,1,,North Black Lake,3,2,,Spring,15:43,10:39,18.93,,54,3,1,127.8,TRUE,Mainstem,48,400
+108549,29,PEA,268,160,10.55,0.35,,immature,5,11,2015,5/11/2015,Koocanusa,Rexford,1,,North of North Point Tobacco,9,2,,Spring,14:27,9:13,18.77,,54,9,1,83.12,TRUE,Mainstem,26,200
+108598,33,N PMN,422,855,16.61,1.88,,,5,11,2015,5/11/2015,Koocanusa,Rexford,1,,North Point Dodge,10,2,,Spring,15:27,10:18,18.85,,54,10,1,113.77,TRUE,Mainstem,42,400
+108661,29,PEA,270,,10.63,,,,5,11,2015,5/11/2015,Koocanusa,Rexford,1,,North Point Murray,13,2,,Spring,14:37,9:21,18.73,,54,13,1,,FALSE,Mainstem,27,200
+108728,29,PEA,255,,10.04,,,,5,11,2015,5/11/2015,Koocanusa,Rexford,1,,North Point Tobacco,8,2,,Spring,14:22,9:08,18.77,,54,8,1,,FALSE,Mainstem,25,200
+108784,12,WCT,305,269,12.01,0.59,,,5,11,2015,5/11/2015,Koocanusa,Rexford,1,immature,North Point Young,17,2,,Spring,15:08,9:49,18.68,,54,17,1,94.81,TRUE,Mainstem,30,300
+108841,33,N PMN,455,1103,17.91,2.43,,,5,11,2015,5/11/2015,Koocanusa,Rexford,1,,North Sophie,18,2,,Spring,15:00,9:41,18.68,,54,18,1,117.1,TRUE,Mainstem,45,400
+108909,29,PEA,291,222,11.46,0.49,,,5,11,2015,5/11/2015,Koocanusa,Rexford,1,,Sandhill,19,2,,Spring,15:16,10:00,18.73,,54,19,1,90.09,TRUE,Mainstem,29,200
+108976,29,PEA,261,128,10.28,0.28,,,5,11,2015,5/11/2015,Koocanusa,Rexford,1,,South Black Lake,2,2,,Spring,15:37,10:32,18.92,,54,2,1,71.99,TRUE,Mainstem,26,200
+109032,58,LS SU,360,381,14.17,0.84,,,5,11,2015,5/11/2015,Koocanusa,Rexford,1,,South of Far South Tobacco,5,2,,Spring,15:48,10:45,18.95,,54,5,1,81.66,TRUE,Mainstem,36,300
+109100,29,PEA,262,151,10.31,0.33,,,5,11,2015,5/11/2015,Koocanusa,Rexford,1,,South Sophie,14,2,,Spring,14:43,9:26,18.72,,54,14,1,83.96,TRUE,Mainstem,26,200
+109157,33,N PMN,320,289,12.6,0.64,,,5,11,2015,5/11/2015,Koocanusa,Rexford,1,,South Tobacco,7,2,,Spring,16:08,11:13,19.08,,54,7,1,88.2,TRUE,Mainstem,32,300
+109976,29,PEA,282,163,11.1,0.36,,,5,16,2016,5/16/2016,Koocanusa,Rexford,1,,Far South Tobacco,6,2,,Spring,15:22,10:34,19.2,59,,6,1,72.68,TRUE,Mainstem,28,200
+110024,29,PEA,185,44,7.28,0.1,,,5,16,2016,5/16/2016,Koocanusa,Rexford,1,,Mid Sophie,15,2,,Spring,14:23,9:13,18.83,59,,15,1,69.49,TRUE,Mainstem,18,100
+110114,33,N PMN,448,1007,17.64,2.22,,,5,16,2016,5/16/2016,Koocanusa,Rexford,1,,North Black Lake,3,2,,Spring,15:12,10:20,19.13,59,,3,1,111.99,TRUE,Mainstem,44,400
+110193,33,N PMN,292,223,11.5,0.49,,,5,16,2016,5/16/2016,Koocanusa,Rexford,1,,North of North Point Tobacco,9,2,,Spring,14:01,8:51,18.83,59,,9,1,89.57,TRUE,Mainstem,29,200
+110280,33,N PMN,558,1962,21.97,4.32,,,5,16,2016,5/16/2016,Koocanusa,Rexford,1,,North Point Dodge,10,2,,Spring,14:55,10:00,19.08,59,,10,1,112.93,TRUE,Mainstem,55,500
+110335,29,PEA,230,98,9.06,0.22,,,5,16,2016,5/16/2016,Koocanusa,Rexford,1,,North Point Murray,13,2,,Spring,14:10,9:00,18.83,59,,13,1,80.55,TRUE,Mainstem,23,200
+110397,29,PEA,261,157,10.28,0.35,,,5,16,2016,5/16/2016,Koocanusa,Rexford,1,,North Point Tobacco,8,2,,Spring,13:52,8:44,18.87,59,,8,1,88.3,TRUE,Mainstem,26,200
+110449,29,PEA,261,132,10.28,0.29,,,5,16,2016,5/16/2016,Koocanusa,Rexford,1,weight may be low,North Point Young,17,2,,Spring,14:41,9:30,18.82,59,,17,1,74.24,TRUE,Mainstem,26,200
+110519,58,LS SU,441,932,17.36,2.05,,,5,16,2016,5/16/2016,Koocanusa,Rexford,1,,North Sophie,18,2,,Spring,14:31,9:23,18.87,59,,18,1,108.67,TRUE,Mainstem,44,400
+110606,29,PEA,185,25,7.28,0.06,,,5,16,2016,5/16/2016,Koocanusa,Rexford,1,weight may be low,Sandhill,19,2,,Spring,14:48,9:36,18.8,59,,19,1,39.48,FALSE,Mainstem,18,100
+110672,58,LS SU,437,1013,17.2,2.23,,,5,16,2016,5/16/2016,Koocanusa,Rexford,1,,South Black Lake,2,2,,Spring,15:05,10:13,19.13,59,,2,1,121.39,TRUE,Mainstem,43,400
+110734,33,N PMN,406,663,15.98,1.46,,,5,16,2016,5/16/2016,Koocanusa,Rexford,1,,South of Far South Tobacco,5,2,,Spring,15:16,10:28,19.2,59,,5,1,99.07,TRUE,Mainstem,40,400
+110812,29,PEA,301,244,11.85,0.54,,,5,16,2016,5/16/2016,Koocanusa,Rexford,1,,South Sophie,14,2,,Spring,14:15,9:05,18.83,59,,14,1,89.47,TRUE,Mainstem,30,300
+110869,29,PEA,190,58,7.48,0.13,,,5,16,2016,5/16/2016,Koocanusa,Rexford,1,,South Tobacco,7,2,,Spring,15:27,10:39,19.2,59,,7,1,84.56,TRUE,Mainstem,19,100
+111680,29,PEA,186,66,7.32,0.15,,,5,16,2017,5/16/2017,Koocanusa,Rexford,1,,Far South Tobacco,6,2,,Spring,16:02,9:06,17.07,52.1,,6,1,102.57,TRUE,Mainstem,18,100
+111726,29,PEA,290,202,11.42,0.44,,,5,16,2017,5/16/2017,Koocanusa,Rexford,1,,Mid Sophie,15,2,,Spring,15:05,10:33,19.47,52.1,,15,1,82.82,TRUE,Mainstem,29,200
+111799,29,PEA,255,134,10.04,0.3,,,5,16,2017,5/16/2017,Koocanusa,Rexford,1,,North Black Lake,3,2,,Spring,15:51,9:30,17.65,52.1,,3,1,80.81,TRUE,Mainstem,25,200
+111847,29,PEA,220,96,8.66,0.21,,,5,16,2017,5/16/2017,Koocanusa,Rexford,1,,North of North Point Tobacco,9,2,,Spring,14:42,8:33,17.85,52.1,,9,1,90.16,TRUE,Mainstem,22,200
+111905,33,N PMN,412,662,16.22,1.46,,,5,16,2017,5/16/2017,Koocanusa,Rexford,1,,North Point Dodge,10,2,,Spring,15:33,9:54,18.35,52.1,,10,1,94.66,TRUE,Mainstem,41,400
+111968,58,LS SU,312,285,12.28,0.63,,,5,16,2017,5/16/2017,Koocanusa,Rexford,1,,North Point Murray,13,2,,Spring,14:53,10:19,19.43,52.1,,13,1,93.84,TRUE,Mainstem,31,300
+112029,29,PEA,220,86,8.66,0.19,,,5,16,2017,5/16/2017,Koocanusa,Rexford,1,,North Point Tobacco,8,2,,Spring,14:30,8:47,18.28,52.1,,8,1,80.77,TRUE,Mainstem,22,200
+112096,58,LS SU,450,818,17.72,1.8,,,5,16,2017,5/16/2017,Koocanusa,Rexford,1,,North Point Young,17,2,,Spring,15:20,10:50,19.5,52.1,,17,1,89.77,TRUE,Mainstem,45,400
+112174,58,LS SU,429,828,16.89,1.82,,,5,16,2017,5/16/2017,Koocanusa,Rexford,1,,North Sophie,18,2,,Spring,15:12,10:43,19.52,52.1,,18,1,104.87,TRUE,Mainstem,42,400
+112266,58,LS SU,451,912,17.76,2.01,,,5,16,2017,5/16/2017,Koocanusa,Rexford,1,,Sandhill,19,2,,Spring,15:25,10:57,19.53,52.1,,19,1,99.42,TRUE,Mainstem,45,400
+112343,58,LS SU,334,362,13.15,0.8,,,5,16,2017,5/16/2017,Koocanusa,Rexford,1,,South Black Lake,2,2,,Spring,15:44,9:40,17.93,52.1,,2,1,97.16,TRUE,Mainstem,33,300
+112411,29,PEA,209,68,8.23,0.15,,,5,16,2017,5/16/2017,Koocanusa,Rexford,1,,South of Far South Tobacco,5,2,,Spring,15:54,9:24,17.5,52.1,,5,1,74.49,TRUE,Mainstem,20,200
+112459,58,LS SU,424,825,16.69,1.82,,,5,16,2017,5/16/2017,Koocanusa,Rexford,1,,South Sophie,14,2,,Spring,15:00,10:27,19.45,52.1,,14,1,108.23,TRUE,Mainstem,42,400
+112517,29,PEA,263,150,10.35,0.33,,,5,16,2017,5/16/2017,Koocanusa,Rexford,1,,South Tobacco,7,2,,Spring,14:06,9:01,18.92,52.1,,7,1,82.46,TRUE,Mainstem,26,200
+113293,29,PEA,,,,,,,5,7,2018,7-May-18,Koocanusa,Rexford,59,,Far South Tobacco,6,2,,Spring,16:20,11:12,18.87,56.1,,6,1,0,FALSE,Mainstem,,
+113363,56,LN SU,377,506,14.84,1.11,,,5,7,2018,7-May-18,Koocanusa,Rexford,1,,Mid Sophie,15,2,,Spring,15:21,9:30,18.15,56.1,,15,1,94.43,TRUE,Mainstem,37,300
+113439,29,PEA,,,,,,,5,7,2018,7-May-18,Koocanusa,Rexford,26,,North Black Lake,3,2,,Spring,16:09,11:00,18.85,56.1,,3,1,0,FALSE,Mainstem,,
+113541,5,BULL,660,,25.98,,,,5,7,2018,7-May-18,Koocanusa,Rexford,1,live release,North of North Point Tobacco,9,2,,Spring,16:58,10:19,17.35,56.1,,9,1,0,FALSE,Mainstem,66,600
+113638,20,YP,159,38,6.26,0.08,,,5,7,2018,7-May-18,Koocanusa,Rexford,1,,North Point Dodge,10,2,,Spring,15:50,10:27,18.62,56.1,,10,1,94.53,TRUE,Mainstem,15,100
+113715,56,LN SU,369,508,14.53,1.12,,,5,7,2018,7-May-18,Koocanusa,Rexford,1,,North Point Murray,13,2,,Spring,15:08,9:15,18.12,56.1,,13,1,101.11,TRUE,Mainstem,36,300
+113825,5,BULL,686,,27.01,,,,5,7,2018,7-May-18,Koocanusa,Rexford,1,live release,North Point Tobacco,8,2,,Spring,14:54,10:10,19.27,56.1,,8,1,0,FALSE,Mainstem,68,600
+113901,12,WCT,355,388,13.98,0.85,Male,,5,7,2018,7-May-18,Koocanusa,Rexford,1,mature,North Point Young,17,2,,Spring,15:39,9:47,18.13,56.1,,17,1,86.73,TRUE,Mainstem,35,300
+113989,1,RB,621,2274,24.45,5.01,Male,,5,7,2018,7-May-18,Koocanusa,Rexford,1,spent,North Sophie,18,2,,Spring,15:28,9:40,18.2,56.1,,18,1,94.95,TRUE,Mainstem,62,600
+114077,8,KOK,225,87,8.86,0.19,Male,,5,7,2018,7-May-18,Koocanusa,Rexford,1,mature,Sandhill,19,2,,Spring,15:11,9:54,18.72,56.1,,19,1,76.38,TRUE,Mainstem,22,200
+114133,29,PEA,202,68,7.95,0.15,,,5,7,2018,7-May-18,Koocanusa,Rexford,1,,South Black Lake,2,2,,Spring,16:00,10:55,18.92,56.1,,2,1,82.5,TRUE,Mainstem,20,200
+114215,33,N PMN,235,106,9.25,0.23,,,5,7,2018,7-May-18,Koocanusa,Rexford,1,,South of Far South Tobacco,5,2,,Spring,16:14,11:05,18.85,56.1,,5,1,81.68,TRUE,Mainstem,23,200
+114298,5,BULL,660,,25.98,,,,5,7,2018,7-May-18,Koocanusa,Rexford,1,live release,South Sophie,14,2,,Spring,15:13,9:25,18.2,56.1,,14,1,0,FALSE,Mainstem,66,600
+114358,29,PEA,,,,,,,5,7,2018,7-May-18,Koocanusa,Rexford,58,,South Tobacco,7,2,,Spring,16:25,10:34,18.15,56.1,,7,1,0,FALSE,Mainstem,,
+116266,58,LS SU,460,916,18.11,2.02,,,5,14,2019,14-May-19,Koocanusa,Rexford,1,,Far South Tobacco,6,2,,Spring,15:05,11:12,20.12,60,,6,1,94.11,TRUE,Mainstem,46,400
+115617,33,N PMN,475,1156,18.7,2.55,,,5,14,2019,14-May-19,Koocanusa,Rexford,1,,Mid Sophie,15,2,,Spring,14:06,9:11,19.08,60,,15,1,107.86,TRUE,Mainstem,47,400
+115993,33,N PMN,495,1027,19.49,2.26,,,5,14,2019,14-May-19,Koocanusa,Rexford,1,,North Black Lake,3,2,,Spring,14:53,10:58,20.08,60,,3,1,84.67,TRUE,Mainstem,49,400
+116335,33,N PMN,439,924,17.28,2.04,,,5,14,2019,14-May-19,Koocanusa,Rexford,1,,North of North Point Tobacco,9,2,,Spring,13:46,8:39,18.88,60,,9,1,109.21,TRUE,Mainstem,43,400
+115698,58,LS SU,446,784,17.56,1.73,,,5,14,2019,14-May-19,Koocanusa,Rexford,1,,North Point Dodge,10,2,,Spring,14:38,10:13,19.58,60,,10,1,88.37,TRUE,Mainstem,44,400
+115767,58,LS SU,455,916,17.91,2.02,,,5,14,2019,14-May-19,Koocanusa,Rexford,1,,North Point Murray,13,2,,Spring,13:55,8:53,18.97,60,,13,1,97.24,TRUE,Mainstem,45,400
+116384,29,PEA,238,120,9.37,0.26,,,5,14,2019,14-May-19,Koocanusa,Rexford,1,,North Point Tobacco,8,2,,Spring,13:42,8:31,18.82,60,,8,1,89.01,TRUE,Mainstem,23,200
+115836,58,LS SU,441,908,17.36,2,,,5,14,2019,14-May-19,Koocanusa,Rexford,1,,North Point Young,17,2,,Spring,14:25,9:58,19.55,60,,17,1,105.87,TRUE,Mainstem,44,400
+115906,58,LS SU,452,810,17.8,1.78,,,5,14,2019,14-May-19,Koocanusa,Rexford,1,,North Sophie,18,2,,Spring,14:18,9:21,19.05,60,,18,1,87.71,TRUE,Mainstem,45,400
+116059,29,PEA,260,158,10.24,0.35,,,5,14,2019,14-May-19,Koocanusa,Rexford,1,,Sandhill,19,2,,Spring,14:51,10:05,19.23,60,,19,1,89.9,TRUE,Mainstem,26,200
+116128,33,N PMN,530,2127,20.87,4.69,,,5,14,2019,14-May-19,Koocanusa,Rexford,1,,South Black Lake,2,2,,Spring,14:48,10:52,20.07,60,,2,1,142.87,TRUE,Mainstem,53,500
+116438,33,N PMN,365,435,14.37,0.96,,,5,14,2019,14-May-19,Koocanusa,Rexford,1,,South of Far South Tobacco,5,2,,Spring,15:00,11:07,20.12,60,,5,1,89.46,TRUE,Mainstem,36,300
+116188,29,PEA,248,120,9.76,0.26,,,5,14,2019,14-May-19,Koocanusa,Rexford,1,,South Sophie,14,2,,Spring,14:00,9:01,19.02,60,,14,1,78.67,TRUE,Mainstem,24,200
+116491,33,N PMN,380,457,14.96,1.01,,,5,14,2019,14-May-19,Koocanusa,Rexford,1,,South Tobacco,7,2,,Spring,15:10,10:24,19.23,60,,7,1,83.28,TRUE,Mainstem,38,300
+117358,33,N PMN,258,146,10.16,0.32,,,5,12,2020,5/12/2020,Koocanusa,Rexford,1,,Far South Tobacco,6,2,,Spring,16:38,8:34,15.93333333,53.3,11.8,6,1,85.01,TRUE,Mainstem,25,200
+117736,33,N PMN,368,494,14.49,1.09,,,5,12,2020,5/12/2020,Koocanusa,Rexford,1,,Mid Sophie,15,2,,Spring,15:37,9:30,17.88333333,53.3,11.8,15,1,99.13,TRUE,Mainstem,36,300
+117684,29,PEA,227,83,8.94,0.18,,,5,12,2020,5/12/2020,Koocanusa,Rexford,1,,North Black Lake,3,2,,Spring,16:30,8:23,15.88333333,53.3,11.8,3,1,70.96,TRUE,Mainstem,22,200
+117213,29,PEA,270,170,10.63,0.37,,,5,12,2020,5/12/2020,Koocanusa,Rexford,1,,North of North Point Tobacco,9,2,,Spring,13:12,9:00,19.8,53.3,11.8,9,1,86.37,TRUE,Mainstem,27,200
+117568,29,PEA,260,146,10.24,0.32,,,5,12,2020,5/12/2020,Koocanusa,Rexford,1,,North Point Dodge,10,2,,Spring,16:11,8:04,15.88333333,53.3,11.8,10,1,83.07,TRUE,Mainstem,26,200
+117473,29,PEA,243,120,9.57,0.26,,,5,12,2020,5/12/2020,Koocanusa,Rexford,1,,North Point Murray,13,2,,Spring,15:19,9:07,17.8,53.3,11.8,13,1,83.63,TRUE,Mainstem,24,200
+117264,29,PEA,295,217,11.61,0.48,,,5,12,2020,5/12/2020,Koocanusa,Rexford,1,,North Point Tobacco,8,2,,Spring,15:05,8:53,17.8,53.3,11.8,8,1,84.53,TRUE,Mainstem,29,200
+117839,29,PEA,262,145,10.31,0.32,,,5,12,2020,5/12/2020,Koocanusa,Rexford,1,,North Point Young,17,2,,Spring,15:57,7:51,15.9,53.3,11.8,17,1,80.62,TRUE,Mainstem,26,200
+117525,33,N PMN,514,1264,20.24,2.78,,,5,12,2020,5/12/2020,Koocanusa,Rexford,1,,North Sophie,18,2,,Spring,15:49,7:45,15.93333333,53.3,11.8,18,1,93.08,TRUE,Mainstem,51,500
+117416,29,PEA,250,130,9.84,0.29,,,5,12,2020,5/12/2020,Koocanusa,Rexford,1,,Sandhill,19,2,,Spring,16:04,7:45,15.68333333,53.3,11.8,19,1,83.46,TRUE,Mainstem,25,200
+117616,33,N PMN,279,161,10.98,0.35,,,5,12,2020,5/12/2020,Koocanusa,Rexford,1,,South Black Lake,2,2,,Spring,16:24,8:17,15.88333333,53.3,11.8,2,1,74.13,TRUE,Mainstem,27,200
+117301,29,PEA,290,198,11.42,0.44,,,5,12,2020,5/12/2020,Koocanusa,Rexford,1,,South of Far South Tobacco,5,2,,Spring,16:34,8:28,15.9,53.3,11.8,5,1,81.18,TRUE,Mainstem,29,200
+117792,33,N PMN,528,1504,20.79,3.31,,,5,12,2020,5/12/2020,Koocanusa,Rexford,1,,South Sophie,14,2,,Spring,15:25,9:14,17.81666667,53.3,11.8,14,1,102.18,TRUE,Mainstem,52,500
+117154,29,PEA,252,122,9.92,0.27,,,5,12,2020,5/12/2020,Koocanusa,Rexford,1,,South Tobacco,7,2,,Spring,16:43,8:48,16.08333333,53.3,11.8,7,1,76.24,TRUE,Mainstem,25,200
+119245,29,PEA,245,126,9.65,0.28,,,5,10,2021,5/10/2021,Koocanusa,Rexford,1,,Far South Tobacco,6,2,,Spring,16:18,10:54,18.6,54.9,12.7,6,1,85.68,TRUE,Mainstem,24,200
+118767,29,PEA,308,272,12.13,0.6,,,5,10,2021,5/10/2021,Koocanusa,Rexford,1,,Mid Sophie,15,2,,Spring,15:14,9:25,18.18333333,54.9,12.7,15,1,93.09,TRUE,Mainstem,30,300
+119145,29,PEA,267,150,10.51,0.33,,,5,10,2021,5/10/2021,Koocanusa,Rexford,1,,North Black Lake,3,2,,Spring,16:07,10:35,18.46666667,54.9,12.7,3,1,78.81,TRUE,Mainstem,26,200
+118581,29,PEA,237,102,9.33,0.22,,,5,10,2021,5/10/2021,Koocanusa,Rexford,1,,North of North Point Tobacco,9,2,,Spring,14:48,8:58,18.16666667,54.9,12.7,9,1,76.62,TRUE,Mainstem,23,200
+119021,33,N PMN,485,1256,19.09,2.77,,,5,10,2021,5/10/2021,Koocanusa,Rexford,1,,North Point Dodge,10,2,,Spring,15:48,10:16,18.46666667,54.9,12.7,10,1,110.09,TRUE,Mainstem,48,400
+118634,33,N PMN,504,1179,19.84,2.6,,,5,10,2021,5/10/2021,Koocanusa,Rexford,1,,North Point Murray,13,2,,Spring,15:00,9:10,18.16666667,54.9,12.7,13,1,92.09,TRUE,Mainstem,50,500
+118530,33,N PMN,568,1913,22.36,4.21,,,5,10,2021,5/10/2021,Koocanusa,Rexford,1,,North Point Tobacco,8,2,,Spring,14:45,8:51,18.1,54.9,12.7,8,1,104.39,TRUE,Mainstem,56,500
+118875,33,N PMN,485,1222,19.09,2.69,,,5,10,2021,5/10/2021,Koocanusa,Rexford,1,,North Point Young,17,2,,Spring,15:34,9:47,18.21666667,54.9,12.7,17,1,107.11,TRUE,Mainstem,48,400
+118813,33,N PMN,495,1570,19.49,3.46,,,5,10,2021,5/10/2021,Koocanusa,Rexford,1,,North Sophie,18,2,,Spring,15:26,9:38,18.2,54.9,12.7,18,1,129.44,TRUE,Mainstem,49,400
+118948,29,PEA,271,166,10.67,0.37,,,5,10,2021,5/10/2021,Koocanusa,Rexford,1,,Sandhill,19,2,,Spring,15:34,9:47,18.21666667,54.9,12.7,19,1,83.41,TRUE,Mainstem,27,200
+119084,29,PEA,255,129,10.04,0.28,,,5,10,2021,5/10/2021,Koocanusa,Rexford,1,,South Black Lake,2,2,,Spring,16:00,10:28,18.46666667,54.9,12.7,2,1,77.8,TRUE,Mainstem,25,200
+119187,29,PEA,230,108,9.06,0.24,,,5,10,2021,5/10/2021,Koocanusa,Rexford,1,,South of Far South Tobacco,5,2,,Spring,16:12,10:40,18.46666667,54.9,12.7,5,1,88.76,TRUE,Mainstem,23,200
+118698,33,N PMN,259,134,10.2,0.3,,,5,10,2021,5/10/2021,Koocanusa,Rexford,1,,South Sophie,14,2,,Spring,15:06,9:18,18.2,54.9,12.7,14,1,77.13,TRUE,Mainstem,25,200
+119297,29,PEA,260,134,10.24,0.3,,,5,10,2021,5/10/2021,Koocanusa,Rexford,1,,South Tobacco,7,2,,Spring,16:22,10:48,18.43333333,54.9,12.7,7,1,76.24,TRUE,Mainstem,26,200
+119805,29,PEA,257,150,10.12,0.33,Female,mature,5,10,2022,5/10/2022,Koocanusa,Rexford,1,"SE sample, mature female",Far South Tobacco,6,2,,Spring,16:13,11:17,19.06666667,50,,6,1,88.37,TRUE,Mainstem,25,200
+119825,29,PEA,254,132,10,0.29,,,5,10,2022,5/10/2022,Koocanusa,Rexford,1,,Mid Sophie,15,2,,Spring,14:54,12:03,21.15,50,,15,1,80.55,TRUE,Mainstem,25,200
+119835,58,LS SU,355,372,13.98,0.82,,,5,10,2022,5/10/2022,Koocanusa,Rexford,1,,North Black Lake,3,2,,Spring,15:56,10:53,18.95,50,,3,1,83.15,TRUE,Mainstem,35,300
+119876,33,N PMN,280,184,11.02,0.41,,,5,10,2022,5/10/2022,Koocanusa,Rexford,1,,North of North Point Tobacco,9,2,,Spring,14:29,10:21,19.86666667,50,,9,1,83.82,TRUE,Mainstem,28,200
+119956,29,PEA,246,122,9.69,0.27,,,5,10,2022,5/10/2022,Koocanusa,Rexford,1,,North Point Dodge,10,2,,Spring,15:35,12:42,21.11666667,50,,10,1,81.95,TRUE,Mainstem,24,200
+119999,33,N PMN,539,1588,21.22,3.5,Female,mature,5,10,2022,5/10/2022,Koocanusa,Rexford,1,se sample,North Point Murray,13,2,,Spring,14:39,11:45,21.1,50,,13,1,101.41,TRUE,Mainstem,53,500
+120045,26,LING,573,1508,22.56,3.32,,,5,10,2022,5/10/2022,Koocanusa,Rexford,1,,North Point Tobacco,8,2,,Spring,14:23,10:15,19.86666667,50,,U,1,80.16,TRUE,Mainstem,57,500
+120176,33,N PMN,364,490,14.33,1.08,,,5,10,2022,5/10/2022,Koocanusa,Rexford,1,,North Point Young,17,2,,Spring,15:13,12:20,21.11666667,50,,17,1,101.6,TRUE,Mainstem,36,300
+120257,33,N PMN,421,898,16.57,1.98,Female,mature,5,10,2022,5/10/2022,Koocanusa,Rexford,1,se sample,North Sophie,18,2,,Spring,15:02,12:13,21.18333333,50,,18,1,120.35,TRUE,Mainstem,42,400
+120314,33,N PMN,476,1214,18.74,2.67,,,5,10,2022,5/10/2022,Koocanusa,Rexford,1,,Sandhill,19,2,,Spring,15:23,12:30,21.11666667,50,,19,1,112.56,TRUE,Mainstem,47,400
+120363,33,N PMN,463,1051,18.23,2.31,Female,mature,5,10,2022,5/10/2022,Koocanusa,Rexford,1,"SE sample, mature female",South Black Lake,2,2,,Spring,15:49,10:34,18.75,50,,2,1,105.89,TRUE,Mainstem,46,400
+120406,29,PEA,239,106,9.41,0.23,,,5,10,2022,5/10/2022,Koocanusa,Rexford,1,,South of Far South Tobacco,5,2,,Spring,16:05,11:07,19.03333333,50,10,5,1,77.64,TRUE,Mainstem,23,200
+120471,33,N PMN,514,1520,20.24,3.35,Female,mature,5,10,2022,5/10/2022,Koocanusa,Rexford,1,se sample,South Sophie,14,2,,Spring,14:47,11:53,21.1,50,,14,1,111.93,TRUE,Mainstem,51,500
+120536,29,PEA,210,70,8.27,0.15,,,5,10,2022,5/10/2022,Koocanusa,Rexford,1,,South Tobacco,7,2,,Spring,16:19,11:30,19.18333333,50,,7,1,75.59,TRUE,Mainstem,21,200
+121271,33,N PMN,532,1444,,,,,5,10,2023,5/10/2023,Koocanusa,Rexford,1,,Far South Tobacco,6,2,,Spring,17:18,10:53,17.58,62.3,,6,1,,,,,
+121339,33,N PMN,600,1997,,,,,5,10,2023,5/10/2023,Koocanusa,Rexford,1,,Mid Sophie,15,2,,Spring,16:11,9:16,17.08,62.3,,15,1,,,,,
+121387,33,N PMN,306,234,,,,,5,10,2023,5/10/2023,Koocanusa,Rexford,1,,North Black Lake,3,2,,Spring,17:04,10:36,17.53,62.3,,3,1,,,,,
+121455,33,N PMN,502,1101,,,,,5,10,2023,5/10/2023,Koocanusa,Rexford,1,,North of North Point Tobacco,9,2,,Spring,15:44,8:47,17.05,62.3,,9,1,,,,,
+121510,58,LS SU,444,818,,,,,5,10,2023,5/10/2023,Koocanusa,Rexford,1,,North Point Dodge ,10,2,,Spring,16:47,10:09,17.37,62.3,,10,1,,,,,
+121612,33,N PMN,391,477,,,,,5,10,2023,5/10/2023,Koocanusa,Rexford,1,,North Point Murray,13,2,,Spring,15:54,8:58,17.07,62.3,,13,1,,,,,
+121680,29,PEA,210,71,,,,,5,10,2023,5/10/2023,Koocanusa,Rexford,1,,North Point Tobacco,8,2,,Spring,15:39,8:42,17.05,62.3,,8,1,,,,,
+121741,33,N PMN,413,627,,,,,5,10,2023,5/10/2023,Koocanusa,Rexford,1,,North Point Young,17,2,,Spring,16:32,9:36,17.07,62.3,,17,1,,,,,
+121825,33,N PMN,544,1720,,,,,5,10,2023,5/10/2023,Koocanusa,Rexford,1,,North Sophie,18,2,,Spring,16:21,9:28,17.12,62.3,,18,1,,,,,
+121885,33,N PMN,344,298,,,,,5,10,2023,5/10/2023,Koocanusa,Rexford,1,,Sandhill,19,2,,Spring,16:40,9:43,17.05,62.3,,19,1,,,,,
+121956,33,N PMN,538,1691,,,,,5,10,2023,5/10/2023,Koocanusa,Rexford,1,,South Black Lake ,2,2,,Spring,16:59,10:24,17.42,62.3,,2,1,,,,,
+122016,33,N PMN,524,488,,,,,5,10,2023,5/10/2023,Koocanusa,Rexford,1,,South of Far South Tobacco,5,2,,Spring,17:10,10:46,17.6,62.3,,5,1,,,,,
+122069,58,LS SU,464,968,,,,,5,10,2023,5/10/2023,Koocanusa,Rexford,1,,South Sophie,14,2,,Spring,16:01,9:06,17.08,62.3,,14,1,,,,,
+122165,29,PEA,269,155,,,,,5,10,2023,5/10/2023,Koocanusa,Rexford,1,,South Tobacco,7,2,,Spring,17:22,11:02,17.67,62.3,,7,1,,,,,

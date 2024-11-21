@@ -1,0 +1,517 @@
+State,RecoveryUnit,CoreArea,LocalPopulation,Waterbody,BLTPatchID,Kovach_ID,MT_ID,FWS_ID,Year,Redds,LifeHistory,Comments,LocationData
+MT,Col Head,Kootenai River,Bear Creek,Bear Creek,17010101BEA, ,MT_50,FWS_50,1995,6,1,,1
+MT,Col Head,Kootenai River,Bear Creek,Bear Creek,17010101BEA, ,MT_50,FWS_50,1996,10,1,,1
+MT,Col Head,Kootenai River,Bear Creek,Bear Creek,17010101BEA, ,MT_50,FWS_50,1997,13,1,,1
+MT,Col Head,Kootenai River,Bear Creek,Bear Creek,17010101BEA, ,MT_50,FWS_50,1998,22,1,,1
+MT,Col Head,Kootenai River,Bear Creek,Bear Creek,17010101BEA, ,MT_50,FWS_50,1999,36,1,,1
+MT,Col Head,Kootenai River,Bear Creek,Bear Creek,17010101BEA, ,MT_50,FWS_50,2000,23,1,,1
+MT,Col Head,Kootenai River,Bear Creek,Bear Creek,17010101BEA, ,MT_50,FWS_50,2001,4,1,e,1
+MT,Col Head,Kootenai River,Bear Creek,Bear Creek,17010101BEA, ,MT_50,FWS_50,2002,17,1,,1
+MT,Col Head,Kootenai River,Bear Creek,Bear Creek,17010101BEA, ,MT_50,FWS_50,2003,14,1,,1
+MT,Col Head,Kootenai River,Bear Creek,Bear Creek,17010101BEA, ,MT_50,FWS_50,2004,6,1,,1
+MT,Col Head,Kootenai River,Bear Creek,Bear Creek,17010101BEA, ,MT_50,FWS_50,2005,3,1,,1
+MT,Col Head,Kootenai River,Bear Creek,Bear Creek,17010101BEA, ,MT_50,FWS_50,2006,14,1,,1
+MT,Col Head,Kootenai River,Bear Creek,Bear Creek,17010101BEA, ,MT_50,FWS_50,2007,9,1,,1
+MT,Col Head,Kootenai River,Bear Creek,Bear Creek,17010101BEA, ,MT_50,FWS_50,2008,14,1,,1
+MT,Col Head,Kootenai River,Bear Creek,Bear Creek,17010101BEA, ,MT_50,FWS_50,2009,6,1,,1
+MT,Col Head,Kootenai River,Bear Creek,Bear Creek,17010101BEA, ,MT_50,FWS_50,2010,8,1,,1
+MT,Col Head,Kootenai River,Bear Creek,Bear Creek,17010101BEA, ,MT_50,FWS_50,2011,3,1,,1
+MT,Col Head,Kootenai River,Bear Creek,Bear Creek,17010101BEA, ,MT_50,FWS_50,2012,4,1,,1
+MT,Col Head,Kootenai River,Bear Creek,Bear Creek,17010101BEA, ,MT_50,FWS_50,2013,8,1,,1
+MT,Col Head,Kootenai River,Bear Creek,Bear Creek,17010101BEA, ,MT_50,FWS_50,2014,11,1,,1
+MT,Col Head,Kootenai River,Bear Creek,Bear Creek,17010101BEA, ,MT_50,FWS_50,2015,7,1,,1
+MT,Col Head,Kootenai River,Bear Creek,Bear Creek,17010101BEA, ,MT_50,FWS_50,2016,4,1,,1
+MT,Col Head,Kootenai River,Bear Creek,Bear Creek,17010101BEA, ,MT_50,FWS_50,2017,1,1,,1
+MT,Col Head,Kootenai River,Bear Creek,Bear Creek,17010101BEA, ,MT_50,FWS_50,2018,3,1,,1
+MT,Col Head,Kootenai River,Bear Creek,Bear Creek,17010101BEA, ,MT_50,FWS_50,2019,4,1,,1
+MT,Col Head,Kootenai River,Bear Creek,Bear Creek,17010101BEA, ,MT_50,FWS_50,2020,4,1,,1
+MT,Col Head,Kootenai River,Bear Creek,Bear Creek,17010101BEA, ,MT_50,FWS_50,2021,4,1,,1
+MT,Col Head,Kootenai River,Bear Creek,Bear Creek,17010101BEA, ,MT_50,FWS_50,2022,7,1,,1
+MT,Col Head,Kootenai River,Bear Creek,Bear Creek,17010101BEA, ,MT_50,FWS_50,2023,1,,,
+MT,Col Head,Lake Koocanusa,Grave Creek,Blue Sky Creek,17010101GRV,Kovach_3,MT_149,FWS_149,1983,2,1,,1
+MT,Col Head,Lake Koocanusa,Grave Creek,Blue Sky Creek,17010101GRV,Kovach_3,MT_149,FWS_149,1984,1,1,,1
+MT,Col Head,Lake Koocanusa,Grave Creek,Blue Sky Creek,17010101GRV, ,MT_149,FWS_149,1993,5,1,,1
+MT,Col Head,Lake Koocanusa,Grave Creek,Blue Sky Creek,17010101GRV, ,MT_149,FWS_149,1994,1,1,,1
+MT,Col Head,Lake Koocanusa,Grave Creek,Blue Sky Creek,17010101GRV, ,MT_149,FWS_149,1995,1,1,,1
+MT,Col Head,Lake Koocanusa,Grave Creek,Blue Sky Creek,17010101GRV,Kovach_3,MT_149,FWS_149,1996,6,1,,1
+MT,Col Head,Lake Koocanusa,Grave Creek,Blue Sky Creek,17010101GRV,Kovach_3,MT_149,FWS_149,1997,1,1,,1
+MT,Col Head,Lake Koocanusa,Grave Creek,Blue Sky Creek,17010101GRV,Kovach_3,MT_149,FWS_149,1998,1,1,,1
+MT,Col Head,Lake Koocanusa,Grave Creek,Blue Sky Creek,17010101GRV,Kovach_3,MT_149,FWS_149,1999,10,1,,1
+MT,Col Head,Lake Koocanusa,Grave Creek,Blue Sky Creek,17010101GRV,Kovach_3,MT_149,FWS_149,2000,1,1,,1
+MT,Col Head,Lake Koocanusa,Grave Creek,Blue Sky Creek,17010101GRV,Kovach_3,MT_149,FWS_149,2001,13,1,,1
+MT,Col Head,Lake Koocanusa,Grave Creek,Blue Sky Creek,17010101GRV,Kovach_3,MT_149,FWS_149,2002,5,1,,1
+MT,Col Head,Lake Koocanusa,Grave Creek,Blue Sky Creek,17010101GRV,Kovach_3,MT_149,FWS_149,2003,20,1,,1
+MT,Col Head,Lake Koocanusa,Grave Creek,Blue Sky Creek,17010101GRV,Kovach_3,MT_149,FWS_149,2004,10,1,,1
+MT,Col Head,Lake Koocanusa,Grave Creek,Blue Sky Creek,17010101GRV,Kovach_3,MT_149,FWS_149,2005,9,1,,1
+MT,Col Head,Lake Koocanusa,Grave Creek,Blue Sky Creek,17010101GRV,Kovach_3,MT_149,FWS_149,2006,8,1,,1
+MT,Col Head,Lake Koocanusa,Grave Creek,Blue Sky Creek,17010101GRV,Kovach_3,MT_149,FWS_149,2007,0,1,,1
+MT,Col Head,Lake Koocanusa,Grave Creek,Blue Sky Creek,17010101GRV,Kovach_3,MT_149,FWS_149,2008,10,1,,1
+MT,Col Head,Lake Koocanusa,Grave Creek,Blue Sky Creek,17010101GRV,Kovach_3,MT_149,FWS_149,2009,8,1,,1
+MT,Col Head,Lake Koocanusa,Grave Creek,Blue Sky Creek,17010101GRV,Kovach_3,MT_149,FWS_149,2010,9,1,,1
+MT,Col Head,Lake Koocanusa,Grave Creek,Blue Sky Creek,17010101GRV,Kovach_3,MT_149,FWS_149,2011,3,1,,1
+MT,Col Head,Lake Koocanusa,Grave Creek,Blue Sky Creek,17010101GRV,Kovach_3,MT_149,FWS_149,2012,12,1,,1
+MT,Col Head,Lake Koocanusa,Grave Creek,Blue Sky Creek,17010101GRV, ,MT_149,FWS_149,2013,15,1,,1
+MT,Col Head,Lake Koocanusa,Grave Creek,Blue Sky Creek,17010101GRV,Kovach_3,MT_149,FWS_149,2014,5,1,,1
+MT,Col Head,Lake Koocanusa,Grave Creek,Blue Sky Creek,17010101GRV, ,MT_149,FWS_149,2015,0,1,,1
+MT,Col Head,Lake Koocanusa,Grave Creek,Blue Sky Creek,17010101GRV, ,MT_149,FWS_149,2017,10,1,,1
+MT,Col Head,Lake Koocanusa,Grave Creek,Blue Sky Creek,17010101GRV, ,MT_149,FWS_149,2018,3,1,,1
+MT,Col Head,Lake Koocanusa,Grave Creek,Blue Sky Creek,17010101GRV, ,MT_149,FWS_149,2019,0,1,,1
+MT,Col Head,Lake Koocanusa,Grave Creek,Blue Sky Creek,17010101GRV, ,MT_149,FWS_149,2020,0,1,,1
+MT,Col Head,Lake Koocanusa,Grave Creek,Blue Sky Creek,17010101GRV, ,MT_149,FWS_149,2021,5,1,,1
+MT,Col Head,Lake Koocanusa,Grave Creek,Blue Sky Creek,17010101GRV, ,MT_149,FWS_149,2022,0,1,,1
+MT,Col Head,Lake Koocanusa,Grave Creek,Blue Sky Creek,17010101GRV, ,MT_149,FWS_149,2023,6,,,
+ID,Col Head,Kootenai River,Boulder Creek,Boulder Creek,17010104BOU,,,FWS_169,2001,2,1,,0
+ID,Col Head,Kootenai River,Boulder Creek,Boulder Creek,17010104BOU,,,FWS_169,2002,2,1,,0
+ID,Col Head,Kootenai River,Boulder Creek,Boulder Creek,17010104BOU,,,FWS_169,2003,0,1,,0
+ID,Col Head,Kootenai River,Boulder Creek,Boulder Creek,17010104BOU,,,FWS_169,2004,0,1,,0
+ID,Col Head,Kootenai River,Boulder Creek,Boulder Creek,17010104BOU,,,FWS_169,2005,1,1,,0
+ID,Col Head,Kootenai River,Boulder Creek,Boulder Creek,17010104BOU,,,FWS_169,2006,0,1,,0
+ID,Col Head,Kootenai River,Boulder Creek,Boulder Creek,17010104BOU,,,FWS_169,2007,0,1,,0
+ID,Col Head,Kootenai River,Boulder Creek,Boulder Creek,17010104BOU,,,FWS_169,2008,0,1,,0
+ID,Col Head,Kootenai River,Boulder Creek,Boulder Creek,17010104BOU,,,FWS_169,2009,0,1,,0
+ID,Col Head,Kootenai River,Boulder Creek,Boulder Creek,17010104BOU,,,FWS_169,2010,0,1,,0
+ID,Col Head,Kootenai River,Boulder Creek,Boulder Creek,17010104BOU,,,FWS_169,2011,0,1,,0
+ID,Col Head,Kootenai River,Boulder Creek,Boulder Creek,17010104BOU,,,FWS_169,2012,0,1,,0
+ID,Col Head,Kootenai River,Boulder Creek,Boulder Creek,17010104BOU,,,FWS_169,2013,0,1,,0
+ID,Col Head,Kootenai River,Boulder Creek,Boulder Creek,17010104BOU,,,FWS_169,2017,0,1,,0
+ID,Col Head,Kootenai River,Boulder Creek,Boulder Creek,17010104BOU, , ,FWS_169,2019,0,1,,0
+MT,Col Head,Lake Koocanusa,Grave Creek,Clarence Creek,17010101GRV,Kovach_3,MT_150,FWS_150,1983,31,1,,1
+MT,Col Head,Lake Koocanusa,Grave Creek,Clarence Creek,17010101GRV,Kovach_3,MT_150,FWS_150,1984,12,1,,1
+MT,Col Head,Lake Koocanusa,Grave Creek,Clarence Creek,17010101GRV, ,MT_150,FWS_150,1985,3,1,,1
+MT,Col Head,Lake Koocanusa,Grave Creek,Clarence Creek,17010101GRV, ,MT_150,FWS_150,1993,8,1,,1
+MT,Col Head,Lake Koocanusa,Grave Creek,Clarence Creek,17010101GRV, ,MT_150,FWS_150,1994,13,1,,1
+MT,Col Head,Lake Koocanusa,Grave Creek,Clarence Creek,17010101GRV,Kovach_3,MT_150,FWS_150,1996,5,1,,1
+MT,Col Head,Lake Koocanusa,Grave Creek,Clarence Creek,17010101GRV,Kovach_3,MT_150,FWS_150,1997,6,1,,1
+MT,Col Head,Lake Koocanusa,Grave Creek,Clarence Creek,17010101GRV,Kovach_3,MT_150,FWS_150,1998,13,1,,1
+MT,Col Head,Lake Koocanusa,Grave Creek,Clarence Creek,17010101GRV,Kovach_3,MT_150,FWS_150,1999,39,1,,1
+MT,Col Head,Lake Koocanusa,Grave Creek,Clarence Creek,17010101GRV,Kovach_3,MT_150,FWS_150,2000,9,1,,1
+MT,Col Head,Lake Koocanusa,Grave Creek,Clarence Creek,17010101GRV,Kovach_3,MT_150,FWS_150,2001,29,1,,1
+MT,Col Head,Lake Koocanusa,Grave Creek,Clarence Creek,17010101GRV,Kovach_3,MT_150,FWS_150,2002,38,1,,1
+MT,Col Head,Lake Koocanusa,Grave Creek,Clarence Creek,17010101GRV,Kovach_3,MT_150,FWS_150,2003,52,1,,1
+MT,Col Head,Lake Koocanusa,Grave Creek,Clarence Creek,17010101GRV,Kovach_3,MT_150,FWS_150,2004,29,1,,1
+MT,Col Head,Lake Koocanusa,Grave Creek,Clarence Creek,17010101GRV,Kovach_3,MT_150,FWS_150,2005,32,1,,1
+MT,Col Head,Lake Koocanusa,Grave Creek,Clarence Creek,17010101GRV,Kovach_3,MT_150,FWS_150,2006,22,1,,1
+MT,Col Head,Lake Koocanusa,Grave Creek,Clarence Creek,17010101GRV,Kovach_3,MT_150,FWS_150,2007,42,1,,1
+MT,Col Head,Lake Koocanusa,Grave Creek,Clarence Creek,17010101GRV,Kovach_3,MT_150,FWS_150,2008,27,1,,1
+MT,Col Head,Lake Koocanusa,Grave Creek,Clarence Creek,17010101GRV,Kovach_3,MT_150,FWS_150,2009,24,1,,1
+MT,Col Head,Lake Koocanusa,Grave Creek,Clarence Creek,17010101GRV,Kovach_3,MT_150,FWS_150,2010,9,1,,1
+MT,Col Head,Lake Koocanusa,Grave Creek,Clarence Creek,17010101GRV,Kovach_3,MT_150,FWS_150,2011,10,1,,1
+MT,Col Head,Lake Koocanusa,Grave Creek,Clarence Creek,17010101GRV,Kovach_3,MT_150,FWS_150,2012,23,1,,1
+MT,Col Head,Lake Koocanusa,Grave Creek,Clarence Creek,17010101GRV, ,MT_150,FWS_150,2013,20,1,,1
+MT,Col Head,Lake Koocanusa,Grave Creek,Clarence Creek,17010101GRV,Kovach_3,MT_150,FWS_150,2014,13,1,,1
+MT,Col Head,Lake Koocanusa,Grave Creek,Clarence Creek,17010101GRV, ,MT_150,FWS_150,2015,8,1,,1
+MT,Col Head,Lake Koocanusa,Grave Creek,Clarence Creek,17010101GRV, ,MT_150,FWS_150,2017,17,1,,1
+MT,Col Head,Lake Koocanusa,Grave Creek,Clarence Creek,17010101GRV, ,MT_150,FWS_150,2018,14,1,,1
+MT,Col Head,Lake Koocanusa,Grave Creek,Clarence Creek,17010101GRV, ,MT_150,FWS_150,2019,1,1,,1
+MT,Col Head,Lake Koocanusa,Grave Creek,Clarence Creek,17010101GRV, ,MT_150,FWS_150,2020,10,1,,1
+MT,Col Head,Lake Koocanusa,Grave Creek,Clarence Creek,17010101GRV, ,MT_150,FWS_150,2021,24,1,,1
+MT,Col Head,Lake Koocanusa,Grave Creek,Clarence Creek,17010101GRV, ,MT_150,FWS_150,2022,10,1,,1
+MT,Col Head,Lake Koocanusa,Grave Creek,Clarence Creek,17010101GRV, ,MT_150,FWS_150,2023,8,,,
+MT,Col Head,Kootenai River,Pipe Creek,East Fork Pipe Creek,17010101PIP, ,MT_51,FWS_51,1992,8,1,,1
+MT,Col Head,Kootenai River,Pipe Creek,East Fork Pipe Creek,17010101PIP, ,MT_51,FWS_51,1993,0,1,,1
+MT,Col Head,Kootenai River,Pipe Creek,East Fork Pipe Creek,17010101PIP, ,MT_51,FWS_51,1996,0,1,,1
+MT,Col Head,Kootenai River,Pipe Creek,East Fork Pipe Creek,17010101PIP, ,MT_51,FWS_51,2007,0,1,,1
+MT,Col Head,Kootenai River,Pipe Creek,East Fork Pipe Creek,17010101PIP, ,MT_51,FWS_51,2008,NA,1,,1
+MT,Col Head,Kootenai River,Pipe Creek,East Fork Pipe Creek,17010101PIP, ,MT_51,FWS_51,2009,NA,1,,1
+MT,Col Head,Kootenai River,Pipe Creek,East Fork Pipe Creek,17010101PIP, ,MT_51,FWS_51,2010,NA,1,,1
+MT,Col Head,Kootenai River,Pipe Creek,East Fork Pipe Creek,17010101PIP, ,MT_51,FWS_51,2011,NA,1,,1
+MT,Col Head,Kootenai River,Pipe Creek,East Fork Pipe Creek,17010101PIP, ,MT_51,FWS_51,2012,NA,1,,1
+MT,Col Head,Kootenai River,Pipe Creek,East Fork Pipe Creek,17010101PIP, ,MT_51,FWS_51,2013,NA,1,,1
+MT,Col Head,Kootenai River,Pipe Creek,East Fork Pipe Creek,17010101PIP, ,MT_51,FWS_51,2014,NA,1,,1
+MT,Col Head,Kootenai River,Pipe Creek,East Fork Pipe Creek,17010101PIP, ,MT_51,FWS_51,2015,NA,1,,1
+MT,Col Head,Kootenai River,Pipe Creek,East Fork Pipe Creek,17010101PIP, ,MT_51,FWS_51,2016,NA,1,,1
+MT,Col Head,Kootenai River,Pipe Creek,East Fork Pipe Creek,17010101PIP, ,MT_51,FWS_51,2017,NA,1,,1
+MT,Col Head,Kootenai River,Pipe Creek,East Fork Pipe Creek,17010101PIP, ,MT_51,FWS_51,2018,NA,1,,1
+MT,Col Head,Kootenai River,Pipe Creek,East Fork Pipe Creek,17010101PIP, ,MT_51,FWS_51,2019,NA,1,,1
+MT,Col Head,Kootenai River,Pipe Creek,East Fork Pipe Creek,17010101PIP, ,MT_51,FWS_51,2020,NA,1,,1
+MT,Col Head,Kootenai River,Pipe Creek,East Fork Pipe Creek,17010101PIP, ,MT_51,FWS_51,2021,NA,1,,1
+MT,Col Head,Kootenai River,Pipe Creek,East Fork Pipe Creek,17010101PIP, ,MT_51,FWS_51,2022,NA,1,,1
+MT,Col Head,Lake Koocanusa,Grave Creek,Grave Creek,17010101GRV,Kovach_3,MT_151,FWS_151,1983,48,1,,1
+MT,Col Head,Lake Koocanusa,Grave Creek,Grave Creek,17010101GRV,Kovach_3,MT_151,FWS_151,1984,23,1,,1
+MT,Col Head,Lake Koocanusa,Grave Creek,Grave Creek,17010101GRV, ,MT_151,FWS_151,1985,33,1,,1
+MT,Col Head,Lake Koocanusa,Grave Creek,Grave Creek,17010101GRV, ,MT_151,FWS_151,1995,15,1,,1
+MT,Col Head,Lake Koocanusa,Grave Creek,Grave Creek,17010101GRV,Kovach_3,MT_151,FWS_151,1996,24,1,,1
+MT,Col Head,Lake Koocanusa,Grave Creek,Grave Creek,17010101GRV,Kovach_3,MT_151,FWS_151,1997,42,1,,1
+MT,Col Head,Lake Koocanusa,Grave Creek,Grave Creek,17010101GRV,Kovach_3,MT_151,FWS_151,1998,52,1,,1
+MT,Col Head,Lake Koocanusa,Grave Creek,Grave Creek,17010101GRV,Kovach_3,MT_151,FWS_151,1999,85,1,,1
+MT,Col Head,Lake Koocanusa,Grave Creek,Grave Creek,17010101GRV,Kovach_3,MT_151,FWS_151,2000,87,1,,1
+MT,Col Head,Lake Koocanusa,Grave Creek,Grave Creek,17010101GRV,Kovach_3,MT_151,FWS_151,2001,131,1,,1
+MT,Col Head,Lake Koocanusa,Grave Creek,Grave Creek,17010101GRV,Kovach_3,MT_151,FWS_151,2002,156,1,,1
+MT,Col Head,Lake Koocanusa,Grave Creek,Grave Creek,17010101GRV,Kovach_3,MT_151,FWS_151,2003,173,1,,1
+MT,Col Head,Lake Koocanusa,Grave Creek,Grave Creek,17010101GRV,Kovach_3,MT_151,FWS_151,2004,102,1,,1
+MT,Col Head,Lake Koocanusa,Grave Creek,Grave Creek,17010101GRV,Kovach_3,MT_151,FWS_151,2005,153,1,,1
+MT,Col Head,Lake Koocanusa,Grave Creek,Grave Creek,17010101GRV,Kovach_3,MT_151,FWS_151,2006,118,1,,1
+MT,Col Head,Lake Koocanusa,Grave Creek,Grave Creek,17010101GRV,Kovach_3,MT_151,FWS_151,2007,166,1,,1
+MT,Col Head,Lake Koocanusa,Grave Creek,Grave Creek,17010101GRV,Kovach_3,MT_151,FWS_151,2008,170,1,,1
+MT,Col Head,Lake Koocanusa,Grave Creek,Grave Creek,17010101GRV,Kovach_3,MT_151,FWS_151,2009,55,1,,1
+MT,Col Head,Lake Koocanusa,Grave Creek,Grave Creek,17010101GRV,Kovach_3,MT_151,FWS_151,2010,102,1,,1
+MT,Col Head,Lake Koocanusa,Grave Creek,Grave Creek,17010101GRV,Kovach_3,MT_151,FWS_151,2011,51,1,,1
+MT,Col Head,Lake Koocanusa,Grave Creek,Grave Creek,17010101GRV,Kovach_3,MT_151,FWS_151,2012,82,1,,1
+MT,Col Head,Lake Koocanusa,Grave Creek,Grave Creek,17010101GRV, ,MT_151,FWS_151,2013,55,1,,1
+MT,Col Head,Lake Koocanusa,Grave Creek,Grave Creek,17010101GRV,Kovach_3,MT_151,FWS_151,2014,56,1,,1
+MT,Col Head,Lake Koocanusa,Grave Creek,Grave Creek,17010101GRV, ,MT_151,FWS_151,2015,84,1,,1
+MT,Col Head,Lake Koocanusa,Grave Creek,Grave Creek,17010101GRV, ,MT_151,FWS_151,2017,85,1,,1
+MT,Col Head,Lake Koocanusa,Grave Creek,Grave Creek,17010101GRV, ,MT_151,FWS_151,2018,83,1,,1
+MT,Col Head,Lake Koocanusa,Grave Creek,Grave Creek,17010101GRV, ,MT_151,FWS_151,2019,43,1,,1
+MT,Col Head,Lake Koocanusa,Grave Creek,Grave Creek,17010101GRV, ,MT_151,FWS_151,2020,54,1,,1
+MT,Col Head,Lake Koocanusa,Grave Creek,Grave Creek,17010101GRV, ,MT_151,FWS_151,2021,57,1,,1
+MT,Col Head,Lake Koocanusa,Grave Creek,Grave Creek,17010101GRV, ,MT_151,FWS_151,2022,37,1,,1
+MT,Col Head,Lake Koocanusa,Grave Creek,Grave Creek,17010101GRV, ,MT_151,FWS_151,2023,43,,,
+ID,Col Head,Kootenai River,Long Canyon Creek,Long Canyon Creek,17010104LON, , ,FWS_170,2020,10,1,,0
+BC,Col Head,Lake Koocanusa,White River,Middle Fork White River,17010107WRV,,,FWS_172,2001,166,1,,0
+BC,Col Head,Lake Koocanusa,White River,Middle Fork White River,17010107WRV,,,FWS_172,2002,153,1,,0
+BC,Col Head,Lake Koocanusa,White River,Middle Fork White River,17010107WRV,,,FWS_172,2003,143,1,,0
+BC,Col Head,Lake Koocanusa,White River,Middle Fork White River,17010107WRV,,,FWS_172,2004,93,1,,0
+BC,Col Head,Lake Koocanusa,White River,Middle Fork White River,17010107WRV,,,FWS_172,2005,137,1,,0
+BC,Col Head,Lake Koocanusa,White River,Middle Fork White River,17010107WRV,,,FWS_172,2006,167,1,,0
+BC,Col Head,Lake Koocanusa,White River,Middle Fork White River,17010107WRV,,,FWS_172,2007,193,1,,0
+BC,Col Head,Lake Koocanusa,White River,Middle Fork White River,17010107WRV,,,FWS_172,2008,137,1,,0
+BC,Col Head,Lake Koocanusa,White River,Middle Fork White River,17010107WRV,,,FWS_172,2009,172,1,,0
+BC,Col Head,Lake Koocanusa,White River,Middle Fork White River,17010107WRV,,,FWS_172,2010,122,1,,0
+BC,Col Head,Lake Koocanusa,White River,Middle Fork White River,17010107WRV,,,FWS_172,2011,206,1,,0
+BC,Col Head,Lake Koocanusa,White River,Middle Fork White River,17010107WRV,,,FWS_172,2012,182,1,,0
+BC,Col Head,Lake Koocanusa,White River,Middle Fork White River,17010107WRV,,,FWS_172,2013,124,1,,0
+BC,Col Head,Lake Koocanusa,White River,Middle Fork White River,17010107WRV,,,FWS_172,2014,215,1,,0
+BC,Col Head,Lake Koocanusa,White River,Middle Fork White River,17010107WRV, , ,FWS_172,2015,200,1,,0
+BC,Col Head,Lake Koocanusa,White River,Middle Fork White River,17010107WRV,,,FWS_172,2016,273,1,,0
+BC,Col Head,Lake Koocanusa,White River,Middle Fork White River,17010107WRV,,,FWS_172,2017,205,1,,0
+BC,Col Head,Lake Koocanusa,White River,Middle Fork White River,17010107WRV,,,FWS_172,2018,34,1,,0
+BC,Col Head,Lake Koocanusa,White River,Middle Fork White River,17010107WRV,,,FWS_172,2019,199,1,,0
+BC,Col Head,Lake Koocanusa,White River,Middle Fork White River,17010107WRV,,,FWS_172,2020,191,1,,0
+BC,Col Head,Lake Koocanusa,White River,Middle Fork White River,17010107WRV,,,FWS_172,2021,187,1,,0
+BC,Col Head,Lake Koocanusa,Blackfoot Creek,NewIndex1,17010107BLF,,,,2012,65,1,,0
+BC,Col Head,Lake Koocanusa,Blackfoot Creek,NewIndex1,17010107BLF,,,,2014,92,1,,0
+BC,Col Head,Lake Koocanusa,Blackfoot Creek,NewIndex1,17010107BLF,,,,2015,58,1,,0
+BC,Col Head,Lake Koocanusa,Blackfoot Creek,NewIndex1,17010107BLF,,,,2017,58,1,,0
+BC,Col Head,Lake Koocanusa,Blackfoot Creek,NewIndex1,17010107BLF,,,,2018,21,1,,0
+BC,Col Head,Lake Koocanusa,Blackfoot Creek,NewIndex1,17010107BLF,,,,2019,35,1,,0
+BC,Col Head,Lake Koocanusa,Blackfoot Creek,NewIndex1,17010107BLF,,,,2020,52,1,,0
+BC,Col Head,Lake Koocanusa,Blackfoot Creek,NewIndex1,17010107BLF,,,,2021,17,1,,0
+BC,Col Head,Lake Koocanusa,Blackfoot Creek,NewIndex3,17010107BLF,,,,2017,38,1,,0
+BC,Col Head,Lake Koocanusa,Blackfoot Creek,NewIndex3,17010107BLF,,,,2018,54,1,,0
+BC,Col Head,Lake Koocanusa,Blackfoot Creek,NewIndex3,17010107BLF,,,,2019,37,1,,0
+BC,Col Head,Lake Koocanusa,Blackfoot Creek,NewIndex3,17010107BLF,,,,2020,50,1,,0
+BC,Col Head,Lake Koocanusa,Blackfoot Creek,NewIndex3,17010107BLF,,,,2021,47,1,,0
+MT,Col Head,Kootenai River,Callahan Creek,North Callahan Creek,17010101CAL,Kovach_1,MT_37,FWS_37,2003,30,1,,1
+MT,Col Head,Kootenai River,Callahan Creek,North Callahan Creek,17010101CAL,Kovach_1,MT_37,FWS_37,2004,17,1,,1
+MT,Col Head,Kootenai River,Callahan Creek,North Callahan Creek,17010101CAL,Kovach_1,MT_37,FWS_37,2005,12,1,,1
+MT,Col Head,Kootenai River,Callahan Creek,North Callahan Creek,17010101CAL,Kovach_1,MT_37,FWS_37,2006,29,1,,1
+MT,Col Head,Kootenai River,Callahan Creek,North Callahan Creek,17010101CAL,Kovach_1,MT_37,FWS_37,2007,0,1,,1
+MT,Col Head,Kootenai River,Callahan Creek,North Callahan Creek,17010101CAL,Kovach_1,MT_37,FWS_37,2008,14,1,,1
+MT,Col Head,Kootenai River,Callahan Creek,North Callahan Creek,17010101CAL,Kovach_1,MT_37,FWS_37,2009,10,1,,1
+MT,Col Head,Kootenai River,Callahan Creek,North Callahan Creek,17010101CAL,Kovach_1,MT_37,FWS_37,2010,9,1,,1
+MT,Col Head,Kootenai River,Callahan Creek,North Callahan Creek,17010101CAL,Kovach_1,MT_37,FWS_37,2011,1,1,,1
+MT,Col Head,Kootenai River,Callahan Creek,North Callahan Creek,17010101CAL,Kovach_1,MT_37,FWS_37,2012,6,1,,1
+MT,Col Head,Kootenai River,Callahan Creek,North Callahan Creek,17010101CAL, ,MT_37,FWS_37,2013,9,1,,1
+MT,Col Head,Kootenai River,Callahan Creek,North Callahan Creek,17010101CAL,Kovach_1,MT_37,FWS_37,2014,7,1,,1
+MT,Col Head,Kootenai River,Callahan Creek,North Callahan Creek,17010101CAL, ,MT_37,FWS_37,2015,1,1,,1
+MT,Col Head,Kootenai River,Callahan Creek,North Callahan Creek,17010101CAL,,MT_37,FWS_37,2016,NA,1,,1
+MT,Col Head,Kootenai River,Callahan Creek,North Callahan Creek,17010101CAL,,MT_37,FWS_37,2017,NA,1,,1
+MT,Col Head,Kootenai River,Callahan Creek,North Callahan Creek,17010101CAL,,MT_37,FWS_37,2018,NA,1,,1
+MT,Col Head,Kootenai River,Callahan Creek,North Callahan Creek,17010101CAL,,MT_37,FWS_37,2019,NA,1,,1
+MT,Col Head,Kootenai River,Callahan Creek,North Callahan Creek,17010101CAL,,MT_37,FWS_37,2020,NA,1,,1
+MT,Col Head,Kootenai River,Callahan Creek,North Callahan Creek,17010101CAL,,MT_37,FWS_37,2021,1,1,,1
+MT,Col Head,Kootenai River,Callahan Creek,North Callahan Creek,17010101CAL,,MT_37,FWS_37,2022,9,1,,1
+MT,Col Head,Kootenai River,Callahan Creek,North Callahan Creek,17010101CAL,,MT_37,FWS_37,2023,6,,,
+BC,Col Head,Lake Koocanusa,White River,North Fork White River,17010107WRV,,,,2014,68,1,,0
+BC,Col Head,Lake Koocanusa,White River,North Fork White River,17010107WRV,,,,2015,79,1,,0
+BC,Col Head,Lake Koocanusa,White River,North Fork White River,17010107WRV,,,,2016,76,1,,0
+BC,Col Head,Lake Koocanusa,White River,North Fork White River,17010107WRV,,,,2017,122,1,,0
+BC,Col Head,Lake Koocanusa,White River,North Fork White River,17010107WRV,,,,2018,100,1,,0
+BC,Col Head,Lake Koocanusa,White River,North Fork White River,17010107WRV,,,,2019,91,1,,0
+BC,Col Head,Lake Koocanusa,White River,North Fork White River,17010107WRV,,,,2020,117,1,,0
+BC,Col Head,Lake Koocanusa,White River,North Fork White River,17010107WRV,,,,2021,118,1,,0
+MT,Col Head,Kootenai River,O'Brien Creek,O'Brien Creek,17010101OBR, ,MT_42,FWS_42,1991,25,1,,1
+MT,Col Head,Kootenai River,O'Brien Creek,O'Brien Creek,17010101OBR, ,MT_42,FWS_42,1992,24,1,,1
+MT,Col Head,Kootenai River,O'Brien Creek,O'Brien Creek,17010101OBR, ,MT_42,FWS_42,1993,6,1,,1
+MT,Col Head,Kootenai River,O'Brien Creek,O'Brien Creek,17010101OBR, ,MT_42,FWS_42,1994,7,1,,1
+MT,Col Head,Kootenai River,O'Brien Creek,O'Brien Creek,17010101OBR, ,MT_42,FWS_42,1995,22,1,,1
+MT,Col Head,Kootenai River,O'Brien Creek,O'Brien Creek,17010101OBR, ,MT_42,FWS_42,1996,12,1,,1
+MT,Col Head,Kootenai River,O'Brien Creek,O'Brien Creek,17010101OBR, ,MT_42,FWS_42,1997,36,1,,1
+MT,Col Head,Kootenai River,O'Brien Creek,O'Brien Creek,17010101OBR, ,MT_42,FWS_42,1998,47,1,,1
+MT,Col Head,Kootenai River,O'Brien Creek,O'Brien Creek,17010101OBR, ,MT_42,FWS_42,1999,37,1,,1
+MT,Col Head,Kootenai River,O'Brien Creek,O'Brien Creek,17010101OBR, ,MT_42,FWS_42,2000,34,1,,1
+MT,Col Head,Kootenai River,O'Brien Creek,O'Brien Creek,17010101OBR, ,MT_42,FWS_42,2001,47,1,,1
+MT,Col Head,Kootenai River,O'Brien Creek,O'Brien Creek,17010101OBR, ,MT_42,FWS_42,2002,45,1,,1
+MT,Col Head,Kootenai River,O'Brien Creek,O'Brien Creek,17010101OBR, ,MT_42,FWS_42,2003,46,1,,1
+MT,Col Head,Kootenai River,O'Brien Creek,O'Brien Creek,17010101OBR, ,MT_42,FWS_42,2004,51,1,,1
+MT,Col Head,Kootenai River,O'Brien Creek,O'Brien Creek,17010101OBR, ,MT_42,FWS_42,2005,86,1,,1
+MT,Col Head,Kootenai River,O'Brien Creek,O'Brien Creek,17010101OBR, ,MT_42,FWS_42,2006,65,1,,1
+MT,Col Head,Kootenai River,O'Brien Creek,O'Brien Creek,17010101OBR, ,MT_42,FWS_42,2007,77,1,,1
+MT,Col Head,Kootenai River,O'Brien Creek,O'Brien Creek,17010101OBR, ,MT_42,FWS_42,2008,79,1,,1
+MT,Col Head,Kootenai River,O'Brien Creek,O'Brien Creek,17010101OBR, ,MT_42,FWS_42,2009,40,1,,1
+MT,Col Head,Kootenai River,O'Brien Creek,O'Brien Creek,17010101OBR, ,MT_42,FWS_42,2010,27,1,,1
+MT,Col Head,Kootenai River,O'Brien Creek,O'Brien Creek,17010101OBR, ,MT_42,FWS_42,2011,32,1,,1
+MT,Col Head,Kootenai River,O'Brien Creek,O'Brien Creek,17010101OBR, ,MT_42,FWS_42,2012,18,1,,1
+MT,Col Head,Kootenai River,O'Brien Creek,O'Brien Creek,17010101OBR, ,MT_42,FWS_42,2013,35,1,,1
+MT,Col Head,Kootenai River,O'Brien Creek,O'Brien Creek,17010101OBR, ,MT_42,FWS_42,2014,34,1,,1
+MT,Col Head,Kootenai River,O'Brien Creek,O'Brien Creek,17010101OBR, ,MT_42,FWS_42,2015,22,1,,1
+MT,Col Head,Kootenai River,O'Brien Creek,O'Brien Creek,17010101OBR, ,MT_42,FWS_42,2016,35,1,,1
+MT,Col Head,Kootenai River,O'Brien Creek,O'Brien Creek,17010101OBR, ,MT_42,FWS_42,2018,34,1,,1
+MT,Col Head,Kootenai River,O'Brien Creek,O'Brien Creek,17010101OBR, ,MT_42,FWS_42,2019,27,1,,1
+MT,Col Head,Kootenai River,O'Brien Creek,O'Brien Creek,17010101OBR, ,MT_42,FWS_42,2020,25,1,,1
+MT,Col Head,Kootenai River,O'Brien Creek,O'Brien Creek,17010101OBR, ,MT_42,FWS_42,2021,5,1,,1
+MT,Col Head,Kootenai River,O'Brien Creek,O'Brien Creek,17010101OBR, ,MT_42,FWS_42,2022,22,1,,1
+MT,Col Head,Kootenai River,O'Brien Creek,O'Brien Creek,17010101OBR, ,MT_42,FWS_42,2023,23,,,
+BC,Col Head,Lake Koocanusa,Blackfoot Creek,OriginalIndex,17010107BLF,,,,2002,108,1,,0
+BC,Col Head,Lake Koocanusa,Blackfoot Creek,OriginalIndex,17010107BLF,,,,2003,96,1,,0
+BC,Col Head,Lake Koocanusa,Blackfoot Creek,OriginalIndex,17010107BLF,,,,2004,91,1,,0
+BC,Col Head,Lake Koocanusa,Blackfoot Creek,OriginalIndex,17010107BLF,,,,2005,106,1,,0
+BC,Col Head,Lake Koocanusa,Blackfoot Creek,OriginalIndex,17010107BLF,,,,2006,144,1,,0
+BC,Col Head,Lake Koocanusa,Blackfoot Creek,OriginalIndex,17010107BLF,,,,2007,73,1,,0
+BC,Col Head,Lake Koocanusa,Blackfoot Creek,OriginalIndex,17010107BLF,,,,2008,73,1,,0
+BC,Col Head,Lake Koocanusa,Blackfoot Creek,OriginalIndex,17010107BLF,,,,2010,7,1,,0
+BC,Col Head,Lake Koocanusa,Blackfoot Creek,OriginalIndex,17010107BLF,,,,2017,20,1,,0
+BC,Col Head,Lake Koocanusa,Blackfoot Creek,OriginalIndex,17010107BLF,,,,2018,18,1,,0
+BC,Col Head,Lake Koocanusa,Blackfoot Creek,OriginalIndex,17010107BLF,,,,2019,71,1,,0
+BC,Col Head,Lake Koocanusa,Blackfoot Creek,OriginalIndex,17010107BLF,,,,2020,51,1,,0
+BC,Col Head,Lake Koocanusa,Blackfoot Creek,OriginalIndex,17010107BLF,,,,2021,41,1,,0
+MT,Col Head,Kootenai River,Pipe Creek,Pipe Creek,17010101PIP, ,MT_52,FWS_52,1990,6,1,,1
+MT,Col Head,Kootenai River,Pipe Creek,Pipe Creek,17010101PIP, ,MT_52,FWS_52,1991,5,1,,1
+MT,Col Head,Kootenai River,Pipe Creek,Pipe Creek,17010101PIP, ,MT_52,FWS_52,1992,11,1,,1
+MT,Col Head,Kootenai River,Pipe Creek,Pipe Creek,17010101PIP, ,MT_52,FWS_52,1993,6,1,,1
+MT,Col Head,Kootenai River,Pipe Creek,Pipe Creek,17010101PIP, ,MT_52,FWS_52,1994,7,1,,1
+MT,Col Head,Kootenai River,Pipe Creek,Pipe Creek,17010101PIP, ,MT_52,FWS_52,1995,5,1,,1
+MT,Col Head,Kootenai River,Pipe Creek,Pipe Creek,17010101PIP, ,MT_52,FWS_52,1996,17,1,,1
+MT,Col Head,Kootenai River,Pipe Creek,Pipe Creek,17010101PIP, ,MT_52,FWS_52,1997,26,1,,1
+MT,Col Head,Kootenai River,Pipe Creek,Pipe Creek,17010101PIP, ,MT_52,FWS_52,1998,34,1,,1
+MT,Col Head,Kootenai River,Pipe Creek,Pipe Creek,17010101PIP, ,MT_52,FWS_52,1999,36,1,,1
+MT,Col Head,Kootenai River,Pipe Creek,Pipe Creek,17010101PIP, ,MT_52,FWS_52,2000,30,1,,1
+MT,Col Head,Kootenai River,Pipe Creek,Pipe Creek,17010101PIP, ,MT_52,FWS_52,2001,6,1,a,1
+MT,Col Head,Kootenai River,Pipe Creek,Pipe Creek,17010101PIP, ,MT_52,FWS_52,2002,11,1,,1
+MT,Col Head,Kootenai River,Pipe Creek,Pipe Creek,17010101PIP, ,MT_52,FWS_52,2003,10,1,,1
+MT,Col Head,Kootenai River,Pipe Creek,Pipe Creek,17010101PIP, ,MT_52,FWS_52,2004,8,1,,1
+MT,Col Head,Kootenai River,Pipe Creek,Pipe Creek,17010101PIP, ,MT_52,FWS_52,2005,2,1,,1
+MT,Col Head,Kootenai River,Pipe Creek,Pipe Creek,17010101PIP, ,MT_52,FWS_52,2006,6,1,,1
+MT,Col Head,Kootenai River,Pipe Creek,Pipe Creek,17010101PIP, ,MT_52,FWS_52,2007,0,1,,1
+MT,Col Head,Kootenai River,Pipe Creek,Pipe Creek,17010101PIP, ,MT_52,FWS_52,2008,4,1,,1
+MT,Col Head,Kootenai River,Pipe Creek,Pipe Creek,17010101PIP, ,MT_52,FWS_52,2009,9,1,,1
+MT,Col Head,Kootenai River,Pipe Creek,Pipe Creek,17010101PIP, ,MT_52,FWS_52,2010,16,1,,1
+MT,Col Head,Kootenai River,Pipe Creek,Pipe Creek,17010101PIP, ,MT_52,FWS_52,2011,2,1,,1
+MT,Col Head,Kootenai River,Pipe Creek,Pipe Creek,17010101PIP, ,MT_52,FWS_52,2012,12,1,,1
+MT,Col Head,Kootenai River,Pipe Creek,Pipe Creek,17010101PIP, ,MT_52,FWS_52,2013,8,1,,1
+MT,Col Head,Kootenai River,Pipe Creek,Pipe Creek,17010101PIP, ,MT_52,FWS_52,2014,8,1,,1
+MT,Col Head,Kootenai River,Pipe Creek,Pipe Creek,17010101PIP, ,MT_52,FWS_52,2015,0,1,,1
+MT,Col Head,Kootenai River,Pipe Creek,Pipe Creek,17010101PIP, ,MT_52,FWS_52,2016,0,1,,1
+MT,Col Head,Kootenai River,Pipe Creek,Pipe Creek,17010101PIP, ,MT_52,FWS_52,2017,2,1,,1
+MT,Col Head,Kootenai River,Pipe Creek,Pipe Creek,17010101PIP, ,MT_52,FWS_52,2018,8,1,,1
+MT,Col Head,Kootenai River,Pipe Creek,Pipe Creek,17010101PIP, ,MT_52,FWS_52,2019,0,1,,1
+MT,Col Head,Kootenai River,Pipe Creek,Pipe Creek,17010101PIP, ,MT_52,FWS_52,2020,0,1,,1
+MT,Col Head,Kootenai River,Pipe Creek,Pipe Creek,17010101PIP, ,MT_52,FWS_52,2021,2,1,,1
+MT,Col Head,Kootenai River,Pipe Creek,Pipe Creek,17010101PIP, ,MT_52,FWS_52,2022,5,1,,1
+MT,Col Head,Kootenai River,Pipe Creek,Pipe Creek,17010101PIP, ,MT_52,FWS_52,2023,0,,,
+MT,Col Head,Kootenai River,Quartz Creek,Quartz Creek,17010101QUA, ,MT_53,FWS_53,1985,14,1,,1
+MT,Col Head,Kootenai River,Quartz Creek,Quartz Creek,17010101QUA, ,MT_53,FWS_53,1987,13,1,,1
+MT,Col Head,Kootenai River,Quartz Creek,Quartz Creek,17010101QUA, ,MT_53,FWS_53,1990,32,1,,1
+MT,Col Head,Kootenai River,Quartz Creek,Quartz Creek,17010101QUA, ,MT_53,FWS_53,1991,22,1,,1
+MT,Col Head,Kootenai River,Quartz Creek,Quartz Creek,17010101QUA, ,MT_53,FWS_53,1992,4,1,,1
+MT,Col Head,Kootenai River,Quartz Creek,Quartz Creek,17010101QUA, ,MT_53,FWS_53,1995,41,1,,1
+MT,Col Head,Kootenai River,Quartz Creek,Quartz Creek,17010101QUA, ,MT_53,FWS_53,1996,9,1,,1
+MT,Col Head,Kootenai River,Quartz Creek,Quartz Creek,17010101QUA, ,MT_53,FWS_53,1997,30,1,,1
+MT,Col Head,Kootenai River,Quartz Creek,Quartz Creek,17010101QUA, ,MT_53,FWS_53,1998,33,1,,1
+MT,Col Head,Kootenai River,Quartz Creek,Quartz Creek,17010101QUA, ,MT_53,FWS_53,1999,14,1,,1
+MT,Col Head,Kootenai River,Quartz Creek,Quartz Creek,17010101QUA, ,MT_53,FWS_53,2000,52,1,,1
+MT,Col Head,Kootenai River,Quartz Creek,Quartz Creek,17010101QUA, ,MT_53,FWS_53,2001,45,1,,1
+MT,Col Head,Kootenai River,Quartz Creek,Quartz Creek,17010101QUA, ,MT_53,FWS_53,2002,52,1,,1
+MT,Col Head,Kootenai River,Quartz Creek,Quartz Creek,17010101QUA, ,MT_53,FWS_53,2003,29,1,,1
+MT,Col Head,Kootenai River,Quartz Creek,Quartz Creek,17010101QUA, ,MT_53,FWS_53,2004,8,1,,1
+MT,Col Head,Kootenai River,Quartz Creek,Quartz Creek,17010101QUA, ,MT_53,FWS_53,2005,25,1,,1
+MT,Col Head,Kootenai River,Quartz Creek,Quartz Creek,17010101QUA, ,MT_53,FWS_53,2006,23,1,,1
+MT,Col Head,Kootenai River,Quartz Creek,Quartz Creek,17010101QUA, ,MT_53,FWS_53,2007,20,1,,1
+MT,Col Head,Kootenai River,Quartz Creek,Quartz Creek,17010101QUA, ,MT_53,FWS_53,2008,14,1,,1
+MT,Col Head,Kootenai River,Quartz Creek,Quartz Creek,17010101QUA, ,MT_53,FWS_53,2009,18,1,,1
+MT,Col Head,Kootenai River,Quartz Creek,Quartz Creek,17010101QUA, ,MT_53,FWS_53,2010,12,1,,1
+MT,Col Head,Kootenai River,Quartz Creek,Quartz Creek,17010101QUA, ,MT_53,FWS_53,2011,7,1,,1
+MT,Col Head,Kootenai River,Quartz Creek,Quartz Creek,17010101QUA, ,MT_53,FWS_53,2012,14,1,,1
+MT,Col Head,Kootenai River,Quartz Creek,Quartz Creek,17010101QUA, ,MT_53,FWS_53,2013,9,1,,1
+MT,Col Head,Kootenai River,Quartz Creek,Quartz Creek,17010101QUA, ,MT_53,FWS_53,2014,5,1,,1
+MT,Col Head,Kootenai River,Quartz Creek,Quartz Creek,17010101QUA, ,MT_53,FWS_53,2015,17,1,,1
+MT,Col Head,Kootenai River,Quartz Creek,Quartz Creek,17010101QUA, ,MT_53,FWS_53,2016,10,1,,1
+MT,Col Head,Kootenai River,Quartz Creek,Quartz Creek,17010101QUA, ,MT_53,FWS_53,2017,9,1,,1
+MT,Col Head,Kootenai River,Quartz Creek,Quartz Creek,17010101QUA, ,MT_53,FWS_53,2018,13,1,,1
+MT,Col Head,Kootenai River,Quartz Creek,Quartz Creek,17010101QUA, ,MT_53,FWS_53,2019,22,1,,1
+MT,Col Head,Kootenai River,Quartz Creek,Quartz Creek,17010101QUA, ,MT_53,FWS_53,2020,8,1,,1
+MT,Col Head,Kootenai River,Quartz Creek,Quartz Creek,17010101QUA, ,MT_53,FWS_53,2021,1,1,,1
+MT,Col Head,Kootenai River,Quartz Creek,Quartz Creek,17010101QUA, ,MT_53,FWS_53,2022,5,1,,1
+MT,Col Head,Kootenai River,Quartz Creek,Quartz Creek,17010101QUA, ,MT_53,FWS_53,2023,29,,,
+BC,Col Head,Lake Koocanusa,Skookumchuck Creek,Skookumchuck Creek,17010108SKO,,,FWS_171,1997,66,1,,0
+BC,Col Head,Lake Koocanusa,Skookumchuck Creek,Skookumchuck Creek,17010108SKO,,,FWS_171,1998,105,1,,0
+BC,Col Head,Lake Koocanusa,Skookumchuck Creek,Skookumchuck Creek,17010108SKO,,,FWS_171,1999,161,1,,0
+BC,Col Head,Lake Koocanusa,Skookumchuck Creek,Skookumchuck Creek,17010108SKO,,,FWS_171,2000,189,1,,0
+BC,Col Head,Lake Koocanusa,Skookumchuck Creek,Skookumchuck Creek,17010108SKO,,,FWS_171,2001,132,1,,0
+BC,Col Head,Lake Koocanusa,Skookumchuck Creek,Skookumchuck Creek,17010108SKO,,,FWS_171,2002,143,1,,0
+BC,Col Head,Lake Koocanusa,Skookumchuck Creek,Skookumchuck Creek,17010108SKO,,,FWS_171,2003,134,1,,0
+BC,Col Head,Lake Koocanusa,Skookumchuck Creek,Skookumchuck Creek,17010108SKO,,,FWS_171,2004,140,1,,0
+BC,Col Head,Lake Koocanusa,Skookumchuck Creek,Skookumchuck Creek,17010108SKO,,,FWS_171,2005,111,1,,0
+BC,Col Head,Lake Koocanusa,Skookumchuck Creek,Skookumchuck Creek,17010108SKO,,,FWS_171,2006,163,1,,0
+BC,Col Head,Lake Koocanusa,Skookumchuck Creek,Skookumchuck Creek,17010108SKO,,,FWS_171,2007,144,1,,0
+BC,Col Head,Lake Koocanusa,Skookumchuck Creek,Skookumchuck Creek,17010108SKO,,,FWS_171,2008,137,1,,0
+BC,Col Head,Lake Koocanusa,Skookumchuck Creek,Skookumchuck Creek,17010108SKO,,,FWS_171,2009,64,1,,0
+BC,Col Head,Lake Koocanusa,Skookumchuck Creek,Skookumchuck Creek,17010108SKO,,,FWS_171,2010,112,1,,0
+BC,Col Head,Lake Koocanusa,Skookumchuck Creek,Skookumchuck Creek,17010108SKO,,,FWS_171,2011,86,1,,0
+BC,Col Head,Lake Koocanusa,Skookumchuck Creek,Skookumchuck Creek,17010108SKO,,,FWS_171,2012,100,1,,0
+BC,Col Head,Lake Koocanusa,Skookumchuck Creek,Skookumchuck Creek,17010108SKO,,,FWS_171,2013,78,1,,0
+BC,Col Head,Lake Koocanusa,Skookumchuck Creek,Skookumchuck Creek,17010108SKO,,,FWS_171,2014,121,1,,0
+BC,Col Head,Lake Koocanusa,Skookumchuck Creek,Skookumchuck Creek,17010108SKO,,,FWS_171,2015,182,1,,0
+BC,Col Head,Lake Koocanusa,Skookumchuck Creek,Skookumchuck Creek,17010108SKO,,,FWS_171,2016,101,1,,0
+BC,Col Head,Lake Koocanusa,Skookumchuck Creek,Skookumchuck Creek,17010108SKO,,,FWS_171,2017,200,1,,0
+BC,Col Head,Lake Koocanusa,Skookumchuck Creek,Skookumchuck Creek,17010108SKO,,,FWS_171,2018,179,1,,0
+BC,Col Head,Lake Koocanusa,Skookumchuck Creek,Skookumchuck Creek,17010108SKO,,,FWS_171,2019,166,1,,0
+BC,Col Head,Lake Koocanusa,Skookumchuck Creek,Skookumchuck Creek,17010108SKO,,,FWS_171,2020,158,1,,0
+BC,Col Head,Lake Koocanusa,Skookumchuck Creek,Skookumchuck Creek,17010108SKO,,,FWS_171,2021,114,1,,0
+BC,Col Head,Lake Koocanusa,Skookumchuck Creek,Skookumchuck Creek,17010108SKO,,,FWS_171,2023,223,,,
+MT,Col Head,Kootenai River,Callahan Creek,South Callahan Creek,17010101CAL,Kovach_1,MT_38,FWS_38,2003,10,1,,1
+MT,Col Head,Kootenai River,Callahan Creek,South Callahan Creek,17010101CAL,Kovach_1,MT_38,FWS_38,2004,8,1,,1
+MT,Col Head,Kootenai River,Callahan Creek,South Callahan Creek,17010101CAL,Kovach_1,MT_38,FWS_38,2005,8,1,,1
+MT,Col Head,Kootenai River,Callahan Creek,South Callahan Creek,17010101CAL,Kovach_1,MT_38,FWS_38,2006,4,1,,1
+MT,Col Head,Kootenai River,Callahan Creek,South Callahan Creek,17010101CAL,Kovach_1,MT_38,FWS_38,2007,3,1,,1
+MT,Col Head,Kootenai River,Callahan Creek,South Callahan Creek,17010101CAL,Kovach_1,MT_38,FWS_38,2008,1,1,,1
+MT,Col Head,Kootenai River,Callahan Creek,South Callahan Creek,17010101CAL,Kovach_1,MT_38,FWS_38,2009,0,1,,1
+MT,Col Head,Kootenai River,Callahan Creek,South Callahan Creek,17010101CAL,Kovach_1,MT_38,FWS_38,2010,1,1,,1
+MT,Col Head,Kootenai River,Callahan Creek,South Callahan Creek,17010101CAL,Kovach_1,MT_38,FWS_38,2011,2,1,,1
+MT,Col Head,Kootenai River,Callahan Creek,South Callahan Creek,17010101CAL,Kovach_1,MT_38,FWS_38,2012,0,1,,1
+MT,Col Head,Kootenai River,Callahan Creek,South Callahan Creek,17010101CAL, ,MT_38,FWS_38,2013,2,1,,1
+MT,Col Head,Kootenai River,Callahan Creek,South Callahan Creek,17010101CAL,Kovach_1,MT_38,FWS_38,2014,0,1,,1
+MT,Col Head,Kootenai River,Callahan Creek,South Callahan Creek,17010101CAL, ,MT_38,FWS_38,2015,0,1,,1
+MT,Col Head,Kootenai River,Callahan Creek,South Callahan Creek,17010101CAL, ,MT_38,FWS_38,2017,1,1,,1
+MT,Col Head,Kootenai River,Callahan Creek,South Callahan Creek,17010101CAL, ,MT_38,FWS_38,2018,NA,1,,1
+MT,Col Head,Kootenai River,Callahan Creek,South Callahan Creek,17010101CAL, ,MT_38,FWS_38,2019,NA,1,,1
+MT,Col Head,Kootenai River,Callahan Creek,South Callahan Creek,17010101CAL, ,MT_38,FWS_38,2020,NA,1,,1
+MT,Col Head,Kootenai River,Callahan Creek,South Callahan Creek,17010101CAL, ,MT_38,FWS_38,2021,2,1,,1
+MT,Col Head,Kootenai River,Callahan Creek,South Callahan Creek,17010101CAL, ,MT_38,FWS_38,2022,4,1,,1
+MT,Col Head,Kootenai River,Callahan Creek,South Callahan Creek,17010101CAL, ,MT_38,FWS_38,2023,4,,,
+BC,Col Head,Lake Koocanusa,White River,Total,17010107WRV,,,,2023,609,,,
+BC,Col Head,Lake Koocanusa,Blackfoot Creek,Total,17010107BLF,,,,2023,129,,,
+BC,Col Head,Lake Koocanusa,White River,Upper Middle Fork White River,17010107WRV,,,,2014,56,1,,0
+BC,Col Head,Lake Koocanusa,White River,Upper Middle Fork White River,17010107WRV,,,,2015,69,1,,0
+BC,Col Head,Lake Koocanusa,White River,Upper Middle Fork White River,17010107WRV,,,,2016,46,1,,0
+BC,Col Head,Lake Koocanusa,White River,Upper Middle Fork White River,17010107WRV,,,,2017,41,1,,0
+BC,Col Head,Lake Koocanusa,White River,Upper Middle Fork White River,17010107WRV,,,,2018,40,1,,0
+BC,Col Head,Lake Koocanusa,White River,Upper Middle Fork White River,17010107WRV,,,,2019,37,1,,0
+BC,Col Head,Lake Koocanusa,White River,Upper Middle Fork White River,17010107WRV,,,,2020,30,1,,0
+BC,Col Head,Lake Koocanusa,White River,Upper Middle Fork White River,17010107WRV,,,,2021,15,1,,0
+MT,Col Head,Kootenai River,West Fisher Creek,West Fisher Creek,17010102WES, ,MT_49,FWS_49,1993,2,1,,1
+MT,Col Head,Kootenai River,West Fisher Creek,West Fisher Creek,17010102WES, ,MT_49,FWS_49,1994,0,1,,1
+MT,Col Head,Kootenai River,West Fisher Creek,West Fisher Creek,17010102WES, ,MT_49,FWS_49,1995,3,1,,1
+MT,Col Head,Kootenai River,West Fisher Creek,West Fisher Creek,17010102WES, ,MT_49,FWS_49,1996,4,1,,1
+MT,Col Head,Kootenai River,West Fisher Creek,West Fisher Creek,17010102WES, ,MT_49,FWS_49,1997,0,1,,1
+MT,Col Head,Kootenai River,West Fisher Creek,West Fisher Creek,17010102WES, ,MT_49,FWS_49,1998,8,1,,1
+MT,Col Head,Kootenai River,West Fisher Creek,West Fisher Creek,17010102WES, ,MT_49,FWS_49,1999,18,1,,1
+MT,Col Head,Kootenai River,West Fisher Creek,West Fisher Creek,17010102WES, ,MT_49,FWS_49,2000,23,1,,1
+MT,Col Head,Kootenai River,West Fisher Creek,West Fisher Creek,17010102WES, ,MT_49,FWS_49,2001,1,1,,1
+MT,Col Head,Kootenai River,West Fisher Creek,West Fisher Creek,17010102WES, ,MT_49,FWS_49,2002,1,1,,1
+MT,Col Head,Kootenai River,West Fisher Creek,West Fisher Creek,17010102WES, ,MT_49,FWS_49,2003,1,1,,1
+MT,Col Head,Kootenai River,West Fisher Creek,West Fisher Creek,17010102WES, ,MT_49,FWS_49,2004,13,1,,1
+MT,Col Head,Kootenai River,West Fisher Creek,West Fisher Creek,17010102WES, ,MT_49,FWS_49,2005,27,1,,1
+MT,Col Head,Kootenai River,West Fisher Creek,West Fisher Creek,17010102WES, ,MT_49,FWS_49,2006,4,1,,1
+MT,Col Head,Kootenai River,West Fisher Creek,West Fisher Creek,17010102WES, ,MT_49,FWS_49,2007,18,1,,1
+MT,Col Head,Kootenai River,West Fisher Creek,West Fisher Creek,17010102WES, ,MT_49,FWS_49,2008,6,1,,1
+MT,Col Head,Kootenai River,West Fisher Creek,West Fisher Creek,17010102WES, ,MT_49,FWS_49,2009,8,1,,1
+MT,Col Head,Kootenai River,West Fisher Creek,West Fisher Creek,17010102WES, ,MT_49,FWS_49,2010,12,1,,1
+MT,Col Head,Kootenai River,West Fisher Creek,West Fisher Creek,17010102WES, ,MT_49,FWS_49,2011,3,1,,1
+MT,Col Head,Kootenai River,West Fisher Creek,West Fisher Creek,17010102WES, ,MT_49,FWS_49,2012,5,1,,1
+MT,Col Head,Kootenai River,West Fisher Creek,West Fisher Creek,17010102WES, ,MT_49,FWS_49,2013,4,1,,1
+MT,Col Head,Kootenai River,West Fisher Creek,West Fisher Creek,17010102WES, ,MT_49,FWS_49,2014,14,1,,1
+MT,Col Head,Kootenai River,West Fisher Creek,West Fisher Creek,17010102WES, ,MT_49,FWS_49,2015,4,1,,1
+MT,Col Head,Kootenai River,West Fisher Creek,West Fisher Creek,17010102WES, ,MT_49,FWS_49,2017,8,1,,1
+MT,Col Head,Kootenai River,West Fisher Creek,West Fisher Creek,17010102WES, ,MT_49,FWS_49,2018,4,1,,1
+MT,Col Head,Kootenai River,West Fisher Creek,West Fisher Creek,17010102WES, ,MT_49,FWS_49,2019,2,1,,1
+MT,Col Head,Kootenai River,West Fisher Creek,West Fisher Creek,17010102WES, ,MT_49,FWS_49,2020,1,1,,1
+MT,Col Head,Kootenai River,West Fisher Creek,West Fisher Creek,17010102WES, ,MT_49,FWS_49,2021,1,1,,1
+MT,Col Head,Kootenai River,West Fisher Creek,West Fisher Creek,17010102WES, ,MT_49,FWS_49,2022,1,1,,1
+MT,Col Head,Kootenai River,West Fisher Creek,West Fisher Creek,17010102WES, ,MT_49,FWS_49,2023,0,,,
+MT,Col Head,Kootenai River,Quartz Creek,West Fork Quartz,17010101QUA, ,MT_54,FWS_54,1990,44,1,,1
+MT,Col Head,Kootenai River,Quartz Creek,West Fork Quartz,17010101QUA, ,MT_54,FWS_54,1991,43,1,,1
+MT,Col Head,Kootenai River,Quartz Creek,West Fork Quartz,17010101QUA, ,MT_54,FWS_54,1992,13,1,,1
+MT,Col Head,Kootenai River,Quartz Creek,West Fork Quartz,17010101QUA, ,MT_54,FWS_54,1993,55,1,,1
+MT,Col Head,Kootenai River,Quartz Creek,West Fork Quartz,17010101QUA, ,MT_54,FWS_54,1994,27,1,,1
+MT,Col Head,Kootenai River,Quartz Creek,West Fork Quartz,17010101QUA, ,MT_54,FWS_54,1995,26,1,,1
+MT,Col Head,Kootenai River,Quartz Creek,West Fork Quartz,17010101QUA, ,MT_54,FWS_54,1996,42,1,,1
+MT,Col Head,Kootenai River,Quartz Creek,West Fork Quartz,17010101QUA, ,MT_54,FWS_54,1997,39,1,,1
+MT,Col Head,Kootenai River,Quartz Creek,West Fork Quartz,17010101QUA, ,MT_54,FWS_54,1998,72,1,,1
+MT,Col Head,Kootenai River,Quartz Creek,West Fork Quartz,17010101QUA, ,MT_54,FWS_54,1999,88,1,,1
+MT,Col Head,Kootenai River,Quartz Creek,West Fork Quartz,17010101QUA, ,MT_54,FWS_54,2000,39,1,,1
+MT,Col Head,Kootenai River,Quartz Creek,West Fork Quartz,17010101QUA, ,MT_54,FWS_54,2001,109,1,,1
+MT,Col Head,Kootenai River,Quartz Creek,West Fork Quartz,17010101QUA, ,MT_54,FWS_54,2002,10,1,,1
+MT,Col Head,Kootenai River,Quartz Creek,West Fork Quartz,17010101QUA, ,MT_54,FWS_54,2003,26,1,,1
+MT,Col Head,Kootenai River,Quartz Creek,West Fork Quartz,17010101QUA, ,MT_54,FWS_54,2004,41,1,,1
+MT,Col Head,Kootenai River,Quartz Creek,West Fork Quartz,17010101QUA, ,MT_54,FWS_54,2005,46,1,,1
+MT,Col Head,Kootenai River,Quartz Creek,West Fork Quartz,17010101QUA, ,MT_54,FWS_54,2006,28,1,,1
+MT,Col Head,Kootenai River,Quartz Creek,West Fork Quartz,17010101QUA, ,MT_54,FWS_54,2007,15,1,,1
+MT,Col Head,Kootenai River,Quartz Creek,West Fork Quartz,17010101QUA, ,MT_54,FWS_54,2008,32,1,,1
+MT,Col Head,Kootenai River,Quartz Creek,West Fork Quartz,17010101QUA, ,MT_54,FWS_54,2009,13,1,,1
+MT,Col Head,Kootenai River,Quartz Creek,West Fork Quartz,17010101QUA, ,MT_54,FWS_54,2010,27,1,,1
+MT,Col Head,Kootenai River,Quartz Creek,West Fork Quartz,17010101QUA, ,MT_54,FWS_54,2011,30,1,,1
+MT,Col Head,Kootenai River,Quartz Creek,West Fork Quartz,17010101QUA, ,MT_54,FWS_54,2012,4,1,,1
+MT,Col Head,Kootenai River,Quartz Creek,West Fork Quartz,17010101QUA, ,MT_54,FWS_54,2013,5,1,,1
+MT,Col Head,Kootenai River,Quartz Creek,West Fork Quartz,17010101QUA, ,MT_54,FWS_54,2014,19,1,,1
+MT,Col Head,Kootenai River,Quartz Creek,West Fork Quartz,17010101QUA, ,MT_54,FWS_54,2015,5,1,,1
+MT,Col Head,Kootenai River,Quartz Creek,West Fork Quartz,17010101QUA, ,MT_54,FWS_54,2016,6,1,,1
+MT,Col Head,Kootenai River,Quartz Creek,West Fork Quartz,17010101QUA, ,MT_54,FWS_54,2017,18,1,,1
+MT,Col Head,Kootenai River,Quartz Creek,West Fork Quartz,17010101QUA, ,MT_54,FWS_54,2018,0,1,,1
+MT,Col Head,Kootenai River,Quartz Creek,West Fork Quartz,17010101QUA, ,MT_54,FWS_54,2019,7,1,,1
+MT,Col Head,Kootenai River,Quartz Creek,West Fork Quartz,17010101QUA, ,MT_54,FWS_54,2020,6,1,,1
+MT,Col Head,Kootenai River,Quartz Creek,West Fork Quartz,17010101QUA, ,MT_54,FWS_54,2021,4,1,,1
+MT,Col Head,Kootenai River,Quartz Creek,West Fork Quartz,17010101QUA, ,MT_54,FWS_54,2022,0,1,,1
+MT,Col Head,Kootenai River,Quartz Creek,West Fork Quartz,17010101QUA, ,MT_54,FWS_54,2023,0,,,
+BC,Col Head,Lake Koocanusa,Wigwam River,Wigwam River Canada,17010106WIG, ,MT_148,FWS_148,1995,247,1,,0
+BC,Col Head,Lake Koocanusa,Wigwam River,Wigwam River Canada,17010106WIG,Kovach_4,MT_148,FWS_148,1996,500,1,,0
+BC,Col Head,Lake Koocanusa,Wigwam River,Wigwam River Canada,17010106WIG,Kovach_4,MT_148,FWS_148,1997,581,1,,0
+BC,Col Head,Lake Koocanusa,Wigwam River,Wigwam River Canada,17010106WIG,Kovach_4,MT_148,FWS_148,1998,673,1,,0
+BC,Col Head,Lake Koocanusa,Wigwam River,Wigwam River Canada,17010106WIG,Kovach_4,MT_148,FWS_148,1999,838,1,,0
+BC,Col Head,Lake Koocanusa,Wigwam River,Wigwam River Canada,17010106WIG,Kovach_4,MT_148,FWS_148,2000,1186,1,,0
+BC,Col Head,Lake Koocanusa,Wigwam River,Wigwam River Canada,17010106WIG,Kovach_4,MT_148,FWS_148,2001,1477,1,,0
+BC,Col Head,Lake Koocanusa,Wigwam River,Wigwam River Canada,17010106WIG,Kovach_4,MT_148,FWS_148,2002,1881,1,,0
+BC,Col Head,Lake Koocanusa,Wigwam River,Wigwam River Canada,17010106WIG,Kovach_4,MT_148,FWS_148,2003,2043,1,,0
+BC,Col Head,Lake Koocanusa,Wigwam River,Wigwam River Canada,17010106WIG,Kovach_4,MT_148,FWS_148,2004,2106,1,,0
+BC,Col Head,Lake Koocanusa,Wigwam River,Wigwam River Canada,17010106WIG,Kovach_4,MT_148,FWS_148,2005,635,1,,0
+BC,Col Head,Lake Koocanusa,Wigwam River,Wigwam River Canada,17010106WIG,Kovach_4,MT_148,FWS_148,2006,2285,1,,0
+BC,Col Head,Lake Koocanusa,Wigwam River,Wigwam River Canada,17010106WIG,Kovach_4,MT_148,FWS_148,2007,1850,1,,0
+BC,Col Head,Lake Koocanusa,Wigwam River,Wigwam River Canada,17010106WIG,Kovach_4,MT_148,FWS_148,2008,1827,1,,0
+BC,Col Head,Lake Koocanusa,Wigwam River,Wigwam River Canada,17010106WIG,Kovach_4,MT_148,FWS_148,2009,1567,1,,0
+BC,Col Head,Lake Koocanusa,Wigwam River,Wigwam River Canada,17010106WIG,Kovach_4,MT_148,FWS_148,2010,1114,1,,0
+BC,Col Head,Lake Koocanusa,Wigwam River,Wigwam River Canada,17010106WIG,Kovach_4,MT_148,FWS_148,2011,1198,1,,0
+BC,Col Head,Lake Koocanusa,Wigwam River,Wigwam River Canada,17010106WIG,Kovach_4,MT_148,FWS_148,2012,1367,1,,0
+BC,Col Head,Lake Koocanusa,Wigwam River,Wigwam River Canada,17010106WIG,Kovach_4,MT_148,FWS_148,2013,1441,1,,0
+BC,Col Head,Lake Koocanusa,Wigwam River,Wigwam River Canada,17010106WIG,Kovach_4,MT_148,FWS_148,2014,1420,1,,0
+BC,Col Head,Lake Koocanusa,Wigwam River,Wigwam River Canada,17010106WIG, ,MT_148,FWS_148,2015,1601,1,,0
+BC,Col Head,Lake Koocanusa,Wigwam River,Wigwam River Canada,17010106WIG, ,MT_148,FWS_148,2016,1561,1,,0
+BC,Col Head,Lake Koocanusa,Wigwam River,Wigwam River Canada,17010106WIG, ,MT_148,FWS_148,2017,1607,1,,0
+BC,Col Head,Lake Koocanusa,Wigwam River,Wigwam River Canada,17010106WIG, ,MT_148,FWS_148,2018,1408,1,,0
+BC,Col Head,Lake Koocanusa,Wigwam River,Wigwam River Canada,17010106WIG, ,MT_148,FWS_148,2019,888,1,,0
+BC,Col Head,Lake Koocanusa,Wigwam River,Wigwam River Canada,17010106WIG, ,MT_148,FWS_148,2020,1042,1,,0
+BC,Col Head,Lake Koocanusa,Wigwam River,Wigwam River Canada,17010106WIG,,MT_148,FWS_148,2021,922,1,,0
+BC,Col Head,Lake Koocanusa,Wigwam River,Wigwam River Canada,17010106WIG,,MT_148,FWS_148,2022,1070,1,,0
+BC,Col Head,Lake Koocanusa,Wigwam River,Wigwam River Canada,17010106WIG,Kovach_4,MT_148,FWS_148,2023,1163,,,
+MT,Col Head,Lake Koocanusa,Wigwam River,Wigwam River US,17010106WIG,Kovach_4,MT_152,FWS_152,1996,12,1,,1
+MT,Col Head,Lake Koocanusa,Wigwam River,Wigwam River US,17010106WIG,Kovach_4,MT_152,FWS_152,1997,17,1,,1
+MT,Col Head,Lake Koocanusa,Wigwam River,Wigwam River US,17010106WIG,Kovach_4,MT_152,FWS_152,1998,6,1,,1
+MT,Col Head,Lake Koocanusa,Wigwam River,Wigwam River US,17010106WIG,Kovach_4,MT_152,FWS_152,1999,21,1,,1
+MT,Col Head,Lake Koocanusa,Wigwam River,Wigwam River US,17010106WIG,Kovach_4,MT_152,FWS_152,2000,9,1,,1
+MT,Col Head,Lake Koocanusa,Wigwam River,Wigwam River US,17010106WIG,Kovach_4,MT_152,FWS_152,2001,19,1,,1
+MT,Col Head,Lake Koocanusa,Wigwam River,Wigwam River US,17010106WIG,Kovach_4,MT_152,FWS_152,2002,11,1,,1
+MT,Col Head,Lake Koocanusa,Wigwam River,Wigwam River US,17010106WIG,Kovach_4,MT_152,FWS_152,2003,10,1,,1
+MT,Col Head,Lake Koocanusa,Wigwam River,Wigwam River US,17010106WIG,Kovach_4,MT_152,FWS_152,2004,27,1,,1
+MT,Col Head,Lake Koocanusa,Wigwam River,Wigwam River US,17010106WIG,Kovach_4,MT_152,FWS_152,2005,7,1,g,1
+MT,Col Head,Lake Koocanusa,Wigwam River,Wigwam River US,17010106WIG,Kovach_4,MT_152,FWS_152,2006,13,1,,1
+MT,Col Head,Lake Koocanusa,Wigwam River,Wigwam River US,17010106WIG,Kovach_4,MT_152,FWS_152,2007,33,1,,1
+MT,Col Head,Lake Koocanusa,Wigwam River,Wigwam River US,17010106WIG,Kovach_4,MT_152,FWS_152,2008,6,1,,1
+MT,Col Head,Lake Koocanusa,Wigwam River,Wigwam River US,17010106WIG,Kovach_4,MT_152,FWS_152,2009,8,1,,1
+MT,Col Head,Lake Koocanusa,Wigwam River,Wigwam River US,17010106WIG,Kovach_4,MT_152,FWS_152,2010,4,1,,1
+MT,Col Head,Lake Koocanusa,Wigwam River,Wigwam River US,17010106WIG,Kovach_4,MT_152,FWS_152,2011,8,1,,1
+MT,Col Head,Lake Koocanusa,Wigwam River,Wigwam River US,17010106WIG,Kovach_4,MT_152,FWS_152,2012,3,1,,1
+MT,Col Head,Lake Koocanusa,Wigwam River,Wigwam River US,17010106WIG,Kovach_4,MT_152,FWS_152,2013,6,1,,1
+MT,Col Head,Lake Koocanusa,Wigwam River,Wigwam River US,17010106WIG,Kovach_4,MT_152,FWS_152,2014,7,1,,1
+MT,Col Head,Lake Koocanusa,Wigwam River,Wigwam River US,17010106WIG, ,MT_152,FWS_152,2015,1,1,,1
+MT,Col Head,Lake Koocanusa,Wigwam River,Wigwam River US,17010106WIG, ,MT_152,FWS_152,2017,5,1,,1
+MT,Col Head,Lake Koocanusa,Wigwam River,Wigwam River US,17010106WIG, ,MT_152,FWS_152,2018,2,1,,1
+MT,Col Head,Lake Koocanusa,Wigwam River,Wigwam River US,17010106WIG, ,MT_152,FWS_152,2021,6,1,,1
+MT,Col Head,Lake Koocanusa,Wigwam River,Wigwam River US,17010106WIG, ,MT_152,FWS_152,2022,9,1,,1
+MT,Col Head,Lake Koocanusa,Wigwam River,Wigwam River US,17010106WIG,Kovach_4,MT_152,FWS_152,2023,4,,,
+BC,Col Head,Lake Koocanusa,Wildhorse Creek,Wildhorse Creek,TC1,,,,2016,171,1,,0
+BC,Col Head,Lake Koocanusa,Wildhorse Creek,Wildhorse Creek,TC1,,,,2017,133,1,,0
+BC,Col Head,Lake Koocanusa,Wildhorse Creek,Wildhorse Creek,TC1,,,,2018,137,1,,0
+BC,Col Head,Lake Koocanusa,Wildhorse Creek,Wildhorse Creek,TC1,,,,2019,89,1,,0
+BC,Col Head,Lake Koocanusa,Wildhorse Creek,Wildhorse Creek,TC1,,,,2020,147,1,,0
+BC,Col Head,Lake Koocanusa,Wildhorse Creek,Wildhorse Creek,TC1,,,,2021,133,1,,0
+BC,Col Head,Lake Koocanusa,Wildhorse Creek,Wildhorse Creek,TC1,,,,2023,145,,,
