@@ -2,7 +2,7 @@
 
 ### bull trout integrated population model ###
 
-# 7.3.24
+# 11.21.24
 # madaline cochrane
 
 
@@ -12,7 +12,7 @@ library(ggplot2)
 library(mcmcplots)
 library(scales)
 library(tidyhydat)
-
+library(bayestestR)
 
 # set working directory
 setwd("C:\\Users\\maddy\\OneDrive - Montana State University\\Koocanusa")
@@ -37,6 +37,40 @@ adult.bull.net.sum<-bull.raw.net.dat%>%
   group_by(Section, YYYY,NetNumb) %>%
   summarise(n = n())
 head(adult.bull.net.sum)
+
+#ggplot(data=bull.raw.net.dat, aes(x=Length_mm))+geom_histogram()+facet_wrap(~YYYY)
+# what percentage of fish are > 75cm after restriction in 2015 goes into effect
+bull.raw.net.dat%>%filter(YYYY>2014)%>%
+  mutate(big_fish = if_else(Length_mm>=750,1,0))%>%group_by(big_fish)%>%
+  count()
+16/542 # only 3% of fish are larger or equal to 75cm
+
+#########################################
+## look at condition across years
+adult.bull.net.sum2<-bull.raw.net.dat%>%
+  mutate(Stage = if_else(Length_mm >= 500,"A","SA"))%>%  # adults are >= 500 mm
+  filter(Stage == "A")%>%
+  group_by(Section, YYYY,NetNumb)
+
+condition<-adult.bull.net.sum2 %>% group_by(YYYY) %>% tidyr::drop_na(ConditionFultonsK) %>% filter(ConditionFiltered == TRUE)%>%
+  filter(ConditionFultonsK >0)%>% filter(YYYY >1979) %>% dplyr::select(YYYY, Length_mm,Weight_g,Date,ConditionFultonsK,
+                                                                       ConditionFiltered)%>%
+  mutate(FultonK = (10^5*Weight_g) / (Length_mm^3))
+condition$ConditionFultonsK = as.numeric(condition$ConditionFultonsK)
+condition <- condition %>% summarise(meanCondition = mean(FultonK,na.rm =T), sdCondition = sd(FultonK,na.rm =T))
+
+ggplot(data=condition, aes(x=YYYY, y=meanCondition))+geom_point()+
+  geom_errorbar(aes(ymin=meanCondition-sdCondition, ymax=meanCondition+sdCondition),alpha=0.2)+
+  geom_smooth()+
+  #geom_line()+
+  theme_minimal()+
+  labs(x="Year",y="Fulton's condition factor")+
+  theme(axis.text.x=element_text(angle=45,hjust=1),#text = element_text(size = 20),
+        plot.background = element_rect(fill = 'white', colour = 'white'))
+#ggsave("Results/summary/bt-condition.png",width = 4, height = 4)
+
+
+
 
 
 # read in spring net soak times
@@ -67,14 +101,17 @@ head(adult.bull.net.final2)
 # nets per year summary
 print(adult.bull.net.sums %>% group_by(YYYY)%>%summarise(n=n()),n=100)
 
-ggplot()+
-  geom_boxplot(data=adult.bull.net.sums,aes(x=YYYY,y=cpue,group=YYYY))+
-  scale_x_continuous(minor_breaks = seq(1976,2022,2),
-                     breaks=seq(1976,2021,4))+
-  scale_y_continuous(limits=c(0,9),breaks=seq(0,10,2),expand=c(0,0))+
-  labs(x="Year",y="Catch per Net")+
-  theme_classic()+
-  theme(axis.text.x=element_text(angle=45,hjust=1))
+adult<-adult.bull.net.sums%>%filter(YYYY>1979)%>%
+  ggplot()+
+  geom_boxplot(aes(x=YYYY,y=cpue,group=YYYY))+
+  scale_x_continuous(limits=c(1979,2024), minor_breaks = seq(1980,2022,2),
+                     breaks=seq(1980,2022,4),expand=c(0,0))+
+  scale_y_continuous(limits=c(0,9),breaks=seq(0,10,2),expand=c(0.01,0))+
+  labs(x="Year",y="Adult CPUE")+
+  theme_minimal()+
+  theme(axis.text.x=element_text(angle=45,hjust=1),text = element_text(size = 20),
+        plot.background = element_rect(fill = 'white', colour = 'white'))
+adult
 # save adult cpue by year figure
 #ggsave("Results/summary/adult.bt.cpue.png",width = 8, height = 6) 
 
@@ -102,7 +139,29 @@ subadult.bull.net.sums <- subadult.bull.net.sums %>%
 tail(subadult.bull.net.sums)
 
 # view sub-adult cpue by year
-ggplot(data=subadult.bull.net.sums, aes(x=YYYY,y=cpue,group=YYYY))+geom_boxplot()
+sub.cpue<-ggplot(data=subadult.bull.net.sums, aes(x=YYYY,y=cpue,group=YYYY))+
+  geom_boxplot()+
+  scale_x_continuous(limits=c(1979,2024), minor_breaks = seq(1980,2022,2),
+                     breaks=seq(1980,2022,4),expand=c(0,0))+
+  scale_y_continuous(limits=c(0,13),breaks=seq(0,12,2),expand=c(0,0))+
+  labs(x="Year",y="Sub-Adult CPUE")+
+  theme_minimal()+
+  theme(axis.text.x=element_text(angle=45,hjust=1),text = element_text(size = 20),
+              plot.background = element_rect(fill = 'white', colour = 'white'))
+sub.cpue
+# save adult cpue by year figure
+#ggsave("Results/summary/adult.bt.cpue.png",width = 8, height = 6) 
+
+
+### stacked CPUE plots
+duplot<-cowplot::plot_grid(adult +theme(axis.title.x = element_blank(),
+                                        axis.text.x = element_blank()),
+                           sub.cpue +theme(), 
+                           nrow = 2, ncol =1, labels = "auto", align = "v")
+duplot
+#ggsave("Results/summary/bt.cpue.png",width = 10, height =10,units=c("in"),dpi=300)
+
+
 
 
 # add capture number as id column
@@ -114,7 +173,7 @@ subadult.bull.net.final2<-tidyr::spread(subadult.bull.net.sums,key=YYYY, value=c
 head(subadult.bull.net.final2)
 
 # view sub-adult cpue distribution by year (take home = many zeros)
-ggplot(data=subadult.bull.net.sums, aes(x=cpue))+geom_histogram()+facet_wrap(~YYYY)
+#ggplot(data=subadult.bull.net.sums, aes(x=cpue))+geom_histogram()+facet_wrap(~YYYY)
 
 
 
@@ -125,6 +184,7 @@ weight.yr <- bull.raw.net.dat %>%
   mutate(Stage = if_else(Length_mm >= 500,"A","SA"))%>% 
   filter(Stage == "A")%>%
   mutate(wt_lbs = Weight_g*0.00220462)%>% # converging to lbs
+  mutate(wt_kg = Weight_g*0.001)%>% # converging to lbs
   summarise(wt=mean(wt_lbs,na.rm=T))%>%
   rename(Season = YYYY)
 
@@ -149,6 +209,18 @@ weight.yr$wt[10]<- 3.824006
 
 # view adult bull trout weight by year
 ggplot(data=weight.yr,aes(x=Season,y=wt))+geom_point()+geom_line()
+
+
+# average weights
+bull.raw.net.dat %>% 
+  mutate(Stage = if_else(Length_mm >= 500,"A","SA"))%>% 
+  #filter(Stage == "A")%>%
+  group_by(Stage)%>%
+  mutate(wt_kg = Weight_g*0.001)%>%
+  summarise(mean = mean(wt_kg,na.rm=T),sd = sd(wt_kg,na.rm=T))
+
+
+
 
 
 
@@ -296,11 +368,14 @@ head(bt.redds.combined.wide) # years are columns
 
 # summary figure of wigwam and grave creek redd counts over time
 bt.redds.combined %>% filter(LocalPopulation == "Grave Creek" | LocalPopulation == "Wigwam River")%>%
+  filter(Year > 1982)%>%
   ggplot(aes(x=Year,y=Redds,color=LocalPopulation))+geom_point()+geom_line()+
-  theme_bw()+
-  scale_y_continuous(expand=c(0,0))+
+  theme_bw()+labs(y="Redd Count")+
+  scale_y_continuous(expand=c(0,0),limits=c(0,2400))+
+  scale_x_continuous(expand=c(0.01,0),breaks=c(1985,1990,1995,2000,2005,2010,2015,2020))+theme_minimal()+
   theme(legend.title=element_blank(),
-        legend.position = c(0.2,0.8))
+        legend.position = c(0.2,0.8),
+        plot.background = element_rect(fill = 'white', colour = 'white'))
 #ggsave("Results/summary/bt.redd.data.png",width = 6, height = 4)
 
 
@@ -401,7 +476,7 @@ bull.river.q2$rollingQ2 <- rollingQ2
 bull.river.low <- bull.river.q2 %>%
   mutate(month = lubridate::month(Date))%>%
   mutate(Year = lubridate::year(Date))%>%
-  filter(month == 7 | month == 8 | month == 9)%>% # only want summer months
+  filter(month ==6 | month == 7 | month == 8 | month == 9)%>% # only want summer months
   group_by(Year)%>%
   summarise(min(rollingQ2))%>%
   dplyr::rename(summerLowflow = `min(rollingQ2)`)%>%
@@ -450,26 +525,30 @@ ggplot(data=bull.q.winter.peak, aes(x=Year, y =maxWinterq))+geom_point()+geom_li
 
 
 ################ read in koocanusa pool elevation data from libby dam 
-pool.elev <- read.csv("Data/koocanusa.elevation.csv",header=T)
+#pool.elev <- read.csv("Data/koocanusa.elevation.csv",header=T)
 #head(pool.elev)
 
-pool.elev$DateTime <- # change date from character to posixct
-  as.POSIXct(pool.elev$DateTime, tz = "", format="%m/%d/%Y %H:%M") 
+#pool.elev$DateTime <- # change date from character to posixct
+#  as.POSIXct(pool.elev$DateTime, tz = "", format="%m/%d/%Y %H:%M") 
 #str(pool.elev)
 
 # want average elevation from year leading up to count data (gill net occurred in spring) 
-pool.elev <- pool.elev %>%
-  mutate(month = lubridate::month(DateTime))%>% # adding a column for month 
-  mutate(survival_yr = ifelse(month < 6,year-1,year)) # 
+#pool.elev <- pool.elev %>%
+#  mutate(month = lubridate::month(DateTime))%>% # adding a column for month 
+#  mutate(survival_yr = ifelse(month < 6,year-1,year)) # 
 
-pool.elev.sum <- pool.elev %>% filter(survival_yr > 1978)%>%
-  group_by(survival_yr) %>% summarise(meanPoolElev = mean(Forebay_Avg_Elevation_ft))%>% # average elevation
-  mutate(scale_avgPoolElevation = scale(meanPoolElev))%>%ungroup() # scale elevation to be compatible with other covariates
+#pool.elev.sum <- pool.elev %>% filter(survival_yr > 1978)%>%
+#  mutate(Forebay_Avg_Elevation_m = Forebay_Avg_Elevation_ft*0.3048)%>%
+#  group_by(survival_yr) %>% summarise(meanPoolElev = mean(Forebay_Avg_Elevation_ft))%>% # average elevation
+#  mutate(scale_avgPoolElevation = scale(meanPoolElev))%>%ungroup() # scale elevation to be compatible with other covariates
 
 # view pool elevation over time
-ggplot(data=pool.elev.sum, aes(x=survival_yr, y=meanPoolElev))+geom_point()+geom_line()
+#ggplot(data=pool.elev.sum, aes(x=survival_yr, y=meanPoolElev))+geom_point()+geom_line()
 
 
+#pool.elev %>% filter(survival_yr > 1980)%>%
+#  mutate(Forebay_Avg_Elevation_m = Forebay_Avg_Elevation_ft*0.3048)%>%
+#  summarise(meanPoolElev = mean(Forebay_Avg_Elevation_m),sdPoolElev = sd(Forebay_Avg_Elevation_m))
 
 
 ############################ read in kokanee estimates from separate r script / analysis ###################
@@ -500,8 +579,10 @@ jags.data<-list(y.adult=adult.bull.net.final2[,6:49], # adult bt cpue, 1980 - 20
                 low.flow.recruitment = bull.river.low$scale_summerLowflow[6:45], # low summer flow data from 1981 - 2020 for bull river, accounting for 3 yr lag to NSub estimate
                 peak.flow = bull.q.winter.peak$scale_maxWinterq[5:44], # max winter discharge from 1980 - 2019 for bull river
                 
-                pool.elevation.recruit = c(pool.elev.sum$scale_avgPoolElevation[5:44]), # pool elevation data for 1983 - 2022
+                #pool.elevation.recruit = c(pool.elev.sum$scale_avgPoolElevation[5:44]), # pool elevation data for 1983 - 2022
                 ca.reg.changes = c(rep(1,16),rep(0,27))) # 1980 - 1995 no sig. fishing regs, 1996 - 2022 catch and release only 
+
+#cor.test(kok,ca.reg.changes) correlation = -0.62, p < 0.001
 
 # jags model 
 cat(file="jags/s-r-new2.txt", "
@@ -512,13 +593,13 @@ model{
   for (t in 1:(nYears-4)) { # 1984 - 2023 (40 observtions) as recruitment is lagged by 4 yrs
 
   # covariate effects on alpha parameter (density-independent) in Ricker model
-    alpha[t] <- exp(alpha_sr + beta.low.flow*low.flow.recruitment[t] + beta.peak.winter*peak.flow[t] + 
-                  beta.pool.recruitment*pool.elevation.recruit[t])
+    alpha[t] <- exp(alpha_sr + beta.low.flow*low.flow.recruitment[t] + beta.peak.winter*peak.flow[t] ) 
+    # + beta.pool.recruitment*pool.elevation.recruit[t]
     
   # Ricker model for sub-adult BT recruitment
     log_predR[t+4] <- log(biomass[t]) + log(alpha[t]) - beta_sr*biomass[t] 
     
-    biomass[t]<-weight[t]*Nadults[t]*mean.fish.per.redd 
+    biomass[t]<-weight[t]*Nadults[t]*mean.fish.per.redd  
     
     logR_Obs[t+4] ~ dnorm(log_predR[t+4], tauR_process) # recruitment includes process error/unaccounted for variation
     Nsubadults[t+4] <- exp(logR_Obs[t+4]) # 4-yr lag and log transformation
@@ -617,7 +698,7 @@ params <- c("Nadults","r.a","Nsubadults", "lambda","q", "r.sa","r.a.redd",
             "lambdaA","S.a", "sd.S.a","transition.prob","a.int",
             "beta.kok","beta.dens","sd.lambda","mean.lambda", "transition.prob",
             "alpha","beta.low.flow","beta.peak.winter",
-            "beta.reg.change", "beta.pool.recruitment") 
+            "beta.reg.change") # "beta.pool.recruitment" 
 
 # initial parameter draws
 inits <- function(){
@@ -641,24 +722,72 @@ inits <- function(){
     'Nsubadults[2]' = runif(1,1000,2000),
     'Nsubadults[3]' = runif(1,1000,2000),
     'Nsubadults[4]' = runif(1,1000,1500),
-    beta.low.flow.redd = runif(1,-0.5,0.5),
+    #beta.low.flow.redd = runif(1,-0.5,0.5),
     beta.low.flow = runif(1,-0.5,0.5),
     beta.peak.winter = runif(1,-0.5,0.5))
 }
 
 # run model - this is going to take awhile 
-#full.mod2 <- jags.parallel(data = jags.data, model.file = "jags/s-r-new2.txt", parameters.to.save = params,
-#              inits=inits, n.chains = 3, n.iter = 25000, n.burnin = 23000, n.thin=5)
+full.mod2 <- jags.parallel(data = jags.data, model.file = "jags/s-r-new2.txt", parameters.to.save = params,
+              inits=inits, n.chains = 3, n.iter = 25000, n.burnin = 23000, n.thin=5)
 
 # view all results
 options(max.print=1000000)
 print(full.mod2,digits = 3)
 mcmcplot(full.mod2) # check for convergence, rhat values, etc
 
+
+full.mod2$BUGSoutput$mean$beta_sr
+quantile(full.mod2$BUGSoutput$sims.list$beta_sr,0.025)
+quantile(full.mod2$BUGSoutput$sims.list$beta_sr,0.975)
+
+full.mod2$BUGSoutput$mean$q.lake
+quantile(full.mod2$BUGSoutput$sims.list$q.lake,0.025)
+quantile(full.mod2$BUGSoutput$sims.list$q.lake,0.975)
+
+full.mod2$BUGSoutput$mean$q.lake.sa
+quantile(full.mod2$BUGSoutput$sims.list$q.lake.sa,0.025)
+quantile(full.mod2$BUGSoutput$sims.list$q.lake.sa,0.975)
+
+1/(1+exp(-full.mod2$BUGSoutput$mean$a.int))
+1/(1+exp(-quantile(full.mod2$BUGSoutput$sims.list$a.int,0.025)))
+1/(1+exp(-quantile(full.mod2$BUGSoutput$sims.list$a.int,0.975)))
+
 # save jag model results
 #saveRDS(full.mod2, file="R/full.mod2.ipm") 
 # read in datafile
 full.mod2 <-readRDS(file="R/full.mod2.ipm")
+
+# pairwise posterior correlations
+bayesplot::mcmc_pairs(full.mod2$BUGSoutput$sims.matrix,pars = c("beta.reg.change","beta.kok","beta.dens"))
+bayesplot::mcmc_scatter(full.mod2$BUGSoutput$sims.matrix, pars = c("beta.reg.change","beta.kok"))+
+  geom_vline(xintercept=0)+geom_hline(yintercept=0)
+bayesplot::mcmc_scatter(full.mod2$BUGSoutput$sims.matrix, pars = c("beta.kok","beta.dens"))+
+  geom_vline(xintercept=0)+geom_hline(yintercept=0)
+
+
+### probability of distribution for beta values
+median(full.mod2$BUGSoutput$sims.list$beta.kok) # positive
+p_direction(x=full.mod2$BUGSoutput$sims.list$beta.kok, method="direct",null=0)
+# 99% proportion of the posterior distribution that is of the median’s sign
+
+median(full.mod2$BUGSoutput$sims.list$beta.dens) # negative
+p_direction(x=full.mod2$BUGSoutput$sims.list$beta.dens, method="direct",null=0)
+# 100% proportion of the posterior distribution that is of the median’s sign
+
+median(full.mod2$BUGSoutput$sims.list$beta.low.flow) # positive 
+p_direction(x=full.mod2$BUGSoutput$sims.list$beta.low.flow, method="direct",null=0)
+# 85% proportion of the posterior distribution that is of the median’s sign
+
+median(full.mod2$BUGSoutput$sims.list$beta.peak.winter) # negative (barely) 
+p_direction(x=full.mod2$BUGSoutput$sims.list$beta.peak.winter, method="direct",null=0)
+# 72% proportion of the posterior distribution that is of the median’s sign
+
+median(full.mod2$BUGSoutput$sims.list$beta.reg.change) # negative
+p_direction(x=full.mod2$BUGSoutput$sims.list$beta.reg.change, method="direct",null=0)
+# 100% proportion of the posterior distribution that is of the median’s sign
+
+
 
 
 ############# visualize co-variate relationships on adult survival 
@@ -672,6 +801,9 @@ meanNlake<-mean(Nlake.est)
 #beta.dens<-full.mod2$BUGSoutput$mean$beta.dens # effect of bull trout density on adult survival
 #beta.kok<-c(full.mod2$BUGSoutput$mean$beta.kok) # kokanee biomass effect on adult survival
 #beta.reg.change<-c(full.mod2$BUGSoutput$mean$beta.reg.change) # effect of canadian fishing regulation change on adult survival
+
+
+
 
 ##### varying available kokanee biomass
 kok.sim.dat <- as.matrix(data.frame(constant = 1,
@@ -738,7 +870,7 @@ predicted_prob_sum2 <- kok.pp.sum2 %>%
 head(predicted_prob_sum2)
 
 
-## final plot to view effect of kokanee availability of adult bull trout survival
+##  plot to view effect of kokanee availability of adult bull trout survival
 ggplot(data = predicted_prob_sum2, aes(x =  AvailKok, y = mean_pp)) +
   geom_ribbon(aes(ymin=lower_pp,ymax=upper_pp),alpha=0.1)+
   geom_smooth(method = 'loess', formula = 'y ~ x',color="black",size=1,se=FALSE) + 
@@ -746,7 +878,7 @@ ggplot(data = predicted_prob_sum2, aes(x =  AvailKok, y = mean_pp)) +
   #geom_point(data=dat,aes(x=kok,y=survival))+
   labs(x="Available Kokanee Biomass (lbs)",y="Adult Bull Trout Survival") +
   scale_x_continuous(expand=c(0,0),labels = comma)
-#ggsave("Results/summary/kookanee_on_btsurvival.png",width = 6, height =4)
+
 
 
 ### plot the effect of kokanee on survival across different fishing regulations
@@ -755,7 +887,7 @@ kok.sim.dat <- as.matrix(data.frame(constant = 1,
                                     kok = seq(from = min(predict$running_biomass_scale,na.rm=T), 
                                               to = max(predict$running_biomass_scale,na.rm=T), 
                                               length.out=20),
-                                    ca.reg.changes=0)) # no significant fishing regs
+                                    ca.reg.changes=0)) #  significant fishing regs
 #head(kok.sim.dat)
 
 # posterior draws
@@ -797,6 +929,8 @@ ggplot(data = kok.pp.sum, aes(x = kok, y = mean_pp)) +
   geom_line() + 
   theme_bw()+ xlab("Kokanee")+ ylab("Survival")
 
+
+
 # convert scaled kokanee to actual biomass
 # scale subtracts the mean and divides by the sd
 # so multifply by sd then add mean to transform back
@@ -812,7 +946,7 @@ predicted_prob_sum <- kok.pp.sum %>%
   mutate("Release" = "Y")
 
 predicted_prob_sum3<-full_join(predicted_prob_sum,predicted_prob_sum2)
-predicted_prob_sum3$`Catch Release` <- as.factor(predicted_prob_sum3$`Catch Release`)
+predicted_prob_sum3$Release <- as.factor(predicted_prob_sum3$Release)
 
 # plotting
 ggplot(data = predicted_prob_sum3, aes(x =  AvailKok, y = mean_pp,group=`Release`,
@@ -823,6 +957,36 @@ ggplot(data = predicted_prob_sum3, aes(x =  AvailKok, y = mean_pp,group=`Release
   theme(legend.position = c(0.8,0.2))+
   labs(x="Kokanee Biomass Available (lbs)",y="Adult Bull Trout Survival") +
   scale_x_continuous(expand=c(0,0),labels = comma)+ scale_color_manual(values=c("#999999", "black"))
+
+predicted_prob_sum3 %>% filter(Release=="Y")%>%
+ggplot(aes(x =  AvailKok*0.453592, y = mean_pp)) +
+  geom_ribbon(aes(ymin=lower_pp,ymax=upper_pp),alpha=0.1)+
+  geom_smooth(method = 'loess', formula = 'y ~ x',color="black",size=1,se=FALSE) + 
+  theme_minimal()+ 
+  #geom_point(data=dat,aes(x=kok,y=survival))+
+  labs(x="Available Kokanee Biomass (kg)",y="Survival") +
+  scale_x_continuous(expand=c(0,0),labels = comma)+
+  theme(plot.margin = unit(c(0.8,0.8,0.8,0.8), "cm"),
+        plot.background = element_rect(fill = 'white', colour = 'white'),
+        axis.title.x = element_text(margin = margin(t = 10, r = 0, b = 0, l = 0)))
+#ggsave("Results/summary/PubFigs/Fig. 4.png",width = 8.5, height =8.5, units="cm", dpi=500)
+
+
+### want to get median increase in adult survival between two regulatory periods
+#head(predicted_prob_sum3)
+predicted_prob_sum3%>%filter(kok>0 & kok <0.2)
+((0.902-0.585)/0.585)*100 # 54% increase 
+
+
+# percent increase in survival
+# only using later half of study, e.g. regulations = yes
+predicted_prob_sum3<-predicted_prob_sum3%>%filter(Release=="Y")%>%arrange(kok)
+predicted_prob_sum3$median_pp[1] # 76% survival - lowest kokanee biomass
+predicted_prob_sum3$median_pp[20] # 98% survival - highest kokanee biomass
+((predicted_prob_sum3$median_pp[20]-predicted_prob_sum3$median_pp[1])/predicted_prob_sum3$median_pp[1])*100
+# 29% increase 
+
+
 
 
 
@@ -871,9 +1035,18 @@ ggplot(data = dd.pp.sum, aes(x = NumbLake*10000, y = mean_pp)) +
   geom_ribbon(aes(ymin=lower_pp,ymax=upper_pp),alpha=0.1)+
   geom_line(size=1.5) + 
   scale_x_continuous(expand=c(0,0))+
-  theme_bw()+ xlab("Bull Trout in Reservoir (n)")+ ylab("Adult Bull Trout Survival")
+  theme_minimal()+ xlab("Bull Trout in Reservoir (n)")+ ylab("Survival")+
+  theme(plot.margin = unit(c(0.8,0.8,0.8,0.8), "cm"),
+        plot.background = element_rect(fill = 'white', colour = 'white'),
+        axis.title.x = element_text(margin = margin(t = 10, r = 0, b = 0, l = 0)))
 #ggsave("Results/summary/density-bt.survival.png",width = 4, height = 4)
 
+max(Nlake.est) #  7188.721
+min(Nlake.est) # 1186
+dd.pp.sum$median_pp[2] # 92% survival - uses 2 b/c population was never 0
+dd.pp.sum$median_pp[20] # 87% survival
+((dd.pp.sum$median_pp[2]-dd.pp.sum$median_pp[20])/dd.pp.sum$median_pp[20])*100
+# 6% decrease
 
 
 
@@ -889,10 +1062,21 @@ ggplot(data=surv,aes(x=yrs,y=survival))+geom_point()+geom_line()+
 #ggsave("Results/summary/bt.survival.png",width = 4, height = 4)
 
 
-# avg survival from 1980 - 1994
-mean(surv$survival[1:15])
+# avg survival from 1980 - 1995
+mean(surv$survival[1:16]) # 50
+sd(surv$survival[1:16])
 # avg survival from 1998 - 2004
-mean(surv$survival[19:25])
+mean(surv$survival[19:25]) # 94
+sd(surv$survival[19:25])
+
+# overall mean
+mean(survival)
+sd(survival)
+
+min(survival) # 0.36
+max(survival) # 0.95
+
+
 
 
 #######################################
@@ -909,10 +1093,45 @@ res2 <- res2 %>% # only want last two digits of years
 ggplot(data=res2, aes(x=Nadult,y=Nreplace))+
   geom_text(aes(label=id))+
   geom_line(aes(x=line,y=line),color="grey")+
-  labs(x="Adult stock (n)", y="Adults lagged 6-yrs (n)")+theme_classic()+
-  annotate("text", x = 4900, y = 4500, label = "1:1",color="grey")
+  labs(x="Adult stock (n)", y="Adults lagged 6-yrs (n)")+theme_minimal()+
+  annotate("text", x = 4800, y = 4400, label = "1:1",color="darkgrey")+
+  theme(plot.margin = unit(c(0.8,0.8,0.8,0.8), "cm"),
+        plot.background = element_rect(fill = 'white', colour = 'white'),
+        axis.title.x = element_text(margin = margin(t = 10, r = 0, b = 0, l = 0)),
+        axis.title.y = element_text(margin = margin(t = 0, r = 10, b = 0, l = 0)))
 # yr represents the replacement year not the initial adult stock size 
 #ggsave("Results/summary/bt.sr.replacement.png",width = 6, height = 4)
+
+
+# need to lag sub-adult estimate for comparison in figure by 4 yrs
+Nsubadult.est<-c(full.mod2$BUGSoutput$mean$Nsubadults)
+Nsubadult.est2 <- Nsubadult.est[5:44] 
+Nadult.est2 <- Nadult.est[1:40]
+wt<-weight.yr$wt[5:44] # 1980-2019
+a <-c(exp(full.mod2$BUGSoutput$mean$alpha_sr))
+b<-c(full.mod2$BUGSoutput$mean$beta_sr)
+
+res<-tibble(Nadult.est2,wt,Nsubadult.est2,yrs=seq(1984,2023)) # yrs are for recruit yr
+res <- res %>% # only want last two digits of years
+  mutate(id=substr(yrs,nchar(yrs)-1,nchar(yrs)))
+
+res <- res %>%
+  mutate(biomass=wt*Nadult.est2*0.5)%>%
+  mutate(model_recruitment1 = log(biomass) + log(a) - b*biomass)%>%
+  mutate(model_recruitment = exp(model_recruitment1))%>%
+  mutate(residual = Nsubadult.est2 - model_recruitment)
+
+# how are residuals from stock-recruitment changing over time
+ggplot(data=res,aes(x=yrs,y=residual))+
+  geom_point()+
+  #geom_text(aes(label=id))+
+  #stat_smooth()+ # method="lm"
+  labs(x="Year",y="Residual")+theme_minimal()
+# negative values = Nestimate is lower than expected from best fit line
+#ggsave("Results/summary/diff.srcurve.Nsubestimate.png",width = 4, height = 4)
+
+
+ggplot(data=res, aes(x=biomass,y=Nsubadult.est2))+geom_point()
 
 
 
@@ -930,7 +1149,7 @@ mean.biomass<-c(mean(res$biomass))
 
 sr.sim.dat <- as.matrix(data.frame(constant = 1,
                                    biomass = seq(from = 0.001, to = max(res$biomass), 
-                                                 length.out=20)))
+                                                 length.out=50)))
 
 
 # posterior draws
@@ -971,14 +1190,22 @@ sr.pp.sum <- summarize(group_by(sr.pp.long, biomass), # summarize results
 sr.pp.sum$biomass <- as.numeric(sr.pp.sum$biomass)
 
 # plotting
-ggplot(data = sr.pp.sum, aes(x = biomass, y = exp(mean_pp))) +
+ggplot(data = sr.pp.sum, aes(x = biomass*0.453592, y = exp(mean_pp))) +
   geom_ribbon(aes(ymin=exp(lower_pp),ymax=exp(upper_pp)),alpha=0.1)+
+  #geom_point(size=3)+
   geom_line(size=1.5) + 
   scale_x_continuous(expand=c(0,80))+scale_y_continuous(expand=c(0,50))+
-  theme_bw()+
-  geom_point(data=res,aes(x=biomass, y=Nsubadult.est2))+
-  labs(x="Spawning Biomass (lbs)", y="Sub-Adult Recruits")
-#ggsave("Results/summary/s-r-curve.png",width = 6, height = 4)
+  theme_minimal()+
+  geom_point(data=res,aes(x=biomass*0.453592, y=Nsubadult.est2))+
+  labs(x="Spawning Biomass (kg)", y="Sub-Adult Recruits")+
+  theme(plot.margin = unit(c(0.8,0.8,0.8,0.8), "cm"),
+        plot.background = element_rect(fill = 'white', colour = 'white'),
+        axis.title.x = element_text(margin = margin(t = 10, r = 0, b = 0, l = 0)),
+        axis.title.y = element_text(margin = margin(t = 0, r = 10, b = 0, l = 0)))
+#ggsave("Results/summary/PubFigs/Fig. 2.png",width = 12, height =8.5, units="cm", dpi=500)
+
+
+
 
 # plotting with years instead of points
 ggplot(data = sr.pp.sum, aes(x = biomass, y = exp(mean_pp))) +
@@ -992,19 +1219,51 @@ ggplot(data = sr.pp.sum, aes(x = biomass, y = exp(mean_pp))) +
 
 
 
+# effect size 
+sr.pp.sum$median_pp[1]-sr.pp.sum$median_pp[20] # - 902
+sr.pp.sum$lower_pp[1]-sr.pp.sum$lower_pp[20] # - 530
+sr.pp.sum$upper_pp[1]-sr.pp.sum$upper_pp[20] # - 1614
+
+((sr.pp.sum$median_pp[20]-sr.pp.sum$median_pp[1])/sr.pp.sum$median_pp[1])*100 #≈ 37% increase
+((sr.pp.sum$lower_pp[20]-sr.pp.sum$lower_pp[1])/sr.pp.sum$lower_pp[1])*100 #≈ 35% increase
+((sr.pp.sum$upper_pp[20]-sr.pp.sum$upper_pp[1])/sr.pp.sum$upper_pp[1])*100 #≈ 44% increase
+
+
+# maximize recruitment 
+exp(max(sr.pp.sum$mean_pp)) # 2886 sub-adult individuals
+# biomass = 4348.8695 lb for max 
+4348.8695*0.453592 # 1973 kg for maximum sustainable yield
+tail(weight.yr) # current weight = 5.31 lb
+4348.8695*2/5.31 # 1638 = number of adults that maximizes recruitment with current bull trout weight
+
+
+# highest biomass = 13,318 kg
+13318*0.453592 # 6041
+exp(7.080432) # individuals at max biomass = 1188
+
+# number decrease
+2886-1188 
+# percent decrease
+((1188-2886)/2886)*100
+
+
+
+
 
 ######################################
 ### relationship between low flow and sub-adult recruitment  ####
+low.flow.recruitment2 = bull.river.low$scale_summerLowflow[6:45]
+
 sr.sim.dat <- as.matrix(data.frame(constant = 1,
-                                   low.flow.recruitment = seq(from = min(low.flow.recruitment), to = max(low.flow.recruitment), 
+                                   low.flow.recruitment = seq(from = min(low.flow.recruitment2), to = max(low.flow.recruitment2), 
                                                               length.out=20),
-                                   peak.flow = 0, pool.elevation.recruit = 0)) # set at averages
+                                   peak.flow = 0)) # set at averages pool.elevation.recruit = 0
 
 # posterior draws
 posterior.draws<-as.matrix(as.mcmc(full.mod2))
 posterior.draws<-as_tibble(posterior.draws)
 posterior.draws4<-posterior.draws %>%
-  dplyr::select(alpha_sr,beta.low.flow, beta.peak.winter,beta.pool.recruitment) # make sure this is in the same order as sim.dat # 
+  dplyr::select(alpha_sr,beta.low.flow, beta.peak.winter) # make sure this is in the same order as sim.dat #  ,beta.pool.recruitment
 #head(posterior.draws4)
 posterior.draws4<-as.matrix(posterior.draws4)
 
@@ -1052,86 +1311,24 @@ ggplot(data = sr.pp.sum, aes(x = LowFlow, y = mean_pp)) +
   geom_ribbon(aes(ymin=lower_pp,ymax=upper_pp),alpha=0.1)+
   geom_line(size=1.5) + 
   scale_x_continuous(expand=c(0,0),breaks=c(8,10,12,14,16))+
-  theme_bw()+
+  theme_minimal()+
   xlab(bquote('Low Flow ('~m^3~s^-1*' )'))+
-  labs(y="Sub-Adult Recruits")
-#ggsave("Results/summary/low.flow.on.recruits.png",width = 4, height = 4)
+  labs(y="Sub-Adult Recruits")+
+  theme(plot.margin = unit(c(0.8,0.8,0.8,0.8), "cm"),
+        plot.background = element_rect(fill = 'white', colour = 'white'),
+        axis.title.x = element_text(margin = margin(t = 10, r = 0, b = 0, l = 0)),
+        axis.title.y = element_text(margin = margin(t = 0, r = 10, b = 0, l = 0)))
+#ggsave("Results/summary/PubFigs/Fig. 3.png",width = 8.5, height =8.5, units="cm", dpi=500)
 
 
+# effect size 
+sr.pp.sum$median_pp[1]-sr.pp.sum$median_pp[20] # - 902
+sr.pp.sum$lower_pp[1]-sr.pp.sum$lower_pp[20] # - 530
+sr.pp.sum$upper_pp[1]-sr.pp.sum$upper_pp[20] # - 1614
 
-######################################
-### effect of pool elevation on sub-adult recruitment
-# alpha[t] <- exp(alpha_sr + beta.low.flow*low.flow.recruitment[t] + beta.peak.winter*peak.flow[t] + beta.pool.recruitment*pool.elevation.recruit[t]
-
-pool<-pool.elev.sum$scale_avgPoolElevation[5:44]
-
-sr.sim.dat <- as.matrix(data.frame(constant = 1,
-                                   low.flow.recruitment = 0,
-                                   peak.flow = 0,
-                                   pool.elevation = seq(from = min(pool), to = max(pool), 
-                                                        length.out=20)))
-
-
-# posterior draws
-posterior.draws<-as.matrix(as.mcmc(full.mod2))
-posterior.draws<-as_tibble(posterior.draws)
-#head(posterior.draws)
-posterior.draws4<-posterior.draws %>%
-  dplyr::select(alpha_sr,beta.low.flow, beta.peak.winter,beta.pool.recruitment) # make sure this is in the same order as sim.dat # 
-#head(posterior.draws4)
-posterior.draws4<-as.matrix(posterior.draws4)
-
-
-Xb <- t(sr.sim.dat %*% t(posterior.draws4)) # multiplying all posterior draws by each row
-#head(Xb)
-Xc<-exp(Xb)# transform
-#head(Xc)
-sr.pp <- as.data.frame(Xc)
-
-names(sr.pp) <- sr.sim.dat[, "pool.elevation"]
-#head(sr.pp)
-## these are draws for alpha - beta (still need to add log(biomass))
-
-sr.pp.long <- tidyr::gather(sr.pp, key = "pool.elevation")
-#head(sr.pp.long)
-sr.pp.long$pool.elevation<-as.numeric(sr.pp.long$pool.elevation)
-sr.pp.long <- sr.pp.long %>% 
-  mutate(value =  exp( log(mean.biomass) + log(value) - full.mod2$BUGSoutput$mean$beta_sr*mean.biomass) )
-
-sr.pp.sum <- summarize(group_by(sr.pp.long, pool.elevation), 
-                       median_pp = median(value),
-                       mean_pp = mean(value),
-                       lower_pp = quantile(value, probs = c(0.025)), 
-                       upper_pp = quantile(value, probs = c(0.975)),
-                       low10_pp = quantile(value, probs = c(0.1)),
-                       high90_pp = quantile(value, probs = c(0.90)),
-                       low25_pp = quantile(value, probs = c(0.25)),
-                       high75_pp = quantile(value, probs = c(0.75)))
-
-sr.pp.sum$pool.elevation <- as.numeric(sr.pp.sum$pool.elevation)
-
-# convert back to actual pool elevation
-m<-mean(pool.elev.sum$meanPoolElev,na.rm=T)
-s<-sd(pool.elev.sum$meanPoolElev,na.rm=T)
-
-#head(sr.pp.sum)
-sr.pp.sum <- sr.pp.sum %>%
-  mutate(step1 = pool.elevation*s)%>%
-  mutate(step2 = step1+m)%>%
-  rename(elev = step2)%>%
-  dplyr::select(-step1)
-#head(sr.pp.sum) # elevation in feet
-
-# libby dam pool elevation plot
-ggplot(data = sr.pp.sum, aes(x = elev, y = mean_pp)) +
-  geom_ribbon(aes(ymin=lower_pp,ymax=upper_pp),alpha=0.1)+
-  geom_line(size=1.5) + 
-  scale_x_continuous(expand=c(0,0))+
-  scale_y_continuous(expand=c(0,0))+
-  theme_bw()+
-  labs(y="Sub-Adult Recruits",x="Pool Elevation (ft)")
-#ggsave("Results/summary/pool.elevation.on.recruits.png",width = 4, height = 4)
-
+((sr.pp.sum$median_pp[20]-sr.pp.sum$median_pp[1])/sr.pp.sum$median_pp[1])*100 #≈ 37% increase
+((sr.pp.sum$lower_pp[20]-sr.pp.sum$lower_pp[1])/sr.pp.sum$lower_pp[1])*100 #≈ 35% increase
+((sr.pp.sum$upper_pp[20]-sr.pp.sum$upper_pp[1])/sr.pp.sum$upper_pp[1])*100 #≈ 44% increase
 
 
 
@@ -1145,15 +1342,13 @@ pe <- as.array(full.mod2$BUGSoutput$sims.array)
 bayesplot::mcmc_intervals(pe, pars= c("beta.dens",
                                       "beta.kok",
                                       "beta.low.flow",
-                                      "beta.peak.winter",
-                                      "beta.pool.recruitment"),
+                                      "beta.peak.winter"),
                           prob = 0.75, 
                           prob_outer = 0.9) + 
   scale_y_discrete(labels = c("beta.dens" = expression(paste(beta[S-density])), 
                               "beta.kok" = expression(paste(beta[S-kok])),
                               "beta.low.flow" = expression(paste(beta[R-lowQ])),
-                              "beta.peak.winter" = expression(paste(beta[R-peakQ])),
-                              "beta.pool.recruitment" = expression(paste(beta[R-poolQ])))) +
+                              "beta.peak.winter" = expression(paste(beta[R-peakQ])))) +
   labs( x = "Credible Interval", y = "Parameter") +
   geom_vline(xintercept = 0, color = "black", size = 1, linetype="dashed") +
   theme_bw() + 
@@ -1258,6 +1453,7 @@ btpop<-ggplot(data=out.result, aes(x=yr, y=Nsubadult.est+Nadult.est))+
   scale_x_continuous(expand = c(0, 0),breaks = c(1980,1985,1990,1995,2000,2005,2010,2015,2020))
 btpop
 
+
 # plotting adult biomass over time
 ggplot(data=out.result, aes(x=yr,y=adult_biomass))+
   geom_point()+geom_line()
@@ -1299,14 +1495,26 @@ bt<-ggplot(data=out.result.long, aes(x=yr, y=N,group=population,color=population
   geom_ribbon(aes(ymin=N.low,ymax=N.high),alpha=0.1)+ # ,color=NA
   scale_x_continuous(expand = c(0, 0))+ # ,breaks = c(1980,1985,1990,1995,2000,2005,2010,2015,2020)
   scale_y_continuous(expand=c(0.06,0))+
-  theme_bw()+
+  theme_minimal()+
   scale_color_grey()+
   theme(legend.title = element_blank(),
         legend.position = c(0.8, 0.8))+
-  labs(x="Year",y="Bull Trout (n)")
+  labs(x="Year",y="Bull Trout (n)")+
+  theme(plot.margin = unit(c(0.8,0.8,0.8,0.8), "cm"),
+        plot.background = element_rect(fill = 'white', colour = 'white'),
+        axis.title.x = element_text(margin = margin(t = 10, r = 0, b = 0, l = 0)),
+        axis.title.y = element_text(margin = margin(t = 0, r = 10, b = 0, l = 0)))
 bt
-#ggsave("Results/summary/bt-population-estimates.png",width = 6, height = 4)
+#ggsave("Results/summary/PubFigs/Fig. 1.png",width = 12, height =8.5, units="cm", dpi=500)
 
+
+# population size in 1980s
+#head(out.result)
+mean(out.result$Nadult.est[1:10])
+max(out.result$Nadult.est)
+mean(out.result$Nadult.est[32:44])
+min(out.result$Nadult.est[32:44])
+max(out.result$Nadult.est[32:44])
 
 
 
@@ -1320,7 +1528,12 @@ mort.og<-tibble(Natural, Harvest, total=Natural+Harvest,
 
 mort<-tibble(mort=Natural, yrs=seq(1980,2022),type="Natural")
 mort2<-tibble(mort=Harvest, yrs=seq(1980,2022),type="Known Harvest")
-#head(mort)
+
+mort2$mort[25] # 2004 year when catch was high
+mort2$mort[38]# 2017 when catch was low 
+mort2$mort[25]/(mort$mort[25]+mort2$mort[25]) # 65% of mortality was due to known harvest
+mort2$mort[38]/(mort$mort[38]+mort2$mort[38]) # only 15% of mortality was due to known harvest
+
 mortfull<-full_join(mort,mort2)
 #head(mortfull)
 
@@ -1330,12 +1543,16 @@ ggplot(data=mort.og, aes(x=yrs))+
   scale_y_continuous(expand=c(0,0),minor_breaks = seq(0,0.6,0.1))+
   scale_x_continuous(expand=c(0,0),breaks=c(1980,1985,1990,1995,2000,2005,2010,2015,2020))+
   scale_fill_grey()+
-  theme_bw()+
+  theme_minimal()+
   geom_vline(xintercept = 1996,linetype=2)+
   labs(x="Year",y="Mortality Rate")+  
   theme(legend.title = element_blank(),
         legend.position = c(0.8,0.8),
-        panel.grid.minor = element_line(size=0.5))
+        panel.grid.minor = element_line(size=0.5),
+        plot.margin = unit(c(0.8,0.8,0.8,0.8), "cm"),
+        plot.background = element_rect(fill = 'white', colour = 'white'),
+        axis.title.x = element_text(margin = margin(t = 10, r = 0, b = 0, l = 0)),
+        axis.title.y = element_text(margin = margin(t = 0, r = 10, b = 0, l = 0)))
 #ggsave("Results/summary/mortality.rates2.png",width = 6, height = 4) 
 
 mort.og2 <- mort.og %>%
@@ -1365,6 +1582,9 @@ ggplot(data=mort.og2, aes(x=yrs))+
         legend.position = c(0.8,0.6))+
   annotate("text", x = 1990, y = 0.5, label = "Total",color="black")
 #ggsave("Results/summary/mortality.rates.png",width = 6, height = 4) 
+
+
+
 
 
 
@@ -1421,6 +1641,13 @@ ggplot(diffs, aes(x=yrs,y=diff))+geom_point()+geom_line()+
 
 
 
+## summary stats on kokanee biomass available 
+max(predict$running_accessible_biomass)*0.453592
+mean(predict$running_accessible_biomass)*0.453592
+min(predict$running_accessible_biomass)*0.453592
+
+mean(predict$running_accessible_biomass_low)*0.453592
+mean(predict$running_accessible_biomass_high)*0.453592
 
 
 ############## summary stats from raw data ###
@@ -1456,5 +1683,8 @@ bull.raw.net.dat %>%
 bull.q.winter.peak %>% filter(Year > 1979) %>% summarise(mean = mean(maxWinterq), sd = sd(maxWinterq))
 bull.river.low %>% filter(Year > 1979) %>% tidyr::drop_na(summerLowflow)%>% 
   summarise(mean = mean(summerLowflow), sd = sd(summerLowflow))
+
+
+
 
 
