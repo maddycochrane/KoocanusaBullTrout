@@ -202,10 +202,6 @@ kok.hydro.acoustic <- kok.hydro.acoustic %>% # adding rows when no surveys occur
 
 
 
-## read in spawner size data from norbury creek
-spawner.bc<-read.csv("Data/SpawnerBodySize_BC.csv",header=T)
-#head(spawner.bc)
-
 # comparing different data sources on size of adult kokanee over time
 ggplot()+
   #geom_boxplot(data=kok.raw.net.dat, aes(x=YYYY,y=Length_mm,group=YYYY))+
@@ -217,9 +213,9 @@ ggplot()+
   geom_line(data=kok.meanL,aes(x=YYYY,y=meanL-25),color="grey",size=1)+
   annotate("text", x = 1990, y = 220, label = "Gill Net Cut-Off",color="grey")+
   
-  geom_point(data=spawner.bc,aes(x=Year,y=MeanLength_mm),color="red",size=2)+
-  geom_line(data=spawner.bc,aes(x=Year,y=MeanLength_mm),color="red",size=1)+
-  annotate("text", x = 2000, y = 350, label = "Mean Spawner",color="red")+
+  #geom_point(data=spawner.bc,aes(x=Year,y=MeanLength_mm),color="red",size=2)+
+  #geom_line(data=spawner.bc,aes(x=Year,y=MeanLength_mm),color="red",size=1)+
+  #annotate("text", x = 2000, y = 350, label = "Mean Spawner",color="red")+
   #geom_point(data=spawner.bc,aes(x=Year,y=MeanLength_mm-25),color="orange",size=2)+
   #geom_line(data=spawner.bc,aes(x=Year,y=MeanLength_mm-25),color="orange",size=1)+
   #geom_point(data=spawner.bc,aes(x=Year,y=MeanLength_mm-SDLength_mm*2),color="yellow",size=2)
