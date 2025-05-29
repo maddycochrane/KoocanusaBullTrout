@@ -2,7 +2,7 @@
 
 ### kokanee integrated population model ###
 
-# 7.8.24
+# 5.29.25
 # madaline cochrane
 
 library(R2jags)
