@@ -17,7 +17,6 @@ library(tidyhydat)
 # set working directory
 
 # read in datafile for final bull trout ipm from 'cleaned_bt_ipm_rcode.R' script
-#full.mod2 <-readRDS(file="R/full.mod2.ipm")
 full.mod2 <-readRDS(file="R/full.mod.new.ipm") # new one
 
 # start here ##
@@ -37,11 +36,9 @@ data{
     biomass[t]<-weight[t]*Nadults[t]*mean.fish.per.redd # only females spawn
     
     #Process Likelihood
-    #logR_Obs[t+4] ~ dnorm(log_predR[t+4], tauR_process)
     logR_Obs[t+4] ~ dnorm(log_predR[t+4], tauR_process) 
     yr1subs[t+4] <- exp(logR_Obs[t+4]) 
     
-    #Nsubadults[t+4] <- exp(logR_Obs[t+4]) # 4-yr lag and log transformation
     Nsubadults[t+4] <- yr1subs[t+4] + (1-transition.prob)*S.sa*Nsubadults[t+3] 
   }
   
@@ -51,7 +48,6 @@ data{
     S.a[t] ~ dnorm(mean.S.a[t], tau.S.a)T(0,1) # yr-specific survival includes process error 
     
     NA[t]<-ifelse(bt.harv[t]>Nadults[t],0,Nadults[t]) # slightly modified from original (another trick to keep N>0)
-    #Nadults[t+1] <- (NA[t]-bt.harv[t])*S.a[t] + transition.prob*Nsubadults[t]
     Nadults[t+1] <- (NA[t]-bt.harv[t])*S.a[t] + transition.prob*S.sa*Nsubadults[t]
     
     lambdaA[t] <-Nadults[t+1]/Nadults[t] # change in adult population size over time
