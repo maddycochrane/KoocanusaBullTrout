@@ -14,9 +14,7 @@ library(patchwork) # To display 2 charts together
 library(hrbrthemes)
 library(scales)
 
-setwd("C:\\Users\\maddy\\OneDrive - Montana State University\\Koocanusa") # personal computer
-#setwd("C:\\Users\\v73v137\\OneDrive - Montana State University\\Koocanusa") # when remoting in
-
+# set working directory
 
 #### bring in kokanee redd data
 kokanee.redds<-read.csv("Data/KoocanusaKokaneeCounts.csv",
