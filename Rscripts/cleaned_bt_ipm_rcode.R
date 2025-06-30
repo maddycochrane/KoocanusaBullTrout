@@ -95,11 +95,6 @@ ggplot(data=condition, aes(x=YYYY, y=meanCondition))+geom_point()+
 
 
 
-
-
-
-
-
 # read in spring net soak times
 set.times<-read.csv("Data/updated.set.times.spring.nets.csv",header=TRUE) 
 set.times <- set.times %>% 
@@ -245,8 +240,6 @@ bull.raw.net.dat %>%
   group_by(Stage)%>%
   mutate(wt_kg = Weight_g*0.001)%>%
   summarise(mean = mean(wt_kg,na.rm=T),sd = sd(wt_kg,na.rm=T))
-
-
 
 
 
@@ -551,33 +544,6 @@ ggplot(data=bull.q.winter.peak, aes(x=Year, y =maxWinterq))+geom_point()+geom_li
 
 
 
-################ read in koocanusa pool elevation data from libby dam 
-#pool.elev <- read.csv("Data/koocanusa.elevation.csv",header=T)
-#head(pool.elev)
-
-#pool.elev$DateTime <- # change date from character to posixct
-#  as.POSIXct(pool.elev$DateTime, tz = "", format="%m/%d/%Y %H:%M") 
-#str(pool.elev)
-
-# want average elevation from year leading up to count data (gill net occurred in spring) 
-#pool.elev <- pool.elev %>%
-#  mutate(month = lubridate::month(DateTime))%>% # adding a column for month 
-#  mutate(survival_yr = ifelse(month < 6,year-1,year)) # 
-
-#pool.elev.sum <- pool.elev %>% filter(survival_yr > 1978)%>%
-#  mutate(Forebay_Avg_Elevation_m = Forebay_Avg_Elevation_ft*0.3048)%>%
-#  group_by(survival_yr) %>% summarise(meanPoolElev = mean(Forebay_Avg_Elevation_ft))%>% # average elevation
-#  mutate(scale_avgPoolElevation = scale(meanPoolElev))%>%ungroup() # scale elevation to be compatible with other covariates
-
-# view pool elevation over time
-#ggplot(data=pool.elev.sum, aes(x=survival_yr, y=meanPoolElev))+geom_point()+geom_line()
-
-
-#pool.elev %>% filter(survival_yr > 1980)%>%
-#  mutate(Forebay_Avg_Elevation_m = Forebay_Avg_Elevation_ft*0.3048)%>%
-#  summarise(meanPoolElev = mean(Forebay_Avg_Elevation_m),sdPoolElev = sd(Forebay_Avg_Elevation_m))
-
-
 ############################ read in kokanee estimates from separate r script / analysis ###################
 predict <-readRDS(file="R/kokanee_biomass")
 head(predict)
@@ -621,8 +587,6 @@ model{
 
   # covariate effects on alpha parameter (density-independent) in Ricker model
     alpha[t] <- exp(alpha_sr + beta.low.flow*low.flow.recruitment[t] + beta.peak.winter*peak.flow[t] ) 
-    #alpha[t] <- exp(alpha_sr + beta.low.flow*((1-ind)*low.flow.recruitment[t] + ind*low.flow.recruitment2[t]) + 
-    #beta.peak.winter*peak.flow[t] ) 
     
   # Ricker model for sub-adult BT recruitment
     log_predR[t+4] <- log(biomass[t]) + log(alpha[t]) - beta_sr*biomass[t] 
@@ -631,7 +595,6 @@ model{
     
     logR_Obs[t+4] ~ dnorm(log_predR[t+4], tauR_process) # recruitment includes process error/unaccounted for variation
     yr1subs[t+4] <- exp(logR_Obs[t+4]) # 4-yr lag and log transformation
-    #Nsubadults[t+4] <- yr1subs[t+4] + (1-transition.prob)*S.a[t+3]*Nsubadults[t+3] 
     Nsubadults[t+4] <- yr1subs[t+4] + (1-transition.prob)*S.sa*Nsubadults[t+3] 
   }
   
@@ -751,7 +714,6 @@ inits <- function(){
     beta.kok = runif(1,0.5,2),
     beta.dens = runif(1,-1,-0.5),
     beta.reg.change = runif(1,-2,-1),
-    #transition.prob = runif(0,0.18,0.21),
     transition.prob = runif(0,0.48,0.51),
     'Nsubadults[1]' = runif(1,500,1500),
     'Nsubadults[2]' = runif(1,1000,2000),
@@ -759,7 +721,6 @@ inits <- function(){
     'Nsubadults[4]' = runif(1,1000,1500),
     #beta.low.flow.redd = runif(1,-0.5,0.5),
     beta.low.flow = runif(1,0,0.5),
-    #ind = runif(1,0.1,0.3),
     beta.peak.winter = runif(1,-0.5,0.5))
 }
 
@@ -790,18 +751,8 @@ quantile(full.mod2$BUGSoutput$sims.list$q.lake.sa,0.975)
 1/(1+exp(-quantile(full.mod2$BUGSoutput$sims.list$a.int,0.975)))
 
 # save jag model results
-#saveRDS(full.mod2, file="R/full.mod2.ipm") - original in first submission
-# read in datafile
-#full.mod2 <-readRDS(file="R/full.mod2.ipm")
-
-# new model with transition prob modeled differently 
 #saveRDS(full.mod2, file="R/full.mod.new.ipm") # new one to use
-full.mod2 <-readRDS(file="R/full.mod.new.ipm")
-
-
-
-
-## look at sr when sub-adults are estimated differently - donovan's suggestion
+#full.mod2 <-readRDS(file="R/full.mod.new.ipm")
 
 
 
@@ -833,7 +784,7 @@ ggplot(data=res2, aes(x=Nadult,y=Nreplace))+
 #    axis.title.x = element_text(margin = margin(t = 10, r = 0, b = 0, l = 0)),
 #   axis.title.y = element_text(margin = margin(t = 0, r = 10, b = 0, l = 0)))
 # yr represents the replacement year not the initial adult stock size 
-ggsave("Results/summary/PubFigs/Figure 2.png",width = 12, height =8.5, units="cm", dpi=500)
+#ggsave("Results/summary/PubFigs/Figure 2.png",width = 12, height =8.5, units="cm", dpi=500)
 
 
 # need to lag sub-adult estimate for comparison in figure by 4 yrs
@@ -868,7 +819,7 @@ ggplot(data=res,aes(x=yrs,y=residual))+
   labs(x="Year",y="Residual")+theme_minimal()+
   theme(plot.background = element_rect(fill = 'white', colour = 'white'))
 # negative values = Nestimate is lower than expected from best fit line
-ggsave("Results/summary/PubFigs/Figure S2.png",width = 4, height = 4)
+#ggsave("Results/summary/PubFigs/Figure S2.png",width = 4, height = 4)
 
 
 #ggplot(data=res, aes(x=biomass,y=yr1subs))+geom_point()
@@ -959,7 +910,7 @@ ggplot(data = sr.pp.sum, aes(x = biomass*0.453592, y = exp(mean_pp))) +
         plot.background = element_rect(fill = 'white', colour = 'white'),
         axis.title.x = element_text(margin = margin(t = 10, r = 0, b = 0, l = 0)),
         axis.title.y = element_text(margin = margin(t = 0, r = 10, b = 0, l = 0)))
-ggsave("Results/summary/PubFigs/Figure 3.png",width = 12, height =8.5, units="cm", dpi=500)
+#ggsave("Results/summary/PubFigs/Figure 3.png",width = 12, height =8.5, units="cm", dpi=500)
 
 
 
@@ -976,7 +927,7 @@ ggplot(data = sr.pp.sum, aes(x = biomass, y = exp(mean_pp))) +
     plot.background = element_rect(fill = 'white', colour = 'white'),
     axis.title.x = element_text(margin = margin(t = 10, r = 0, b = 0, l = 0)),
     axis.title.y = element_text(margin = margin(t = 0, r = 10, b = 0, l = 0)))
-ggsave("Results/summary/s-r-curve-w-dates.png",width = 6, height = 4)
+#ggsave("Results/summary/s-r-curve-w-dates.png",width = 6, height = 4)
 
 
 
@@ -1070,7 +1021,7 @@ ggplot(data=resid.df, aes(x=Year,y=Redds.grave+Redds.wigwam))+geom_point()+geom_
   theme_minimal()+labs(y="Redds")+
   annotate("text", x = 1985, y = 520, label = "Model",color="grey")+
   annotate("text", x = 2006, y = 710, label = "Data")
-ggsave("Results/summary/PubFigs/Figure S4.png",width = 12, height =8.5, units="cm", dpi=500)
+#ggsave("Results/summary/PubFigs/Figure S4.png",width = 12, height =8.5, units="cm", dpi=500)
 
 
 adult.bull.net.sums%>%filter(YYYY>1979)%>%
@@ -1086,7 +1037,7 @@ adult.bull.net.sums%>%filter(YYYY>1979)%>%
   geom_point(data=resid.df, aes(x=Year,y=model.NA*c(q.lake)),color="grey")+
   geom_line(data=resid.df, aes(x=Year,y=model.NA*c(q.lake)),color="grey")+
   geom_ribbon(data=resid.df, aes(x=Year,ymin=model.NA.low*c(q.lake), ymax=model.NA.high*c(q.lake)),alpha=0.1)
-ggsave("Results/summary/PubFigs/Figure S5.png",width = 12, height =8.5, units="cm", dpi=500)
+#ggsave("Results/summary/PubFigs/Figure S5.png",width = 12, height =8.5, units="cm", dpi=500)
 
 
 ggplot(data=resid.df, aes(x=Year,y=resid.cpue))+geom_point()+geom_line()
@@ -1115,7 +1066,7 @@ duplot<-cowplot::plot_grid(grave.fig +theme(),
                            cpue.fig,
                            nrow = 1, ncol =3, labels = "auto", align = "v")
 duplot
-ggsave("Results/summary/bt.resids.png",width = 14, height =6,units=c("in"),dpi=500)
+#ggsave("Results/summary/bt.resids.png",width = 14, height =6,units=c("in"),dpi=500)
 
 
 
@@ -1371,7 +1322,7 @@ predicted_prob_sum3 %>% filter(Release=="Y")%>%
   theme(plot.margin = unit(c(0.8,0.8,0.8,0.8), "cm"),
         plot.background = element_rect(fill = 'white', colour = 'white'),
         axis.title.x = element_text(margin = margin(t = 10, r = 0, b = 0, l = 0)))
-ggsave("Results/summary/PubFigs/Figure 6.png",width = 8.5, height =8.5, units="cm", dpi=500)
+#ggsave("Results/summary/PubFigs/Figure 6.png",width = 8.5, height =8.5, units="cm", dpi=500)
 
 
 ### want to get median increase in adult survival between two regulatory periods
@@ -1441,7 +1392,7 @@ ggplot(data = dd.pp.sum, aes(x = NumbLake*10000, y = mean_pp)) +
   theme(plot.margin = unit(c(0.8,0.8,0.8,0.8), "cm"),
         plot.background = element_rect(fill = 'white', colour = 'white'),
         axis.title.x = element_text(margin = margin(t = 10, r = 0, b = 0, l = 0)))
-ggsave("Results/summary/PubFigs/Figure 7.png",width = 4, height = 4)
+#ggsave("Results/summary/PubFigs/Figure 7.png",width = 4, height = 4)
 
 max(Nlake.est) #  7051
 min(Nlake.est) # 1212
@@ -1553,7 +1504,7 @@ ggplot(data = sr.pp.sum, aes(x = LowFlow, y = mean_pp)) +
         plot.background = element_rect(fill = 'white', colour = 'white'),
         axis.title.x = element_text(margin = margin(t = 10, r = 0, b = 0, l = 0)),
         axis.title.y = element_text(margin = margin(t = 0, r = 10, b = 0, l = 0)))
-ggsave("Results/summary/PubFigs/Figure 4.png",width = 8.5, height =8.5, units="cm", dpi=500)
+#ggsave("Results/summary/PubFigs/Figure 4.png",width = 8.5, height =8.5, units="cm", dpi=500)
 
 
 # effect size 
@@ -1740,7 +1691,7 @@ bt<-ggplot(data=out.result.long, aes(x=yr, y=N,group=population,color=population
         axis.title.x = element_text(margin = margin(t = 10, r = 0, b = 0, l = 0)),
         axis.title.y = element_text(margin = margin(t = 0, r = 10, b = 0, l = 0)))
 bt
-ggsave("Results/summary/PubFigs/Figure 1.png",width = 12, height =8.5, units="cm", dpi=500)
+#ggsave("Results/summary/PubFigs/Figure 1.png",width = 12, height =8.5, units="cm", dpi=500)
 
 
 # population size in 1980s
