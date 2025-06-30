@@ -14,7 +14,7 @@ library(mcmcplots)
 library(egg)
 library(tidyhydat)
 
-setwd("C:\\Users\\maddy\\OneDrive - Montana State University\\Koocanusa")
+# set working directory
 
 # read in datafile for final bull trout ipm from 'cleaned_bt_ipm_rcode.R' script
 #full.mod2 <-readRDS(file="R/full.mod2.ipm")
