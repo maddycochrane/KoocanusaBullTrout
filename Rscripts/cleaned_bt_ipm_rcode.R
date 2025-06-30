@@ -15,7 +15,6 @@ library(tidyhydat)
 library(bayestestR)
 
 # set working directory
-setwd("C:\\Users\\maddy\\OneDrive - Montana State University\\Koocanusa")
 
 
 
@@ -56,7 +55,6 @@ ggplot(data=adult.bull.net.sum2, aes(x=log(Length_mm),y=log(Weight_g)))+geom_poi
 bod.cond.bt <- lm(log(Weight_g) ~ log(Length_mm), data=adult.bull.net.sum2)
 summary(bod.cond.bt)
 # as size increases so does body condition 
-
 
 
 
@@ -612,115 +610,119 @@ jags.data<-list(y.adult=adult.bull.net.final2[,6:49], # adult bt cpue, 1980 - 20
                 #pool.elevation.recruit = c(pool.elev.sum$scale_avgPoolElevation[5:44]), # pool elevation data for 1983 - 2022
                 ca.reg.changes = c(rep(1,16),rep(0,27))) # 1980 - 1995 no sig. fishing regs, 1996 - 2022 catch and release only 
 
-#cor.test(kok,ca.reg.changes) correlation = -0.62, p < 0.001
 
 # jags model 
-#cat(file="jags/s-r-new2.txt", "
+cat(file="jags/s-r-new2.txt", "
 # likelihood
-#model{ 
+model{ 
 
 # Process Likelihood
-#  for (t in 1:(nYears-4)) { # 1984 - 2023 (40 observtions) as recruitment is lagged by 4 yrs
+  for (t in 1:(nYears-4)) { # 1984 - 2023 (40 observtions) as recruitment is lagged by 4 yrs
 
   # covariate effects on alpha parameter (density-independent) in Ricker model
- #   alpha[t] <- exp(alpha_sr + beta.low.flow*low.flow.recruitment[t] + beta.peak.winter*peak.flow[t] ) 
-    # + beta.pool.recruitment*pool.elevation.recruit[t]
+    alpha[t] <- exp(alpha_sr + beta.low.flow*low.flow.recruitment[t] + beta.peak.winter*peak.flow[t] ) 
+    #alpha[t] <- exp(alpha_sr + beta.low.flow*((1-ind)*low.flow.recruitment[t] + ind*low.flow.recruitment2[t]) + 
+    #beta.peak.winter*peak.flow[t] ) 
     
   # Ricker model for sub-adult BT recruitment
-  #  log_predR[t+4] <- log(biomass[t]) + log(alpha[t]) - beta_sr*biomass[t] 
+    log_predR[t+4] <- log(biomass[t]) + log(alpha[t]) - beta_sr*biomass[t] 
     
-#  biomass[t]<-weight[t]*Nadults[t]*mean.fish.per.redd  
+    biomass[t]<-weight[t]*Nadults[t]*mean.fish.per.redd  
     
-#  logR_Obs[t+4] ~ dnorm(log_predR[t+4], tauR_process) # recruitment includes process error/unaccounted for variation
-#  Nsubadults[t+4] <- exp(logR_Obs[t+4]) # 4-yr lag and log transformation
-# }
+    logR_Obs[t+4] ~ dnorm(log_predR[t+4], tauR_process) # recruitment includes process error/unaccounted for variation
+    yr1subs[t+4] <- exp(logR_Obs[t+4]) # 4-yr lag and log transformation
+    #Nsubadults[t+4] <- yr1subs[t+4] + (1-transition.prob)*S.a[t+3]*Nsubadults[t+3] 
+    Nsubadults[t+4] <- yr1subs[t+4] + (1-transition.prob)*S.sa*Nsubadults[t+3] 
+  }
   
-#  for(t in 1:(nYears-1)){
+  for(t in 1:(nYears-1)){
   # covariate effects on adult BT survival
-#   S.a.step1[t] <- a.int + beta.dens*(NumbLake[t]/10000)+ 
-#                 beta.kok*kok[t] + beta.reg.change*ca.reg.changes[t] # scaling raw abundance
+    S.a.step1[t] <- a.int + beta.dens*(NumbLake[t]/10000)+ 
+                  beta.kok*kok[t] + beta.reg.change*ca.reg.changes[t] # scaling raw abundance
                   
-#  mean.S.a[t] <- 1/(1+exp(-S.a.step1[t])) #  logit transformation
-#  S.a[t] ~ dnorm(mean.S.a[t], tau.S.a)T(0,1) # yr-specific survival includes process error 
+    mean.S.a[t] <- 1/(1+exp(-S.a.step1[t])) #  logit transformation
+    S.a[t] ~ dnorm(mean.S.a[t], tau.S.a)T(0,1) # yr-specific survival includes process error 
     
-#  NA[t]<-max(Nadults[t],bt.harv[t]) # to keep Nadults above 0 (simulation problem when N can't go below zero)
-#  Nadults[t+1] <- (NA[t]-bt.harv[t])*S.a[t] + transition.prob*Nsubadults[t]
+    NA[t]<-max(Nadults[t],bt.harv[t]) # to keep Nadults above 0 (simulation problem when N can't go below zero)
+    Nadults[t+1] <- (NA[t]-bt.harv[t])*S.a[t] + transition.prob*S.sa*Nsubadults[t]
     
   # Derived Parameters
-#   lambdaA[t] <-Nadults[t+1]/Nadults[t] # change in adult population size over time
-#    lambda[t] <-Nsubadults[t+1]/Nsubadults[t] # change in sub-adult population size over time
-    #    NumbLake[t]<-Nsubadults[t]+Nadults[t] # using total bt population to understand density dependence
-# }
+    lambdaA[t] <-Nadults[t+1]/Nadults[t] # change in adult population size over time
+    lambda[t] <-Nsubadults[t+1]/Nsubadults[t] # change in sub-adult population size over time
+    NumbLake[t]<-Nsubadults[t]+Nadults[t] # using total bt population to understand density dependence
+  }
   
   
 # Observation Likelihood
-# for (t in 1:nYears){
-#  for(i in 1:nReps){ 
+  for (t in 1:nYears){
+    for(i in 1:nReps){ 
 # CPUE 
-#   y.adult[i,t] ~ dnegbin(p.a[t], r.a) # includes observation error
-#   y.subadult[i,t] ~ dnegbin(p.sa[t], r.sa) # includes observation error
-# }
-# p.a[t] <- r.a/(r.a+(Nadults[t]*q.lake))
-#p.sa[t] <- r.sa/(r.sa+(Nsubadults[t]*q.lake.sa))
+      y.adult[i,t] ~ dnegbin(p.a[t], r.a) # includes observation error
+      y.subadult[i,t] ~ dnegbin(p.sa[t], r.sa) # includes observation error
+    }
+    p.a[t] <- r.a/(r.a+(Nadults[t]*q.lake))
+    p.sa[t] <- r.sa/(r.sa+(Nsubadults[t]*q.lake.sa))
     
-# for(j in 1:nSites){
+    for(j in 1:nSites){
 # Redd counts
-#   y.redd[j,t] ~ dnegbin(p.a.redd[j,t],r.a.redd)
-#    p.a.redd[j,t] <- r.a.redd/(r.a.redd+Nspawners[t]*q[j])
-# }
-# Nspawners[t] <- Nadults[t]*mean.fish.per.redd
-#  }
+      y.redd[j,t] ~ dnegbin(p.a.redd[j,t],r.a.redd)
+      p.a.redd[j,t] <- r.a.redd/(r.a.redd+Nspawners[t]*q[j])
+    }
+    Nspawners[t] <- Nadults[t]*mean.fish.per.redd
+    }
     
   
   # PRIORS
-# mean.fish.per.redd <- 0.5 # 2 fish/redd
+  mean.fish.per.redd <- 0.5 # 2 fish/redd
   
   # intrinsic productivity (recruitment prior)
-# alpha_sr ~ dunif(-10,2.5)
+  alpha_sr ~ dunif(-10,2.5)
   
   # strength of dens depend (recruitment prior)
-#  beta_inv ~ dunif(0,5000)
-# beta_sr <- 1/beta_inv 
+  beta_inv ~ dunif(0,5000)
+  beta_sr <- 1/beta_inv 
   
   # priors for covariate effects on sub-adult recruitment/alpha parameter
-#beta.low.flow ~ dnorm(0,1)
-#beta.peak.winter ~ dnorm(0,1)
-#  beta.pool.recruitment ~ dnorm(0,1)
+  beta.low.flow ~ dnorm(0,1)
+  beta.peak.winter ~ dnorm(0,1)
+  beta.pool.recruitment ~ dnorm(0,1)
+  ind ~ dbeta(1,3) # weighted towards age-1 effect more than age-2 for this indicator variable
   
   # unk process variance for recruits model 
-# sigmaR_process ~ dnorm(0, 1/3^2)T(0,) # sd = 3
-# tauR_process <- pow(sigmaR_process, -2)
+  sigmaR_process ~ dnorm(0, 1/3^2)T(0,) # sd = 3
+  tauR_process <- pow(sigmaR_process, -2)
   
   # catchability coefficients (scaling cpue to true abundance)
-# q.lake ~ dnorm(0.001,100)T(0,)
-# q.lake.sa ~ dnorm(0.001,100)T(0,)
-# q ~ ddirch(c(0.08,0.92)) 
+  q.lake ~ dnorm(0.001,100)T(0,)
+  q.lake.sa ~ dnorm(0.001,100)T(0,)
+  q ~ ddirch(c(0.08,0.92)) 
   
   # over-disperstion parameter for neg binomial distribution
-# r.a ~ dgamma(5,1)
-# r.sa ~ dgamma(5,1)
-# r.a.redd ~ dgamma(1,1)
+  r.a ~ dgamma(5,1)
+  r.sa ~ dgamma(5,1)
+  r.a.redd ~ dgamma(1,1)
   
   # Adult bt survival priors
-#sd.S.a ~ dnorm(0.2,1/0.1^2)T(0,)
-  #tau.S.a <- pow(sd.S.a, -2)
-  #a.int ~ dnorm(2.2,1/0.5^2)
-  # beta.kok ~ dnorm(0.5,4) # effect of kokanee abundance on adult bt survival
-  # beta.dens ~ dnorm(-1,4)T(,0) # dd effect (forcing negative)
-  #beta.reg.change ~ dnorm(-0.5,1) # when canadian harvest open, it will negatively affect survival
+  sd.S.a ~ dnorm(0.1,2500)T(0,) # sd = 0.02
+  tau.S.a <- pow(sd.S.a, -2)
+  a.int ~ dnorm(2.2,1/0.5^2)
+  beta.kok ~ dnorm(0.5,4) # effect of kokanee abundance on adult bt survival
+  beta.dens ~ dnorm(-1,4)T(,0) # dd effect (forcing negative)
+  beta.reg.change ~ dnorm(-0.5,1) # when canadian harvest open, it will negatively affect survival
 
   # Transition probability (from sub-adult to adult bt) prior
-  #transition.prob~ dnorm(0.2,400)T(0,1) 
+  transition.prob~ dnorm(0.5,400)T(0,1) # sd = 0.05
+  S.sa ~ dnorm(0.6,400)T(0,1) # sd = 0.05
   
-  #Nadults[1] ~ dunif(500,1000) 
+  Nadults[1] ~ dunif(500,1000) 
   
   # initial sub-adult population size estimates when recruitment model can't be fit due to 4-yr lag
-  # Nsubadults[1] ~ dunif(500,2500)
-  # Nsubadults[2] ~ dunif(500,2500)
-  #  Nsubadults[3] ~ dunif(500,2500)
-  # Nsubadults[4] ~ dunif(500,2500)
-#} 
-#")
+  Nsubadults[1] ~ dunif(500,2500)
+  Nsubadults[2] ~ dunif(500,2500)
+  Nsubadults[3] ~ dunif(500,2500)
+  Nsubadults[4] ~ dunif(500,2500)
+} 
+")
 
 # parameters monitored 
 params <- c("Nadults","r.a","Nsubadults", "lambda","q", "r.sa","r.a.redd",
@@ -728,7 +730,7 @@ params <- c("Nadults","r.a","Nsubadults", "lambda","q", "r.sa","r.a.redd",
             "lambdaA","S.a", "sd.S.a","transition.prob","a.int",
             "beta.kok","beta.dens","sd.lambda","mean.lambda", "transition.prob",
             "alpha","beta.low.flow","beta.peak.winter",
-            "beta.reg.change","S.sa","yr1subs") # "ind",
+            "beta.reg.change","S.sa","yr1subs") 
 
 # initial parameter draws
 inits <- function(){
